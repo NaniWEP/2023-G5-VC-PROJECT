@@ -29,7 +29,7 @@ VUE_APP_API_URL=http://localhost:8000/api
 ### Step 2: Update the Environment Variables
 - [x] copy <code>.env.example </code> file **to** the <code>.env </code> file
 ```
-DB_DATABASE= YOUR_DB_NAMEs
+DB_DATABASE= YOUR_DB_NAME
 DB_USERNAME= root
 ```
 
