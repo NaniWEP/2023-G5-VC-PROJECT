@@ -17,4 +17,17 @@ const vuetify = createVuetify({
   
   // Mount the app and router
   app.use(router).use(vuetify).mount('#app')
+  
 
+// createApp(App).use(router).mount('#app')
+
+// import Vue from "vue";
+// import App from "./App.vue";
+// import Vuelidate from 'vuelidate'
+
+// Vue.config.productionTip = false;
+// Vue.use(Vuelidate)
+
+// new Vue({
+//   render: h => h(App)
+// }).$mount("#app");
