@@ -1,16 +1,31 @@
 <template>
-  <LoginPage/>
+
+  <v-app>
+    <v-main>
+      <div id="app">
+        <router-view/>
+      </div>
+    </v-main>
+  </v-app>
+  
 </template>
 
 <script>
-import LoginPage from './views/LoginPage.vue'
+
 export default {
-  components:{
-    LoginPage,
-  }
+  name: 'App',
+
+  data: () => ({
+    //
+  }),
 }
 </script>
 
-<style>
-
+<style scoped>
+ #app {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+ }
 </style>
