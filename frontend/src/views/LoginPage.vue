@@ -1,6 +1,6 @@
 <template>
     <v-card class="mx-auto px-7 py-6 bg-grey-lighten-3 mt-10" max-width="450">
-        <img src="../assets/use.png" alt="">
+        <!-- <img src="../assets/use.png" alt=""> -->
         <h1 class="text-center">WELLCOM BACK</h1>
       <v-form
         v-model="form"

@@ -1,13 +1,9 @@
 <template>
-
   <v-app>
     <v-main>
-      <div id="app">
-        <router-view/>
-      </div>
+      <router-view/>
     </v-main>
   </v-app>
-  
 </template>
 
 <script>
@@ -20,12 +16,3 @@ export default {
   }),
 }
 </script>
-
-<style scoped>
- #app {
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
- }
-</style>

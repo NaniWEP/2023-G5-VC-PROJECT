@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import ProfileDetail from "../views/student_profile/DetailPage.vue";
 import FavoritePage from "../views/student_profile/FavoritePage.vue";
-import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from "../views/HomeView.vue"
+// import { createRouter, createWebHistory } from 'vue-router'
 import LoginPage from '../views/LoginPage.vue'
 import RegisterView from '../views/RegisterView.vue'
 import UserInformationView from '../views/UserInformationView.vue'
@@ -17,7 +18,7 @@ const routes = [
     component: FavoritePage,
   },
   {
-    path: '/',
+    path: '/login',
     name: 'login',
     component: LoginPage
      
@@ -31,6 +32,11 @@ const routes = [
     path: '/userinformation',
     name: 'userinformation',
     component: UserInformationView
+  },
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView
   },
 ]
 

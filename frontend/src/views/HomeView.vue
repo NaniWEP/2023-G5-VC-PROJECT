@@ -1,18 +1,29 @@
 <template>
-  <HelloWorld />
+  <v-app>
+    <NavbarComponent />
+    <BannerComponent />
+    <v-main>
+      <ContentComponent />
+    </v-main>
+    <FooterComponent />
+  </v-app>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
-
-// Components
-import HelloWorld from '../components/HelloWorld.vue';
+import NavbarComponent from '../components/NavbarComponent.vue';
+import ContentComponent from '../components/ContentComponent.vue';
+import FooterComponent from '../components/FooterComponent.vue';
+import BannerComponent from '../components/BannerComponent.vue';
 
 export default defineComponent({
   name: 'HomeView',
 
   components: {
-    HelloWorld,
-  },
+    NavbarComponent,
+    ContentComponent,
+    FooterComponent,
+    BannerComponent
+},
 });
 </script>
