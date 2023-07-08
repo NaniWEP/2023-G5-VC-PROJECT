@@ -21,8 +21,8 @@
           :key="index" :to="item.route" class="mr-2 nav">
           <v-list-item-title>{{item.title}}</v-list-item-title>
         </v-list-item>
-        <v-btn elevation="2" class="mr-2 navButtom" to="/signIn" elevated>SignIn</v-btn>
-        <v-btn elevation="2" class="navButtom" to="/signUp" elevated>SingUp</v-btn>
+        <v-btn elevation="2" class="mr-2 navButtom" to="/login" elevated>Login</v-btn>
+        <v-btn elevation="2" class="navButtom" to="/register" elevated>Register</v-btn>
       </v-list>
     </v-app-bar>    
 </template>
