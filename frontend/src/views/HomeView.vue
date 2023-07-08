@@ -1,27 +1,29 @@
 <template>
   <v-app>
-    <NavbarView />
+    <NavbarComponent />
+    <BannerComponent />
     <v-main>
-      <ContentView />
+      <ContentComponent />
     </v-main>
-    <FooterView />
+    <FooterComponent />
   </v-app>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
-import NavbarView from '../components/NavbarView.vue';
-import ContentView from '../components/ContentView.vue';
-import FooterView from '../components/FooterView.vue';
-// Components
+import NavbarComponent from '../components/NavbarComponent.vue';
+import ContentComponent from '../components/ContentComponent.vue';
+import FooterComponent from '../components/FooterComponent.vue';
+import BannerComponent from '../components/BannerComponent.vue';
 
 export default defineComponent({
   name: 'HomeView',
 
   components: {
-    NavbarView,
-    ContentView,
-    FooterView,
+    NavbarComponent,
+    ContentComponent,
+    FooterComponent,
+    BannerComponent
 },
 });
 </script>

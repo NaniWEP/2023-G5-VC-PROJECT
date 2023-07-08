@@ -24,9 +24,7 @@
         <v-btn elevation="2" class="mr-2 navButtom" to="/signIn" elevated>SignIn</v-btn>
         <v-btn elevation="2" class="navButtom" to="/signUp" elevated>SingUp</v-btn>
       </v-list>
-    </v-app-bar>
-    <v-img src="../assets/1628819847875.jpg" cover width="100%" alt=""></v-img>
-    
+    </v-app-bar>    
 </template>
 
 <script>
