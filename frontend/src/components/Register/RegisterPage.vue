@@ -60,7 +60,7 @@
     <v-col cols="12" sm="6" md="6"
     >
       <v-btn to="/userinformation" @click="goToDetailInformation" color="green" block size="x-large">Continue</v-btn>
-    <p>Do you have an account? <router-link to="/">Login</router-link></p>
+    <p>Do you have an account? <router-link to="/login">Login</router-link></p>
     </v-col>
   </v-form>
 </template>

@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
 import ProfileDetail from "../views/student_profile/DetailPage.vue";
 import FavoritePage from "../views/student_profile/FavoritePage.vue";
-import HomeView from "../views/HomeView.vue"
-// import { createRouter, createWebHistory } from 'vue-router'
 import LoginPage from '../views/LoginPage.vue'
 import RegisterView from '../views/RegisterView.vue'
 import UserInformationView from '../views/UserInformationView.vue'
+import HomeView from '../views/HomeView.vue'
+import AboutView from '../views/AboutView.vue'
+
 const routes = [
+  
   {
     path: "/detailPage",
     name: "detailPage",
@@ -36,8 +38,13 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component:HomeView
   },
+  {
+    path: '/aboutPage',
+    name: 'about',
+    component: AboutView
+  }
 ]
 
 const router = createRouter({

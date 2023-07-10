@@ -9,8 +9,6 @@
               class="profile_img"
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
               alt="student dp"
-              width="190"
-              height="170"
             />
             <h3 class="text-center">Doeur Diet</h3>
           </v-card-title>
@@ -56,10 +54,16 @@
                 <tr>
                   <td>Phone number</td>
                   <td class="text-right">:</td>
-                  <td>09983773</td>
+                  <td>08876555</td>
+                </tr>
+                <tr>
+                  <td>Province</td>
+                  <td class="text-right">:</td>
+                  <td>Siem Reap</td>
                 </tr>
               </tbody>
             </v-simple-table>
+            <dialog-form></dialog-form>
           </v-card-text>
         </v-card>
         <v-card class="elevation-2 mt-4">
@@ -83,60 +87,14 @@
 </template>
 
 <script>
+import DialogForm from "../../components/student_dashboard/DialogForm.vue";
 import SideNavBar from "../../components/student_dashboard/SideNavBar.vue";
 export default {
   components: {
     SideNavBar,
+    DialogForm,
   },
-  data: () => ({
-    dialog: false,
-    userName: "",
-    gender: "",
-    dateOfBirth: "",
-    province: "",
-    age: "",
-    gmail: "",
-    userNameRules: [
-      (value) => {
-        if (value?.length > 0) return true;
-
-        return "Require to complete.";
-      },
-    ],
-    genderRules: [
-      (value) => {
-        if (value?.length > 0) return true;
-
-        return "Require to complete.";
-      },
-    ],
-    gmailRules: [
-      (v) =>
-        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-        "E-mail must be valid",
-    ],
-    dateOfBirthRules: [
-      (value) => {
-        if (value?.length > 0) return true;
-
-        return "Require to complete.";
-      },
-    ],
-    provinceRules: [
-      (value) => {
-        if (value?.length > 0) return true;
-
-        return "Require to complete.";
-      },
-    ],
-    ageRules: [
-      (value) => {
-        if (value?.length > 0) return true;
-
-        return "Require to complete.";
-      },
-    ],
-  }),
+  data: () => ({}),
 };
 </script>
 

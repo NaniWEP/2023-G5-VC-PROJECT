@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main class="main">
       <router-view/>
     </v-main>
   </v-app>
@@ -16,3 +16,16 @@ export default {
   }),
 }
 </script>
+<style scoped>
+
+#app{
+  background-color: #000000;
+}
+.main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+</style>
