@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchoolManagerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,8 +28,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::prefix('/schoolManager')->group(function(){
 
 });
+// Role routes
+Route::resource('/role', RoleController::class);
+
+// Login / register routes
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/Login', [AuthController::class, 'Login']);
+Route::post('/login', [AuthController::class, 'login']);
 
 
 Route::fallback(function(){

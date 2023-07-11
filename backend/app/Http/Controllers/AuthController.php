@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthLoginRequest;
 use App\Http\Requests\AuthRegisterRequest;
+use App\Http\Resources\GetUserResource;
 use App\Models\SchoolManager;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,27 +15,30 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
+
     public function register(AuthRegisterRequest $request)
     {
         $user = User::create([
            'first_name' => $request -> first_name, 
-           'last_name' => $request -> last_name, 
-           'email' => $request -> email, 
+           'last_name' => $request -> last_name,
+           'email' => $request -> email,
            'password' => Hash::make($request -> password), 
-           'date_of_birth' => $request -> date_of_birth, 
-           'province' => $request -> province, 
+           'date_of_birth' => $request -> date_of_birth,
+           'province' => $request -> province,
+           'role_id' => $request -> role_id,
         ]);
 
-        $token = $user->createToken('API TOKEN', ['select', 'create', 'update', 'delete']);
-        
+        $token = $user->createToken('API TOKEN', ['select', 'create', 'update'])->plainTextToken;
+        $user = new GetUserResource($user);
         return response()->json([
-           'message' => 'Create user successful',
-           'user' => $user,
-           'token' => $token
+            'succes' => true,
+            'message' => 'Create user successful',
+            'data' => $user,
+            'token' => $token
         ]);
     }
 
-    public function Login(AuthLoginRequest $request)
+    public function login(AuthLoginRequest $request)
     {
         
         $userEmail = User::where('email', $request->email)->first();
@@ -59,7 +63,7 @@ class AuthController extends Controller
         if(Auth::attempt($credential))
         {
             $user = Auth::user();
-            
+            $user = new GetUserResource($user);
             $token = $user->createToken('API TOKEN', ['select', 'create', 'update', 'delete'])->plainTextToken;
             
             return response()->json([
@@ -71,7 +75,7 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request) 
+    public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
         return response()->json([

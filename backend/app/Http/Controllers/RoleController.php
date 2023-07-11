@@ -29,10 +29,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $role = Role::created([
-           'name' => $request->name 
-        ]);
-
+        $role = Role::store($request);
         return response()->json([
            'success' => true,
            'meassage' => 'Create roles successfully',
@@ -43,9 +40,15 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Role $role)
+    public function show(string $id)
     {
         //
+        $roles = Role::find($id);
+
+        return response()->json([
+            'success' => true,
+            'data' => $roles
+        ], Response::HTTP_OK);
     }
 
     /**
