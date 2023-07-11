@@ -21,7 +21,7 @@ class RoleController extends Controller
         return response()->json([
             'success' => true,
             'data' => $roles
-        ], Response::HTTP_OK);
+        ], Response::HTTP_OK);//200
     }
 
     /**
@@ -37,7 +37,7 @@ class RoleController extends Controller
            'success' => true,
            'meassage' => 'Create roles successfully',
            'data' => $role 
-        ], Response::HTTP_CREATED);
+        ], Response::HTTP_CREATED);//201
     }
 
     /**
