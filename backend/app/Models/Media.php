@@ -13,16 +13,16 @@ class Media extends Model
         'name',
     ];
 
-    public function schoolManager() : HasMany {
-        return $this-> hasMany(SchoolManager::class);
-    }
-    public function user() : HasMany {
+    public function user() : HasMany 
+    {
         return $this-> hasMany(User::class);
     }
-    public function universityMedia() : HasMany {
-        return $this-> hasMany(UniversityMedia::class);
+    public function universityPostMedia() : HasMany 
+    {
+        return $this-> hasMany(UniversityPostMedia::class);
     }
-    public function workshopMedia() : HasMany {
-        return $this-> hasMany(WorkshopMedia::class);
+    public function workshopPostMedia() : HasMany 
+    {
+        return $this-> hasMany(WorkshopPostMedia::class);
     }
 }

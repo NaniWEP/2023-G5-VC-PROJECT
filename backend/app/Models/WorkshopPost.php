@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-class Workshop extends Model
+
+class WorkshopPost extends Model
 {
     use HasFactory;
     protected $fillable = 
@@ -20,20 +20,20 @@ class Workshop extends Model
         'organizer',
         'contact',
         'status',
-        'school_manager_id'
+        'user_id'
     ];
 
 
-    public function workshopMedia(): HasMany
+    public function workshopPostMedia(): HasMany
     {
-        return $this -> hasMany(WorkshopMedia::class);
+        return $this -> hasMany(WorkshopPostMedia::class);
     }
-    public function favoriteWorkshop(): HasMany
+    public function favoriteWorkshopPost(): HasMany
     {
-        return $this -> hasMany(FavoriteWorkshop::class);
+        return $this -> hasMany(favoriteWorkshopPost::class);
     }
-    public function schoolManager():BelongsTo
+    public function user():BelongsTo
     {
-        return $this -> belongsTo(SchoolManager::class);
+        return $this -> belongsTo(User::class);
     }
 }

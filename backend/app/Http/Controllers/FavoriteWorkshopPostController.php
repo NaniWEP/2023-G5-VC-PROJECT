@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FavoriteWorkshop;
 use Illuminate\Http\Request;
 
-class FavoriteWorkshopController extends Controller
+class FavoriteWorkshopPostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +25,7 @@ class FavoriteWorkshopController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(FavoriteWorkshop $favoriteWorkshop)
+    public function show(string $id)
     {
         //
     }
@@ -34,7 +33,7 @@ class FavoriteWorkshopController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, FavoriteWorkshop $favoriteWorkshop)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -42,7 +41,7 @@ class FavoriteWorkshopController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FavoriteWorkshop $favoriteWorkshop)
+    public function destroy(string $id)
     {
         //
     }

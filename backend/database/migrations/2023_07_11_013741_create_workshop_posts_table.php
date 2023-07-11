@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('favorite_workshops', function (Blueprint $table) {
+        Schema::create('workshop_posts', function (Blueprint $table) {
             $table->id();
-            // favorite_workshops
-            $table->unsignedBigInteger('workshop_id');
-            $table->foreign('workshop_id')
-            ->references('id')
-            ->on('workshops')
-            ->onDelete('cascade');
+            $table->string('name');
+            $table->string('description');
+            $table->date('date');
+            $table->time('time');
+            $table->string('location');
+            $table->string('organizer');
+            $table->string('contact');
+            $table->boolean('status');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
             ->references('id')
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('favorite_workshops');
+        Schema::dropIfExists('workshop_posts');
     }
 };

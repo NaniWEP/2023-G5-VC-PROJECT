@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('majors', function (Blueprint $table) {
             $table->id();
-            // majors
             $table->string('name');
             $table->string('description');
             $table->integer('year_duration');

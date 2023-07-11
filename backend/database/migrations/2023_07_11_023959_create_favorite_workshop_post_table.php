@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('school_managers', function (Blueprint $table) {
+        Schema::create('favorite_workshop_post', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->string('password');
-            $table->unsignedBigInteger('profile_id');
-            $table->foreign('profile_id')
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
             ->references('id')
-            ->on('media')
+            ->on('users')
+            ->onDelete('cascade');            
+            $table->unsignedBigInteger('workshop_post_id');
+            $table->foreign('workshop_post_id')
+            ->references('id')
+            ->on('workshop_posts')
             ->onDelete('cascade');
             $table->timestamps();
         });
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('school_managers');
+        Schema::dropIfExists('favorite_workshop_post');
     }
 };

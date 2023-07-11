@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UniversityMedia;
 use Illuminate\Http\Request;
 
-class UniversityMediaController extends Controller
+class FavoriteUniversityPostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +25,7 @@ class UniversityMediaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UniversityMedia $universityMedia)
+    public function show(string $id)
     {
         //
     }
@@ -34,7 +33,7 @@ class UniversityMediaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UniversityMedia $universityMedia)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -42,7 +41,7 @@ class UniversityMediaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UniversityMedia $universityMedia)
+    public function destroy(string $id)
     {
         //
     }
