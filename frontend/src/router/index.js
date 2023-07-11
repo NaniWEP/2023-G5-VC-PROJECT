@@ -9,13 +9,13 @@ import DashboardView from "../views/Dashboard/DashboardView.vue"
 
 
 const routes = [
-  { path: '/dashbaord', component: DashboardView  },
+  { path: '/', component: DashboardView  },
   { path: '/user', component: UserView  },
   { path: '/apply', component: ApplyView  },
   { path: '/chart', component: ChartView  },
-  { path: '/Post', component: PostView  },
-  { path: '/Major', component: MajorView  },
-  { path: '/Expiration', component: ExpirationView  },   
+  { path: '/post', component: PostView  },
+  { path: '/major', component: MajorView  },
+  { path: '/expiration', component: ExpirationView  },   
   
 ]
 

@@ -11,10 +11,10 @@
         <v-list border="light-green-accent-4">
           <v-list-item :to="{ path: '/user' }" prepend-icon="mdi-account-multiple-outline" title="Users" value="users"></v-list-item>
           <v-list-item :to="{ path: '/apply' }" prepend-icon="mdi-bookmark-outline" title="Applying" value="Applying"></v-list-item>
-          <v-list-item :to="{ path: '/Post' }" prepend-icon="mdi-post" title="Post" value="Post"></v-list-item>
-          <v-list-item :to="{ path: '/Major' }" prepend-icon="mdi-clipboard-check" title="Major" value="Major"></v-list-item>
+          <v-list-item :to="{ path: '/post' }" prepend-icon="mdi-post" title="Post" value="Post"></v-list-item>
+          <v-list-item :to="{ path: '/major' }" prepend-icon="mdi-clipboard-check" title="Major" value="Major"></v-list-item>
           <v-list-item :to="{ path: '/chart' }" prepend-icon="mdi-chart-line" title="Chart" value="Chart"></v-list-item>
-          <v-list-item :to="{ path: '/Expiration' }" prepend-icon="mdi-alert-circle" title="Expired Date" value="Expired Date"></v-list-item>
+          <v-list-item :to="{ path: '/expiration' }" prepend-icon="mdi-alert-circle" title="Expired Date" value="Expired Date"></v-list-item>
           <v-list-item prepend-icon="mdi-account-minus" title="Sign Out" value="Sign Out"></v-list-item>
         </v-list>
       </v-navigation-drawer>
