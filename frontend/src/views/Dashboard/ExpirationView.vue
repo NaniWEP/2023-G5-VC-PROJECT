@@ -1,4 +1,5 @@
 <template>
+  <dashboard-component-vue></dashboard-component-vue>
   <v-card class="bg-grey-lighten-2 p-6">
     <h1 class="text-light-green-accent-4 ml-10">Expired Date</h1>
     <div class="d-flex align-center flex-column bg-grey-lighten-4 pa-6">
@@ -30,12 +31,14 @@
     <v-card-actions>
       <v-list-item class="w-100">
         <template v-slot:prepend>
-          <v-avatar
-            color="grey-darken-3"
-            image="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-          ></v-avatar>
+          <div class="d-flex  ml-10">
+              <v-avatar
+                color="grey-darken-3"
+                class="justify-content-center"
+                image="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+              ></v-avatar>
+            </div>
         </template>
-
         <v-list-item-title>PNC</v-list-item-title>
         <template v-slot:append>
           <div class="justify-self-end mr-8">
@@ -49,7 +52,11 @@
 </template>
 
 <script>
+import DashboardComponentVue from '@/components/Dashboard/DashboardComponent.vue';
 export default {
+  components:{
+    DashboardComponentVue
+  },
   data: () => ({
     toggle: null,
   }),

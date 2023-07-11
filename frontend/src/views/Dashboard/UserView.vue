@@ -1,4 +1,5 @@
 <template>
+    <dashboard-component></dashboard-component>
     <v-card class="ml-15 mt-5 mr-8 mb-3 bg-grey-lighten-2 p-10">
         <h1 class="text-light-green-accent-4 ml-10">Profile Detail</h1>
     </v-card>
@@ -6,7 +7,7 @@
             <hr>
         <div class="content">
             <div>
-                <img src="../assets/img.jpg" alt="">
+                <img src="../../assets/img.jpg" alt="">
                 <p>GillyNa</p>
             </div>
             <div class="group mt-15 mr-50">
@@ -79,7 +80,9 @@
 </template>
 
 <script>
+import DashboardComponent from '@/components/Dashboard/DashboardComponent.vue'
 export default {
+  components: { DashboardComponent },
 
     data () {
     return {

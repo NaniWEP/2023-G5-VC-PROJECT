@@ -1,6 +1,9 @@
 <template>
     <v-layout>
-      <v-navigation-drawer class="bg-black">
+      <v-navigation-drawer class="bg-black"
+        expand-on-hover
+        rail
+      >
         <v-list-item class="mt-8 ml-12 font-weight-bold text-h1 text-green-accent-3"
           title="Dashboard" size="large">
         </v-list-item>
@@ -16,10 +19,6 @@
         </v-list>
       </v-navigation-drawer>
     </v-layout>
-
-    <v-card class="main">
-        <router-view></router-view>
-    </v-card>
 
 </template>
 
