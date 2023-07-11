@@ -34,6 +34,7 @@ class AuthRegisterRequest extends FormRequest
             'password' => 'required|min:8',
             'date_of_birth' => 'required',
             'province' => 'required',
+            'role_id' => 'required',
         ];
     }
 }
