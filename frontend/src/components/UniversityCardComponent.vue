@@ -1,8 +1,10 @@
 <template>
+<div class="d-flex flex-column">
+
   <v-row>
     <v-col
-      v-for="n in 8"
-      :key="n"
+      v-for="(university,index) in universities"
+      :key="index"
       class="d-flex justift-center align-center"
       cols="4"
     >
@@ -14,28 +16,29 @@
             cover
           ></v-img>
 
-          <v-card-title> Top western road trips </v-card-title>
+          <v-card-title> {{university.name}}</v-card-title>
 
-          <v-card-subtitle> 1,000 miles of wonder </v-card-subtitle>
+          <v-card-subtitle>{{university.description}}</v-card-subtitle>
 
           <v-card-actions>
-            <v-btn to="/universityDetail" style="color:rgba(46, 46, 255, 0.79); padding: 0 20px" variant="text"> See more </v-btn>
+            <v-btn
+              :to="`/universityDetail/${index+1}`"
+              :id="$route.params.index"
+              style="color: rgba(46, 46, 255, 0.79); padding: 0 20px"
+              variant="text"
+            >
+              See more
+            </v-btn>
           </v-card-actions>
-
         </v-card>
       </v-list>
     </v-col>
   </v-row>
-  <v-pagination
-      :length="4"
-      rounded="circle"
-      class="mb-8"
-  ></v-pagination>
+  <v-pagination :length="4" rounded="circle" class="mb-8"></v-pagination>
+</div>
 </template>
 <script>
 export default {
-  data: () => ({
-    show: false,
-  }),
+  props: ["universities"],
 };
 </script>

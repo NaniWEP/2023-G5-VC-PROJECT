@@ -26,10 +26,10 @@
           item.title
         }}</v-list-item-title>
       </v-list-item>
-      <v-btn elevation="2" class="mr-2 navButtom" to="/signIn" elevated
+      <v-btn elevation="2" class="mr-2 navButtom" to="/login" elevated
         >SignIn</v-btn
       >
-      <v-btn elevation="2" class="navButtom" to="/signUp" elevated
+      <v-btn elevation="2" class="navButtom" to="/register" elevated
         >SingUp</v-btn
       >
     </v-list>

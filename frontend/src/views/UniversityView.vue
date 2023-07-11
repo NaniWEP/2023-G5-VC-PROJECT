@@ -1,6 +1,6 @@
 <template>
-  <NavbarComponent />
   <v-app>
+  <NavbarComponent />
     <BannerComponent />
     <v-main>
       <UniversityComponent />

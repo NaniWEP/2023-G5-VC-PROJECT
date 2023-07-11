@@ -1,20 +1,16 @@
 <template>
-  <v-container id="{{id}}" class="container">
+  <v-container class="container">
+    <SideNavBar></SideNavBar>
     <v-row>
-      <v-col cols="12" md="5">
+      <v-col cols="12" md="3">
         <v-card class="elevation-2">
-          <v-btn class="ma-2" color="red-darken-1" to="/universityPage">
-            <v-icon start icon="mdi-arrow-left"></v-icon>
-            Back
-          </v-btn>
-
           <v-card-title class="justify-center">
             <v-img
               class="profile_img"
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
               alt="student dp"
             />
-            <h4 class="text-center">{{university.name}}</h4>
+            <h3 class="text-center">Doeur Diet</h3>
           </v-card-title>
           <v-card-text>
             <p class="mb-0">
@@ -25,7 +21,7 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" md="7">
+      <v-col cols="12" md="8">
         <v-card class="elevation-2">
           <v-card-title class="justify-center">
             <h3 class="mb-0">
@@ -67,7 +63,7 @@
                 </tr>
               </tbody>
             </v-simple-table>
-            <!-- <dialog-form></dialog-form> -->
+            <dialog-form></dialog-form>
           </v-card-text>
         </v-card>
         <v-card class="elevation-2 mt-4">
@@ -89,28 +85,16 @@
     </v-row>
   </v-container>
 </template>
+
 <script>
-import axios from "axios";
+import DialogForm from "../../components/student_dashboard/DialogForm.vue";
+import SideNavBar from "../../components/student_dashboard/SideNavBar.vue";
 export default {
-  name: "UniversityDetail",
-  data(){
-    return{
-      university: {}
-    }
-  },
-  props: ["id"],
   components: {
+    SideNavBar,
+    DialogForm,
   },
-  created() {
-      axios
-      .get(`http://127.0.0.1:8000/api/university/${this.id}`)
-      .then(response => {
-        this.university = response.data.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  data: () => ({}),
 };
 </script>
 
@@ -130,16 +114,16 @@ img {
   width: 10%;
 }
 .text-center {
-  background-color: #3737e5;
-  color: #ffff;
+  background-color: #afc4c7;
   margin-top: 1%;
   padding: 10px;
+  font-size: large;
 }
 
 .v-card-text {
   margin-top: 16px;
   padding: 30px;
-  background-color: #ffff;
+  background-color: #cecaca;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
@@ -147,12 +131,17 @@ img {
 .v-card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: 24px;
-  background-color: #d8d8d8;
+  background-color: #b2b4a8;
   padding: 30px;
   border-radius: 4px;
 }
+
+body {
+  background-color: #e6e6e6;
+}
+
 .profile_img {
-  border: 5px solid #3737e5;
+  border: 5px solid #1ba699;
   border-radius: 50%;
   padding: 24px;
 }
@@ -183,5 +172,9 @@ tr:hover {
 
 .text-right {
   text-align: right;
+}
+
+.container {
+  background-color: #1ba699;
 }
 </style>
