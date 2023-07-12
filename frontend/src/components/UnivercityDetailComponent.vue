@@ -99,14 +99,14 @@ export default {
   components: {
   },
   mounted(){
-    // axios
-    // .get(`http://127.0.0.1:8000/api/university/${this.id}`)
-    // .then(response => {
-    //   this.university = response.data.data;
-    // })
-    // .catch(error => {
-    //   console.log(error);
-    // });
+    axios
+    .get(`http://127.0.0.1:8000/api/university/${this.id}`)
+    .then(response => {
+      this.university = response.data.data;
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 };
 </script>
