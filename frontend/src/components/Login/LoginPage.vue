@@ -1,7 +1,7 @@
 <template>
-    <v-card class="mx-auto px-7 py-6 bg-grey-lighten-2 mt-10 bt-2-black" max-width="450">
-        <img src="../../assets/use.png" alt="">
-        <h1 class="text-center">WELLCOM BACK</h1>
+    <v-card class="card px-6 py-3 bg-grey-lighten-3">
+        <v-img class="image" src="../../assets/use.png"></v-img>
+        <h1 class="text-center">WELLCOME BACK</h1>
       <v-form
         v-model="form"
         @submit.prevent="onSubmit">
@@ -9,10 +9,9 @@
         <v-text-field
           v-model="email"
           :readonly="loading"
-          :rules="[required]"
+          :rules="emailRules"
           class="mb-2 mt-3"
           clearable
-          variant="outlined"
           prepend-inner-icon="mdi-email-outline"
           label="Email"
         ></v-text-field>
@@ -20,10 +19,11 @@
         <v-text-field
           v-model="password"
           :readonly="loading"
-          :rules="[required,counter]"
+          :rules="[rules.required, rules.min]"
           clearable
           label="Password"
-          variant="outlined"
+          hint="At least 8 characters"
+          name="input-10-1"
           placeholder="Enter your password"
           :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
           :type="visible ? 'text' : 'password'"
@@ -35,12 +35,11 @@
           :disabled="!form"
           :loading="loading"
           block
-          color="green-darken-2"
+          color="indigo-accent-3"
           size="large"
           type="submit"
           variant="elevated"
         > LOGIN </v-btn>
-
       </v-form>
         <p>Don't have account? <router-link to="/register">Register</router-link></p>
     </v-card>
@@ -49,61 +48,51 @@
 
 <script>
 import '@mdi/font/css/materialdesignicons.css'
-import 'bootstrap/dist/css/bootstrap.css'
   export default {
-    
-    data(){
-        return{
-        form: false,
-        email: "",
-        password: "",
-        loading: false,
-        visible: false,
-    }
-    
-    },
+    data: () => ({
+      email: "",
+      password: "",
+      loginInfo: null,
+      form: false,
+      loading: false,
+      visible: false,
+
+      emailRules: [
+        (v) => !!v || "Field is required",
+        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      ],
+
+      rules: {
+        required: (value) => !!value || "Field is required",
+        min: (v) => (v && v.length >= 8) || "Min 8 characters",
+      },
+      
+    }),
 
     methods: {
       onSubmit () {
-        if (!this.form) 
-        return this.loading = true
-        setTimeout(() => (this.loading = false), 200)
+        if (!this.form) return
+        this.loading = true
+        setTimeout(() => (this.loading = false), 1000)
+        this.loginInfo = {email: this.email, password: this.password}
+        console.log(this.loginInfo)
       },
-
-      required(value){
-        return !!value || 'Field is required.'
-        
-      },
-      counter(value){
-        return value.length <= 8 || 'Password must be at least 8'
-      },
-      email1(value){
-        const validate = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            return validate.test(value) || 'Invalid e-mail.'
-      }
-
-    //     rules:{
-    //     required: value => !!value || 'Field is required.',
-    //     counter: value => value.length <= 8 || 'Password must be at least 8',
-    //     email: value => {
-    //         const validate = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    //         return validate.test(value) || 'Invalid e-mail.'
-    //       },
-    //   }
-      
     },
+
   }
 </script>
 
-<style scoped>
-
-  img{
-    width: 130px;
-    margin-left: 35%;
+<style>
+  .image{
+    width: 35%;
+    margin-left: 32%;
   }
 
   p{
     padding: 15px;
   }
-</style>
 
+  .card{
+    width: 35%;
+  }
+</style>

@@ -1,9 +1,9 @@
 <template>
-  <v-form v-model="valid" class="form bg-grey-lighten-2">
+  <v-form v-model="valid" class="form bg-grey-lighten-3">
     <v-container class="container">
       <h1>Register</h1>
       <div class="namefilled">
-        <v-col cols="11" md="6">
+        <v-col cols="6" md="5">
           <v-text-field
             v-model="firstname"
             :rules="nameRules"
@@ -12,7 +12,7 @@
           ></v-text-field>
         </v-col>
 
-        <v-col cols="11" md="6">
+        <v-col cols="6" md="5">
           <v-text-field
             v-model="lastname"
             :rules="nameRules"
@@ -23,16 +23,16 @@
       </div>
       <div class="inputFilled">
         <v-text-field
-          :style="{ width: '96%' }"
+          :style="{ width: '80%' }"
           v-model="email"
           :rules="emailRules"
           label="E-mail"
           required
         ></v-text-field>
         <v-text-field
-          :style="{ width: '97%' }"
+          :style="{ width: '80%' }"
           v-model="password"
-          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+          :append-inner-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
           :rules="[rules.required, rules.min]"
           :type="show1 ? 'text' : 'password'"
           name="input-10-1"
@@ -43,9 +43,9 @@
         ></v-text-field>
         <v-text-field
           block
-          :style="{ width: '97%' }"
+          :style="{ width: '80%' }"
           v-model="verify"
-          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+          :append-inner-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
           :rules="[rules.required, passwordMatch]"
           :type="show1 ? 'text' : 'password'"
           name="input-10-1"
@@ -55,21 +55,18 @@
         ></v-text-field>
       </div>
     </v-container>
-    <v-col cols="12" class="d-flex justify-space-between align-center">
-      <v-btn class="ma-2" color="red-darken-1" size="x-large" to="/">
-        <v-icon start icon="mdi-arrow-left"></v-icon>
-        CANCEL
-      </v-btn>
-      <v-btn class="ma-2" color="green" size="x-large" @click="see">
-        <v-icon start icon="mdi-wrench"></v-icon>
-        CONTINUE
-      </v-btn>
+    <v-col cols="12" sm="6" md="10"
+    >
+      <v-btn to="/userinformation" @click="goToDetailInformation" color="indigo-accent-3" block size="x-large">Continue</v-btn>
+    <p>Do you have an account? <router-link to="/login">Login</router-link></p>
     </v-col>
     <p class="w-100">
       Do you have an account? <router-link to="/login">Login</router-link>
     </p>
   </v-form>
 </template>
+
+
 <script>
 import "@mdi/font/css/materialdesignicons.css";
 export default {
@@ -147,7 +144,7 @@ export default {
   align-items: center;
 }
 .form {
-  width: 50%;
+  width: 40%;
   display: flex;
   align-items: center;
   justify-content: center;
