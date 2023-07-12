@@ -7,7 +7,6 @@ import UserInformationView from '../views/UserInformationView.vue'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import SearchView from '../views/SearchView.vue'
-import { createRouter, createWebHistory } from 'vue-router'
 import UserView from "../views/Dashboard/UserView.vue"
 import ApplyView from "../views/Dashboard/ApplyView.vue"
 import ChartView from "../views/Dashboard/ChartView.vue"

@@ -2,7 +2,7 @@
 <template>
   <div id="card">
     <v-card
-      class="mx-auto mt-4 mb-4 box-sizing: border-box"
+      class="mx-auto  mt-4 mb-4 box-sizing: border-box"
       color="blue-lighten-5"
       theme="light"
       max-width="70%"
@@ -13,24 +13,23 @@
         <v-icon size="x-large"></v-icon>
       </template>
 
-      <v-card-text class="text-p py-2 ml-12 d-flex justify-space-between mr-5">
+      <v-card-text class="text-p py-2 ml-5 d-flex justify-space-between mr-5">
         {{ major.description }}
         <div>
           <h3>{{ major.price }}$/year</h3>
-          <h3>{{ major.duration}} year</h3>
-
+          <h3>{{ major.duration }} year</h3>
         </div>
       </v-card-text>
       <v-card-actions>
         <v-list-item class="w-100">
-          <template v-slot:prepend>
+          <template  v-slot:prepend>
             <v-avatar
               color="grey-darken-3"
               image="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
             ></v-avatar>
           </template>
 
-          <v-list-item-title>{{ major.university}}</v-list-item-title>
+          <v-list-item-title>{{ major.university }}</v-list-item-title>
           <template v-slot:append>
             <div class="justify-self-end mr-8">
               <v-icon class="me-1" icon="mdi-bookmark-plus-outline"></v-icon>
