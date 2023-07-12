@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthLoginRequest;
 use App\Http\Requests\AuthRegisterRequest;
-<<<<<<< HEAD
-=======
 use App\Http\Resources\GetUserResource;
 use App\Models\SchoolManager;
->>>>>>> 89264386a5213f321a0e9672e002216d38252cc0
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
