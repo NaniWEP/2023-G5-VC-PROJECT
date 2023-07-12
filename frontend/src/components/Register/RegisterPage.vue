@@ -60,15 +60,14 @@
         <v-icon start icon="mdi-arrow-left"></v-icon>
         CANCEL
       </v-btn>
-      <v-btn class="ma-2" color="green" size="x-large">
-        <v-icon start icon="mdi-wrench"
-        @click="see"
-        ></v-icon>
+      <v-btn class="ma-2" color="green" size="x-large" @click="see">
+        <v-icon start icon="mdi-wrench"></v-icon>
         CONTINUE
-        </v-btn
-      >
+      </v-btn>
     </v-col>
-    <p class="w-100">Do you have an account? <router-link to="/login">Login</router-link></p>
+    <p class="w-100">
+      Do you have an account? <router-link to="/login">Login</router-link>
+    </p>
   </v-form>
 </template>
 <script>
@@ -107,6 +106,9 @@ export default {
   },
   methods: {
     goToDetailInformation() {
+      if (this.firstName !== "" && this.lastName !== "" && this.email !== ""){
+        console.log("h1");
+      }
       this.$router.push("/userinformation");
     },
     validate() {
@@ -114,10 +116,10 @@ export default {
         // submit form to server/API here...
       }
     },
-    see(){
-      console.log("Rule" , this.rules);
-      console.log("emailRule" , this.emailRules);
-      console.log("password" , this.passwordMatch);
+    see() {
+      console.log("Rule", this.rules == true);
+      console.log("emailRule", this.emailRules == true);
+      console.log("password", this.passwordMatch == true);
     },
     reset() {
       this.$refs.form.reset();
