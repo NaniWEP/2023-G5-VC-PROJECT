@@ -5,6 +5,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchoolManagerController;
 use App\Http\Controllers\WorkshopPostController;
 use App\Models\WorkshopPost;
+use App\Http\Controllers\UniversityController;
+use App\Models\University;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Route;
@@ -21,15 +23,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::prefix('/auth')->group(function(){
+    Route::prefix('/auth')->group(function () {
         Route::get('/user', [AuthController::class, 'user']);
         Route::post('/logout', [AuthController::class, 'logout']);
+        Route::resource('/university', UniversityController::class);
+        Route::get('/myUniversity', [UniversityController::class, 'showMyUniversity']);
     });
-
 });
 
-Route::prefix('/schoolManager')->group(function(){
-
+Route::prefix('/university')->group(function () {
+    Route::get('/showAllUniversity', [UniversityController::class, 'index']);
 });
 // Role routes
 Route::resource('/role', RoleController::class);
@@ -40,6 +43,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/getexpiredworkshop',[WorkshopPostController::class,'getWorkshopExprired']);
 
-Route::fallback(function(){
+
+Route::fallback(function () {
     return "Sorry we cannot found!!😥😣";
 });

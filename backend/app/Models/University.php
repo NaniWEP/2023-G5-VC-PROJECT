@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Auth;
+
 class University extends Model
 {
     use HasFactory;
-    protected $fillable = 
+    protected $fillable =
     [
         'name',
         'description',
@@ -21,14 +23,29 @@ class University extends Model
         'province',
         'user_id',
     ];
-
-    public function major() : HasMany
+    public static function store($request, $id = null)
     {
-        return $this-> hasMany(Major::class);
+        $university = $request->only([
+            'name',
+            'description',
+            'website',
+            'email',
+            'phone',
+            'location',
+            'province',
+            'user_id',
+        ]);
+        $university = self::updateOrCreate(['id' => $id], $university);
+        return $university;
     }
 
-    public function user():BelongsTo
+    public function major(): HasMany
     {
-        return $this -> belongsTo(User::class);
+        return $this->hasMany(Major::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
