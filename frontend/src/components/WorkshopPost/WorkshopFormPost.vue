@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="valid" class="form">
+  <v-form v-model="valid" class="form" @submit.prevent="submitData">
     <v-container class="container">
       <h1>ADD WORKSHOP</h1>
       <div class="namefilled input">
@@ -33,10 +33,11 @@
       </div>
       <div class="namefilled input">
         <v-col cols="12" md="5">
-          <v-text-field 
-          :roles:="ordanizerRoles"
-          v-model="organizer" 
-          label="Organizer"></v-text-field>
+          <v-text-field
+            :roles:="ordanizerRoles"
+            v-model="organizer"
+            label="Organizer"
+          ></v-text-field>
         </v-col>
 
         <v-col cols="12" md="6">
@@ -81,7 +82,7 @@
           <v-icon start icon="mdi-arrow-left"></v-icon>
           CANCEL
         </v-btn>
-        <v-btn class="ma-2" color="green" size="x-large">
+        <v-btn type="submite" class="ma-2" color="green" size="x-large">
           <v-icon start icon="mdi-wrench"></v-icon>
           POST</v-btn
         >
@@ -91,6 +92,7 @@
 </template>
 <script>
 import "@mdi/font/css/materialdesignicons.css";
+// import axios from "axios";
 export default {
   data: () => ({
     valid: true,
@@ -102,7 +104,7 @@ export default {
     location: "",
     image: "",
     description: "",
-    users: [],
+    workshopInfo: null,
     titleRules: [
       (value) => {
         if (value) return true;
@@ -138,11 +140,27 @@ export default {
     },
   },
   methods: {
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
+    submitData() {
+
+      this.workshopInfo = {
+        name: this.title,
+        date: this.date,
+        time: this.time,
+        organizer: this.organizer,
+        contact: this.contact,
+        location: this.location,
+        image: this.image,
+        description: this.description,
+      }
+      // axios.post("api/workshopData", {
+      //   this.workshopInfo
+      // })
+      // .than(response => {
+      //   console.log(response.data)
+      // })
+      // .catch(error => {
+      //   console.log(error.message)
+      // })
     },
   },
 };

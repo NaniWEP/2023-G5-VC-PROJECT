@@ -19,7 +19,16 @@ class WorkshopPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $title = $request->input('title');
+        $date = $request->input('date');
+        $time = $request->input('time');
+        $organizer = $request->input('organizer');
+        $contact = $request->input('contact');
+        $location = $request->input('location');
+        $image = $request->input('image');
+        $description = $request->input('description');
+
+        return response()->json(['message' => 'Workshop created successfully']);
     }
 
     /**

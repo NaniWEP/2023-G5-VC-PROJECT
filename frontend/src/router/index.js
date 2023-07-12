@@ -13,7 +13,7 @@ const routes = [
   
   {
     path: "/formPostWorkshop",
-    name: "workshopPost",   
+    name: "workshopPost",
     component: workshopPost,
   },
   {
