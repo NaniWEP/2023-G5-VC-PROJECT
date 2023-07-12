@@ -3,23 +3,15 @@
     <v-container class="container">
       <h1>Detail Information</h1>
       <div class="inputFiled">
-        <v-col cols="6" md="5">
-          <v-text-field
-            v-model="dateOfBirth"
+        <v-col cols="10" md="10">
+          <v-combobox
+            label="Province"
+            v-model="selectProvince"
             :rules="inputRules"
-            label="Date of birth"
-            type="date"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6" md="5">
-          <v-text-field
-            v-model="age"
-            :rules="inputRules"
-            label="Age"
-            type="number"
-            required
-          ></v-text-field>
+            placeholder="Plase Select.........."
+            :items="province"
+          >
+          </v-combobox>
         </v-col>
       </div>
       <div class="inputFiled">
@@ -29,22 +21,33 @@
             :rules="inputRules"
             placeholder="Plase Select.........."
             :items="gender"
+            v-model="selectGender"
           >
           </v-combobox>
         </v-col>
         <v-col cols="6" md="5">
-          <v-combobox
-            label="Province"
+          <v-text-field
+            v-model="dateOfBirth"
             :rules="inputRules"
-            placeholder="Plase Select.........."
-            :items="province">      
-          </v-combobox>
+            label="Date of birth"
+            type="date"
+            required
+          ></v-text-field>
         </v-col>
       </div>
     </v-container>
-    <v-col cols="12" sm="6" md="10">
-      <v-btn @click="goToDetailInformation" color="indigo-accent-3" block size="x-large">Continue</v-btn>
+    <v-col cols="12" class="d-flex justify-space-between align-center">
+      <v-btn class="ma-2" color="red-darken-1" size="x-large" to="/">
+        <v-icon start icon="mdi-arrow-left"></v-icon>
+        CANCEL
+      </v-btn>
+      <v-btn class="ma-2" color="green" @click="getUser" size="x-large">
+        CONTINUE
+      </v-btn>
     </v-col>
+    <p class="w-100">
+      Do you have an account? <router-link to="/login">Login</router-link>
+    </p>
   </v-form>
 </template>
 
@@ -52,27 +55,39 @@
 <script>
 import "@mdi/font/css/materialdesignicons.css";
 export default {
+  name: "UserInformation",
   methods: {
-    goToDetailInformation() {
-      this.$router.push("/");
-    },
-    validate() {
-      if (this.$refs.loginForm.validate()) {
-        // submit form to server/API here...
+    getUser() {
+      if (
+        this.dateOfBirth !== "" &&
+        this.selectGender !== "" &&
+        this.selectProvince !== ""
+      ) {
+        this.user.push({
+          firstName: this.$router.currentRoute.value.query.firstName,
+          lastName: this.$router.currentRoute.value.query.lastName,
+          email: this.$router.currentRoute.value.query.email,
+          password: this.$router.currentRoute.value.query.password,
+          gender: this.selectGender,
+          dateOfBrith: this.dateOfBirth,
+          province: this.selectProvince,
+        });
+        this.$router.push("/");
+        console.log(this.user);
       }
     },
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
-    },
   },
+  // show(){
+  //   this.getData;
+  // },
   data: () => ({
     valid: true,
     dateOfBirth: "",
     age: "",
+    selectGender: "",
+    selectProvince: "",
     gender: ["M", "F"],
+    user: [],
     province: [
       "Banteay Meanchey",
       "Battambang",
@@ -99,8 +114,6 @@ export default {
       "Takeo",
       "Tboung Khmum",
     ],
-    verify: "",
-
     inputRules: [
       (value) => {
         if (value) return true;

@@ -13,7 +13,7 @@ import ChartView from "../views/Dashboard/ChartView.vue"
 import PostView from "../views/Dashboard/PostView.vue"
 import MajorView from "../views/Dashboard/MajorView.vue"
 import ExpirationView from "../views/Dashboard/ExpirationView.vue"
-import DashboardView from "../views/Dashboard/DashboardView.vue"
+// import DashboardView from "../views/Dashboard/DashboardView.vue"
 
 
 const routes = [
@@ -42,7 +42,8 @@ const routes = [
   {
     path: '/userinformation',
     name: 'userinformation',
-    component: UserInformationView
+    component: UserInformationView,
+    props: true
   },
   {
     path: '/',
@@ -60,7 +61,7 @@ const routes = [
     component: SearchView,
     props: true
   },
-  { path: '/', component: DashboardView  },
+  // { path: '/', component: DashboardView  },
   { path: '/user', component: UserView  },
   { path: '/apply', component: ApplyView  },
   { path: '/chart', component: ChartView  },
