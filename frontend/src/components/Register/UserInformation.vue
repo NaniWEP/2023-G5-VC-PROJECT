@@ -1,9 +1,9 @@
 <template>
-  <v-form v-model="valid" class="form">
+  <v-form v-model="valid" class="form py-3 bg-grey-lighten-3">
     <v-container class="container">
       <h1>Detail Information</h1>
       <div class="inputFiled">
-        <v-col cols="6" md="3">
+        <v-col cols="6" md="5">
           <v-text-field
             v-model="dateOfBirth"
             :rules="inputRules"
@@ -12,7 +12,7 @@
             required
           ></v-text-field>
         </v-col>
-        <v-col cols="6" md="3">
+        <v-col cols="6" md="5">
           <v-text-field
             v-model="age"
             :rules="inputRules"
@@ -23,7 +23,7 @@
         </v-col>
       </div>
       <div class="inputFiled">
-        <v-col cols="6" md="3">
+        <v-col cols="6" md="5">
           <v-combobox
             label="Gender"
             :rules="inputRules"
@@ -32,23 +32,24 @@
           >
           </v-combobox>
         </v-col>
-        <v-col cols="6" md="3">
+        <v-col cols="6" md="5">
           <v-combobox
             label="Province"
             :rules="inputRules"
             placeholder="Plase Select.........."
-            :items="province"
-          >
+            :items="province">      
           </v-combobox>
         </v-col>
       </div>
     </v-container>
-    <v-col cols="12" sm="6" md="6">
-      <v-btn @click="goToDetailInformation" color="green" block size="x-large">Continue</v-btn>
+    <v-col cols="12" sm="6" md="10">
+      <v-btn @click="goToDetailInformation" color="indigo-accent-3" block size="x-large">Continue</v-btn>
     </v-col>
   </v-form>
 </template>
-  <script>
+
+
+<script>
 import "@mdi/font/css/materialdesignicons.css";
 export default {
   methods: {
@@ -111,14 +112,16 @@ export default {
   }),
 };
 </script>
-  <style scoped>
+
+  
+<style scoped>
 .inputFiled {
   display: flex;
   width: 100%;
   justify-content: center;
 }
 .form {
-  width: 70%;
+  width: 40%;
   display: flex;
   align-items: center;
   justify-content: center;
