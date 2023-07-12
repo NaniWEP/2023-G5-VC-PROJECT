@@ -1,5 +1,8 @@
 <template>
+<v-app>
+    
     <SearchPage></SearchPage>
+</v-app>
 </template>
 <script>
  import SearchPage from "../components/SearchPage/SearhPage.vue";
@@ -11,7 +14,9 @@ export default {
 </script>
 
 <style scoped>
- *{
-    height: 100vh;
- }
+*{
+  /* margin-top: 40px; */
+  display: flex;
+
+}
 </style>

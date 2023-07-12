@@ -162,7 +162,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .selectButton:hover {
   background-color: #3737e5;
   color: #ffff;

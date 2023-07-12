@@ -1,23 +1,21 @@
 <template>
-  <v-form v-model="valid" class="form">
+  <v-form v-model="valid" class="form bg-grey-lighten-2">
     <v-container class="container">
       <h1>Register</h1>
       <div class="namefilled">
-        <v-col cols="6" md="3">
+        <v-col cols="11" md="6">
           <v-text-field
-            v-model="firstname"
+            v-model="firstName"
             :rules="nameRules"
-            :counter="10"
             label="First name"
             required
           ></v-text-field>
         </v-col>
 
-        <v-col cols="6" md="3">
+        <v-col cols="11" md="6">
           <v-text-field
-            v-model="lastname"
+            v-model="lastName"
             :rules="nameRules"
-            :counter="10"
             label="Last name"
             required
           ></v-text-field>
@@ -25,14 +23,14 @@
       </div>
       <div class="inputFilled">
         <v-text-field
-          :style="{ width: '48%' }"
+          :style="{ width: '97%' }"
           v-model="email"
           :rules="emailRules"
           label="E-mail"
           required
         ></v-text-field>
         <v-text-field
-          :style="{ width: '48%' }"
+          :style="{ width: '97%' }"
           v-model="password"
           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
           :rules="[rules.required, rules.min]"
@@ -41,11 +39,12 @@
           label="Password"
           hint="At least 8 characters"
           counter
+          required
           @click:append="show1 = !show1"
         ></v-text-field>
         <v-text-field
           block
-          :style="{ width: '48%' }"
+          :style="{ width: '97%' }"
           v-model="verify"
           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
           :rules="[rules.required, passwordMatch]"
@@ -53,43 +52,48 @@
           name="input-10-1"
           label="Confirm Password"
           counter
+          required
           @click:append="show1 = !show1"
         ></v-text-field>
       </div>
     </v-container>
-    <v-col cols="12" sm="6" md="6"
-    >
-      <v-btn to="/userinformation" @click="goToDetailInformation" color="green" block size="x-large">Continue</v-btn>
-    <p>Do you have an account? <router-link to="/login">Login</router-link></p>
+    <v-col cols="12" class="d-flex justify-space-between align-center">
+      <v-btn class="ma-2" color="red-darken-1" size="x-large" to="/">
+        <v-icon start icon="mdi-arrow-left"></v-icon>
+        CANCEL
+      </v-btn>
+      <v-btn
+        class="ma-2"
+        color="green"
+        size="x-large"
+        @click="goToDetailInformation"
+      >
+        CONTINUE
+      </v-btn>
     </v-col>
+    <p class="w-100">
+      Do you have an account? <router-link to="/login">Login</router-link>
+    </p>
   </v-form>
 </template>
+
+
 <script>
-import '@mdi/font/css/materialdesignicons.css'
+import "@mdi/font/css/materialdesignicons.css";
 export default {
   data: () => ({
-    valid: true,
+    // validtion: false,
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     verify: "",
-    users:[],
+    users: [],
     nameRules: [
       (value) => {
         if (value) return true;
-
         return "Name is required.";
       },
-      (value) => {
-        if (value?.length <= 10) return true;
-
-        return "Name must be less than 10 characters.";
-      },
-    ],
-    loginEmailRules: [
-      (v) => !!v || "Required",
-      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
     emailRules: [
       (v) => !!v || "Required",
@@ -109,28 +113,55 @@ export default {
   },
   methods: {
     goToDetailInformation() {
-      this.$router.push('/userinformation')
-    },
-    validate() {
-      if (this.$refs.loginForm.validate()) {
-        // submit form to server/API here...
+      let valid = true;
+      console.log(valid);
+
+      if (
+        this.firstName === "" ||
+        this.lastName === "" ||
+        this.email === "" ||
+        this.password === "" ||
+        !this.verify
+      ) {
+        valid = false;
+      } else if (!/\S+@\S+\.\S+/.test(this.email)) {
+        console.log("Invalid email format.");
+        valid = false;
+      } else if (this.password !== this.verify) {
+        valid = false;
+      }
+
+      if (valid) {
+        // this.users.push({
+        //   firstName: this.firstName,
+        //   lastName: this.lastName,
+        //   email: this.email,
+        //   password: this.password,
+        // });
+        this.$router.push({
+          path: "/userinformation",
+          query: {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            email: this.email,
+            password: this.password,
+          },
+        });
+            console.log(this.users);
       }
     },
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
-    },
   },
-  
 };
 </script>
 <style scoped>
+.action .btn {
+  width: 30%;
+}
 .namefilled {
   display: flex;
   width: 100%;
   justify-content: center;
+  align-items: center;
 }
 .inputFilled {
   width: 100%;
@@ -139,11 +170,12 @@ export default {
   align-items: center;
 }
 .form {
-  width: 70%;
+  width: 40%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  border-radius: 10px;
 }
 
 .container {
@@ -151,5 +183,6 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 10px;
 }
 </style>
