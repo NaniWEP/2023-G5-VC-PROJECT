@@ -58,6 +58,9 @@ export default {
   name: "UserInformation",
   methods: {
     getUser() {
+      console.log();
+      console.log();
+      console.log();
       if (
         this.dateOfBirth !== "" &&
         this.selectGender !== "" &&
@@ -72,8 +75,9 @@ export default {
           dateOfBrith: this.dateOfBirth,
           province: this.selectProvince,
         });
-        this.$router.push("/");
+        
         console.log(this.user);
+        this.$router.push("/");
       }
     },
   },
