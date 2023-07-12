@@ -82,7 +82,7 @@ import '@mdi/font/css/materialdesignicons.css'
   }
 </script>
 
-<style>
+<style scoped>
   .image{
     width: 35%;
     margin-left: 32%;
@@ -94,5 +94,6 @@ import '@mdi/font/css/materialdesignicons.css'
 
   .card{
     width: 35%;
+    border-radius: 10px;
   }
 </style>

@@ -29,7 +29,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .main{
     margin-left: 18%;
     height: 620px;

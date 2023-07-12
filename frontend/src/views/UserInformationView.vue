@@ -9,3 +9,12 @@ export default {
     }
 }
 </script>
+<style scoped>
+    /* *{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+
+    } */
+</style>

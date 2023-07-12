@@ -1,29 +1,23 @@
 <template>
-
-  
-    <router-view/>
-
-
+  <v-app>
+    <v-main class="main">
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-
 export default {
-  components:{
-
-  },
-}
+  components: {},
+};
 </script>
 <style scoped>
-
-#app{
+#app {
   background-color: #000000;
 }
-.main{
+.main {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
-
 </style>

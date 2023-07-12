@@ -93,7 +93,7 @@ export default {
   }
 </script>
 
-<style>
+<style scoped>
     hr{
      margin: 50px 50px 0px 50px; 
      border: 2px rgb(17, 224, 17) solid;

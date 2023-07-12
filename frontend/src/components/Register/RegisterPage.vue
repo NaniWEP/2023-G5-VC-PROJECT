@@ -1,7 +1,7 @@
 <template>
   <v-form v-model="valid" class="form bg-grey-lighten-2">
     <v-container class="container">
-      <h1>Register</h1>
+      <h1 class="text-center">Register</h1>
       <div class="namefilled">
         <v-col cols="11" md="6">
           <v-text-field
