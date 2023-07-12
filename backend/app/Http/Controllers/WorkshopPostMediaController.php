@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AuthenticationController;
 use Illuminate\Http\Request;
 
-class AuthenticationControllerController extends Controller
+class WorkshopPostMediaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +25,7 @@ class AuthenticationControllerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(AuthenticationController $authenticationController)
+    public function show(string $id)
     {
         //
     }
@@ -34,7 +33,7 @@ class AuthenticationControllerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, AuthenticationController $authenticationController)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -42,7 +41,7 @@ class AuthenticationControllerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AuthenticationController $authenticationController)
+    public function destroy(string $id)
     {
         //
     }

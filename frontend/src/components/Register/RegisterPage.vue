@@ -54,16 +54,24 @@
           @click:append="show1 = !show1"
         ></v-text-field>
       </div>
+      <v-col cols="12" sm="6" md="6">
+        <v-btn
+          to="/userinformation"
+          @click="goToDetailInformation"
+          color="green"
+          block
+          size="x-large"
+          >Continue</v-btn
+        >
+        <p>
+          Do you have an account? <router-link to="/login">Login</router-link>
+        </p>
+      </v-col>
     </v-container>
-    <v-col cols="12" sm="6" md="6"
-    >
-      <v-btn to="/userinformation" @click="goToDetailInformation" color="green" block size="x-large">Continue</v-btn>
-    <p>Do you have an account? <router-link to="/login">Login</router-link></p>
-    </v-col>
   </v-form>
 </template>
 <script>
-import '@mdi/font/css/materialdesignicons.css'
+import "@mdi/font/css/materialdesignicons.css";
 export default {
   data: () => ({
     valid: true,
@@ -72,7 +80,7 @@ export default {
     email: "",
     password: "",
     verify: "",
-    users:[],
+    users: [],
     nameRules: [
       (value) => {
         if (value) return true;
@@ -107,7 +115,7 @@ export default {
   },
   methods: {
     goToDetailInformation() {
-      this.$router.push('/userinformation')
+      this.$router.push("/userinformation");
     },
     validate() {
       if (this.$refs.loginForm.validate()) {
@@ -121,7 +129,6 @@ export default {
       this.$refs.form.resetValidation();
     },
   },
-  
 };
 </script>
 <style scoped>

@@ -38,32 +38,32 @@
                 <tr>
                   <td>Username</td>
                   <td class="text-right">:</td>
-                  <td>Doeur Diet</td>
+                  <td>{{university.name}}</td>
                 </tr>
                 <tr>
-                  <td>Gender</td>
+                  <td>Contact By Email</td>
                   <td class="text-right">:</td>
-                  <td>Male</td>
+                  <td>{{university.email}}</td>
                 </tr>
                 <tr>
-                  <td>DateOfBirth</td>
+                  <td>Phone Number</td>
                   <td class="text-right">:</td>
-                  <td>Jan/12/2002</td>
+                  <td>{{university.phone}}</td>
                 </tr>
                 <tr>
-                  <td>Email</td>
+                  <td>Province/City</td>
                   <td class="text-right">:</td>
-                  <td>doeur.diet@gmail.com</td>
+                  <td>{{university.province}}</td>
                 </tr>
                 <tr>
-                  <td>Phone number</td>
+                  <td>Location</td>
                   <td class="text-right">:</td>
-                  <td>08876555</td>
+                  <td>{{university.location}}</td>
                 </tr>
                 <tr>
-                  <td>Province</td>
+                  <td>Website</td>
                   <td class="text-right">:</td>
-                  <td>Siem Reap</td>
+                  <td>{{university.website}}</td>
                 </tr>
               </tbody>
             </v-simple-table>
@@ -78,10 +78,7 @@
           </v-card-title>
           <v-card-text>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              {{university.description}}
             </p>
           </v-card-text>
         </v-card>
@@ -101,15 +98,15 @@ export default {
   props: ["id"],
   components: {
   },
-  created() {
-      axios
-      .get(`http://127.0.0.1:8000/api/university/${this.id}`)
-      .then(response => {
-        this.university = response.data.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  mounted(){
+    // axios
+    // .get(`http://127.0.0.1:8000/api/university/${this.id}`)
+    // .then(response => {
+    //   this.university = response.data.data;
+    // })
+    // .catch(error => {
+    //   console.log(error);
+    // });
   }
 };
 </script>

@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -26,6 +27,7 @@ class User extends Authenticatable
         'password',
         'date_of_birth',
         'province',
+        'role_id',
         'profile_id',
     ];
 
@@ -49,17 +51,24 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-
-    public function favoriteUniversity() : HasMany
+    public function university(): HasOne
     {
-        return $this-> hasMany(FavoriteUniversity::class);
+        return $this->hasOne(University::class);
     }
-    public function favoriteWorkshop() : HasMany
+    public function favoriteUniversityPost() : HasMany
     {
-        return $this-> hasMany(FavoriteWorkshop::class);
+        return $this-> hasMany(FavoriteUniversityPost::class);
+    }
+    public function favoriteWorkshopPost() : HasMany
+    {
+        return $this-> hasMany(FavoriteWorkshopPost::class);
     }
     public function media() : BelongsTo
     {
         return $this-> belongsTo(Media::class);
+    }
+    public function role() : BelongsTo
+    {
+        return $this-> belongsTo(Role::class);
     }
 }

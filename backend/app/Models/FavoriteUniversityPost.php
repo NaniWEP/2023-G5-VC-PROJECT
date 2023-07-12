@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class FavoriteUniversity extends Model
+class FavoriteUniversityPost extends Model
 {
     use HasFactory;
     protected $fillable = 
     [
-        'university_id',
         'user_id',
+        'university_post_id',
     ];
 
-    public function university() : BelongsTo
+    public function universityPost() : BelongsTo
     {
-        return $this-> belongsTo(University::class);
+        return $this-> belongsTo(UniversityPost::class);
     }
     public function user() : BelongsTo
     {

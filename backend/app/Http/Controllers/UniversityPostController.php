@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Workshop;
 use Illuminate\Http\Request;
 
-class WorkshopController extends Controller
+class UniversityPostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +25,7 @@ class WorkshopController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Workshop $workshop)
+    public function show(string $id)
     {
         //
     }
@@ -34,7 +33,7 @@ class WorkshopController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Workshop $workshop)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -42,7 +41,7 @@ class WorkshopController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Workshop $workshop)
+    public function destroy(string $id)
     {
         //
     }

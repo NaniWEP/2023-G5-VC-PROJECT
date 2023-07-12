@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\WorkshopMedia;
 use Illuminate\Http\Request;
 
-class WorkshopMediaController extends Controller
+class WorkshopPostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +25,7 @@ class WorkshopMediaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(WorkshopMedia $workshopMedia)
+    public function show(string $id)
     {
         //
     }
@@ -34,7 +33,7 @@ class WorkshopMediaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, WorkshopMedia $workshopMedia)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -42,7 +41,7 @@ class WorkshopMediaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(WorkshopMedia $workshopMedia)
+    public function destroy(string $id)
     {
         //
     }

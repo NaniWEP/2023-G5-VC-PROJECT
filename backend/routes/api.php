@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SchoolManagerController;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UniversityController;
 /*
@@ -14,8 +18,12 @@ use App\Http\Controllers\UniversityController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::prefix('/auth')->group(function(){
+        Route::get('/user', [AuthController::class, 'user']);
+        Route::post('/logout', [AuthController::class, 'logout']);
+    });
+
 });
 Route::get('/university', [UniversityController::class, 'index']);
 Route::get('/university/{id}', [UniversityController::class, 'show']);

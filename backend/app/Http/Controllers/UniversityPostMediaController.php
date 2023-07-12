@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SchoolManager;
 use Illuminate\Http\Request;
 
-class SchoolManagerController extends Controller
+class UniversityPostMediaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +25,7 @@ class SchoolManagerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SchoolManager $schoolManager)
+    public function show(string $id)
     {
         //
     }
@@ -34,7 +33,7 @@ class SchoolManagerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SchoolManager $schoolManager)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -42,7 +41,7 @@ class SchoolManagerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SchoolManager $schoolManager)
+    public function destroy(string $id)
     {
         //
     }

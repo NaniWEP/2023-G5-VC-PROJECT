@@ -11,20 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('workshops', function (Blueprint $table) {
+        Schema::create('universities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->date('date');
-            $table->time('time');
+            $table->string('website');
+            $table->string('email');
+            $table->string('phone');
             $table->string('location');
-            $table->string('organizer');
-            $table->string('contact');
-            $table->boolean('status');
-            $table->unsignedBigInteger('school_manager_id');
-            $table->foreign('school_manager_id')
+            $table->string('province');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
             ->references('id')
-            ->on('school_managers')
+            ->on('users')
             ->onDelete('cascade');
             $table->timestamps();
         });
@@ -35,6 +34,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('workshops');
+        Schema::dropIfExists('universities');
     }
 };
+

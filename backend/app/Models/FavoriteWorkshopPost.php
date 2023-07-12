@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class FavoriteWorkshop extends Model
+class FavoriteWorkshopPost extends Model
 {
     use HasFactory;
     protected $fillable = 
     [
-        'workshop_id',
         'user_id',
+        'workshop_post_id',
     ];
 
-    public function workshop() : BelongsTo 
+    public function workshopPost() : BelongsTo 
     {
-        return $this-> belongsTo(Workshop::class);    
+        return $this-> belongsTo(WorkshopPost::class);    
     }
     public function user() : BelongsTo 
     {

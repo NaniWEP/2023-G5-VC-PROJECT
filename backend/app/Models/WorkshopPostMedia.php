@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UniversityMedia extends Model
+class WorkshopPostMedia extends Model
 {
     use HasFactory;
     protected $fillable = 
     [
-        'university_id',
+        'workshop_post_id',
         'media_id',
     ];
 
-    public function university() : BelongsTo
+    public function workshopPost() : BelongsTo
     {
-        return $this-> belongsTo(University::class);
+        return $this-> belongsTo(WorkshopPost::class);
     }
     public function media() : BelongsTo
     {

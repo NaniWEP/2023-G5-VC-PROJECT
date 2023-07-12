@@ -5,26 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-class University extends Model
+
+class UniversityPost extends Model
 {
     use HasFactory;
     protected $fillable = 
     [
-        'name',
+        'title',
         'description',
-        'website',
-        'email',
-        'phone',
-        'location',
-        'province',
+        'date',
+        'status',
+        'major_id',
         'user_id',
     ];
 
-    public function major() : HasMany
+    public function major() : BelongsTo
     {
-        return $this-> hasMany(Major::class);
+        return $this-> belongsTo(Major::class);
     }
 
     public function user():BelongsTo
