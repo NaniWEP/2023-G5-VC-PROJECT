@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchoolManagerController;
+use App\Http\Controllers\WorkshopPostController;
+use App\Models\WorkshopPost;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +38,7 @@ Route::resource('/role', RoleController::class);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/getexpiredworkshop',[WorkshopPostController::class,'getWorkshopExprired']);
 
 Route::fallback(function(){
     return "Sorry we cannot found!!😥😣";
