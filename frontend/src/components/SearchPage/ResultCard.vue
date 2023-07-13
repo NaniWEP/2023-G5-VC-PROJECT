@@ -13,11 +13,11 @@
         <v-icon size="x-large"></v-icon>
       </template>
 
-      <v-card-text class="text-p py-2 ml-5 d-flex justify-space-between mr-5">
+      <v-card-text class="text-p py-2 ml-12 d-flex justify-space-between mr-5">
         {{ major.description }}
         <div>
-          <h3>{{ major.price }}$/year</h3>
-          <h3>{{ major.duration }} year</h3>
+          <h3><v-icon> mdi-currency-usd</v-icon> {{ major.price }}/year</h3>
+          <h3> <v-icon> mdi-clock-time-eight-outline</v-icon> {{ major.duration }} year</h3>
         </div>
       </v-card-text>
       <v-card-actions>
@@ -33,7 +33,6 @@
           <template v-slot:append>
             <div class="justify-self-end mr-8">
               <v-icon class="me-1" icon="mdi-bookmark-plus-outline"></v-icon>
-              <span class="subheading me-2">256</span>
             </div>
           </template>
         </v-list-item>

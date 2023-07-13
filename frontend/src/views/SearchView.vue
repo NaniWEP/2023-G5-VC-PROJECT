@@ -17,6 +17,8 @@ export default {
 *{
   /* margin-top: 40px; */
   display: flex;
+  width: 100%;
+
 
 }
 </style>
