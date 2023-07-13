@@ -1,5 +1,4 @@
 <template>
-    <v-layout>
       <v-navigation-drawer class="bg-black"
         expand-on-hover
         rail
@@ -18,8 +17,6 @@
           <v-list-item prepend-icon="mdi-account-minus" title="Sign Out" value="Sign Out"></v-list-item>
         </v-list>
       </v-navigation-drawer>
-    </v-layout>
-
 </template>
 
 <script>

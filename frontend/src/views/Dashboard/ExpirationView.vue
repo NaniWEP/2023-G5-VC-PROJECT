@@ -1,4 +1,7 @@
 <template>
+<div id="body">
+
+
   <dashboard-component-vue></dashboard-component-vue>
   <v-card class="bg-grey-lighten-2 p-6 title">
     <h1 class="text-light-green-accent-4 ">Expired Date</h1>
@@ -53,6 +56,7 @@
       </tbody>
     </v-table>
   </v-container>
+  </div>
 </template>
 
 <script>
@@ -70,5 +74,11 @@ export default {
 <style scoped>
 .title {
   margin-left: 60px;
+}
+#body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
 }
 </style>

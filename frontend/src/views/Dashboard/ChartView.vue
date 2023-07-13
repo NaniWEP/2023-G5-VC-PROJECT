@@ -1,22 +1,34 @@
 <template>
-<dashboard-component-vue></dashboard-component-vue>
+  <div id="body">
+    <dashboard-component-vue></dashboard-component-vue>
     <v-card>
-        <div id="chart">
-            <apexchart type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
-            <h1>hi</h1>
-        </div>
+      <div id="chart">
+        <apexchart
+          type="bar"
+          height="350"
+          :options="chartOptions"
+          :series="series"
+        ></apexchart>
+        <h1>hi</h1>
+      </div>
     </v-card>
+  </div>
 </template>
 
 <script>
-import DashboardComponentVue from '@/components/Dashboard/DashboardComponent.vue'
+import DashboardComponentVue from "@/components/Dashboard/DashboardComponent.vue";
 export default {
-  components:{
-    DashboardComponentVue
-  }
-}
+  components: {
+    DashboardComponentVue,
+  },
+};
 </script>
 
-<style>
-
+<style scoped>
+  #body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
 </style>
