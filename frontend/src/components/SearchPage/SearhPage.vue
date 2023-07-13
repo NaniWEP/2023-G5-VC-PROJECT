@@ -144,7 +144,8 @@ export default {
 <style scoped>
 #body {
   margin-top: 50px;
-  width: 100%;
+  /* width: 100%; */
+  /* background-color: blanchedalmond; */
   display: flex;
   flex-direction: column;
 }
