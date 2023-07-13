@@ -38,7 +38,7 @@
           </div>
         </v-container>
         <v-col cols="12" class="d-flex justify-space-between align-center">
-          <v-btn class="ma-2" color="red-darken-1" size="x-large" to="/">
+          <v-btn class="ma-2" color="red-darken-1" size="x-large"  @click="backToRegister">
             <v-icon start icon="mdi-arrow-left"></v-icon>
             CANCEL
           </v-btn>
@@ -59,27 +59,37 @@ export default {
   name: "UserInformation",
   methods: {
     getUser() {
-      console.log();
-      console.log();
-      console.log();
       if (
         this.dateOfBirth !== "" &&
         this.selectGender !== "" &&
         this.selectProvince !== ""
       ) {
         this.user.push({
-          firstName: this.$router.currentRoute.value.query.firstName,
-          lastName: this.$router.currentRoute.value.query.lastName,
-          email: this.$router.currentRoute.value.query.email,
-          password: this.$router.currentRoute.value.query.password,
+          firstName: this.$route.query.firstName,
+          lastName: this.$route.query.lastName,
+          email: this.$route.query.email,
+          password: this.$route.query.password,
           gender: this.selectGender,
           dateOfBrith: this.dateOfBirth,
           province: this.selectProvince,
         });
-
         console.log(this.user);
         this.$router.push("/");
       }
+    },
+    backToRegister(){
+      // console.log(this.$route.query.firstName);
+      // console.log(this.$route.query);
+      this.$router.push({
+          path: "/register",
+          query: {
+            firstName: this.$route.query.firstName,
+            lastName: this.$route.query.lastName,
+            email: this.$route.query.email,
+            password: this.$route.query.password,
+          },
+      })
+
     },
   },
   // show(){

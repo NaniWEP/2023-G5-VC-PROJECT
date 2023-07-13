@@ -58,7 +58,11 @@
       </div>
     </v-container>
     <v-col cols="12" class="d-flex justify-space-between align-center">
-      <v-btn class="ma-2" color="red-darken-1" size="x-large" to="/">
+      <v-btn class="ma-2" 
+      color="red-darken-1" 
+      size="x-large"
+      @click="resetUser"
+      >
         <v-icon start icon="mdi-arrow-left"></v-icon>
         CANCEL
       </v-btn>
@@ -106,6 +110,10 @@ export default {
       min: (v) => (v && v.length >= 8) || "Min 8 characters",
     },
   }),
+  created() {
+    // Call the showResultFromHomePage method to display the search results
+    this.resetUser()
+  },
   computed: {
     passwordMatch() {
       return () => this.password === this.verify || "Password must match";
@@ -130,14 +138,7 @@ export default {
       } else if (this.password !== this.verify) {
         valid = false;
       }
-
       if (valid) {
-        // this.users.push({
-        //   firstName: this.firstName,
-        //   lastName: this.lastName,
-        //   email: this.email,
-        //   password: this.password,
-        // });
         this.$router.push({
           path: "/userinformation",
           query: {
@@ -149,6 +150,15 @@ export default {
         });
             console.log(this.users);
       }
+    },
+    resetUser(){
+      this.lastName = this.$route.query.lastName;
+      this.firstName = this.$route.query.firstName;
+      this.email = this.$route.query.email;
+      this.password = this.$route.query.password;
+      this.verify = this.$route.query.password;
+      console.log(this.$route);
+      console.log(11);
     },
   },
 };
