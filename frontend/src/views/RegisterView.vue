@@ -12,8 +12,7 @@ export default {
 };
 </script>
 <style scoped>
-* {
-  margin-top: 50px;
+#body {
   display: flex;
   justify-content: center;
   align-items: center;

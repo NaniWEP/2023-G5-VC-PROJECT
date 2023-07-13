@@ -11,5 +11,4 @@ class WorkshopPostController extends Controller
         $expiredWorkshop = WorkshopPost::where('status', '=', 1)->get();
         return response()->json(['massage'=>'This is workshop not expired', 'data' => $expiredWorkshop]);
     }
-    
 }

@@ -41,8 +41,8 @@ Route::resource('/role', RoleController::class);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+// Expired routes
 Route::get('/getexpiredworkshop',[WorkshopPostController::class,'getWorkshopExprired']);
-
 
 Route::fallback(function () {
     return "Sorry we cannot found!!😥😣";
