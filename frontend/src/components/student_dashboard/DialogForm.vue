@@ -2,18 +2,10 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent width="1024">
       <template v-slot:activator="{ props }">
-        <v-btn
-          color="primary"
-          v-bind="props"
-          mr-10
-          style="margin-left: 80%"
-          class="mt-8"
-        >
-          Update
-        </v-btn>
+        <v-btn v-bind="props" class="btn"> Update </v-btn>
       </template>
-    
-      <v-card-text class="bg-white">
+
+      <v-card-text class="card-text">
         <v-card-title style="text-align: center">
           <span class="text-h5">Account information</span>
         </v-card-title>
@@ -29,9 +21,8 @@
             </v-col>
             <v-col cols="12" sm="6" md="4">
               <v-autocomplete
-                :items="['Male', 'Female']"
+                :items="['M', 'F']"
                 label="Gender*"
-                multiple
                 v-model="gender"
                 :rules="genderRules"
               ></v-autocomplete>
@@ -82,7 +73,7 @@
             <v-icon left>mdi-close</v-icon>
             Close
           </v-btn>
-          <v-btn color="blue-darken-1" variant="text" @click="dialog = false">
+          <v-btn color="#3737e5" variant="text" @click="dialog = false">
             <v-icon left>mdi-content-save</v-icon>
             Save
           </v-btn>
@@ -153,5 +144,16 @@ export default {
   border-radius: 20px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+.card-text {
+  background-color: #fff;
+  border-top: 30px solid #64dd17;
+  border-radius: 10px;
+}
+.btn {
+  background-color: #3737e5;
+  color: white;
+  margin-top: 4%;
+  margin-left: 85%;
 }
 </style>

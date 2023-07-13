@@ -24,9 +24,7 @@
       <v-col cols="12" md="8">
         <v-card class="elevation-2">
           <v-card-title class="justify-center">
-            <h3 class="mb-0">
-              <v-icon>mdi-account</v-icon>General Information
-            </h3>
+            <h3 class="mb-0"><v-icon>mdi-account</v-icon>My Information</h3>
           </v-card-title>
           <v-card-text>
             <v-simple-table>
@@ -123,25 +121,24 @@ img {
 .v-card-text {
   margin-top: 16px;
   padding: 30px;
-  background-color: #cecaca;
+  background-color: #bec7bb;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
 
 .v-card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  margin-bottom: 24px;
-  background-color: #b2b4a8;
   padding: 30px;
-  border-radius: 4px;
+  border-radius: 10px;
+  border: 2px solid #64dd17;
 }
 
-body {
-  background-color: #e6e6e6;
+.text-center {
+  background-color: #64dd17;
 }
 
 .profile_img {
-  border: 5px solid #1ba699;
+  border: 3px solid #64dd17;
   border-radius: 50%;
   padding: 24px;
 }
@@ -172,9 +169,5 @@ tr:hover {
 
 .text-right {
   text-align: right;
-}
-
-.container {
-  background-color: #1ba699;
 }
 </style>

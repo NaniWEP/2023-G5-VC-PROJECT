@@ -1,15 +1,9 @@
 <template>
-  <v-navigation-drawer
-    v-model="showDrawer"
-    absolute
-    bottom
-    temporary
-    class="bg-blue-grey lighten-3"
-  >
+  <v-navigation-drawer v-model="showDrawer" fixed bottom temporary>
     <app-nav></app-nav>
   </v-navigation-drawer>
 
-  <v-app-bar app class="navbar bg-blue-grey lighten-3" dark>
+  <v-app-bar app class="navbar" dark>
     <v-app-bar-nav-icon
       @click.stop="showDrawer = !showDrawer"
     ></v-app-bar-nav-icon>

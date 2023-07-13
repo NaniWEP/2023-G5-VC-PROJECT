@@ -26,7 +26,7 @@
       <v-col cols="12" md="8">
         <v-card class="elevation-2">
           <v-card-title class="justify-center">
-            <h3 class="mb-0"><v-icon>mdi-heart</v-icon>Student's favorite</h3>
+            <h3 class="mb-0"><v-icon>mdi-heart</v-icon>My favorite</h3>
           </v-card-title>
 
           <v-tabs v-model="tab" class="bg-white">
@@ -162,17 +162,13 @@ export default {
 .v-card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: 24px;
-  background-color: #b2b4a8;
+  border: 2px solid #64dd17;
   padding: 30px;
   border-radius: 4px;
 }
 
-body {
-  background-color: #e6e6e6;
-}
-
 .profile_img {
-  border: 5px solid #1ba699;
+  border: 3px solid #64dd17;
   border-radius: 50%;
   padding: 24px;
 }
@@ -205,10 +201,6 @@ tr:hover {
   text-align: right;
 }
 
-.container {
-  background-color: #1ba699;
-}
-
 img {
   width: 35%;
 }
@@ -222,16 +214,20 @@ img {
   padding: 9px;
 }
 .title {
-  background-color: #1ba699;
+  background-color: #64dd17;
   margin-right: 50%;
   text-align: center;
   margin-top: 2%;
 }
 
 .main-card {
-  background-color: #e1ebea;
-  margin: 7px;
+  background-color: #b8beb6;
+  margin: 8px;
   padding: 10px;
+  border-radius: 3px;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+}
+.text-center {
+  background-color: #64dd17;
 }
 </style>
