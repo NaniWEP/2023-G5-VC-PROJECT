@@ -3,16 +3,15 @@
   <NavbarComponent />
     <BannerComponent />
     <v-main>
-      <ContentComponent />
+      <UniversityComponent />
     </v-main>
     <FooterComponent />
   </v-app>
 </template>
-
 <script>
 import { defineComponent } from 'vue';
 import NavbarComponent from '../components/NavbarComponent.vue';
-import ContentComponent from '../components/ContentComponent.vue';
+import UniversityComponent from '../components/UniversityComponent.vue';
 import FooterComponent from '../components/FooterComponent.vue';
 import BannerComponent from '../components/BannerComponent.vue';
 
@@ -21,7 +20,7 @@ export default defineComponent({
 
   components: {
     NavbarComponent,
-    ContentComponent,
+    UniversityComponent,
     FooterComponent,
     BannerComponent
 },

@@ -18,10 +18,10 @@ class AuthController extends Controller
     public function register(AuthRegisterRequest $request)
     {
         $user = User::create([
-           'first_name' => $request -> first_name, 
+           'first_name' => $request -> first_name,
            'last_name' => $request -> last_name,
            'email' => $request -> email,
-           'password' => Hash::make($request -> password), 
+           'password' => Hash::make($request -> password),
            'date_of_birth' => $request -> date_of_birth,
            'province' => $request -> province,
            'role_id' => $request -> role_id,
@@ -39,7 +39,7 @@ class AuthController extends Controller
 
     public function login(AuthLoginRequest $request)
     {
-        
+
         $userEmail = User::where('email', $request->email)->first();
         $credential = $request->only('email', 'password');
 
@@ -64,7 +64,7 @@ class AuthController extends Controller
             $user = Auth::user();
             $user = new GetUserResource($user);
             $token = $user->createToken('API TOKEN', ['select', 'create', 'update', 'delete'])->plainTextToken;
-            
+
             return response()->json([
                 'success' => true,
                 'user' => $user,

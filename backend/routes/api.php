@@ -10,7 +10,6 @@ use App\Models\University;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,3 +46,5 @@ Route::get('/getexpiredworkshop',[WorkshopPostController::class,'getWorkshopExpr
 Route::fallback(function () {
     return "Sorry we cannot found!!😥😣";
 });
+Route::get('/university', [UniversityController::class, 'index']);
+Route::get('/university/{id}', [UniversityController::class, 'show']);

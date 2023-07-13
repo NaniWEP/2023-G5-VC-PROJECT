@@ -8,7 +8,6 @@
             v-model="firstName"
             :rules="nameRules"
             label="First name"
-            required
           ></v-text-field>
         </v-col>
 
@@ -56,28 +55,25 @@
           @click:append="show1 = !show1"
         ></v-text-field>
       </div>
+      <v-col cols="12" sm="6" md="6">
+        <v-btn
+          to="/userinformation"
+          @click="goToDetailInformation"
+          color="green"
+          block
+          size="x-large"
+          >Continue</v-btn
+        >
+        <p>
+          Do you have an account? <router-link to="/login">Login</router-link>
+        </p>
+      </v-col>
     </v-container>
-    <v-col cols="12" class="d-flex justify-space-between align-center">
-      <v-btn class="ma-2" 
-      color="red-darken-1" 
-      size="x-large"
-      @click="resetUser"
-      >
-        <v-icon start icon="mdi-arrow-left"></v-icon>
-        CANCEL
-      </v-btn>
-      <v-btn
-        class="ma-2"
-        color="green"
-        size="x-large"
-        @click="goToDetailInformation"
-      >
-        CONTINUE
-      </v-btn>
+    <v-col cols="12" sm="6" md="6"
+    >
+      <v-btn to="/userinformation" @click="goToDetailInformation" color="green" block size="x-large">Continue</v-btn>
+    <p>Do you have an account? <router-link to="/login">Login</router-link></p>
     </v-col>
-    <p class="w-100">
-      Do you have an account? <router-link to="/login">Login</router-link>
-    </p>
   </v-form>
 </template>
 
@@ -121,34 +117,11 @@ export default {
   },
   methods: {
     goToDetailInformation() {
-      let valid = true;
-      console.log(valid);
-
-      if (
-        this.firstName === "" ||
-        this.lastName === "" ||
-        this.email === "" ||
-        this.password === "" ||
-        !this.verify
-      ) {
-        valid = false;
-      } else if (!/\S+@\S+\.\S+/.test(this.email)) {
-        console.log("Invalid email format.");
-        valid = false;
-      } else if (this.password !== this.verify) {
-        valid = false;
-      }
-      if (valid) {
-        this.$router.push({
-          path: "/userinformation",
-          query: {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            email: this.email,
-            password: this.password,
-          },
-        });
-            console.log(this.users);
+      this.$router.push('/userinformation')
+    },
+    validate() {
+      if (this.$refs.loginForm.validate()) {
+        // submit form to server/API here...
       }
     },
     resetUser(){
@@ -180,8 +153,8 @@ export default {
   align-items: center;
 }
 .form {
-  width: 40%;
-  /* display: flex; */
+  width: 70%;
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
