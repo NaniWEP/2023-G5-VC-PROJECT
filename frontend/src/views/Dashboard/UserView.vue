@@ -1,14 +1,14 @@
 <template>
   <div id="body">
     <dashboard-component></dashboard-component>
-    <v-card class="ml-15 mt-5 mr-8 mb-3 bg-grey-lighten-2 p-10">
+    <v-card class="ml-8 mt-5 mr-8 mb-3 bg-grey-lighten-2 p-10">
       <h1 class="text-light-green-accent-4 ml-10">Profile Detail</h1>
     </v-card>
-    <v-card class="ml-15 mt-3 mr-8 mb-3 h-90 bg-grey-lighten-2">
+    <v-card class="ml-8 mt-3 mr-8 mb-3 h-90 bg-grey-lighten-2">
       <hr />
       <div class="content">
         <div>
-          <img src="../../assets/img.jpg" alt="" />
+          <v-img class="img" src="../../assets/img.jpg"></v-img>
           <p>GillyNa</p>
         </div>
         <div class="group mt-15 mr-50">
@@ -26,7 +26,7 @@
               v-bind="props"
             >
               Change Information
-              <v-dialog v-model="dialog" activator="parent" width="auto">
+              <v-dialog v-model="dialog" activator="parent" width="60%">
                 <v-card>
                   <v-container class="bg-grey-lighten-2">
                     <v-row>
@@ -72,8 +72,14 @@
                         ></v-text-field>
                       </v-col>
                     </v-row>
-                    <v-card-actions>
-                      <v-btn
+                    <v-card-actions class="action">
+                      <v-btn 
+                        color="primary"
+                        size="large"
+                        @click="dialog = false"
+                        >Cancel</v-btn
+                      >
+                       <v-btn 
                         color="primary"
                         size="large"
                         @click="dialog = false"
@@ -119,16 +125,21 @@ hr {
   display: flex;
   justify-content: space-around;
 }
-img {
-  margin: 20px 20px 0px 20px;
+.img {
+  margin: 50px 20px 0px 20px;
   width: 150px;
   height: 150px;
+  border-radius: 100%;
 }
 p {
-  padding: 10px;
-  margin-left: 70px;
+  padding: 20px;
+  margin-left: 50px;
 }
 .group {
   margin: 100px;
+}
+
+.action{
+  gap: 70%;
 }
 </style>

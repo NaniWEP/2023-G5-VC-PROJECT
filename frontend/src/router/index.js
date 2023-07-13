@@ -61,13 +61,30 @@ const routes = [
     component: SearchView,
     props: true
   },
-  // { path: '/', component: DashboardView  },
-  { path: '/user', component: UserView  },
-  { path: '/apply', component: ApplyView  },
-  { path: '/chart', component: ChartView  },
-  { path: '/post', component: PostView  },
-  { path: '/major', component: MajorView  },
-  { path: '/expiration', component: ExpirationView  },   
+  {
+    path: '/user',
+    component: UserView
+  },
+  { 
+    path: '/apply', 
+    component: ApplyView  
+  },
+  { 
+    path: '/chart', 
+    component: ChartView  
+  },
+  { 
+    path: '/post', 
+    component: PostView  
+  },
+  { 
+    path: '/major', 
+    component: MajorView  
+  },
+  { 
+    path: '/expiration', 
+    component: ExpirationView  
+  },   
 ]
 
 

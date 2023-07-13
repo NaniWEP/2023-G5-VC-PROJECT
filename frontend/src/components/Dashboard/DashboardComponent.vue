@@ -1,11 +1,11 @@
 <template>
-      <v-navigation-drawer class="bg-black"
-        expand-on-hover
-        rail
-      >
-        <v-list-item class="mt-8 ml-12 font-weight-bold text-h1 text-green-accent-3"
-          title="Dashboard" size="large">
-        </v-list-item>
+      <v-navigation-drawer class="bg-black" expand-on-hover rail> 
+        <div class="d-flex">
+          <v-list-item class="mt-5 mr-16 font-weight-bold text-h1 text-green-accent-3"
+            prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
+            title="Dashboard" size="large">
+          </v-list-item>
+        </div>
         <hr class="boder">
         <v-list border="light-green-accent-4">
           <v-list-item :to="{ path: '/user' }" prepend-icon="mdi-account-multiple-outline" title="Users" value="users"></v-list-item>
