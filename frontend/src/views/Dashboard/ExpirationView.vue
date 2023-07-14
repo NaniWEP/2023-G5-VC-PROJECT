@@ -87,20 +87,21 @@ export default {
           console.log(error);
         });
     },
-    // getExpiredUniversityPost() {
-    //   axios
-    //     .get("/getexpireduniversitypost")
-    //     .then((response) => {
-    //       this.universityPostExpired = response.data.data;
-    //       console.log(this.universityPostExpired);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
+    getExpiredUniversityPost() {
+      axios
+        .get("/getexpireduniversitypost")
+        .then((response) => {
+          this.universityPostExpired = response.data.data;
+          console.log(this.universityPostExpired);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
   created() {
     this.getExpiredWorkshopPost();
+    this.getExpiredUniversityPost();
     
   },
 };
