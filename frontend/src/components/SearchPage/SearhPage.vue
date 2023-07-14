@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import NavbarComponentVue from "../NavbarComponent.vue";
+import NavbarComponentVue from "../Layout/NavbarComponent.vue";
 import ResultCardVue from "./ResultCard.vue";
 import SearchBarVue from "./SearchBar.vue";
 

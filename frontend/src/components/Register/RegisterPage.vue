@@ -8,7 +8,6 @@
             v-model="firstName"
             :rules="nameRules"
             label="First name"
-            required
           ></v-text-field>
         </v-col>
 
@@ -55,32 +54,33 @@
           required
           @click:append="show1 = !show1"
         ></v-text-field>
+        <p class="w-100 ml-8">
+          Do you have an account? <router-link to="/login">Login</router-link>
+        </p>
       </div>
+      <v-col cols="12" class="d-flex justify-space-between align-center">
+        <v-btn
+          class="ma-2"
+          color="red-darken-1"
+          size="x-large"
+          to="/"
+          @click="resetUser"
+        >
+          <v-icon start icon="mdi-arrow-left"></v-icon>
+          CANCEL
+        </v-btn>
+        <v-btn
+          class="ma-2"
+          color="green"
+          size="x-large"
+          @click="goToDetailInformation"
+        >
+          CONTINUE
+        </v-btn>
+      </v-col>
     </v-container>
-    <v-col cols="12" class="d-flex justify-space-between align-center">
-      <v-btn class="ma-2" 
-      color="red-darken-1" 
-      size="x-large"
-      @click="resetUser"
-      >
-        <v-icon start icon="mdi-arrow-left"></v-icon>
-        CANCEL
-      </v-btn>
-      <v-btn
-        class="ma-2"
-        color="green"
-        size="x-large"
-        @click="goToDetailInformation"
-      >
-        CONTINUE
-      </v-btn>
-    </v-col>
-    <p class="w-100">
-      Do you have an account? <router-link to="/login">Login</router-link>
-    </p>
   </v-form>
 </template>
-
 
 <script>
 import "@mdi/font/css/materialdesignicons.css";
@@ -112,7 +112,7 @@ export default {
   }),
   created() {
     // Call the showResultFromHomePage method to display the search results
-    this.resetUser()
+    this.resetUser();
   },
   computed: {
     passwordMatch() {
@@ -122,7 +122,7 @@ export default {
   methods: {
     goToDetailInformation() {
       let valid = true;
-      console.log(valid);
+      // console.log(valid);
 
       if (
         this.firstName === "" ||
@@ -148,17 +148,16 @@ export default {
             password: this.password,
           },
         });
-            console.log(this.users);
       }
     },
-    resetUser(){
-      this.lastName = this.$route.query.lastName;
+    resetUser() {
       this.firstName = this.$route.query.firstName;
+      this.lastName = this.$route.query.lastName;
       this.email = this.$route.query.email;
       this.password = this.$route.query.password;
       this.verify = this.$route.query.password;
-      console.log(this.$route);
-      console.log(11);
+      // console.log(this.$route);
+      // console.log(11);
     },
   },
 };

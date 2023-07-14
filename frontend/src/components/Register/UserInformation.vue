@@ -32,6 +32,7 @@
                 :rules="inputRules"
                 label="Date of birth"
                 type="date"
+                :format="customFormat"
                 required
               ></v-text-field>
             </v-col>
@@ -40,10 +41,10 @@
         <v-col cols="12" class="d-flex justify-space-between align-center">
           <v-btn class="ma-2" color="red-darken-1" size="x-large"  @click="backToRegister">
             <v-icon start icon="mdi-arrow-left"></v-icon>
-            CANCEL
+            BACK
           </v-btn>
           <v-btn class="ma-2" color="green" @click="getUser" size="x-large">
-            CONTINUE
+            CREATE
           </v-btn>
         </v-col>
         <p class="w-100">
@@ -55,6 +56,8 @@
 
 <script>
 import "@mdi/font/css/materialdesignicons.css";
+import axios from "@/stores/axiosHttp";
+// import axios from 'axios'
 export default {
   name: "UserInformation",
   methods: {
@@ -74,7 +77,8 @@ export default {
           province: this.selectProvince,
         });
         console.log(this.user);
-        this.$router.push("/");
+        this.register()
+
       }
     },
     backToRegister(){
@@ -91,12 +95,43 @@ export default {
       })
 
     },
+    async register() {
+      try {
+        await axios
+          .post("/register", {
+            first_name: this.$router.currentRoute.value.query.firstName,
+            last_name: this.$router.currentRoute.value.query.lastName,
+            email: this.$router.currentRoute.value.query.email,
+            password: this.$router.currentRoute.value.query.password,
+            gender: this.selectGender,
+            date_of_birth: this.dateOfBirth,
+            province: this.selectProvince,
+            role_id: 1,
+          })
+          .then((response) => {
+            console.log(response.data);
+            if(response.data.success){
+              localStorage.setItem("myToken", response.data.token)
+              console.log(response.data.message);
+              this.$router.push("/");
+            }else{
+            console.log(response.data.message);
+            }
+          });
+      } catch (error) {
+
+        // console.log(error.response.message);
+        console.log(error.response.data.message);
+      }
+    },
   },
   // show(){
   //   this.getData;
   // },
   data: () => ({
     valid: true,
+    customFormat: (val) =>
+        val ? new Date(val).toISOString().substr(0, 10) : null,
     dateOfBirth: "",
     age: "",
     selectGender: "",

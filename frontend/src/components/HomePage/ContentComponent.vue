@@ -1,4 +1,5 @@
 <template>
+ <section>
   <v-row>
     <v-col sm="1"> </v-col>
     <v-col sm="10">
@@ -131,6 +132,7 @@
     </v-col>
   </v-row>
   <v-pagination :length="4" rounded="circle" class="mb-8"></v-pagination>
+ </section>
 </template>
 
 <script>

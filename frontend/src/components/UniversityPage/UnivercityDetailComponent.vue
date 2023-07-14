@@ -1,16 +1,20 @@
 <template>
-  <v-container class="container">
-    <SideNavBar></SideNavBar>
+  <v-container id="{{id}}" class="container">
     <v-row>
-      <v-col cols="12" md="3">
+      <v-col cols="12" md="5">
         <v-card class="elevation-2">
+          <v-btn class="ma-2" color="red-darken-1" to="/universityPage">
+            <v-icon start icon="mdi-arrow-left"></v-icon>
+            Back
+          </v-btn>
+
           <v-card-title class="justify-center">
             <v-img
               class="profile_img"
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
               alt="student dp"
             />
-            <h3 class="text-center">Doeur Diet</h3>
+            <h4 class="text-center">{{university.name}}</h4>
           </v-card-title>
           <v-card-text>
             <p class="mb-0">
@@ -21,10 +25,12 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" md="8">
+      <v-col cols="12" md="7">
         <v-card class="elevation-2">
           <v-card-title class="justify-center">
-            <h3 class="mb-0"><v-icon>mdi-account</v-icon>My Information</h3>
+            <h3 class="mb-0">
+              <v-icon>mdi-account</v-icon>General Information
+            </h3>
           </v-card-title>
           <v-card-text>
             <v-simple-table>
@@ -32,36 +38,36 @@
                 <tr>
                   <td>Username</td>
                   <td class="text-right">:</td>
-                  <td>Doeur Diet</td>
+                  <td>{{university.name}}</td>
                 </tr>
                 <tr>
-                  <td>Gender</td>
+                  <td>Contact By Email</td>
                   <td class="text-right">:</td>
-                  <td>Male</td>
+                  <td>{{university.email}}</td>
                 </tr>
                 <tr>
-                  <td>DateOfBirth</td>
+                  <td>Phone Number</td>
                   <td class="text-right">:</td>
-                  <td>Jan/12/2002</td>
+                  <td>{{university.phone}}</td>
                 </tr>
                 <tr>
-                  <td>Email</td>
+                  <td>Province/City</td>
                   <td class="text-right">:</td>
-                  <td>doeur.diet@gmail.com</td>
+                  <td>{{university.province}}</td>
                 </tr>
                 <tr>
-                  <td>Phone number</td>
+                  <td>Location</td>
                   <td class="text-right">:</td>
-                  <td>08876555</td>
+                  <td>{{university.location}}</td>
                 </tr>
                 <tr>
-                  <td>Province</td>
+                  <td>Website</td>
                   <td class="text-right">:</td>
-                  <td>Siem Reap</td>
+                  <td>{{university.website}}</td>
                 </tr>
               </tbody>
             </v-simple-table>
-            <dialog-form></dialog-form>
+            <!-- <dialog-form></dialog-form> -->
           </v-card-text>
         </v-card>
         <v-card class="elevation-2 mt-4">
@@ -72,10 +78,7 @@
           </v-card-title>
           <v-card-text>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              {{university.description}}
             </p>
           </v-card-text>
         </v-card>
@@ -83,16 +86,28 @@
     </v-row>
   </v-container>
 </template>
-
 <script>
-import DialogForm from "../../components/student_dashboard/DialogForm.vue";
-import SideNavBar from "../../components/student_dashboard/SideNavBar.vue";
+import axios from "axios";
 export default {
-  components: {
-    SideNavBar,
-    DialogForm,
+  name: "UniversityDetail",
+  data(){
+    return{
+      university: {}
+    }
   },
-  data: () => ({}),
+  props: ["id"],
+  components: {
+  },
+  mounted(){
+    axios
+    .get(`http://127.0.0.1:8000/api/university/${this.id}`)
+    .then(response => {
+      this.university = response.data.data;
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
 };
 </script>
 
@@ -112,33 +127,29 @@ img {
   width: 10%;
 }
 .text-center {
-  background-color: #afc4c7;
+  background-color: #3737e5;
+  color: #ffff;
   margin-top: 1%;
   padding: 10px;
-  font-size: large;
 }
 
 .v-card-text {
   margin-top: 16px;
   padding: 30px;
-  background-color: #bec7bb;
+  background-color: #ffff;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
 
 .v-card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 24px;
+  background-color: #d8d8d8;
   padding: 30px;
-  border-radius: 10px;
-  border: 2px solid #64dd17;
+  border-radius: 4px;
 }
-
-.text-center {
-  background-color: #64dd17;
-}
-
 .profile_img {
-  border: 3px solid #64dd17;
+  border: 5px solid #3737e5;
   border-radius: 50%;
   padding: 24px;
 }

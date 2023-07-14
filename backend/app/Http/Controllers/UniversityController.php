@@ -16,14 +16,8 @@ class UniversityController extends Controller
      */
     public function index()
     {
-
-        $universities = University::all();
-        $universities = UniversityResource::collection($universities);
-
-        return response()->json([
-            'success' => true,
-            'data' => $universities
-        ], 200);
+        $Universities = University::all();
+        return response()->json(['message' => 'Here all the university.', 'data' => $Universities], 200);
     }
 
     /**
@@ -44,17 +38,14 @@ class UniversityController extends Controller
         ], Response::HTTP_FORBIDDEN);
 
     }
-    
+
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        $university = University::find($id);
-        return response()->json([
-            'success' => true,
-            'data' => $university
-        ], Response::HTTP_OK);
+        $University = University::find($id);
+        return response()->json(['message' => 'Here all the university.', 'data' => $University], 200);
     }
 
 

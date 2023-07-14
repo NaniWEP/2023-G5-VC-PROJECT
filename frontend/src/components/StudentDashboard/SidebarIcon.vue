@@ -1,7 +1,7 @@
 <template>
   <v-list nav dense>
     <v-list-item-group>
-      <v-list-item :to="'/detailPage'">
+      <v-list-item :to="'/StudentDetail'">
         <v-list-item-icon>
           <v-icon size="32" icon="mdi-account"></v-icon>
           <span>Doeur Diet</span>
