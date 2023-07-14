@@ -21,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(work, index) of workshopExpired" :key="index">
+          <tr v-for="(work, index) of workshopPostExpired" :key="index">
             <td>{{ work.id }}</td>
             <td>{{ work.name }}</td>
             <td>{{ work.description }}</td>
@@ -37,15 +37,17 @@
       <v-table>
         <thead>
           <tr>
-            <th style="width: 100px" class="text-center">Id</th>
-            <th style="width: 500px" class="text-center">Name</th>
-            <th style="width: 200px" class="text-center">Action</th>
+            <th style="width: 100px" class="text-left">Id</th>
+            <th style="width: 200px" class="text-left">Name</th>
+            <th style="width: 500px" class="text-left">descrition</th>
+            <th style="width: 200px" class="text-left">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item of 5" :key="item">
-            <td>{{ item }}</td>
-            <td>I love you doeur</td>
+          <tr v-for="(post, index) of universityPostExpired" :key="index">
+            <td>{{ post.id }}</td>
+            <td>{{ post.name }}</td>
+            <td>{{ post.description }}</td>
             <td>
               <v-btn class="mr-4" color="success">Edit</v-btn>
               <v-btn color="red">Delete</v-btn>
@@ -69,39 +71,37 @@ export default {
   data: () => ({
     toggle: null,
     // users: [],
-    workshopExpired: [],
+    workshopPostExpired: [],
+    universityPostExpired:[],
+
   }),
   methods: {
-    display() {},
-    // getExpiredWorkshop() {
-
-    //   axios
-    //     .get("/getexpiredworkshop")
-    //     .then(function (response) {
-    //       // Do something with the response data
-    //       workshops = response.data.data;
-    //       this.workshopExpired = workshops;
-    //       console.log(workshops);
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // },
-    getExpiredWorkshop() {
+    getExpiredWorkshopPost() {
       axios
-        .get("/getexpiredworkshop")
+        .get("/getexpiredworkshoppost")
         .then((response) => {
-          // Do something with the response data
-          this.workshopExpired = response.data.data;
-          console.log(this.workshopExpired);
+          this.workshopPostExpired = response.data.data;
+          console.log(this.workshopPostExpired);
         })
         .catch((error) => {
           console.log(error);
         });
     },
+    // getExpiredUniversityPost() {
+    //   axios
+    //     .get("/getexpireduniversitypost")
+    //     .then((response) => {
+    //       this.universityPostExpired = response.data.data;
+    //       console.log(this.universityPostExpired);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
   },
   created() {
-    this.getExpiredWorkshop();
+    this.getExpiredWorkshopPost();
+    
   },
 };
 </script>

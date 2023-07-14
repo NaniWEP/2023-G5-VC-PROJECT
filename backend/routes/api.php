@@ -6,6 +6,7 @@ use App\Http\Controllers\SchoolManagerController;
 use App\Http\Controllers\WorkshopPostController;
 use App\Models\WorkshopPost;
 use App\Http\Controllers\UniversityController;
+use App\Http\Controllers\UniversityPostController;
 use App\Models\University;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Route;
@@ -42,7 +43,8 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 // Expired routes
-Route::get('/getexpiredworkshop',[WorkshopPostController::class,'getWorkshopExprired']);
+Route::get('/getexpiredworkshoppost',[WorkshopPostController::class,'getWorkshopExprired']);
+Route::get('/getexpireduniversitypost',[UniversityPostController::class,'getUnivertiesPostExprired']);
 
 Route::fallback(function () {
     return "Sorry we cannot found!!😥😣";
