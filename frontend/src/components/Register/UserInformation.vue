@@ -56,8 +56,8 @@
 
 <script>
 import "@mdi/font/css/materialdesignicons.css";
-import axios from "@/stores/axiosHttp";
-// import axios from 'axios'
+// import axios from "@/stores/axiosHttp";
+import axios from 'axios'
 export default {
   name: "UserInformation",
   methods: {
@@ -98,7 +98,7 @@ export default {
     async register() {
       try {
         await axios
-          .post("/register", {
+          .post("http://127.0.0.1:8000/api/register", {
             first_name: this.$router.currentRoute.value.query.firstName,
             last_name: this.$router.currentRoute.value.query.lastName,
             email: this.$router.currentRoute.value.query.email,
