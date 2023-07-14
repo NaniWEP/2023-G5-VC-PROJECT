@@ -7,7 +7,7 @@
     elevation="6"
     elevate-on-scroll
   >
-    <v-avatar><v-img src="../assets/logo.png"></v-img></v-avatar>
+    <v-avatar><v-img src="../../assets/logo.png"></v-img></v-avatar>
     <v-toolbar-title> KNOWLEDGE AND OPPORTUNITY </v-toolbar-title>
     <v-spacer />
     <v-list class="d-flex align-center">

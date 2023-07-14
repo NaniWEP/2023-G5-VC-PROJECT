@@ -10,10 +10,10 @@
 </template>
 <script>
 import { defineComponent } from 'vue';
-import NavbarComponent from '../components/NavbarComponent.vue';
-import UniversityComponent from '../components/UniversityComponent.vue';
-import FooterComponent from '../components/FooterComponent.vue';
-import BannerComponent from '../components/BannerComponent.vue';
+import NavbarComponent from '../../components/Layout/NavbarComponent.vue';
+import UniversityComponent from '../../components/UniversityPage/UniversityComponent.vue';
+import FooterComponent from '../../components/Layout/FooterComponent.vue';
+import BannerComponent from '../../components/Layout/BannerComponent.vue';
 
 export default defineComponent({
   name: 'HomeView',

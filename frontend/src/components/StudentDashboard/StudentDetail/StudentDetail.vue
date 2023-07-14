@@ -85,8 +85,8 @@
 </template>
 
 <script>
-import DialogForm from "../../components/student_dashboard/DialogForm.vue";
-import SideNavBar from "../../components/student_dashboard/SideNavBar.vue";
+import DialogForm from "./DialogForm.vue";
+import SideNavBar from "../SideNavBar.vue";
 export default {
   components: {
     SideNavBar,

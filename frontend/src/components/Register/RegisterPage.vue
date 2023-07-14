@@ -54,29 +54,33 @@
           required
           @click:append="show1 = !show1"
         ></v-text-field>
-      </div>
-      <v-col cols="12" sm="6" md="6">
-        <v-btn
-          to="/userinformation"
-          @click="goToDetailInformation"
-          color="green"
-          block
-          size="x-large"
-          >Continue</v-btn
-        >
-        <p>
+        <p class="w-100 ml-8">
           Do you have an account? <router-link to="/login">Login</router-link>
         </p>
+      </div>
+      <v-col cols="12" class="d-flex justify-space-between align-center">
+        <v-btn
+          class="ma-2"
+          color="red-darken-1"
+          size="x-large"
+          to="/"
+          @click="resetUser"
+        >
+          <v-icon start icon="mdi-arrow-left"></v-icon>
+          CANCEL
+        </v-btn>
+        <v-btn
+          class="ma-2"
+          color="green"
+          size="x-large"
+          @click="goToDetailInformation"
+        >
+          CONTINUE
+        </v-btn>
       </v-col>
     </v-container>
-    <v-col cols="12" sm="6" md="6"
-    >
-      <v-btn to="/userinformation" @click="goToDetailInformation" color="green" block size="x-large">Continue</v-btn>
-    <p>Do you have an account? <router-link to="/login">Login</router-link></p>
-    </v-col>
   </v-form>
 </template>
-
 
 <script>
 import "@mdi/font/css/materialdesignicons.css";
@@ -108,7 +112,7 @@ export default {
   }),
   created() {
     // Call the showResultFromHomePage method to display the search results
-    this.resetUser()
+    this.resetUser();
   },
   computed: {
     passwordMatch() {
@@ -117,21 +121,43 @@ export default {
   },
   methods: {
     goToDetailInformation() {
-      this.$router.push('/userinformation')
-    },
-    validate() {
-      if (this.$refs.loginForm.validate()) {
-        // submit form to server/API here...
+      let valid = true;
+      // console.log(valid);
+
+      if (
+        this.firstName === "" ||
+        this.lastName === "" ||
+        this.email === "" ||
+        this.password === "" ||
+        !this.verify
+      ) {
+        valid = false;
+      } else if (!/\S+@\S+\.\S+/.test(this.email)) {
+        console.log("Invalid email format.");
+        valid = false;
+      } else if (this.password !== this.verify) {
+        valid = false;
+      }
+      if (valid) {
+        this.$router.push({
+          path: "/userinformation",
+          query: {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            email: this.email,
+            password: this.password,
+          },
+        });
       }
     },
-    resetUser(){
-      this.lastName = this.$route.query.lastName;
+    resetUser() {
       this.firstName = this.$route.query.firstName;
+      this.lastName = this.$route.query.lastName;
       this.email = this.$route.query.email;
       this.password = this.$route.query.password;
       this.verify = this.$route.query.password;
-      console.log(this.$route);
-      console.log(11);
+      // console.log(this.$route);
+      // console.log(11);
     },
   },
 };
@@ -153,8 +179,8 @@ export default {
   align-items: center;
 }
 .form {
-  width: 70%;
-  display: flex;
+  width: 40%;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
   flex-direction: column;

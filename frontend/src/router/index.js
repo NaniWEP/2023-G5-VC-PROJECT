@@ -1,51 +1,93 @@
 import { createRouter, createWebHistory } from "vue-router";
-import ProfileDetail from "../views/student_profile/DetailPage.vue";
-import FavoritePage from "../views/student_profile/FavoritePage.vue";
-import LoginPage from '../views/LoginPage.vue'
-import RegisterView from '../views/RegisterView.vue'
-import UserInformationView from '../views/UserInformationView.vue'
-import HomeView from '../views/HomeView.vue'
-import AboutView from '../views/AboutView.vue'
+import HomePageView from '../views/Page/HomeView.vue'
+import AboutPageView from '../views/Page/AboutView.vue'
+import UniversityPageView from '../views/Page/UniversityView.vue'
+import WorkshopView from '../views/Page/WorkshopView.vue'
+
+import LoginPageView from '../views/Page/LoginPage.vue'
+import RegisterPageView from '../views/Page/RegisterView.vue'
+
+import UniversityDetalView from '../components/UniversityPage/UnivercityDetailComponent.vue'
+
+import WorkshopFormPost from '../components/WorkshopPost/WorkshopFormPost.vue'
+
+import StudentDetail from "../views/StudentDashboard/StudentDetail.vue"
+import StudentFavoritePage from "../views/StudentDashboard/StudentFavorite.vue"
+
+import UserInformationView from '../components/Register/UserInformation.vue'
+
 import SearchView from '../views/SearchView.vue'
-import UserView from "../views/Dashboard/UserView.vue"
-import ApplyView from "../views/Dashboard/ApplyView.vue"
-import ChartView from "../views/Dashboard/ChartView.vue"
-import PostView from "../views/Dashboard/PostView.vue"
-import MajorView from "../views/Dashboard/MajorView.vue"
-import ExpirationView from "../views/Dashboard/ExpirationView.vue"
+
+import UserView from "../components/SchoolManagerDashboard/UserView.vue"
+
+import ApplyView from "../components/SchoolManagerDashboard/ApplyView.vue"
+import ChartView from "../components/SchoolManagerDashboard/ChartView.vue"
+import PostView from "../components/SchoolManagerDashboard/PostView.vue"
+import MajorView from "../components/SchoolManagerDashboard/MajorView.vue"
+import ExpirationView from "../components/SchoolManagerDashboard/ExpirationView.vue"
 // import DashboardView from "../views/Dashboard/DashboardView.vue"
 
 
-import University from '../views/UniversityView.vue'
-import UniversityDetal from '../components/UnivercityDetailComponent.vue'
-import workshopPost from '../components/WorkshopPost/WorkshopFormPost.vue'
 const routes = [
-  
   {
-    path: "/formPostWorkshop",
-    name: "workshopPost",
-    component: workshopPost,
+    path: '/',
+    name: 'home',
+    component:HomePageView
   },
+
   {
-    path: "/detailPage",
-    name: "detailPage",   
-    component: ProfileDetail,
+    path: '/aboutPage',
+    name: 'about',
+    component: AboutPageView
   },
+
   {
-    path: "/favoritePage",
-    name: "favoritePage",
-    component: FavoritePage,
+    path: '/universityPage',
+    name: 'university',
+    component: UniversityPageView
   },
+
+  {
+    path: '/workshopPage',
+    name: 'workshop',
+    component: WorkshopView
+  },
+
   {
     path: '/login',
     name: 'login',
-    component: LoginPage
-     
+    component: LoginPageView  
   },
+
   {
     path: '/register',
     name: 'register',
-    component:RegisterView
+    component:RegisterPageView
+  },
+
+  {
+    path: '/universityDetail/:id',
+    name: 'universityDetail',
+    component: UniversityDetalView,
+    props: true
+  },
+
+  {
+    path: "/formPostWorkshop",
+    name: "workshopPost",
+    component: WorkshopFormPost,
+  },
+
+  {
+    path: "/studentDetail",
+    name: "detailPage",   
+    component: StudentDetail,
+  },
+
+  {
+    path: "/favoritePage",
+    name: "favoritePage",
+    component: StudentFavoritePage,
   },
   {
     path: '/userinformation',
@@ -53,27 +95,14 @@ const routes = [
     component: UserInformationView,
     props: true
   },
+  
   {
-    path: '/',
-    name: 'home',
-    component:HomeView
-  },
-  {
-    path: '/aboutPage',
-    name: 'about',
-    component: AboutView
-  },
-  {
-    path: '/universityPage',
-    name: 'university',
-    component: University
-  },
-  {
-    path: '/universityDetail/:id',
-    name: 'universityDetail',
-    component: UniversityDetal,
+    path: '/searhPage',
+    name: 'searchPage',
+    component: SearchView,
     props: true
   },
+
   {
     path: '/user',
     component: UserView
