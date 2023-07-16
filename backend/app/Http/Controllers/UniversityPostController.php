@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UniversityPost;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class UniversityPostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function universityPost(Request $request){
+        $universityPost = UniversityPost::universityPost($request);
+        return response()->json([
+            'success' => true,
+            'meassage' => 'Create universityPost successfully',
+            'data' => $universityPost 
+         ], Response::HTTP_CREATED);//200
     }
 
     /**

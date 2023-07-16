@@ -1,4 +1,7 @@
 <template>
+  <!--  -->
+  <!-- Resource : https://canvasjs.com/vuejs-charts/basic-chart-example/ -->
+  <!--  -->
   <v-form v-model="valid" class="form bg-grey-lighten-2">
     <v-container class="container">
       <h1 class="text-center">Register</h1>
@@ -58,10 +61,11 @@
       </div>
     </v-container>
     <v-col cols="12" class="d-flex justify-space-between align-center">
-      <v-btn class="ma-2" 
-      color="red-darken-1" 
-      size="x-large"
-      @click="resetUser"
+      <v-btn
+        class="ma-2"
+        color="red-darken-1"
+        size="x-large"
+        @click="resetUser"
       >
         <v-icon start icon="mdi-arrow-left"></v-icon>
         CANCEL
@@ -112,7 +116,7 @@ export default {
   }),
   created() {
     // Call the showResultFromHomePage method to display the search results
-    this.resetUser()
+    this.resetUser();
   },
   computed: {
     passwordMatch() {
@@ -148,10 +152,10 @@ export default {
             password: this.password,
           },
         });
-            console.log(this.users);
+        console.log(this.users);
       }
     },
-    resetUser(){
+    resetUser() {
       this.lastName = this.$route.query.lastName;
       this.firstName = this.$route.query.firstName;
       this.email = this.$route.query.email;
