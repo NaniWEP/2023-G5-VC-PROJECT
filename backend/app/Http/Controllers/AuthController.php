@@ -7,7 +7,7 @@ use App\Http\Requests\AuthRegisterRequest;
 use App\Http\Resources\GetUserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\{Validator,Auth};
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,29 +17,30 @@ class AuthController extends Controller
 
     public function register(AuthRegisterRequest $request)
     {
-        $user = User::create([
-           'first_name' => $request -> first_name, 
-           'last_name' => $request -> last_name,
-           'email' => $request -> email,
-           'password' => Hash::make($request -> password), 
-           'date_of_birth' => $request -> date_of_birth,
-           'province' => $request -> province,
-           'role_id' => $request -> role_id,
-        ]);
+            $user = User::create([
+               'first_name' => $request -> first_name,
+               'last_name' => $request -> last_name,
+               'email' => $request -> email,
+               'password' => Hash::make($request -> password),
+               'date_of_birth' => $request -> date_of_birth,
+               'province' => $request -> province,
+               'role_id' => $request -> role_id,
+            ]);
 
-        $token = $user->createToken('API TOKEN', ['select', 'create', 'update'])->plainTextToken;
-        $user = new GetUserResource($user);
-        return response()->json([
-            'succes' => true,
-            'message' => 'Create user successful',
-            'data' => $user,
-            'token' => $token
-        ]);
+            $token = $user->createToken('API TOKEN', ['select', 'create', 'update'])->plainTextToken;
+            $user = new GetUserResource($user);
+            return response()->json([
+                'success' => true,
+                'message' => 'Create user successful',
+                'data' => $user,
+                'token' => $token
+            ]);
+
     }
 
     public function login(AuthLoginRequest $request)
     {
-        
+
         $userEmail = User::where('email', $request->email)->first();
         $credential = $request->only('email', 'password');
 
@@ -64,7 +65,7 @@ class AuthController extends Controller
             $user = Auth::user();
             $user = new GetUserResource($user);
             $token = $user->createToken('API TOKEN', ['select', 'create', 'update', 'delete'])->plainTextToken;
-            
+
             return response()->json([
                 'success' => true,
                 'user' => $user,

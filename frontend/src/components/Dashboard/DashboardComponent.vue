@@ -1,6 +1,6 @@
 <template>
-      <v-navigation-drawer class="bg-black" expand-on-hover rail> 
-        <div class="d-flex">
+      <v-navigation-drawer class="bg-grey-lighten-2" expand-on-hover rail> 
+        <div class="d-flex mr-2">
           <v-list-item class="mt-5 mr-16 font-weight-bold text-h1 text-green-accent-3"
             prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
             title="Dashboard" size="large">

@@ -12,7 +12,6 @@ use App\Models\University;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,7 +43,15 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 // Expired routes
-Route::get('/getexpiredworkshop',[WorkshopPostController::class,'getWorkshopExprired']);
+Route::prefix('/workshop')->group(function(){
+    Route::get('/expirepost', [WorkshopPostController::class,'getWorkshopPostExprired']);
+});
+Route::prefix('/university')->group(function(){
+    Route::get('/expirepost', [UniversityPostController::class,'getUnivertiesPostExprired']);
+});
+Route::get('/university', [UniversityController::class, 'index']);
+Route::get('/university/{id}', [UniversityController::class, 'show']);
+
 
 // schoolManager route
 Route::prefix('/schoolManager')->group(function(){

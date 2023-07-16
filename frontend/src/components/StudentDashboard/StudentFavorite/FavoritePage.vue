@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import SideNavBar from "../../components/student_dashboard/SideNavBar.vue";
+import SideNavBar from "../SideNavBar.vue";
 export default {
   components: {
     SideNavBar,
