@@ -37,10 +37,9 @@
       <v-table>
         <thead>
           <tr>
-            <th style="width: 100px" class="text-left">Id</th>
-            <th style="width: 200px" class="text-left">Name</th>
-            <th style="width: 500px" class="text-left">descrition</th>
-            <th style="width: 200px" class="text-left">Action</th>
+            <th style="width: 100px" class="text-center">Id</th>
+            <th style="width: 500px" class="text-center">Name</th>
+            <th style="width: 200px" class="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -72,12 +71,14 @@ export default {
     toggle: null,
     // users: [],
     workshopPostExpired: [],
-    universityPostExpired: [],
+    universityPostExpired:[],
+
   }),
   methods: {
     getExpiredWorkshopPost() {
+      console.log('axios.defaults')
       axios
-        .get("/workshop/expirepost")
+        .get('/getexpiredworkshoppost')
         .then((response) => {
           this.workshopPostExpired = response.data.data;
           console.log(this.workshopPostExpired);
@@ -88,7 +89,7 @@ export default {
     },
     getExpiredUniversityPost() {
       axios
-        .get("/university/expirepost")
+        .get("/getexpireduniversitypost")
         .then((response) => {
           this.universityPostExpired = response.data.data;
           console.log(this.universityPostExpired);
@@ -100,7 +101,7 @@ export default {
   },
   created() {
     this.getExpiredWorkshopPost();
-    this.getExpiredUniversityPost();
+    
   },
 };
 </script>

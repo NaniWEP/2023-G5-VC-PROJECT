@@ -42,11 +42,16 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 // Expired routes
-Route::get('/getexpiredworkshoppost',[WorkshopPostController::class,'getWorkshopExprired']);
-Route::get('/getexpireduniversitypost',[UniversityPostController::class,'getUnivertiesPostExprired']);
+Route::prefix('/workshop')->group(function(){
+    Route::get('/expirepost', [WorkshopPostController::class,'getWorkshopPostExprired']);
+});
+Route::prefix('/university')->group(function(){
+    Route::get('/expirepost', [UniversityPostController::class,'getUnivertiesPostExprired']);
+});
+Route::get('/university', [UniversityController::class, 'index']);
+Route::get('/university/{id}', [UniversityController::class, 'show']);
+
 
 Route::fallback(function () {
     return "Sorry we cannot found!!😥😣";
 });
-Route::get('/university', [UniversityController::class, 'index']);
-Route::get('/university/{id}', [UniversityController::class, 'show']);

@@ -55,4 +55,13 @@ class WorkshopPostController extends Controller
     {
         //
     }
+
+    public function getWorkshopPostExprired(){
+        $expiredWorkshopPost = WorkshopPost::WHERE('status', '=', 0)->GET();
+        return response()->json([
+            'success'=>true,
+            'massage'=>'This is all university post expired',
+             'data' => $expiredWorkshopPost
+            ],200);
+    }
 }
