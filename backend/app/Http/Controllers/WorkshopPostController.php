@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\WorkshopPost;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class WorkshopPostController extends Controller
 {
     /**
@@ -57,6 +57,8 @@ class WorkshopPostController extends Controller
     }
 
     public function getWorkshopPostExprired(){
+        $currentDate = Carbon::today();
+        WorkshopPost::whereDate('date', '<', $currentDate)->where('status', '=', 1)->update(['status' => 0]);// set post to expire
         $expiredWorkshopPost = WorkshopPost::WHERE('status', '=', 0)->GET();
         return response()->json([
             'success'=>true,
