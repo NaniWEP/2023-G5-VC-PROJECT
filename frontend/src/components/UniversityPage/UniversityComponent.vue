@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import axios from "@/stores/axiosHttp";
 import CardComponet from "./UniversityCardComponent.vue";
 export default {
   components: {
@@ -26,7 +26,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://127.0.0.1:8000/api/university")
+      .get("/university")
       .then((respone) => {
         this.universities = respone.data.data;
       })

@@ -50,8 +50,8 @@
 
 <script>
 import "@mdi/font/css/materialdesignicons.css";
-import axios from "axios";
-// import axios from "@/stores/axiosHttp";
+// import axios from "axios";
+import axios from "@/stores/axiosHttp";
 export default {
   data: () => ({
     email: "",
@@ -84,8 +84,7 @@ export default {
     async login() {
       try {
         await axios
-          .post(
-            "http://127.0.0.1:8000/api/login",
+          .post("/login",
             {
               email: this.email,
               password: this.password,

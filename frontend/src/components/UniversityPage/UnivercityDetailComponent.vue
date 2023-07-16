@@ -87,7 +87,7 @@
   </v-container>
 </template>
 <script>
-import axios from "axios";
+import axios from "@/stores/axiosHttp";
 export default {
   name: "UniversityDetail",
   data(){
@@ -100,7 +100,7 @@ export default {
   },
   mounted(){
     axios
-    .get(`http://127.0.0.1:8000/api/university/${this.id}`)
+    .get(`/university/${this.id}`)
     .then(response => {
       this.university = response.data.data;
     })
