@@ -78,7 +78,7 @@ export default {
     getExpiredWorkshopPost() {
       console.log('axios.defaults')
       axios
-        .get('/getexpiredworkshoppost')
+        .get('/workshop/expirepost')
         .then((response) => {
           this.workshopPostExpired = response.data.data;
           console.log(this.workshopPostExpired);
@@ -89,7 +89,7 @@ export default {
     },
     getExpiredUniversityPost() {
       axios
-        .get("/getexpireduniversitypost")
+        .get("/university/expirepost")
         .then((response) => {
           this.universityPostExpired = response.data.data;
           console.log(this.universityPostExpired);
