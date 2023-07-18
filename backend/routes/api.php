@@ -34,6 +34,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::prefix('/university')->group(function () {
     Route::get('/showAllUniversity', [UniversityController::class, 'index']);
     Route::get('/expirepost', [UniversityPostController::class,'getUnivertiesPostExprired']);
+    Route::get('/majorPost', [UniversityPostController::class,'getMajoePost']);
 });
 // Role routes
 Route::resource('/role', RoleController::class);

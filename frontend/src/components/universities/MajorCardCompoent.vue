@@ -3,7 +3,7 @@
 
   <v-row>
     <v-col
-      v-for="(university,index) in universities"
+      v-for="(major,index) in majors"
       :key="index"
       class="d-flex justift-center align-center"
       cols="4"
@@ -16,9 +16,9 @@
             cover
           ></v-img>
 
-          <v-card-title> {{university.name}}</v-card-title>
+          <v-card-title> {{major.title}}</v-card-title>
 
-          <v-card-subtitle>{{university.description}}</v-card-subtitle>
+          <v-card-subtitle>{{major.description}}</v-card-subtitle>
 
           <v-card-actions>
             <v-btn
@@ -36,7 +36,7 @@
               variant="text"
             >
             <v-icon align-tabs="center" color="#304FFE" icon="mdi-heart"></v-icon>
-              Favorite
+              add to Favorite
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -47,6 +47,6 @@
 </template>
 <script>
 export default {
-  props: ["universities"],
+  props: ["majors"],
 };
 </script>
