@@ -24,10 +24,19 @@
             <v-btn
               :to="`/universityDetail/${index+1}`"
               :id="$route.params.index"
-              style="color: rgba(46, 46, 255, 0.79); padding: 0 20px"
+              style="color:#304FFE; padding: 0 20px"
               variant="text"
             >
               See more
+            </v-btn>
+            <v-btn
+              :to="`/universityDetail/${index+1}`"
+              :id="$route.params.index"
+              style="color:#304FFE; padding: 0 20px"
+              variant="text"
+            >
+            <v-icon align-tabs="center" color="#304FFE" icon="mdi-heart"></v-icon>
+              Favorite
             </v-btn>
           </v-card-actions>
         </v-card>
