@@ -35,6 +35,7 @@ Route::prefix('/university')->group(function () {
     Route::get('/showAllUniversity', [UniversityController::class, 'index']);
     Route::get('/expirepost', [UniversityPostController::class,'getUnivertiesPostExprired']);
     Route::get('/majorPost', [UniversityPostController::class,'getMajoePost']);
+    Route::get('/majorPost/{id}', [UniversityPostController::class,'getMajoePostById']);
 });
 // Role routes
 Route::resource('/role', RoleController::class);

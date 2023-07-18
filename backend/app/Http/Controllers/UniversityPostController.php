@@ -32,7 +32,16 @@ class UniversityPostController extends Controller
     }
 
     public function getMajoePost(){
-        $majorPost = universityPost::all();
+        $majorPosts = universityPost::all();
+        return response()->json([
+            'success' => true,
+            'massage' => 'Get major posts successfully',
+            'data' => $majorPosts
+        ],Response::HTTP_OK);//200
+    }
+
+    public function getMajoePostById($id){
+        $majorPost = universityPost::find($id);
         return response()->json([
             'success' => true,
             'massage' => 'Get major posts successfully',
