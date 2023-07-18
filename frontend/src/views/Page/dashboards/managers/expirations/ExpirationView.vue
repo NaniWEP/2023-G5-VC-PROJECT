@@ -1,5 +1,5 @@
 <template>
-    <ExpirationComponent />
+   <ExpirationComponent/>
 </template>
 <script>
 import ExpirationComponent from '../../../../../components/dashboards/managers/expirations/ExpirationComponent.vue'

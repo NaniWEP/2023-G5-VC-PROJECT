@@ -6,6 +6,7 @@ use App\Http\Controllers\SchoolManagerController;
 use App\Http\Controllers\WorkshopPostController;
 use App\Models\WorkshopPost;
 use App\Http\Controllers\UniversityController;
+use App\Http\Controllers\UniversityPostController;
 use App\Models\University;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Route;
@@ -32,6 +33,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::prefix('/university')->group(function () {
     Route::get('/showAllUniversity', [UniversityController::class, 'index']);
+    Route::get('/expirepost', [UniversityPostController::class,'getUnivertiesPostExprired']);
 });
 // Role routes
 Route::resource('/role', RoleController::class);
@@ -41,6 +43,11 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 // Expired routes
+Route::prefix('/workshop')->group(function(){
+    Route::get('/expirepost', [WorkshopPostController::class,'getWorkshopPostExprired']);
+});
+
+
 Route::get('/getexpiredworkshop',[WorkshopPostController::class,'getWorkshopExprired']);
 
 Route::fallback(function () {
