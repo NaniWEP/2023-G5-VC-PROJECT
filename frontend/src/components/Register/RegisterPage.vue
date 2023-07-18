@@ -1,5 +1,8 @@
 <template>
-  <v-form v-model="valid" class="form bg-grey-lighten-2">
+  <!--  -->
+  <!-- Resource : https://canvasjs.com/vuejs-charts/basic-chart-example/ -->
+  <!--  -->
+  <v-form v-if="!toggle" v-model="valid" class="form bg-grey-lighten-2">
     <v-container class="container">
       <h1 class="text-center">Register</h1>
       <div class="namefilled">
@@ -22,12 +25,24 @@
       </div>
       <div class="inputFilled">
         <v-text-field
+          v-if="!emailError"
           :style="{ width: '97%' }"
           v-model="email"
           :rules="emailRules"
           label="E-mail"
           required
-        ></v-text-field>
+        >
+        </v-text-field>
+        <v-text-field
+          v-else
+          :style="{ width: '97%' }"
+          v-model="email"
+          :rules="emailRules"
+          :error-messages="[emailError]"
+          label="E-mail"
+          required
+        >
+        </v-text-field>
         <v-text-field
           :style="{ width: '97%' }"
           v-model="password"
@@ -59,13 +74,7 @@
         </p>
       </div>
       <v-col cols="12" class="d-flex justify-space-between align-center">
-        <v-btn
-          class="ma-2"
-          color="red-darken-1"
-          size="x-large"
-          to="/"
-          @click="resetUser"
-        >
+        <v-btn class="ma-2" color="red-darken-1" size="x-large">
           <v-icon start icon="mdi-arrow-left"></v-icon>
           CANCEL
         </v-btn>
@@ -73,26 +82,117 @@
           class="ma-2"
           color="green"
           size="x-large"
-          @click="goToDetailInformation"
+          @click="getDetailInformation"
         >
           CONTINUE
         </v-btn>
       </v-col>
     </v-container>
   </v-form>
+  <v-form v-else v-model="valid" class="form py-3 bg-grey-lighten-3">
+    <v-container class="container">
+      <h1 class="mb-10">Detail Information</h1>
+      <div class="inputFiled w-100">
+        <v-col cols="12" md="12">
+          <v-combobox
+            label="Province"
+            v-model="selectProvince"
+            :rules="inputRules"
+            placeholder="Plase Select.........."
+            :items="province"
+          >
+          </v-combobox>
+        </v-col>
+      </div>
+      <div class="inputFiled w-100">
+        <v-col cols="12" md="12">
+          <v-combobox
+            label="Gender"
+            :rules="inputRules"
+            placeholder="Plase Select.........."
+            :items="gender"
+            v-model="selectGender"
+          >
+          </v-combobox>
+        </v-col>
+        <v-col cols="12" md="12">
+          <v-text-field
+            v-model="dateOfBirth"
+            :rules="inputRules"
+            label="Date of birth"
+            type="date"
+            :format="customFormat"
+            required
+          ></v-text-field>
+        </v-col>
+      </div>
+    </v-container>
+    <v-col cols="12" class="d-flex justify-space-between align-center">
+      <v-btn class="ma-2" color="red-darken-1" size="x-large" @click="back">
+        <v-icon start icon="mdi-arrow-left"></v-icon>
+        BACK
+      </v-btn>
+      <v-btn class="ma-2" color="green" size="x-large" @click="register">
+        CREATE
+      </v-btn>
+    </v-col>
+    <p class="w-100">
+      Do you have an account? <router-link to="/login">Login</router-link>
+    </p>
+  </v-form>
 </template>
 
 <script>
 import "@mdi/font/css/materialdesignicons.css";
+import axios from "@/stores/axiosHttp";
 export default {
   data: () => ({
-    // validtion: false,
+    toggle: false, 
     firstName: "",
     lastName: "",
     email: "",
+    emailError:"",
     password: "",
     verify: "",
-    users: [],
+    customFormat: (val) =>
+      val ? new Date(val).toISOString().substr(0, 10) : null,
+    dateOfBirth: "",
+    selectGender: "",
+    selectProvince: "",
+    gender: ["M", "F"],
+    province: [
+      "Banteay Meanchey",
+      "Battambang",
+      "Kampong Cham",
+      "Kampong Chhnang",
+      "Kampong Speu",
+      "Kampot",
+      "Kandal",
+      "Kep",
+      "Koh Kong",
+      "Kratié",
+      "Mondulkiri",
+      "Oddar Meanchey",
+      "Pailin",
+      "Phnom Penh",
+      "Preah Vihear",
+      "Prey Veng",
+      "Pursat",
+      "Ratanakiri",
+      "Siem Reap",
+      "Sihanoukville",
+      "Stung Treng",
+      "Svay Rieng",
+      "Takeo",
+      "Tboung Khmum",
+    ],
+    inputRules: [
+      (value) => {
+        if (value) return true;
+
+        return "Input is required.";
+      },
+    ],
     nameRules: [
       (value) => {
         if (value) return true;
@@ -110,20 +210,14 @@ export default {
       min: (v) => (v && v.length >= 8) || "Min 8 characters",
     },
   }),
-  created() {
-    // Call the showResultFromHomePage method to display the search results
-    this.resetUser();
-  },
   computed: {
     passwordMatch() {
       return () => this.password === this.verify || "Password must match";
     },
   },
   methods: {
-    goToDetailInformation() {
+    getDetailInformation() {
       let valid = true;
-      // console.log(valid);
-
       if (
         this.firstName === "" ||
         this.lastName === "" ||
@@ -139,25 +233,49 @@ export default {
         valid = false;
       }
       if (valid) {
-        this.$router.push({
-          path: "/userinformation",
-          query: {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            email: this.email,
-            password: this.password,
-          },
-        });
+        this.toggle = true;
       }
     },
-    resetUser() {
-      this.firstName = this.$route.query.firstName;
-      this.lastName = this.$route.query.lastName;
-      this.email = this.$route.query.email;
-      this.password = this.$route.query.password;
-      this.verify = this.$route.query.password;
-      // console.log(this.$route);
-      // console.log(11);
+    back() {
+      this.toggle = false;
+    },
+    async register() {
+      try {
+        if (
+          this.dateOfBirth !== "" &&
+          this.selectGender !== "" &&
+          this.selectProvince !== ""
+        ) {
+          await axios
+            .post("/register", {
+              first_name: this.firstName,
+              last_name: this.lastName,
+              email: this.email,
+              password: this.password,
+              gender: this.selectGender,
+              date_of_birth: this.dateOfBirth,
+              province: this.selectProvince,
+              role_id: 1,
+            })
+            .then((response) => {
+              console.log(response.data);
+              if (response.data.success) {
+                localStorage.setItem("myToken", response.data.token);
+                console.log(response.data.message);
+                this.$router.push("/");
+              } else {
+                console.log(response.data.message);
+                
+              }
+            });
+        }
+      } catch (error) {
+        this.emailError = error.response.data.message.email[0];
+        this.toggle = false;
+        this.email = "";
+        console.log(error.response.data.message.email[0]);
+        
+      }
     },
   },
 };
@@ -180,10 +298,6 @@ export default {
 }
 .form {
   width: 40%;
-  /* display: flex; */
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   border-radius: 10px;
 }
 

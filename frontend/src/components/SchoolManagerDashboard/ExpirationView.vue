@@ -82,7 +82,6 @@ export default {
         .get("/workshop/expirepost")
         .then((response) => {
           this.workshopPostExpired = response.data.data;
-          // console.log(this.workshopPostExpired);
         })
         .catch((error) => {
           console.log(error);
