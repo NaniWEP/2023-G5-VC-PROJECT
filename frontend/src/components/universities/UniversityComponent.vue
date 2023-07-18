@@ -8,8 +8,8 @@
           class="d-flex flex-column align-center justify-center"
         >
           <h1 class="mb-8">KNOWLEDGE AND OPPORTUNITY</h1>
-          <v-tabs v-model="tab" align-tabs="center" color="#3737e5" style="width: 50%">
-              <v-tab value="university">UNIVERSITIES</v-tab>
+          <v-tabs v-model="tab" fixed-tabs color="#3737e5" class="mb-8" style="width: 60%">
+              <v-tab value="university" class="p-4">UNIVERSITIES</v-tab>
               <v-tab value="major">MAJOR POSTS</v-tab>
           </v-tabs>
         </v-list>
@@ -20,26 +20,30 @@
       <div style="margin: 0px 10%">
         <v-window v-model="tab">
           <v-window-item value="university">
-            <CardComponet :universities="universities" />
+            <UniversityCardComponet :universities="universities" />
           </v-window-item>
           <v-window-item value="major">
-            <CardComponet :universities="universities" />
+            <MajorCardComponet :majors="majors" />
           </v-window-item>
         </v-window>
       </div>
     </div>
+    <v-pagination :length="4" rounded="circle" class="mb-8"></v-pagination>
   </section>
 </template>
 <script>
 import axios from "../../stores/axiosHttp";
-import CardComponet from "./UniversityCardComponent.vue";
+import UniversityCardComponet from "./UniversityCardComponent.vue";
+import MajorCardComponet from "./MajorCardCompoent.vue";
 export default {
   components: {
-    CardComponet,
+    UniversityCardComponet,
+    MajorCardComponet
   },
   data() {
     return {
       universities: [],
+      majors: [],
       tab: null,
     };
   },
@@ -48,6 +52,14 @@ export default {
       .get("/university")
       .then((respone) => {
         this.universities = respone.data.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+    axios
+      .get("/university/majorPost")
+      .then((respone) => {
+        this.majors = respone.data.data;
       })
       .catch((err) => {
         return err;
