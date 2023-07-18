@@ -43,15 +43,7 @@
       >
         LOGIN
       </v-btn>
-      <v-btn 
-      block 
-      to="/" 
-      color="red" 
-      size="large" 
-      class="mb-4"
-      > 
-      CANCEL 
-      </v-btn>
+      <v-btn block to="/" color="red" size="large" class="mb-4"> CANCEL </v-btn>
     </v-form>
   </v-card>
 </template>
@@ -59,6 +51,8 @@
 <script>
 import "@mdi/font/css/materialdesignicons.css";
 import axios from "@/stores/axiosHttp";
+import encrypt from "@/stores/encrypt";
+import { setCookie } from "@/stores/cookie.js";
 export default {
   data: () => ({
     email: "",
@@ -91,23 +85,29 @@ export default {
     async login() {
       try {
         await axios
-          .post("/login",
+          .post(
+            "/login",
             {
               email: this.email,
               password: this.password,
-            },
-            {
-              headers: {
-                Authorization: "Bearer " + localStorage.getItem("myToken"),
-              },
             }
           )
           .then((response) => {
             console.log(response.data);
             if (response.data.success) {
-              localStorage.setItem("myToken", response.data.token);
-              console.log(response.data.message);
-              this.$router.push("/");
+              let encryptToken = encrypt(response.data.token, "myToken");
+
+              setCookie("myToken", encryptToken, 1);
+              setCookie("myId", response.data.data.id, 1);
+
+              // send user to
+              if (response.data.data.role_type == "student") {
+                this.$router.push("/");
+              } else if (response.data.data.role_type == "manager") {
+                this.$router.push("/manager");
+              } else if (response.data.data.role_type == "admin") {
+                this.$router.push("/admin");
+              }
             } else {
               console.log(response.data.message);
             }
