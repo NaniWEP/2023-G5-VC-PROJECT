@@ -29,7 +29,7 @@ class UniversityController extends Controller
             $university = University::store($request);
             return response()->json([
                 'success' => true,
-                'meassage' => 'Create universities successfully',
+                'message' => 'Create universities successfully',
                 'data' => $university
             ], Response::HTTP_CREATED); //201
         }

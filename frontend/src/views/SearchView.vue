@@ -1,11 +1,10 @@
 <template>
 <v-app>
-    
     <SearchPage></SearchPage>
 </v-app>
 </template>
 <script>
- import SearchPage from "../components/SearchPage/SearhPage.vue";
+ import SearchPage from "../components/searchs/SearhPage.vue";
 export default {
     components:{
         SearchPage
