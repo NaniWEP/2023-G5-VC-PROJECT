@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import DashboardComponentVue from "@/components/Dashboard/DashboardComponent.vue";
+import DashboardComponentVue from "../../DashboardComponent.vue";
 import axios from "@/stores/axiosHttp";
 export default {
   components: {

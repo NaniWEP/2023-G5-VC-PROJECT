@@ -43,14 +43,21 @@
       >
         LOGIN
       </v-btn>
-      <v-btn block to="/" color="red" size="large" class="mb-4"> CANCEL </v-btn>
+      <v-btn 
+      block 
+      to="/" 
+      color="red" 
+      size="large" 
+      class="mb-4"
+      > 
+      CANCEL 
+      </v-btn>
     </v-form>
   </v-card>
 </template>
 
 <script>
 import "@mdi/font/css/materialdesignicons.css";
-// import axios from "axios";
 import axios from "@/stores/axiosHttp";
 export default {
   data: () => ({

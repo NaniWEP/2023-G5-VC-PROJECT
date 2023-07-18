@@ -4,7 +4,7 @@
   <!--  -->
   <v-form v-if="!toggle" v-model="valid" class="form bg-grey-lighten-2">
     <v-container class="container">
-      <h1 class="text-center">Register</h1>
+      <h1 class="text-center">Sign Up</h1>
       <div class="namefilled">
         <v-col cols="11" md="6">
           <v-text-field
@@ -69,29 +69,33 @@
           required
           @click:append="show1 = !show1"
         ></v-text-field>
-        <p class="w-100 ml-8">
+        <p class="w-100 ml-5">
           Do you have an account? <router-link to="/login">Login</router-link>
         </p>
       </div>
       <v-col cols="12" class="d-flex justify-space-between align-center">
-        <v-btn class="ma-2" color="red-darken-1" size="x-large">
+        <v-btn class="ma-2" color="red-darken-1" size="x-large" to="/">
           <v-icon start icon="mdi-arrow-left"></v-icon>
           CANCEL
         </v-btn>
         <v-btn
           class="ma-2"
-          color="green"
+          color="indigo-accent-3"
           size="x-large"
           @click="getDetailInformation"
         >
           CONTINUE
         </v-btn>
       </v-col>
+      <p>1/2</p>
     </v-container>
   </v-form>
+
+<!-- second form -->
+
   <v-form v-else v-model="valid" class="form py-3 bg-grey-lighten-3">
     <v-container class="container">
-      <h1 class="mb-10">Detail Information</h1>
+      <h1 class="mb-10">More Information</h1>
       <div class="inputFiled w-100">
         <v-col cols="12" md="12">
           <v-combobox
@@ -124,21 +128,22 @@
             :format="customFormat"
             required
           ></v-text-field>
+          <p class="w-100">
+            Do you have an account? <router-link to="/login">Login</router-link>
+          </p>
         </v-col>
       </div>
-    </v-container>
     <v-col cols="12" class="d-flex justify-space-between align-center">
       <v-btn class="ma-2" color="red-darken-1" size="x-large" @click="back">
         <v-icon start icon="mdi-arrow-left"></v-icon>
         BACK
       </v-btn>
-      <v-btn class="ma-2" color="green" size="x-large" @click="register">
-        CREATE
+      <v-btn class="ma-2" color="indigo-accent-3" size="x-large" @click="register">
+        SIGN UP
       </v-btn>
     </v-col>
-    <p class="w-100">
-      Do you have an account? <router-link to="/login">Login</router-link>
-    </p>
+      <p>2/2</p>
+    </v-container>
   </v-form>
 </template>
 
@@ -147,11 +152,11 @@ import "@mdi/font/css/materialdesignicons.css";
 import axios from "@/stores/axiosHttp";
 export default {
   data: () => ({
-    toggle: false, 
+    toggle: false,
     firstName: "",
     lastName: "",
     email: "",
-    emailError:"",
+    emailError: "",
     password: "",
     verify: "",
     customFormat: (val) =>
@@ -159,7 +164,7 @@ export default {
     dateOfBirth: "",
     selectGender: "",
     selectProvince: "",
-    gender: ["M", "F"],
+    gender: ["MALE", "FEMALE"],
     province: [
       "Banteay Meanchey",
       "Battambang",
@@ -265,7 +270,6 @@ export default {
                 this.$router.push("/");
               } else {
                 console.log(response.data.message);
-                
               }
             });
         }
@@ -274,7 +278,6 @@ export default {
         this.toggle = false;
         this.email = "";
         console.log(error.response.data.message.email[0]);
-        
       }
     },
   },
