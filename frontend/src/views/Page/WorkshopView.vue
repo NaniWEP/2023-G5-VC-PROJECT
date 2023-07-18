@@ -1,3 +1,12 @@
 <template>
-    <h1>this is workshop page</h1>
+    <Workshop />
 </template>
+<script>
+import Workshop from '../../components/workshops/WorkshopComponent.vue'
+    export default {
+        name : 'workshopPage',
+        components: {
+            Workshop
+        }
+    }
+</script>

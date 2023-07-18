@@ -11,10 +11,10 @@
 
 <script>
 import { defineComponent } from 'vue';
-import NavbarComponent from '../../components/Layout/NavbarComponent.vue';
-import ContentComponent from '../../components/HomePage/ContentComponent.vue';
-import FooterComponent from '../../components/Layout/FooterComponent.vue';
-import BannerComponent from '../../components/Layout/BannerComponent.vue';
+import NavbarComponent from '../../components/layouts/NavbarComponent.vue';
+import BannerComponent from '../../components/layouts/BannerComponent.vue';
+import ContentComponent from '../../components/homes/ContentComponent.vue';
+import FooterComponent from '../../components/layouts/FooterComponent.vue';
 
 export default defineComponent({
   name: 'HomeView',
