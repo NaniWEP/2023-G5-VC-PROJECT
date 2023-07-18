@@ -8,6 +8,7 @@ import LoginPageView from '../views/Page/LoginView.vue'
 import RegisterPageView from '../views/Page/registers/RegisterView.vue'
 
 import UniversityDetalView from '../views/Page/universities/UniversityDetailView.vue'
+import MajorPostView from '../components/universities/MajorPostDetailComponent.vue'
 
 import StudentDetail from "../views/Page/dashboards/students/StudentDetailView.vue"
 import StudentFavoritePage from "../views/Page/dashboards/students/StudentFavoriteView.vue"
@@ -67,6 +68,13 @@ const routes = [
     path: '/universityDetail/:id',
     name: 'universityDetail',
     component: UniversityDetalView,
+    props: true
+  },
+
+  {
+    path: 'university/majorPost/:id',
+    name: 'majorPost',
+    component: MajorPostView,
     props: true
   },
 
