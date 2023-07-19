@@ -18,8 +18,6 @@ import ChartView from "../views/Page/dashboards/managers/charts/ChartView.vue"
 import PostView from "../views/Page/dashboards/managers/posts/PostView.vue"
 import MajorView from "../views/Page/dashboards/managers/majors/MajorView.vue"
 import ExpirationView from "../views/Page/dashboards/managers/expirations/ExpirationView.vue"
-// import DashboardView from "../views/Dashboard/DashboardView.vue"
-import PopularMajorView  from '../views/Page/homes/PopularMajorView'
 
 const routes = [
   {
@@ -89,12 +87,6 @@ const routes = [
     path: "/favoritePage",
     name: "favoritePage",
     component: StudentFavoritePage,
-  },
-  {
-    path: '/userinformation',
-    name: 'userinformation',
-    component: UserInformationView,
-    props: true
   },
   
   {

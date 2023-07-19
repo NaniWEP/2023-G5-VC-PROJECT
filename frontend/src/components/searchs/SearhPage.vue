@@ -4,11 +4,16 @@
     <div class="search">
       <search-bar-vue @request="getData"></search-bar-vue>
     </div>
-    <ResultCardVue
-      v-for="major in rseults"
-      :key="major"
-      :major="major"
-    ></ResultCardVue>
+    <div>
+      <v-progress-linear
+        v-show="loading"
+        indeterminate
+        color="cyan"
+      ></v-progress-linear>
+      <div v-for="major in rseults" :key="major.id">
+        <ResultCardVue :major="major"></ResultCardVue>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -26,11 +31,11 @@ export default {
     return {
       majors: [],
       rseults: [],
+      dataFetched: false,
+      loading: true,
     };
   },
-  created() {
-    // Call the showResultFromHomePage method to display the search results
-    this.showResultFromHomePage();
+  mounted() {
     this.getDataFromDB();
   },
   methods: {
@@ -43,7 +48,6 @@ export default {
       this.rseults = [];
       const { major, university, searchValue } = this.request;
       for (let majorObj of this.majors) {
-        console.log(majorObj.title);
         if (
           (majorObj.title.toLowerCase().includes(major.toLowerCase()) ||
             !major) &&
@@ -60,30 +64,42 @@ export default {
           this.rseults.push(majorObj);
         }
       }
+      this.loading = false;
     },
     showResultFromHomePage() {
-      this.rseults = [];
-      for (let major of this.majors) {
+      this.results = [];
+      for (let majorObj of this.majors) {
         if (
-          major.title === this.$route.query.major ||
-          major.university === this.$route.query.university ||
-          major.university === this.$route.query.searchValue ||
-          major.title === this.$route.query.searchValue
+          (majorObj.title
+            .toLowerCase()
+            .includes(this.$route.query.major.toLowerCase()) ||
+            !this.$route.query.major) &&
+          (majorObj.university.name
+            .toLowerCase()
+            .includes(this.$route.query.university.toLowerCase()) ||
+            !this.$route.query.university) &&
+          (majorObj.title
+            .toLowerCase()
+            .includes(this.$route.query.searchValue.toLowerCase()) ||
+            majorObj.university.name
+              .toLowerCase()
+              .includes(this.$route.query.searchValue.toLowerCase()) ||
+            !this.$route.query.searchValue)
         ) {
-          this.rseults.push(major);
+          this.rseults.push(majorObj);
         }
       }
+      this.dataFetched = true;
+      this.loading = false;
     },
-    getDataFromDB() {
-      axios
-        .get("/majors")
-        .then((response) => {
-          this.majors = response.data.data;
-          // console.log(response.data.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    async getDataFromDB() {
+      try {
+        const response = await axios.get("/majors");
+        this.majors = response.data.data;
+        this.showResultFromHomePage();
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
