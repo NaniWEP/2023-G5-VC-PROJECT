@@ -9,8 +9,8 @@
         >
           <h1 class="mb-8">KNOWLEDGE AND OPPORTUNITY</h1>
           <v-tabs v-model="tab" fixed-tabs color="#3737e5" class="mb-8" style="width: 80%">
-              <v-tab value="university" style="border-right: 2px solid #3737e5" class="p-4">UNIVERSITIES</v-tab>
-              <v-tab value="major" style="border-left: 2px solid #3737e5">MAJOR POSTS</v-tab>
+              <v-tab value="university" class="selectButton" style="border-right: 2px solid #3737e5">UNIVERSITIES</v-tab>
+              <v-tab value="major" class="selectButton" style="border-left: 2px solid #3737e5">MAJOR POSTS</v-tab>
           </v-tabs>
         </v-list>
       </v-col>
@@ -67,3 +67,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+.selectButton:hover {
+  background-color: #3737e5;
+  color: #ffff;
+  transition: 800ms;
+}
+</style>
