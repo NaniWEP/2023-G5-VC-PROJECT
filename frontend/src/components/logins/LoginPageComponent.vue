@@ -1,6 +1,6 @@
 <template>
   <v-card class="card px-6 py-3 bg-grey-lighten-3">
-    <v-img class="image" src="../../assets/use.png"></v-img>
+    <v-img class="image" src="../../assets/user.png"></v-img>
     <h1 class="text-center">WELLCOME BACK</h1>
     <v-form v-model="form" @submit.prevent="onSubmit">
       <v-text-field

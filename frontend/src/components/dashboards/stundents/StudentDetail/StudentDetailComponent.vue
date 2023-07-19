@@ -28,38 +28,76 @@
           </v-card-title>
           <v-card-text>
             <v-simple-table>
-              <tbody>
-                <tr>
-                  <td>Username</td>
-                  <td class="text-right">:</td>
-                  <td>Doeur Diet</td>
-                </tr>
-                <tr>
-                  <td>Gender</td>
-                  <td class="text-right">:</td>
-                  <td>Male</td>
-                </tr>
-                <tr>
-                  <td>DateOfBirth</td>
-                  <td class="text-right">:</td>
-                  <td>Jan/12/2002</td>
-                </tr>
-                <tr>
-                  <td>Email</td>
-                  <td class="text-right">:</td>
-                  <td>doeur.diet@gmail.com</td>
-                </tr>
-                <tr>
-                  <td>Phone number</td>
-                  <td class="text-right">:</td>
-                  <td>08876555</td>
-                </tr>
-                <tr>
-                  <td>Province</td>
-                  <td class="text-right">:</td>
-                  <td>Siem Reap</td>
-                </tr>
-              </tbody>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="6">
+                    <v-text-field
+                      label="firstName*"
+                      required
+                      v-model="firstname"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field
+                      label="LastName*"
+                      required
+                      v-model="lastname"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-autocomplete
+                      :items="['M', 'F']"
+                      label="Gender*"
+                      v-model="gender"
+                    ></v-autocomplete>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field
+                      label="Date of birth*"
+                      type="date"
+                      required
+                      v-model="dateOfBirth"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field
+                      label="Email*"
+                      required
+                      v-model="gmail"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field
+                      label="Phone number*"
+                      type="number"
+                      required
+                      v-model="phoneNumber"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-autocomplete
+                      label="Province*"
+                       :items="[
+                       'KampongThom',
+                       'KampongCham',
+                       'PreyVeag',
+                       'KosKong',
+                       'BatdomBong',
+                       'BunteayMeanjey',
+                       'Kompot',
+                       'Stung Treang',
+                       'SeamReap',
+                       ]"
+                      required
+                      v-model="province"
+                    ></v-autocomplete>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field label="Image*" type="file" required></v-text-field>
+                  </v-col>
+                  <v-btn color="#3737e5" variant="text" @click="Save">Save</v-btn>            
+                </v-row>
+              </v-container>
             </v-simple-table>
             <dialog-form></dialog-form>
           </v-card-text>
@@ -85,14 +123,30 @@
 </template>
 
 <script>
-import DialogForm from "./DialogFormComponent.vue";
+// import DialogForm from "./DialogFormComponent.vue";
 import SideNavBar from "../studentLayouts/SideNavBar.vue";
 export default {
   components: {
     SideNavBar,
-    DialogForm,
+    // DialogForm,
   },
-  data: () => ({}),
+  data(){
+    return{     
+      users:[
+      {
+        id:1,
+        firstname:"Thana",
+        lastname:"Chhoeun",
+        gender:"Male",
+        dateOfBirth:"1-1-1111",
+        gmail:"thana@gmail.com",
+        phoneNumber:"094839243",
+        province:"KPT"
+      }
+      ],
+    }
+  },
+
 };
 </script>
 
@@ -112,7 +166,7 @@ img {
   width: 10%;
 }
 .text-center {
-  background-color: #afc4c7;
+  background-color: #d4dcdd;
   margin-top: 1%;
   padding: 10px;
   font-size: large;
@@ -121,7 +175,7 @@ img {
 .v-card-text {
   margin-top: 16px;
   padding: 30px;
-  background-color: #bec7bb;
+  background-color: #cdd3cd;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }

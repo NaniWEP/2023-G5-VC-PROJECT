@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthLoginRequest;
 use App\Http\Requests\AuthRegisterRequest;
+use App\Http\Requests\GetUserRequest;
 use App\Http\Resources\GetUserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -80,6 +81,17 @@ class AuthController extends Controller
         $request->user()->tokens()->delete();
         return response()->json([
             'message' => 'Logout successfully'
+        ], Response::HTTP_OK); //200
+    }
+
+    public function getUser(){
+        $user = Auth::user();
+        $user = new GetUserResource($user);
+
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+            'message' => 'Get user data successfully',
         ], Response::HTTP_OK); //200
     }
 }
