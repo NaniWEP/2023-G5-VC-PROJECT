@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MajorController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchoolManagerController;
 use App\Http\Controllers\WorkshopPostController;
@@ -50,7 +51,7 @@ Route::prefix('/workshop')->group(function(){
 
 
 Route::get('/getexpiredworkshop',[WorkshopPostController::class,'getWorkshopExprired']);
-
+Route::get('/majors',[MajorController::class,'index']);
 Route::fallback(function () {
     return "Sorry we cannot found!!😥😣";
 });
