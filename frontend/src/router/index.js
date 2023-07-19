@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomePageView from '../views/Page/HomeView.vue'
+import HomePageView from '../views/Page/homes/HomeView.vue'
 import AboutPageView from '../views/Page/AboutView.vue'
 import UniversityPageView from '../views/Page/universities/UniversityView.vue'
+import WorkshopView from '../views/Page/workshops/WorkshopView.vue'
 import WorkshopView from '../views/Page/WorkshopView.vue'
 import LoginPageView from '../views/Page/LoginView.vue'
 import RegisterPageView from '../views/Page/registers/RegisterView.vue'
@@ -15,7 +16,6 @@ import ChartView from "../views/Page/dashboards/managers/charts/ChartView.vue"
 import PostView from "../views/Page/dashboards/managers/posts/PostView.vue"
 import MajorView from "../views/Page/dashboards/managers/majors/MajorView.vue"
 import ExpirationView from "../views/Page/dashboards/managers/expirations/ExpirationView.vue"
-
 
 const routes = [
   {
@@ -62,6 +62,20 @@ const routes = [
   },
 
   {
+    path: '/university/majorPost/:id',
+    name: 'majorPost',
+    component: MajorPostView,
+    props: true
+  },
+
+  {
+    path: '/workshop/workshopDetail/:id',
+    name: 'majorPost',
+    component: WorkshopDetailView,
+    props: true
+  },
+
+  {
     path: "/studentDetail",
     name: "detailPage",   
     component: StudentDetail,
@@ -82,28 +96,39 @@ const routes = [
 
   {
     path: '/user',
+    name: 'user',
     component: UserView
   },
   { 
     path: '/apply', 
+    name: 'apply',
     component: ApplyView  
   },
   { 
     path: '/chart', 
+    name: 'chart',
     component: ChartView  
   },
   { 
     path: '/post', 
+    name: 'post',
     component: PostView  
   },
   { 
     path: '/major', 
+    name: 'major',
     component: MajorView  
   },
   { 
     path: '/expiration', 
+    name: 'expiration',
     component: ExpirationView  
   },   
+  { 
+    path: '/popularMajor',
+    name: 'popularMajor',
+    component: PopularMajorView  
+  }, 
 ]
 
 

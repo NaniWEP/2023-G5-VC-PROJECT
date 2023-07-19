@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\MajorResource;
 use App\Models\Major;
-// use GuzzleHttp\Psr7\Response;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 

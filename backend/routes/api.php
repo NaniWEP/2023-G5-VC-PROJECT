@@ -36,6 +36,7 @@ Route::prefix('/university')->group(function () {
     Route::get('/showAllUniversity', [UniversityController::class, 'index']);
     Route::get('/expirepost', [UniversityPostController::class,'getUnivertiesPostExprired']);
     Route::get('/majorPost', [UniversityPostController::class,'getMajoePost']);
+    Route::get('/majorPost/{id}', [UniversityPostController::class,'getMajoePostById']);
 });
 // Role routes
 Route::resource('/role', RoleController::class);
@@ -46,7 +47,9 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // Expired routes
 Route::prefix('/workshop')->group(function(){
+    Route::get('/workshopDetail/{id}', [WorkshopPostController::class,'show']);
     Route::get('/expirepost', [WorkshopPostController::class,'getWorkshopPostExprired']);
+    Route::get('/workshopPost', [WorkshopPostController::class, 'workshopPost']);
 });
 
 
@@ -57,3 +60,4 @@ Route::fallback(function () {
 });
 Route::get('/university', [UniversityController::class, 'index']);
 Route::get('/university/{id}', [UniversityController::class, 'show']);
+
