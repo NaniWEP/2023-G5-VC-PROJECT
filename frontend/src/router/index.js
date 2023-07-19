@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomePageView from '../views/Page/HomeView.vue'
 import AboutPageView from '../views/Page/AboutView.vue'
 import UniversityPageView from '../views/Page/universities/UniversityView.vue'
-import WorkshopView from '../views/Page/WorkshopView.vue'
+import WorkshopView from '../views/Page/workshops/WorkshopView.vue'
 
 import LoginPageView from '../views/Page/LoginView.vue'
 import RegisterPageView from '../views/Page/registers/RegisterView.vue'

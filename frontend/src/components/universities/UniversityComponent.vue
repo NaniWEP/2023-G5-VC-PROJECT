@@ -29,6 +29,7 @@ export default {
       .get("/university")
       .then((respone) => {
         this.universities = respone.data.data;
+        console.log(respone.data.data);
       })
       .catch((err) => {
         return err;

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\WorkshopPost;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Symfony\Component\HttpFoundation\Response;
+
 class WorkshopPostController extends Controller
 {
     /**
@@ -18,18 +20,14 @@ class WorkshopPostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function workshopPost()
     {
-        $title = $request->input('title');
-        $date = $request->input('date');
-        $time = $request->input('time');
-        $organizer = $request->input('organizer');
-        $contact = $request->input('contact');
-        $location = $request->input('location');
-        $image = $request->input('image');
-        $description = $request->input('description');
-
-        return response()->json(['message' => 'Workshop created successfully']);
+        $workshop = WorkshopPost::all();
+        return response()->json([
+            'success' => true,
+            'meassage' => 'get workshopPost successfully',
+            'data' => $workshop 
+         ], Response::HTTP_OK);//200
     }
 
     /**

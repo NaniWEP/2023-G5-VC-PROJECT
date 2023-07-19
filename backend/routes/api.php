@@ -45,6 +45,7 @@ Route::post('/login', [AuthController::class, 'login']);
 // Expired routes
 Route::prefix('/workshop')->group(function(){
     Route::get('/expirepost', [WorkshopPostController::class,'getWorkshopPostExprired']);
+    Route::get('/workshopPost', [WorkshopPostController::class, 'workshopPost']);
 });
 
 
@@ -55,3 +56,4 @@ Route::fallback(function () {
 });
 Route::get('/university', [UniversityController::class, 'index']);
 Route::get('/university/{id}', [UniversityController::class, 'show']);
+
