@@ -76,8 +76,8 @@
             v-model="searchValue"
           ></v-text-field>
           <v-btn
-           @click="search"
-            to="/searchPage"
+            @click="search"
+            to="/searhPage"
             color="#3737e5"
             class="text-white"
             height="55"
@@ -93,15 +93,22 @@
   </v-row>
 </template>
 <script>
+import axios from "@/stores/axiosHttp";
 export default {
   data() {
     return {
       major: "",
       university: "",
       searchValue: "",
+      dataFromDB: [],
+      universityNames: [],
+      majorNames: [],
     };
   },
-  // props:["request"],
+  created() {
+    this.getUnviersityAndMajorName();
+    this.getDataFromDB();
+  },
   methods: {
     search() {
       if (
@@ -118,6 +125,24 @@ export default {
           (this.university = ""),
           (this.searchValue = ""),
           this.$emit("request", repuest);
+      }
+    },
+    getDataFromDB() {
+      axios
+        .get("/majors")
+        .then((response) => {
+          this.dataFromDB = response.data.data;
+          // console.log(this.dataFromDB);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getUnviersityAndMajorName() {
+      // console.log("This is data: ", this.dataFromDB);
+      for (let data of this.dataFromDB) {
+        this.universityNames.push(data.university.name);
+        this.majorNames.push(data.title);
       }
     },
   },

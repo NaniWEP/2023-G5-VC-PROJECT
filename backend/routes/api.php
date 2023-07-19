@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MajorController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchoolManagerController;
 use App\Http\Controllers\WorkshopPostController;
@@ -34,6 +35,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::prefix('/university')->group(function () {
     Route::get('/showAllUniversity', [UniversityController::class, 'index']);
     Route::get('/expirepost', [UniversityPostController::class,'getUnivertiesPostExprired']);
+    Route::get('/majorPost', [UniversityPostController::class,'getMajoePost']);
+    Route::get('/majorPost/{id}', [UniversityPostController::class,'getMajoePostById']);
 });
 // Role routes
 Route::resource('/role', RoleController::class);
@@ -44,13 +47,14 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // Expired routes
 Route::prefix('/workshop')->group(function(){
+    Route::get('/workshopDetail/{id}', [WorkshopPostController::class,'show']);
     Route::get('/expirepost', [WorkshopPostController::class,'getWorkshopPostExprired']);
     Route::get('/workshopPost', [WorkshopPostController::class, 'workshopPost']);
 });
 
 
 Route::get('/getexpiredworkshop',[WorkshopPostController::class,'getWorkshopExprired']);
-
+Route::get('/majors',[MajorController::class,'index']);
 Route::fallback(function () {
     return "Sorry we cannot found!!😥😣";
 });

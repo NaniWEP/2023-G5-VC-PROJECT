@@ -15,7 +15,7 @@
 import NavbarComponentVue from "../layouts/NavbarComponent.vue";
 import ResultCardVue from "./ResultCard.vue";
 import SearchBarVue from "./SearchBar.vue";
-
+import axios from "@/stores/axiosHttp";
 export default {
   components: {
     NavbarComponentVue,
@@ -24,78 +24,14 @@ export default {
   },
   data() {
     return {
-      majors: [
-        {
-          title: "Wep Programming",
-          description: "Now our university start get new students for 2024",
-          startDate: "7/Aug/2024",
-          applyDate: "7/Jan/2024",
-          duration: 2,
-          university: "PNC",
-          price: 4000,
-        },
-        {
-          title: "Wep Programming",
-          description: "Now our university start get new students for 2024",
-          startDate: "7/Aug/2024",
-          applyDate: "7/Jan/2024",
-          duration: 2,
-          university: "Royal University of Phnom Penh",
-          price: 700,
-        },
-        {
-          title: "Computer Science",
-          description: "Now our university start get new students for 2024",
-          startDate: "7/Aug/2024",
-          applyDate: "7/Jan/2024",
-          duration: 2,
-          university: "Royal University of Phnom Penh",
-          price: 700,
-        },
-        {
-          title: "Engineering",
-          description: "Now our university start get new students for 2024",
-          startDate: "7/Aug/2024",
-          applyDate: "7/Jan/2024",
-          duration: 2,
-          university: "Institute of Technology of Cambodia",
-          price: 500,
-        },
-        {
-          title: "Law",
-          description: "Now our university start get new students for 2024",
-          startDate: "7/Aug/2024",
-          applyDate: "7/Jan/2024",
-          duration: 2,
-          university: "Royal University of Law and Economics",
-          price: 2000,
-        },
-        {
-          title: "Graphic Design",
-          description:
-            "The Artificial Intelligence and Data Analytics MSc programme at Loughborough University London is aimed at providing students with a comprehensive understanding of data analytics and applied Artificial Intelligence in the digital age and developing their skills to address associated challenges with the use of AI and Data Analytics tools in the most effective way.",
-          startDate: "7/Aug/2024",
-          applyDate: "7/Jan/2024",
-          duration: 2,
-          university: "Norton University",
-          price: 800,
-        },
-        {
-          title: "Accounting",
-          description: "Now our university start get new students for 2024",
-          startDate: "7/Aug/2024",
-          applyDate: "7/Jan/2024",
-          duration: 2,
-          university: "Mean Chey University",
-          price: 650,
-        },
-      ],
+      majors: [],
       rseults: [],
     };
   },
   created() {
     // Call the showResultFromHomePage method to display the search results
     this.showResultFromHomePage();
+    this.getDataFromDB();
   },
   methods: {
     getData(request) {
@@ -107,15 +43,16 @@ export default {
       this.rseults = [];
       const { major, university, searchValue } = this.request;
       for (let majorObj of this.majors) {
+        console.log(majorObj.title);
         if (
           (majorObj.title.toLowerCase().includes(major.toLowerCase()) ||
             !major) &&
-          (majorObj.university
+          (majorObj.university.name
             .toLowerCase()
             .includes(university.toLowerCase()) ||
             !university) &&
           (majorObj.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-            majorObj.university
+            majorObj.university.name
               .toLowerCase()
               .includes(searchValue.toLowerCase()) ||
             !searchValue)
@@ -137,6 +74,17 @@ export default {
         }
       }
     },
+    getDataFromDB() {
+      axios
+        .get("/majors")
+        .then((response) => {
+          this.majors = response.data.data;
+          // console.log(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
@@ -144,8 +92,6 @@ export default {
 <style scoped>
 #body {
   margin-top: 50px;
-  /* width: 100%; */
-  /* background-color: blanchedalmond; */
   display: flex;
   flex-direction: column;
 }

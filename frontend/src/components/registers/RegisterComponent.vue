@@ -2,6 +2,8 @@
   <!--  -->
   <!-- Resource : https://canvasjs.com/vuejs-charts/basic-chart-example/ -->
   <!--  -->
+
+  <!-- First form -->
   <v-form v-if="!toggle" v-model="valid" class="form bg-grey-lighten-2">
     <v-container class="container">
       <h1 class="text-center">Sign Up</h1>
@@ -91,7 +93,7 @@
     </v-container>
   </v-form>
 
-<!-- second form -->
+  <!-- second form -->
 
   <v-form v-else v-model="valid" class="form py-3 bg-grey-lighten-3">
     <v-container class="container">
@@ -133,15 +135,20 @@
           </p>
         </v-col>
       </div>
-    <v-col cols="12" class="d-flex justify-space-between align-center">
-      <v-btn class="ma-2" color="red-darken-1" size="x-large" @click="back">
-        <v-icon start icon="mdi-arrow-left"></v-icon>
-        BACK
-      </v-btn>
-      <v-btn class="ma-2" color="indigo-accent-3" size="x-large" @click="register">
-        SIGN UP
-      </v-btn>
-    </v-col>
+      <v-col cols="12" class="d-flex justify-space-between align-center">
+        <v-btn class="ma-2" color="red-darken-1" size="x-large" @click="back">
+          <v-icon start icon="mdi-arrow-left"></v-icon>
+          BACK
+        </v-btn>
+        <v-btn
+          class="ma-2"
+          color="indigo-accent-3"
+          size="x-large"
+          @click="register"
+        >
+          SIGN UP
+        </v-btn>
+      </v-col>
       <p>2/2</p>
     </v-container>
   </v-form>
@@ -150,6 +157,8 @@
 <script>
 import "@mdi/font/css/materialdesignicons.css";
 import axios from "@/stores/axiosHttp";
+import encrypt from "@/stores/encrypt";
+import { setCookie } from "@/stores/cookie.js";
 export default {
   data: () => ({
     toggle: false,
@@ -265,8 +274,12 @@ export default {
             .then((response) => {
               console.log(response.data);
               if (response.data.success) {
-                localStorage.setItem("myToken", response.data.token);
-                console.log(response.data.message);
+                let encryptToken = encrypt(response.data.token, "myToken");
+
+                setCookie("myToken", encryptToken, 1);
+                setCookie("myId", response.data.data.id, 1);
+                
+                // send user to:
                 this.$router.push("/");
               } else {
                 console.log(response.data.message);
@@ -283,6 +296,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .action .btn {
   width: 30%;

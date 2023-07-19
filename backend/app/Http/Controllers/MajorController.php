@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MajorResource;
 use App\Models\Major;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 
 class MajorController extends Controller
@@ -13,6 +15,12 @@ class MajorController extends Controller
     public function index()
     {
         //
+        $majors = Major::all();
+        $majors = MajorResource::collection($majors);
+        return response()->json([
+           'success' => true,
+           'data' => $majors
+        ], Response::HTTP_OK);
     }
 
     /**

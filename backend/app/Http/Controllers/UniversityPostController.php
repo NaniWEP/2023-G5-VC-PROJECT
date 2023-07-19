@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ShowMajorPostResource;
 use App\Models\UniversityPost;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -16,8 +17,8 @@ class UniversityPostController extends Controller
         return response()->json([
             'success' => true,
             'meassage' => 'Create universityPost successfully',
-            'data' => $universityPost 
-         ], Response::HTTP_CREATED);//200
+            'data' => $universityPost
+         ], Response::HTTP_CREATED);//201
     }
 
     public function getUnivertiesPostExprired() {
@@ -25,6 +26,29 @@ class UniversityPostController extends Controller
         $currentDate = Carbon::today();
         UniversityPost::whereDate('date', '<', $currentDate)->where('status', '=', 1)->update(['status' => 0]);// set post to expire
         $expiredUnivetyPost = UniversityPost::where('status', '=', 0)->get();
-        return response()->json(['message' => 'This is all university posts expired', 'data' => $expiredUnivetyPost]);
+        return response()->json([
+            'message' => 'This is all university posts expired',
+            'data' => $expiredUnivetyPost
+        ],Response::HTTP_OK);//200
+    }
+
+    public function getMajoePost(){
+        $majorPosts = universityPost::all();
+        $majorPosts = ShowMajorPostResource::collection($majorPosts);
+        return response()->json([
+            'success' => true,
+            'massage' => 'Get major posts successfully',
+            'data' => $majorPosts
+        ],Response::HTTP_OK);//200
+    }
+
+    public function getMajoePostById( string $id){
+        $majorPost = universityPost::find($id);
+        $majorPost = new ShowMajorPostResource($majorPost);
+        return response()->json([
+            'success' => true,
+            'massage' => 'Get major posts successfully',
+            'data' => $majorPost
+        ],Response::HTTP_OK);//200
     }
 }
