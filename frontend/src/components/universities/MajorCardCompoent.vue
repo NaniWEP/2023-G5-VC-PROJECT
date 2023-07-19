@@ -22,7 +22,7 @@
 
           <v-card-actions>
             <v-btn
-              :to="`/universityDetail/${index+1}`"
+              :to="`/university/majorPost/${index+1}`"
               :id="$route.params.index"
               style="color:#304FFE; padding: 0 20px"
               variant="text"

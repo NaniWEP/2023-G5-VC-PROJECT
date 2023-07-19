@@ -17,7 +17,9 @@ class UniversityController extends Controller
     public function index()
     {
         $Universities = University::all();
-        return response()->json(['message' => 'Here all the university.', 'data' => $Universities], 200);
+        return response()->json([
+            'message' => 'Here all the university.',
+            'data' => $Universities],Response::HTTP_OK);//200
     }
 
     /**

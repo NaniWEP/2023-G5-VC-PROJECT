@@ -100,7 +100,7 @@ export default {
   },
   mounted(){
     axios
-    .get(`/university/${this.id}`)
+    .get(`/university/majorPost/${this.id}`)
     .then(response => {
       this.university = response.data.data;
     })

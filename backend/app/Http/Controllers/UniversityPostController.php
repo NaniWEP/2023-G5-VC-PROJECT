@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ShowMajorPostResource;
 use App\Models\UniversityPost;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -33,6 +34,7 @@ class UniversityPostController extends Controller
 
     public function getMajoePost(){
         $majorPosts = universityPost::all();
+        $majorPosts = ShowMajorPostResource::collection($majorPosts);
         return response()->json([
             'success' => true,
             'massage' => 'Get major posts successfully',
@@ -40,8 +42,9 @@ class UniversityPostController extends Controller
         ],Response::HTTP_OK);//200
     }
 
-    public function getMajoePostById($id){
+    public function getMajoePostById( string $id){
         $majorPost = universityPost::find($id);
+        $majorPost = new ShowMajorPostResource($majorPost);
         return response()->json([
             'success' => true,
             'massage' => 'Get major posts successfully',
