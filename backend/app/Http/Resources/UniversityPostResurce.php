@@ -5,7 +5,8 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\GetUserResource;
-class MajorResource extends JsonResource
+use App\Http\Resources\MajorResource;
+class UniversityPostResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,14 +17,12 @@ class MajorResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->name,
+            'title' => $this->title,
             'description' => $this->description,
-            'year_duration' => $this->year_duration,
-            'month_duration' => $this->month_duration,
-            'apply_date' => $this->apply_date,
-            'start_date' => $this->start_date,
-            'price' => $this->price,
-            'university' => new UniversityResource($this->university),
+            'date' => $this->date,
+            'status' => $this->status,
+            'user' => new GetUserResource($this->user_id),
+            'major' => new MajorResource($this->major_id),
         ];
     }
 }

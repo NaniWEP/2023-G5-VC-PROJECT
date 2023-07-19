@@ -26,19 +26,57 @@
           item.title
         }}</v-list-item-title>
       </v-list-item>
-      <v-btn elevation="2" class="mr-2 navButtom" to="/login" elevated
+      <v-btn
+        v-if="isLoggedIn == false"
+        elevation="2"
+        class="mr-2 navButtom"
+        to="/login"
+        elevated
         >SignIn</v-btn
       >
-      <v-btn elevation="2" class="navButtom" to="/register" elevated
+      <v-btn
+        v-if="isLoggedIn == false"
+        elevation="2"
+        class="navButtom"
+        to="/register"
+        elevated
         >SingUp</v-btn
+      >
+      <v-btn
+        v-if="isLoggedIn == true"
+        elevation="2"
+        class="navButtom"
+        @click="signOut"
+        elevated
+        >SingOut</v-btn
       >
     </v-list>
   </v-app-bar>
 </template>
 
 <script>
+import { getCookie } from "@/stores/cookie.js";
 export default {
   name: "navbarView",
+  data() {
+    return {
+      isLoggedIn: false,
+    };
+  },
+  methods: {
+    getUserId() {
+      let userId = getCookie("myId");
+      if (userId) {
+        this.isLoggedIn = true;
+      }
+    },
+    signOut(){
+      console.log("Log out is work");
+    },
+  },
+  created() {
+    this.getUserId();
+  },
 };
 </script>
 

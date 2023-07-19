@@ -79,7 +79,7 @@
           ></v-text-field>
           <v-btn
             :to="{
-              path: '/searchPage',
+              path: '/searhPage',
               query: {
                 university: university,
                 major: major,
