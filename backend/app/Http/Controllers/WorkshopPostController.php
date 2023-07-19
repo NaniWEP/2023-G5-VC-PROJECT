@@ -17,7 +17,8 @@ class WorkshopPostController extends Controller
         $WorkshopPost = WorkshopPost::all();
         return response()->json([
             'message' => 'Here all the WorkshopPost.',
-            'data' => $WorkshopPost],Response::HTTP_OK);//200
+            'data' => $WorkshopPost],
+            Response::HTTP_OK);//200
     }
 
     /**
