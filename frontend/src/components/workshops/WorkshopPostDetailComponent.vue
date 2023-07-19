@@ -99,7 +99,7 @@ export default {
   components: {},
   mounted() {
     axios
-      .get(`/workshop/workshopDetail/2`)
+      .get(`/workshop/workshopDetail/${this.id}`)
       .then((response) => {
         this.workshopPost = response.data.data;
         console.log(this.workshopPost);
