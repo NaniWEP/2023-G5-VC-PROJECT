@@ -75,4 +75,12 @@ class WorkshopPostController extends Controller
              'data' => $expiredWorkshopPost
             ],200);
     }
+    // Get data new update workshop
+    public function getWorkshopLastUpdated(){
+        $NewWorkshop = WorkshopPost::orderByDesc('id')->limit(10)->where('status',1)->get();
+        return response()->json([
+            'message' => 'Here all the WorkshopPostNewUpdate.',
+            'data' => $NewWorkshop],
+            Response::HTTP_OK);//200
+    }
 }

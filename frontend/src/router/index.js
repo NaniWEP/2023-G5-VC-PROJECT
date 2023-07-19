@@ -26,7 +26,6 @@ import PostView from "../views/Page/dashboards/managers/posts/PostView.vue"
 import MajorView from "../views/Page/dashboards/managers/majors/MajorView.vue"
 import ExpirationView from "../views/Page/dashboards/managers/expirations/ExpirationView.vue"
 // import DashboardView from "../views/Dashboard/DashboardView.vue"
-import PopularMajorView  from '../views/Page/homes/PopularMajorView'
 
 const routes = [
   {
@@ -141,11 +140,7 @@ const routes = [
     name: 'expiration',
     component: ExpirationView  
   },   
-  { 
-    path: '/popularMajor',
-    name: 'popularMajor',
-    component: PopularMajorView  
-  }, 
+ 
 ]
 
 

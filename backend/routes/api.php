@@ -37,6 +37,7 @@ Route::prefix('/university')->group(function () {
     Route::get('/expirepost', [UniversityPostController::class,'getUnivertiesPostExprired']);
     Route::get('/majorPost', [UniversityPostController::class,'getMajoePost']);
     Route::get('/majorPost/{id}', [UniversityPostController::class,'getMajoePostById']);
+    Route::get('/newUpdate', [UniversityPostController::class,'getMajorLastUpdated']);
 });
 // Role routes
 Route::resource('/role', RoleController::class);
@@ -49,6 +50,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::prefix('/workshop')->group(function(){
     Route::get('/workshopDetail/{id}', [WorkshopPostController::class,'show']);
     Route::get('/expirepost', [WorkshopPostController::class,'getWorkshopPostExprired']);
+    Route::get('/newUpdate', [WorkshopPostController::class,'getWorkshopLastUpdated']);
 });
 
 

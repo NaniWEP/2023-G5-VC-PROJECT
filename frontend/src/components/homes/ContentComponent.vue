@@ -94,36 +94,27 @@
       </v-col>
       <v-col sm="1"> </v-col>
     </v-row>
-    <v-row>
-      <v-col>
-        <div class="d-flex flex-column">
-          <h3 style="margin-left: 5%">Workshop</h3>
-            <v-window>
-              <v-window-item>
-                <workshopNewComponent />
-              </v-window-item>
-            </v-window>
-        </div>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <div class="d-flex flex-column">
-          <h3 style="margin-left: 5%">Major Post</h3>
-            <v-window>
-              <v-window-item>
-                <workshopNewComponent />
-              </v-window-item>
-            </v-window>
-        </div>
-      </v-col>
-    </v-row>
-    <v-pagination :length="4" rounded="circle" class="mb-8"></v-pagination>
+    <div class="d-flex flex-column">
+      <div>
+        <v-window v-model="tab">
+          <v-window-item value="newUpdate">
+                <NewUpdateComponent />
+          </v-window-item>
+          <v-window-item value="popularUniversity">
+                <NewUpdateComponent />
+          </v-window-item>
+          <v-window-item value="popularMajor">
+                <PopularMajorComponent />
+          </v-window-item>
+        </v-window>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
-import workshopNewComponent from "./WorkshopNewUpdateComponent.vue";
+import NewUpdateComponent from "./NewUpdateComponent.vue";
+import PopularMajorComponent from "./PopularMajorComponent.vue";
 export default {
   data() {
     return {
@@ -134,7 +125,8 @@ export default {
     };
   },
   components: {
-    workshopNewComponent,
+    NewUpdateComponent,
+    PopularMajorComponent
   },
   methods: {
     search() {

@@ -51,4 +51,12 @@ class UniversityPostController extends Controller
             'data' => $majorPost
         ],Response::HTTP_OK);//200
     }
+
+    public function getMajorLastUpdated(){
+        $majorPost = UniversityPost::orderByDesc('id')->limit(10)->where('status',1)->get();
+        return response()->json([
+            'message' => 'Here all the major post new update.',
+            'data' => $majorPost],
+            Response::HTTP_OK);//200
+    }
 }

@@ -2,8 +2,8 @@
   <v-sheet class="mx-auto" elevation="8" style="width: 100%">
     <v-slide-group v-model="model" class="pa-4" center-active show-arrows>
       <v-slide-group-item
-        v-for="n in 15"
-        :key="n"
+        v-for="(workshop,index) in workshops"
+        :key="index"
       >
         <v-card
           color="grey-lighten-3"
@@ -17,13 +17,13 @@
             cover
           ></v-img>
 
-          <v-card-title>PNC</v-card-title>
+          <v-card-title>{{workshop.name}}</v-card-title>
 
-          <v-card-subtitle>We will show you what is soft skill and how to use it and make yourself stronger.</v-card-subtitle>
+          <v-card-subtitle>{{workshop.description}}</v-card-subtitle>
 
           <v-card-actions>
             <v-btn
-              :to="`/universityDetail/${index + 1}`"
+              :to="`/universityDetail/${workshop.id}`"
               :id="$route.params.index"
               style="color: #304ffe; padding: 10px 20px"
               variant="text"
@@ -51,8 +51,12 @@
 </template>
 <script>
 export default {
+  props: ["workshops"],
   data: () => ({
     model: null,
   }),
+  mounted(){
+    console.log(this.workshops);
+  }
 };
 </script>
