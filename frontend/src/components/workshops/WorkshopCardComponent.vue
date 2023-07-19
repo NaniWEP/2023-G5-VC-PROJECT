@@ -3,7 +3,7 @@
 
   <v-row>
     <v-col
-      v-for="(major,index) in majors"
+      v-for="(workshop,index) of workshops"
       :key="index"
       class="d-flex justift-center align-center"
       cols="4"
@@ -16,37 +16,29 @@
             cover
           ></v-img>
 
-          <v-card-title> {{major.title}}</v-card-title>
+          <v-card-title> {{workshops.name}}</v-card-title>
 
-          <v-card-subtitle>{{major.description}}</v-card-subtitle>
+          <v-card-subtitle>{{workshops.description}}</v-card-subtitle>
 
           <v-card-actions>
             <v-btn
-              :to="`/university/majorPost/${index+1}`"
+              :to="`workshopDetail/${index+1}`"
               :id="$route.params.index"
-              style="color:#304FFE; padding: 0 20px"
+              style="color: rgba(46, 46, 255, 0.79); padding: 0 20px"
               variant="text"
             >
               See more
-            </v-btn>
-            <v-btn
-              :to="`/universityDetail/${index+1}`"
-              :id="$route.params.index"
-              style="color:#304FFE; padding: 0 20px"
-              variant="text"
-            >
-            <v-icon align-tabs="center" color="#304FFE" icon="mdi-heart"></v-icon>
-              add to Favorite
             </v-btn>
           </v-card-actions>
         </v-card>
       </v-list>
     </v-col>
   </v-row>
+  <v-pagination :length="4" rounded="circle" class="mb-8"></v-pagination>
 </div>
 </template>
 <script>
 export default {
-  props: ["majors"],
+  props: ["workshops"],
 };
 </script>

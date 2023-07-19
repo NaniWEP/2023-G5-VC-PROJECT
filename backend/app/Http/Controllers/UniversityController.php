@@ -17,7 +17,9 @@ class UniversityController extends Controller
     public function index()
     {
         $Universities = University::all();
-        return response()->json(['message' => 'Here all the university.', 'data' => $Universities], 200);
+        return response()->json([
+            'message' => 'Here all the university.',
+            'data' => $Universities],Response::HTTP_OK);//200
     }
 
     /**
@@ -45,7 +47,9 @@ class UniversityController extends Controller
     public function show($id)
     {
         $University = University::find($id);
-        return response()->json(['message' => 'Here all the university.', 'data' => $University], 200);
+        return response()->json([
+            'message' => 'Here all the university.',
+            'data' => $University],Response::HTTP_OK);//200
     }
 
 

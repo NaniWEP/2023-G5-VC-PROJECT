@@ -63,10 +63,11 @@
             :items="[
               'Wep Programming',
               'Computer Science',
-              'Engineering',
+              'Engineering ',
               'Law',
               'Graphic Design',
               'Accounting',
+              'Information technology (IT)'
             ]"
             color="#3737e5"
             class="mr-2"
@@ -79,7 +80,7 @@
           ></v-text-field>
           <v-btn
             :to="{
-              path: '/searchPage',
+              path: '/searhPage',
               query: {
                 university: university,
                 major: major,
@@ -136,6 +137,7 @@
 </template>
 
 <script>
+// import axios from "@/stores/axiosHttp";
 export default {
   data() {
     return {

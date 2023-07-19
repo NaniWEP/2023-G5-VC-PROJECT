@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthLoginRequest;
 use App\Http\Requests\AuthRegisterRequest;
+use App\Http\Requests\GetUserRequest;
 use App\Http\Resources\GetUserResource;
 use App\Models\User;
 use Illuminate\Http\Request;

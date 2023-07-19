@@ -13,11 +13,13 @@
         <v-icon size="x-large"></v-icon>
       </template>
 
-      <v-card-text class="text-p py-2 ml-12 d-flex justify-space-between mr-5">
+      <v-card-text class=" w-100 card-body ml-12 d-flex  mr-5">
+        <div class="description">
         {{ major.description }}
-        <div>
+        </div>
+        <div class="action">
           <h3><v-icon> mdi-currency-usd</v-icon> {{ major.price }}/year</h3>
-          <h3> <v-icon> mdi-clock-time-eight-outline</v-icon> {{ major.duration }} year</h3>
+          <h3> <v-icon> mdi-clock-time-eight-outline</v-icon> {{ major.year_duration }} year</h3>
         </div>
       </v-card-text>
       <v-card-actions>
@@ -29,9 +31,9 @@
             ></v-avatar>
           </template>
 
-          <v-list-item-title>{{ major.university }}</v-list-item-title>
+          <v-list-item-title>{{ major.university.name }}</v-list-item-title>
           <template v-slot:append>
-            <div class="justify-self-end mr-8">
+            <div class="justify-self-end mr-15">
               <v-icon class="me-1" icon="mdi-bookmark-plus-outline"></v-icon>
             </div>
           </template>
@@ -44,14 +46,20 @@
 <script>
 export default {
   props: ["major"],
-  methods: {
-    show() {
-      console.log(this.majors);
-    },
-  },
 };
 </script>
-
-
 <style scoped>
+.card-body{
+  justify-content: space-between;
+}
+.description{
+
+  width: 80%;
+}
+.action{
+  flex-direction: column;
+  gap: 10px;
+  width: 150px;
+
+}
 </style>
