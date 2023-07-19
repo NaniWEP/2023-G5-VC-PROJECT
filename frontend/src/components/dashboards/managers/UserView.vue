@@ -16,13 +16,6 @@
             />
             <h4 class="text-center">Phearom</h4>
           </v-card-title>
-          <v-card-text>
-            <p class="mb-0">
-              <strong class="pr-1">Student ID:</strong>321000001
-            </p>
-            <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
-            <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
-          </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="12" md="7">

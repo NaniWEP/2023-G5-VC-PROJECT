@@ -82,4 +82,15 @@ class AuthController extends Controller
             'message' => 'Logout successfully'
         ], Response::HTTP_OK); //200
     }
+
+    public function getUser(){
+        $user = Auth::user();
+        $user = new GetUserResource($user);
+
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+            'message' => 'Get user data successfully',
+        ], Response::HTTP_OK); //200
+    }
 }
