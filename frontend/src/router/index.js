@@ -10,7 +10,7 @@ import UniversityDetalView from '../views/Page/universities/UniversityDetailView
 import MajorPostView from '../components/universities/MajorPostDetailComponent.vue'
 import StudentDetail from "../views/Page/dashboards/students/StudentDetailView.vue"
 import StudentFavoritePage from "../views/Page/dashboards/students/StudentFavoriteView.vue"
-import UserInformationView from '../views/Page/registers/UserInformationView.vue'
+// import UserInformationView from '../views/Page/registers/UserInformationView.vue'
 import SearchView from '../views/SearchView.vue'
 import UserView from "../components/dashboards/managers/UserView.vue"
 import ApplyView from "../views/Page/dashboards/managers/applys/ApplyingView.vue"

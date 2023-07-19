@@ -20,10 +20,10 @@ class WorkshopResource extends JsonResource
             'date' => $this -> date,
             'time' => $this -> time,
             'location' => $this -> location,
-            'organizer' => $this -> organization,
+            'organizer' => $this -> organizer,
             'contact' => $this -> contact,
             'status' => $this -> status,
-            'user_id = $this -> user_id'
+            'user_id' => $this -> user_id
         ];
     }
 }

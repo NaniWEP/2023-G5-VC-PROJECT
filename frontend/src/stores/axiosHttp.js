@@ -8,7 +8,6 @@ const axiosHttp = axios.create({
 
 axiosHttp.interceptors.request.use(
     (config) => {
-      // const token = localStorage.getItem('myToken');
       const token = decrypt(getCookie('myToken'), "myToken")
       console.log(token)
       if (token) {

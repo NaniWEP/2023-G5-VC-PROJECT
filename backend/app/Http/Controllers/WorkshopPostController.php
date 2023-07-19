@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\WorkshopPost;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Http\Resources\WorkshopResource;
 use Symfony\Component\HttpFoundation\Response;
 
 class WorkshopPostController extends Controller
@@ -30,7 +31,7 @@ class WorkshopPostController extends Controller
         return response()->json([
             'success' => true,
             'meassage' => 'get workshopPost successfully',
-            'data' => $workshop 
+            'data' => $workshop
          ], Response::HTTP_OK);//200
     }
 
@@ -40,6 +41,7 @@ class WorkshopPostController extends Controller
     public function show(string $id)
     {
         $WorkshopPost = WorkshopPost::find($id);
+        $WorkshopPost = new WorkshopResource($WorkshopPost);
         return response()->json([
             'success' => true,
             'message' => 'Here all the WorkshopPost.',
