@@ -29,7 +29,7 @@
         <v-card class="elevation-2">
           <v-card-title class="justify-center">
             <h3 class="mb-0">
-              <v-icon>mdi-account</v-icon>General Information
+              <v-icon>mdi-account</v-icon>General Information About University
             </h3>
           </v-card-title>
           <v-card-text>
