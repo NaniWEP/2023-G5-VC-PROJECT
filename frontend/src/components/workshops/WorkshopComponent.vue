@@ -8,7 +8,7 @@
       </v-col>
     </v-row>
     <div style="margin: 0px 10%">
-      <CardComponet :workshops="workshops" />
+      <CardComponet :workshops="workshopPost" />
     </div>
   </div>
 </template>
@@ -29,7 +29,6 @@ export default {
       .get("/workshop/workshopPost")
       .then((respone) => {
         this.workshopPost = respone.data.data;
-        console.log(this.workshopPost = respone.data.data);
       })
       .catch((err) => {
         return err;

@@ -3,7 +3,7 @@
 
   <v-row>
     <v-col
-      v-for="(workshops,index) in workshopPost"
+      v-for="(workshop,index) of workshops"
       :key="index"
       class="d-flex justift-center align-center"
       cols="4"
@@ -22,7 +22,7 @@
 
           <v-card-actions>
             <v-btn
-              :to="`/workshopDetail/${index+1}`"
+              :to="`workshopDetail/${index+1}`"
               :id="$route.params.index"
               style="color: rgba(46, 46, 255, 0.79); padding: 0 20px"
               variant="text"
