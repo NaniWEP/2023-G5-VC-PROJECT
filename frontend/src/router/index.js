@@ -3,10 +3,11 @@ import HomePageView from '../views/Page/homes/HomeView.vue'
 import AboutPageView from '../views/Page/AboutView.vue'
 import UniversityPageView from '../views/Page/universities/UniversityView.vue'
 import WorkshopView from '../views/Page/workshops/WorkshopView.vue'
-import WorkshopView from '../views/Page/WorkshopView.vue'
+import WorkshopDetailView from '../components/workshops/WorkshopPostDetailComponent.vue'
 import LoginPageView from '../views/Page/LoginView.vue'
 import RegisterPageView from '../views/Page/registers/RegisterView.vue'
 import UniversityDetalView from '../views/Page/universities/UniversityDetailView.vue'
+import MajorPostView from '../components/universities/MajorPostDetailComponent.vue'
 import StudentDetail from "../views/Page/dashboards/students/StudentDetailView.vue"
 import StudentFavoritePage from "../views/Page/dashboards/students/StudentFavoriteView.vue"
 import SearchView from '../views/SearchView.vue'
@@ -16,6 +17,7 @@ import ChartView from "../views/Page/dashboards/managers/charts/ChartView.vue"
 import PostView from "../views/Page/dashboards/managers/posts/PostView.vue"
 import MajorView from "../views/Page/dashboards/managers/majors/MajorView.vue"
 import ExpirationView from "../views/Page/dashboards/managers/expirations/ExpirationView.vue"
+import PopularMajorView  from '../views/Page/homes/PopularMajorView'
 
 const routes = [
   {
@@ -71,7 +73,7 @@ const routes = [
   {
     path: '/workshop/workshopDetail/:id',
     name: 'majorPost',
-    component: WorkshopDetailView,
+    component:WorkshopDetailView,
     props: true
   },
 
