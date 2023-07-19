@@ -8,9 +8,9 @@
           class="d-flex flex-column align-center justify-center"
         >
           <h1 class="mb-8">KNOWLEDGE AND OPPORTUNITY</h1>
-          <v-tabs v-model="tab" fixed-tabs color="#3737e5" class="mb-8" style="width: 60%">
-              <v-tab value="university" class="p-4">UNIVERSITIES</v-tab>
-              <v-tab value="major">MAJOR POSTS</v-tab>
+          <v-tabs v-model="tab" fixed-tabs color="#3737e5" class="mb-8" style="width: 80%">
+              <v-tab value="university" style="border-right: 2px solid #3737e5" class="p-4">UNIVERSITIES</v-tab>
+              <v-tab value="major" style="border-left: 2px solid #3737e5">MAJOR POSTS</v-tab>
           </v-tabs>
         </v-list>
       </v-col>

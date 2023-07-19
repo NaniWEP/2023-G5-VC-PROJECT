@@ -48,6 +48,7 @@ Route::post('/login', [AuthController::class, 'login']);
 // Expired routes
 Route::prefix('/workshop')->group(function(){
     Route::get('/expirepost', [WorkshopPostController::class,'getWorkshopPostExprired']);
+    Route::get('/workshopDetail/{id}', [WorkshopPostController::class,'show']);
 });
 
 

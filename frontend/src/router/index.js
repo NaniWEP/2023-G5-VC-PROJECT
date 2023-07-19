@@ -3,6 +3,7 @@ import HomePageView from '../views/Page/HomeView.vue'
 import AboutPageView from '../views/Page/AboutView.vue'
 import UniversityPageView from '../views/Page/universities/UniversityView.vue'
 import WorkshopView from '../views/Page/WorkshopView.vue'
+import WorkshopDetailView from '../components/workshops/WorkshopPostDetailComponent.vue'
 
 import LoginPageView from '../views/Page/LoginView.vue'
 import RegisterPageView from '../views/Page/registers/RegisterView.vue'
@@ -75,6 +76,13 @@ const routes = [
     path: '/university/majorPost/:id',
     name: 'majorPost',
     component: MajorPostView,
+    props: true
+  },
+
+  {
+    path: '/workshop/workshopDetail/:id',
+    name: 'majorPost',
+    component: WorkshopDetailView,
     props: true
   },
 
