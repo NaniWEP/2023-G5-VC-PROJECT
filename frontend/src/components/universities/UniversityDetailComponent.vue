@@ -103,6 +103,7 @@ export default {
     .get(`/university/${this.id}`)
     .then(response => {
       this.university = response.data.data;
+        console.log(response.data.data)
     })
     .catch(error => {
       console.log(error);
