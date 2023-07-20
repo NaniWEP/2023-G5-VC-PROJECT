@@ -80,6 +80,7 @@ export default {
       }
     },
     async signOut() {
+    this.isLoggedIn = false;
     const token = getCookie('myToken')
           console.log("Token here: " + token)
 

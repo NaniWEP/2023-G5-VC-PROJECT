@@ -286,7 +286,7 @@ export default {
             });
         }
       } catch (error) {
-        // this.emailError = error.response.data.message.email[0];
+        this.emailError = error.response.data.message.email[0];
         this.toggle = false;
         this.email = "";
         console.log(error.response);
