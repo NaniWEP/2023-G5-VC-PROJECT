@@ -14,7 +14,6 @@ export default {
 
 <style scoped>
 *{
-  /* margin-top: 40px; */
   display: flex;
   width: 100%;
 

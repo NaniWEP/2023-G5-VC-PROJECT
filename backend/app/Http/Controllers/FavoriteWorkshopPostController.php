@@ -1,7 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
+
+use App\Models\FavoriteWorkshopPost;
 use Illuminate\Http\Request;
 
 class FavoriteWorkshopPostController extends Controller
@@ -20,6 +22,15 @@ class FavoriteWorkshopPostController extends Controller
     public function store(Request $request)
     {
         //
+        //reference https://poe.com/
+        $user = auth()->user();
+        $favorite = new FavoriteWorkshopPost();
+        $favorite->user_id = $user->id;
+        $favorite->workshop_post_id = $request->input('workshop_post_id');
+        $favorite->save();
+        return response()->json([
+            'success' => true
+        ],201);
     }
 
     /**

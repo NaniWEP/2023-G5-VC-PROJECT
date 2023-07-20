@@ -36,4 +36,8 @@ class WorkshopPost extends Model
     {
         return $this -> belongsTo(User::class);
     }
+    public function favorite(){
+        $cid = auth()->guard('user')->user()!=null ? auth()->guard('user')->user()->id : null;
+        return $this->belongsTo(FavoriteUniversityPost::class,'id','workshop_post_id')->where('user_id',$cid);
+    }
 }
