@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\WorkshopPost;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\WorkshopResource;
 use Symfony\Component\HttpFoundation\Response;
 
 class WorkshopPostController extends Controller
@@ -15,6 +17,7 @@ class WorkshopPostController extends Controller
     public function index()
     {
         $WorkshopPost = WorkshopPost::all();
+        $WorkshopPost = WorkshopResource::collection($WorkshopPost);
         return response()->json([
             'message' => 'Here all the WorkshopPost.',
             'data' => $WorkshopPost],
@@ -30,7 +33,7 @@ class WorkshopPostController extends Controller
         return response()->json([
             'success' => true,
             'meassage' => 'get workshopPost successfully',
-            'data' => $workshop 
+            'data' => $workshop
          ], Response::HTTP_OK);//200
     }
 
@@ -40,6 +43,20 @@ class WorkshopPostController extends Controller
     public function show(string $id)
     {
         $WorkshopPost = WorkshopPost::find($id);
+        $WorkshopPost = new WorkshopResource($WorkshopPost);
+        return response()->json([
+            'success' => true,
+            'message' => 'Here all the WorkshopPost.',
+            'data' => $WorkshopPost],Response::HTTP_OK);//200
+    }
+    /**
+     * Display the specified resource.
+     */
+    public function selctByUserId()
+    {
+        $id = Auth::user()->id;
+        $WorkshopPost = WorkshopPost::where('user_id',$id)->get();
+        $WorkshopPost =WorkshopResource::collection($WorkshopPost);
         return response()->json([
             'success' => true,
             'message' => 'Here all the WorkshopPost.',
@@ -70,5 +87,13 @@ class WorkshopPostController extends Controller
             'massage'=>'This is all workshop post expired',
              'data' => $expiredWorkshopPost
             ],200);
+    }
+    // Get data new update workshop
+    public function getWorkshopLastUpdated(){
+        $NewWorkshop = WorkshopPost::orderByDesc('id')->limit(10)->where('status',1)->get();
+        return response()->json([
+            'message' => 'Here all the WorkshopPostNewUpdate.',
+            'data' => $NewWorkshop],
+            Response::HTTP_OK);//200
     }
 }

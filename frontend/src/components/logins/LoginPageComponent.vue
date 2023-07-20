@@ -94,25 +94,23 @@ export default {
           .then((response) => {
             console.log(response.data);
             if (response.data.success) {
-              let token = response.data.token;
-
-              setCookie("myToken", token, 1);
-              setCookie("myId", response.data.data.id, 1);
+              setCookie("myToken", response.data.token, 1);
+              setCookie("myId", response.data.user.id, 1);
 
               // send user to
-              if (response.data.data.role_type == "user") {
+              if (response.data.user.role_type == "user") {
                 this.$router.push("/");
-              } else if (response.data.data.role_type == "manager") {
+              } else if (response.data.user.role_type == "manager") {
                 this.$router.push("/manager");
-              } else if (response.data.data.role_type == "admin") {
-                this.$router.push("/admin");
+              } else if (response.data.user.role_type == "admin") {
+                this.$router.push("/");
               }
             } else {
-              console.log(response.data.message);
+              console.log(response.data);
             }
           });
       } catch (error) {
-        console.log(error.response);
+        console.log(error.message);
       }
     },
   },

@@ -1,10 +1,12 @@
 <template>
-  <div class="chart-container">
-    <canvas id="myChart"></canvas>
-  </div>
-  <div id="chart">
-    <apexchart width="380"></apexchart>
-  </div>
+  <section>
+    <div class="chart-container">
+      <canvas id="myChart"></canvas>
+    </div>
+    <div id="chart">
+      <apexchart width="380"></apexchart>
+    </div>
+  </section>
 </template>
 
 <script>
