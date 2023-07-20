@@ -22,7 +22,7 @@
         </v-list-item-icon>
       </v-list-item>
 
-      <v-list-item :to="{ path: '/logOut' }">
+      <v-list-item :to="{ path: '/logOu' }">
         <v-list-item-icon>
           <v-icon size="32">mdi-logout</v-icon>
           <span>Sign out</span>

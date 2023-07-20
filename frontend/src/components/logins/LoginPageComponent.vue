@@ -51,7 +51,6 @@
 <script>
 import "@mdi/font/css/materialdesignicons.css";
 import axios from "@/stores/axiosHttp";
-import encrypt from "@/stores/encrypt";
 import { setCookie } from "@/stores/cookie.js";
 export default {
   data: () => ({
@@ -95,13 +94,13 @@ export default {
           .then((response) => {
             console.log(response.data);
             if (response.data.success) {
-              let encryptToken = encrypt(response.data.token, "myToken");
+              let token = response.data.token;
 
-              setCookie("myToken", encryptToken, 1);
+              setCookie("myToken", token, 1);
               setCookie("myId", response.data.data.id, 1);
 
               // send user to
-              if (response.data.data.role_type == "student") {
+              if (response.data.data.role_type == "user") {
                 this.$router.push("/");
               } else if (response.data.data.role_type == "manager") {
                 this.$router.push("/manager");
@@ -113,7 +112,7 @@ export default {
             }
           });
       } catch (error) {
-        console.log(error.response.data.message);
+        console.log(error.response);
       }
     },
   },

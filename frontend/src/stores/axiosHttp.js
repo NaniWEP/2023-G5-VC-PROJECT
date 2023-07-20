@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { getCookie } from "@/stores/cookie.js";
-import { decrypt } from "@/stores/decrypt";
 
 const axiosHttp = axios.create({
   baseURL: process.env.VUE_APP_API_URL
@@ -9,7 +8,7 @@ const axiosHttp = axios.create({
 axiosHttp.interceptors.request.use(
     (config) => {
       // const token = localStorage.getItem('myToken');
-      const token = decrypt(getCookie('myToken'), "myToken")
+      const token = getCookie('myToken')
       console.log(token)
       if (token) {
          config.headers.Authorization = `Bearer ${token}`
