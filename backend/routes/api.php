@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FavoriteUniversityPostController;
 use App\Http\Controllers\FavoriteWorkshopPostController;
 use App\Http\Controllers\MajorController;
 use App\Http\Controllers\RoleController;
@@ -40,6 +41,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::prefix('/workshop')->group(function(){
             Route::get('/selectByUser', [WorkshopPostController::class, 'selctByUserId']);
         });
+        Route::post('/favoriteUniversityPost', [FavoriteUniversityPostController::class, 'store']);
     });
 
 });

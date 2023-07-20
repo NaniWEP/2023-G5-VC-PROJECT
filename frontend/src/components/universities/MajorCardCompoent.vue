@@ -27,7 +27,9 @@
               >
                 See more
               </v-btn>
-              <v-btn style="color: #304ffe; padding: 0 20px" variant="text">
+              <v-btn style="color: #304ffe; padding: 0 20px" 
+                  @click="addFovMajorPost(major.id)"
+                  variant="text">
                 <v-icon
                   align-tabs="center"
                   color="#304FFE"
@@ -43,7 +45,25 @@
   </div>
 </template>
 <script>
+import axios from "../../stores/axiosHttp"
 export default {
   props: ["majors"],
+  data(){
+    return{
+      id: 1
+    }
+  },
+  methods:{
+    addFovMajorPost(id){
+      console.log(id)
+      axios.post("auth/favoriteUniversityPost",{"university_post_id": id})
+      .then(response=>{
+        console.log(response.data)
+      })
+      .catch(error=>{
+        console.log(error.message)
+      })
+    }
+  }
 };
 </script>

@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import { getCookie } from "@/stores/cookie.js";
+import { getCookie } from "@/stores/cookie.js";
 // import { decrypt } from "@/stores/decrypt";
 
 const axiosHttp = axios.create({
@@ -7,7 +7,7 @@ const axiosHttp = axios.create({
 })
 axiosHttp.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem('myToken');
+      const token = getCookie('myToken');
       if (token) {
          config.headers.Authorization = `Bearer ${token}`
         } else {
