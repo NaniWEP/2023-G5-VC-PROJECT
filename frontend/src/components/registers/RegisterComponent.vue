@@ -157,7 +157,6 @@
 <script>
 import "@mdi/font/css/materialdesignicons.css";
 import axios from "@/stores/axiosHttp";
-import encrypt from "@/stores/encrypt";
 import { setCookie } from "@/stores/cookie.js";
 export default {
   data: () => ({
@@ -274,9 +273,9 @@ export default {
             .then((response) => {
               console.log(response.data);
               if (response.data.success) {
-                let encryptToken = encrypt(response.data.token, "myToken");
+                let token = response.data.token;
 
-                setCookie("myToken", encryptToken, 1);
+                setCookie("myToken", token, 1);
                 setCookie("myId", response.data.data.id, 1);
                 
                 // send user to:
@@ -290,7 +289,7 @@ export default {
         this.emailError = error.response.data.message.email[0];
         this.toggle = false;
         this.email = "";
-        console.log(error.response.data.message.email[0]);
+        console.log(error.response);
       }
     },
   },

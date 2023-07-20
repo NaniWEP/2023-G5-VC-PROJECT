@@ -1,5 +1,5 @@
 <template>
-  <v-container id="{{id}}" class="container">
+  <v-container class="container">
     <v-row>
       <v-col cols="12" md="5">
         <v-card class="elevation-2">
@@ -89,22 +89,22 @@
 <script>
 import axios from "@/stores/axiosHttp";
 export default {
-  name: "UniversityDetail",
+  name: "MajorDetail",
+  props: ["id"],
+  components: {},
   data() {
     return {
       majorPost: {},
       major: {},
     };
   },
-  props: ["id"],
-  components: {},
   mounted() {
     axios
-      .get(`/university/majorPost/${this.id}`)
+      .get(`/university/majorPostDetail/${this.id}`)
       .then((response) => {
+        console.log(response);
         this.majorPost = response.data.data;
         this.major = this.majorPost.major;
-        console.log(this.majorPost);
       })
       .catch((error) => {
         console.log(error);

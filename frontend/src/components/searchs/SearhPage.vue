@@ -38,6 +38,9 @@ export default {
   mounted() {
     this.getDataFromDB();
   },
+  created(){
+    console.log(this.$route.query);
+  },
   methods: {
     getData(request) {
       this.request = request;

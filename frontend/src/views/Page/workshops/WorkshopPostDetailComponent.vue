@@ -14,7 +14,7 @@
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
               alt="student dp"
             />
-            <h4 class="text-center">{{university.name}}</h4>
+            <h4 class="text-center">{{ workshopPost.name }}</h4>
           </v-card-title>
           <v-card-text>
             <p class="mb-0">
@@ -29,41 +29,41 @@
         <v-card class="elevation-2">
           <v-card-title class="justify-center">
             <h3 class="mb-0">
-              <v-icon>mdi-account</v-icon>General Information About University
+              <v-icon>mdi-account</v-icon>General Information About Major
             </h3>
           </v-card-title>
           <v-card-text>
             <v-simple-table>
               <tbody>
                 <tr>
-                  <td>Username</td>
+                  <td>Major</td>
                   <td class="text-right">:</td>
-                  <td>{{university.name}}</td>
+                  <td>{{ workshopPost.name }}</td>
                 </tr>
                 <tr>
-                  <td>Contact By Email</td>
+                  <td>Major Price</td>
                   <td class="text-right">:</td>
-                  <td>{{university.email}}</td>
+                  <td>{{ workshopPost.date }}</td>
                 </tr>
                 <tr>
-                  <td>Phone Number</td>
+                  <td>Day start apply</td>
                   <td class="text-right">:</td>
-                  <td>{{university.phone}}</td>
+                  <td>{{ workshopPost.time }}</td>
                 </tr>
                 <tr>
-                  <td>Province/City</td>
+                  <td>Day start learn</td>
                   <td class="text-right">:</td>
-                  <td>{{university.province}}</td>
+                  <td>{{ workshopPost.organizer }}</td>
                 </tr>
                 <tr>
-                  <td>Location</td>
+                  <td>Duration</td>
                   <td class="text-right">:</td>
-                  <td>{{university.location}}</td>
+                  <td>{{ workshopPost.location }}</td>
                 </tr>
                 <tr>
                   <td>Website</td>
                   <td class="text-right">:</td>
-                  <td>{{university.website}}</td>
+                  <td>{{ workshopPost.contact }}</td>
                 </tr>
               </tbody>
             </v-simple-table>
@@ -78,7 +78,7 @@
           </v-card-title>
           <v-card-text>
             <p>
-              {{university.description}}
+              {{ workshopPost.description }}
             </p>
           </v-card-text>
         </v-card>
@@ -90,25 +90,24 @@
 import axios from "@/stores/axiosHttp";
 export default {
   name: "UniversityDetail",
-  data(){
-    return{
-      university: {}
-    }
+  data() {
+    return {
+      workshopPost: {},
+    };
   },
   props: ["id"],
-  components: {
-  },
-  mounted(){
+  components: {},
+  mounted() {
     axios
-    .get(`/university/university/${this.id}`)
-    .then(response => {
-      this.university = response.data.data;
-        console.log(response.data.data)
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  }
+      .get(`/workshop/workshopDetail/${this.id}`)
+      .then((response) => {
+        this.workshopPost = response.data.data;
+        console.log(this.workshopPost);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 };
 </script>
 
