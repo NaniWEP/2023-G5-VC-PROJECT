@@ -50,7 +50,7 @@ Route::prefix('/university')->group(function () {
     Route::get('/university/{id}', [UniversityController::class, 'show']);
     Route::get('/expirepost', [UniversityPostController::class,'getUnivertiesPostExprired']);
     Route::get('/majorPost', [UniversityPostController::class,'getMajoePost']);
-    Route::get('/majorPost/{id}', [UniversityPostController::class,'getMajoePostById']);
+    Route::get('/majorPostDetail/{id}', [UniversityPostController::class,'getMajorPostById']);
     Route::get('/newUpdate', [UniversityPostController::class,'getMajorLastUpdated']);
 });
 // Expired routes

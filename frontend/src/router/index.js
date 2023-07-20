@@ -65,8 +65,8 @@ const routes = [
   },
 
   {
-    path: '/university/majorPost/:id',
-    name: 'majorPost',
+    path: '/majorPostDetail/:id',
+    name: 'MajorDetail',
     component: MajorPostView,
     props: true
   },

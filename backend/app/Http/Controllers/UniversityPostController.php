@@ -42,7 +42,7 @@ class UniversityPostController extends Controller
         ],Response::HTTP_OK);//200
     }
 
-    public function getMajoePostById( string $id){
+    public function getMajorPostById( string $id){
         $majorPost = universityPost::find($id);
         $majorPost = new ShowMajorPostResource($majorPost);
         return response()->json([
