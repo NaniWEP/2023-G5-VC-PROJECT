@@ -90,14 +90,14 @@
 import axios from "@/stores/axiosHttp";
 export default {
   name: "UniversityDetail",
+  props: ["id"],
+  components: {},
   data() {
     return {
       majorPost: {},
       major: {},
     };
   },
-  props: ["id"],
-  components: {},
   mounted() {
     axios
       .get(`/university/majorPost/${this.id}`)

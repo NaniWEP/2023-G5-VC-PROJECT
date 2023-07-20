@@ -49,7 +49,7 @@ export default {
   },
   mounted() {
     axios
-      .get("/university")
+      .get("/university/showAllUniversity")
       .then((respone) => {
         this.universities = respone.data.data;
         console.log(respone.data.data);
@@ -61,6 +61,7 @@ export default {
       .get("/university/majorPost")
       .then((respone) => {
         this.majors = respone.data.data;
+        console.log(this.majors)
       })
       .catch((err) => {
         return err;
