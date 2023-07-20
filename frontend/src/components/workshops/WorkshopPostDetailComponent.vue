@@ -1,62 +1,69 @@
 <template>
-  <div id="body">
-    <DashboardComponent></DashboardComponent>
-    <v-card class="ml-8 mt-5 mr-8 mb-3 bg-grey-lighten-2 p-10">
-      <h1 class="text-light-green-accent-4 ml-10">Profile Detail</h1>
-    </v-card>
-    <v-container class="container">
+  <v-container id="{{id}}" class="container">
     <v-row>
       <v-col cols="12" md="5">
         <v-card class="elevation-2">
+          <v-btn class="ma-2" color="red-darken-1" to="/universityPage">
+            <v-icon start icon="mdi-arrow-left"></v-icon>
+            Back
+          </v-btn>
+
           <v-card-title class="justify-center">
             <v-img
               class="profile_img"
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
               alt="student dp"
             />
-            <h4 class="text-center">Phearom</h4>
+            <h4 class="text-center">{{ workshopPost.name }}</h4>
           </v-card-title>
+          <v-card-text>
+            <p class="mb-0">
+              <strong class="pr-1">Student ID:</strong>321000001
+            </p>
+            <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
+            <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
+          </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="12" md="7">
         <v-card class="elevation-2">
           <v-card-title class="justify-center">
             <h3 class="mb-0">
-              <v-icon>mdi-account</v-icon>General Information
+              <v-icon>mdi-account</v-icon>General Information About Major
             </h3>
           </v-card-title>
           <v-card-text>
             <v-simple-table>
               <tbody>
                 <tr>
-                  <td>Username</td>
+                  <td>Major</td>
                   <td class="text-right">:</td>
-                  <td>Phearom</td>
+                  <td>{{ workshopPost.name }}</td>
                 </tr>
                 <tr>
-                  <td>Contact By Email</td>
+                  <td>Major Price</td>
                   <td class="text-right">:</td>
-                  <td>ggg</td>
+                  <td>{{ workshopPost.date }}</td>
                 </tr>
                 <tr>
-                  <td>Phone Number</td>
+                  <td>Day start apply</td>
                   <td class="text-right">:</td>
-                  <td>ggg</td>
+                  <td>{{ workshopPost.time }}</td>
                 </tr>
                 <tr>
-                  <td>Province/City</td>
+                  <td>Day start learn</td>
                   <td class="text-right">:</td>
-                  <td>ggg</td>
+                  <td>{{ workshopPost.organizer }}</td>
                 </tr>
                 <tr>
-                  <td>Location</td>
+                  <td>Duration</td>
                   <td class="text-right">:</td>
-                  <td>ggg</td>
+                  <td>{{ workshopPost.location }}</td>
                 </tr>
                 <tr>
                   <td>Website</td>
                   <td class="text-right">:</td>
-                  <td>ggg</td>
+                  <td>{{ workshopPost.contact }}</td>
                 </tr>
               </tbody>
             </v-simple-table>
@@ -71,22 +78,35 @@
           </v-card-title>
           <v-card-text>
             <p>
-              ggg
+              {{ workshopPost.description }}
             </p>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
   </v-container>
-  </div>
 </template>
 <script>
-import DashboardComponent from "./DashboardView.vue"
+import axios from "@/stores/axiosHttp";
 export default {
   name: "UniversityDetail",
+  data() {
+    return {
+      workshopPost: {},
+    };
+  },
   props: ["id"],
-  components: {
-    DashboardComponent
+  components: {},
+  mounted() {
+    axios
+      .get(`/workshop/workshopDetail/${this.id}`)
+      .then((response) => {
+        this.workshopPost = response.data.data;
+        console.log(this.workshopPost);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>

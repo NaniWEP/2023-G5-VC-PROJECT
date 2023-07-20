@@ -19,7 +19,7 @@
         </div>
         <div class="action">
           <h3><v-icon> mdi-currency-usd</v-icon> {{ major.price }}/year</h3>
-          <h3> <v-icon> mdi-clock-time-eight-outline</v-icon> {{ major.duration }} year</h3>
+          <h3> <v-icon> mdi-clock-time-eight-outline</v-icon> {{ major.year_duration }} year</h3>
         </div>
       </v-card-text>
       <v-card-actions>
@@ -46,15 +46,8 @@
 <script>
 export default {
   props: ["major"],
-  methods: {
-    // show() {
-    //   console.log(this.majors);
-    // },
-  },
 };
 </script>
-
-
 <style scoped>
 .card-body{
   justify-content: space-between;

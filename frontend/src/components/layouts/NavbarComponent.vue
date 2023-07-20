@@ -51,11 +51,21 @@
         >SingOut</v-btn
       >
     </v-list>
+    <router-link to="/studentDetail" v-if="isLoggedIn == true"
+      ><v-avatar size="65" @click="signOut"
+        ><v-img src="../../assets/user.png"></v-img>
+        <v-tooltip activator="parent" location="bottom"
+          >Profile
+        </v-tooltip></v-avatar
+      ></router-link
+    >
   </v-app-bar>
 </template>
 
 <script>
-import { getCookie } from "@/stores/cookie.js";
+import { getCookie, eraseCookie } from "@/stores/cookie.js";
+import axios from "@/stores/axiosHttp";
+import decrypt from "@/stores/decrypt";
 export default {
   name: "navbarView",
   data() {
@@ -70,8 +80,20 @@ export default {
         this.isLoggedIn = true;
       }
     },
-    signOut(){
-      console.log("Log out is work");
+    async signOut() {
+    const token = decrypt(getCookie('myToken'), "myToken")
+          console.log("Token here: " + token)
+
+      try {
+        await axios.post("/auth/logout")
+        .then((repsonse) => {
+          eraseCookie("myToken")
+          console.log(repsonse)
+        });
+        console.log("Log out is work");
+      } catch (error) {
+        console.log(error.response);
+      }
     },
   },
   created() {

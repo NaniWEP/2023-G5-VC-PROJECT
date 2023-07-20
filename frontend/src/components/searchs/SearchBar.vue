@@ -61,10 +61,11 @@
             :items="[
               'Wep Programming',
               'Computer Science',
-              'Engineering',
+              'Engineering ',
               'Law',
               'Graphic Design',
               'Accounting',
+              'Information technology (IT)'
             ]"
             color="#3737e5"
             class="mr-2"
@@ -132,14 +133,12 @@ export default {
         .get("/majors")
         .then((response) => {
           this.dataFromDB = response.data.data;
-          // console.log(this.dataFromDB);
         })
         .catch((error) => {
           console.log(error);
         });
     },
     getUnviersityAndMajorName() {
-      // console.log("This is data: ", this.dataFromDB);
       for (let data of this.dataFromDB) {
         this.universityNames.push(data.university.name);
         this.majorNames.push(data.title);
