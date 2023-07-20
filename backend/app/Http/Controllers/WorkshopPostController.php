@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\WorkshopPost;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\WorkshopResource;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,6 +17,7 @@ class WorkshopPostController extends Controller
     public function index()
     {
         $WorkshopPost = WorkshopPost::all();
+        $WorkshopPost = WorkshopResource::collection($WorkshopPost);
         return response()->json([
             'message' => 'Here all the WorkshopPost.',
             'data' => $WorkshopPost],
@@ -42,6 +44,19 @@ class WorkshopPostController extends Controller
     {
         $WorkshopPost = WorkshopPost::find($id);
         $WorkshopPost = new WorkshopResource($WorkshopPost);
+        return response()->json([
+            'success' => true,
+            'message' => 'Here all the WorkshopPost.',
+            'data' => $WorkshopPost],Response::HTTP_OK);//200
+    }
+    /**
+     * Display the specified resource.
+     */
+    public function selctByUserId()
+    {
+        $id = Auth::user()->id;
+        $WorkshopPost = WorkshopPost::where('user_id',$id)->get();
+        $WorkshopPost =WorkshopResource::collection($WorkshopPost);
         return response()->json([
             'success' => true,
             'message' => 'Here all the WorkshopPost.',

@@ -35,7 +35,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
         // university routes
         Route::resource('/university', UniversityController::class);
         Route::get('/myUniversity', [UniversityController::class, 'showMyUniversity']);
+        Route::prefix('/workshop')->group(function(){
+            Route::get('/selectByUser', [WorkshopPostController::class, 'selctByUserId']);
+        });
     });
+
 });
 
 Route::prefix('/university')->group(function () {
@@ -65,6 +69,8 @@ Route::prefix('/workshop')->group(function(){
     Route::get('/expirepost', [WorkshopPostController::class,'getWorkshopPostExprired']);
     Route::get('/newUpdate', [WorkshopPostController::class,'getWorkshopLastUpdated']);
     Route::get('/workshopPost', [WorkshopPostController::class, 'workshopPost']);
+    Route::get('/', [WorkshopPostController::class, 'index']);
+    Route::get('/{id}', [WorkshopPostController::class, 'selctByUserId']);
 });
 
 
