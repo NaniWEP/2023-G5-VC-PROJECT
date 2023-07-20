@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FavoriteWorkshopPostController;
 use App\Http\Controllers\MajorController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchoolManagerController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\WorkshopPostController;
 use App\Models\WorkshopPost;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\UniversityPostController;
+use App\Models\FavoriteWorkshopPost;
 use App\Models\University;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Route;
@@ -49,6 +51,7 @@ Route::prefix('/university')->group(function () {
 // Expired routes
 Route::prefix('/workshop')->group(function(){
     Route::get('/expirepost', [WorkshopPostController::class,'getWorkshopPostExprired']);
+    Route::post('/favorites',[FavoriteWorkshopPostController::class,'store']);
 });
 // Role routes
 Route::resource('/role', RoleController::class);
