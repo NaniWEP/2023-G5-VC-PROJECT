@@ -73,7 +73,16 @@ export default {
     };
   },
   methods: {
-    
+    addFovMajorPost(id){
+      console.log(id)
+      axios.post("auth/workshop/favorite",{"workshop_post_id": id})
+      .then(response=>{
+        console.log(response.data)
+      })
+      .catch(error=>{
+        console.log(error.message)
+      })
+    }
   },
 };
 </script>
