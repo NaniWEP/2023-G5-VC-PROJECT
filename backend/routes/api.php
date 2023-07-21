@@ -41,6 +41,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::prefix('/workshop')->group(function(){
             Route::get('/selectByUser', [WorkshopPostController::class, 'selctByUserId']);
         });
+        Route::prefix('/workshop')->group(function(){
+            Route::post('/favorite',[FavoriteWorkshopPostController::class,'store']);
+            Route::get('/favoriteList',[FavoriteWorkshopPostController::class,'getFavorite']);
+        });
         Route::post('/favoriteUniversityPost', [FavoriteUniversityPostController::class, 'store']);
     });
 

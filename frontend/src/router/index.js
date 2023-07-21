@@ -17,8 +17,6 @@ import ChartView from "../views/Page/dashboards/managers/charts/ChartView.vue"
 import PostView from "../views/Page/dashboards/managers/posts/PostView.vue"
 import MajorView from "../views/Page/dashboards/managers/majors/MajorView.vue"
 import ExpirationView from "../views/Page/dashboards/managers/expirations/ExpirationView.vue"
-import PopularMajorView  from '../views/Page/homes/PopularMajorView'
-// import RegisterWorkshop from '../views/Page/workshops/formregisterWorkshop/FormRegisterWorkshopComponent.vue'
 
 const routes = [
   {
@@ -126,17 +124,7 @@ const routes = [
     path: '/expiration', 
     name: 'expiration',
     component: ExpirationView  
-  },   
-  { 
-    path: '/popularMajor',
-    name: 'popularMajor',
-    component: PopularMajorView  
-  }, 
-  // {
-  //   path: '/registerWorkshop',
-  //   name: 'registerWorkshop',
-  //   component: RegisterWorkshop
-  // }
+  },
 ]
 
 
