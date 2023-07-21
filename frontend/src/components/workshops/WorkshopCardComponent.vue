@@ -3,7 +3,7 @@
     <v-row>
       <v-col
         v-for="(workshop, index) of workshops"
-        :key="workshop"
+        :key="index"
         :id="workshop.id"
         class="d-flex justift-center align-center"
         cols="4"
@@ -22,7 +22,7 @@
 
             <v-card-actions>
               <v-btn
-                :to="`workshopDetail/${index + 1}`"
+                :to="`workshopDetail/${workshop.id}`"
                 :id="$route.params.index"
                 style="color: rgba(46, 46, 255, 0.79); padding: 0 20px"
                 variant="text"
@@ -73,23 +73,16 @@ export default {
     };
   },
   methods: {
-    // addFavorite(id) {
-    //   for (let workshop of this.workshops) {
-    //     if (id === workshop.id) {
-    //       workshop.isFavorite = !workshop.isFavorite;
-    //       break;
-    //     }
-    //   }
-    // },
-    saveFavorite(majorId) {
-      axios.post('/workshop/favorites', {
-        major_id: majorId,
-      }).then((response) => {
-        console.log('Favorite saved!',response);
-      }).catch((error) => {
-        console.error(error);
-      });
-    },
+    addFovMajorPost(id){
+      console.log(id)
+      axios.post("auth/workshop/favorite",{"workshop_post_id": id})
+      .then(response=>{
+        console.log(response.data)
+      })
+      .catch(error=>{
+        console.log(error.message)
+      })
+    }
   },
 };
 </script>

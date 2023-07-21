@@ -4,6 +4,7 @@
     <h1 class="text-center">WELLCOME BACK</h1>
     <v-form v-model="form" @submit.prevent="onSubmit">
       <v-text-field
+        v-if="errorMessage == null"
         v-model="email"
         :readonly="loading"
         :rules="emailRules"
@@ -12,11 +13,39 @@
         prepend-inner-icon="mdi-email-outline"
         label="Email"
       ></v-text-field>
+      <v-text-field
+        v-else
+        v-model="email"
+        :readonly="loading"
+        :rules="emailRules"
+        :error-messages="[errorMessage]"
+        class="mb-2 mt-3"
+        clearable
+        prepend-inner-icon="mdi-email-outline"
+        label="Email"
+      ></v-text-field>
 
       <v-text-field
+        v-if="errorMessage == null"
         v-model="password"
         :readonly="loading"
         :rules="[rules.required, rules.min]"
+        clearable
+        label="Password"
+        hint="At least 8 characters"
+        name="input-10-1"
+        placeholder="Enter your password"
+        :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+        :type="visible ? 'text' : 'password'"
+        @click:append-inner="visible = !visible"
+        prepend-inner-icon="mdi-lock-outline"
+      ></v-text-field>
+      <v-text-field
+        v-else
+        v-model="password"
+        :readonly="loading"
+        :rules="[rules.required, rules.min]"
+        :error-messages="[errorMessage]"
         clearable
         label="Password"
         hint="At least 8 characters"
@@ -56,6 +85,7 @@ export default {
   data: () => ({
     email: "",
     password: "",
+    errorMessage: null,
     loginInfo: null,
     form: false,
     loading: false,
@@ -84,33 +114,34 @@ export default {
     async login() {
       try {
         await axios
-          .post(
-            "/login",
-            {
-              email: this.email,
-              password: this.password,
-            }
-          )
+          .post("/login", {
+            email: this.email,
+            password: this.password,
+          })
           .then((response) => {
-            console.log(response.data);
+            console.log(response.data.data.role_type);
             if (response.data.success) {
+              console.log(response.data.data.id);
               setCookie("myToken", response.data.token, 1);
-              setCookie("myId", response.data.user.id, 1);
+              setCookie("myId", response.data.data.id, 1);
 
               // send user to
-              if (response.data.user.role_type == "user") {
+              if (response.data.data.role_type == "user") {
                 this.$router.push("/");
-              } else if (response.data.user.role_type == "manager") {
+              } else if (response.data.data.role_type == "manager") {
                 this.$router.push("/manager");
-              } else if (response.data.user.role_type == "admin") {
+              } else if (response.data.data.role_type == "admin") {
                 this.$router.push("/");
               }
             } else {
-              console.log(response.data);
+              console.log("NOOOOOO");
             }
           });
       } catch (error) {
-        console.log(error.message);
+        if (!error.response.data.success) {
+          this.errorMessage = "Incorrect email or password!";
+        }
+        console.log(error.response.data.success);
       }
     },
   },

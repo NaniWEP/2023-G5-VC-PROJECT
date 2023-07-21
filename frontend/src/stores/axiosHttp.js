@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { getCookie } from "@/stores/cookie.js";
-// import { decrypt } from "@/stores/decrypt";
 
 const axiosHttp = axios.create({
   baseURL: process.env.VUE_APP_API_URL

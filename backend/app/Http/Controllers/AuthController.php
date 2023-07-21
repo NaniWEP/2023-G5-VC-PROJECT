@@ -69,7 +69,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'success' => true,
-                'user' => $user,
+                'data' => $user,
                 'token' => $token,
                 'message' => 'Login successfully',
             ], Response::HTTP_OK); //200
@@ -90,7 +90,7 @@ class AuthController extends Controller
 
         return response()->json([
             'success' => true,
-            'user' => $user,
+            'data' => $user,
             'message' => 'Get user data successfully',
         ], Response::HTTP_OK); //200
     }

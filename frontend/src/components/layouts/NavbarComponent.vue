@@ -52,7 +52,7 @@
       >
     </v-list>
     <router-link to="/studentDetail" v-if="isLoggedIn == true"
-      ><v-avatar size="65" @click="signOut"
+      ><v-avatar size="65"
         ><v-img src="../../assets/user.png"></v-img>
         <v-tooltip activator="parent" location="bottom"
           >Profile
@@ -65,7 +65,6 @@
 <script>
 import { getCookie, eraseCookie } from "@/stores/cookie.js";
 import axios from "@/stores/axiosHttp";
-import decrypt from "@/stores/decrypt";
 export default {
   name: "navbarView",
   data() {
@@ -81,13 +80,15 @@ export default {
       }
     },
     async signOut() {
-    const token = decrypt(getCookie('myToken'), "myToken")
+    this.isLoggedIn = false;
+    const token = getCookie('myToken')
           console.log("Token here: " + token)
 
       try {
         await axios.post("/auth/logout")
         .then((repsonse) => {
           eraseCookie("myToken")
+          eraseCookie("myId")
           console.log(repsonse)
         });
         console.log("Log out is work");
