@@ -42,6 +42,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/selectByUser', [WorkshopPostController::class, 'selctByUserId']);
         });
         Route::post('/favoriteUniversityPost', [FavoriteUniversityPostController::class, 'store']);
+        Route::delete('/favoriteUniversityPost/{id}', [FavoriteUniversityPostController::class, 'destroy']);
     });
 
 });
