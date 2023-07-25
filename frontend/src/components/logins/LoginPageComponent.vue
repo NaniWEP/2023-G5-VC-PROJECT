@@ -2,6 +2,13 @@
   <v-card class="card px-6 py-3">
     <v-img class="image" src="../../assets/login/logIN.png"></v-img>
     <h1 class="text-center">WELLCOME BACK</h1>
+    <div class="google">
+
+      <GoogleAuth class="googleLog"/>
+      </div>
+      <div class="line">
+          <hr>
+      </div>
     <v-form v-model="form" @submit.prevent="onSubmit">
       <v-text-field
         v-if="errorMessage == null"
@@ -79,9 +86,11 @@
 
 <script>
 import "@mdi/font/css/materialdesignicons.css";
+import GoogleAuth from "../google/GoogleAuth.vue"
 import axios from "@/stores/axiosHttp";
 import { setCookie } from "@/stores/cookie.js";
 export default {
+  components: {GoogleAuth},
   data: () => ({
     email: "",
     password: "",
@@ -163,5 +172,22 @@ p {
   border-radius: 10px;
   color: #ffff;
   background-color: #ffffff05;
+}
+.google{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.googleLog{
+  width: 90%;
+}
+
+hr {
+    border: none;
+    border-top: 3px double #ffffff;
+    text-align: center;
+    height: 5px;
 }
 </style>

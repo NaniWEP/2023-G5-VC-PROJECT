@@ -7,10 +7,10 @@
           <v-card-title class="justify-center">
             <v-img
               class="profile_img"
-              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+              :src="user.picture"
               alt="student dp"
             />
-            <h3 class="text-center">{{ user.first_name + user.last_name }}</h3>
+            <h3 class="text-center">{{ user.first_name + " " +user.last_name }}</h3>
           </v-card-title>
         </v-card>
       </v-col>
