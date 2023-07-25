@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
+            $table->string('gender');
             $table->date('date_of_birth');
             $table->string('province');
             $table->unsignedBigInteger('role_id');
@@ -24,11 +25,7 @@ return new class extends Migration
             ->references('id')
             ->on('roles')
             ->onDelete('cascade');
-            $table->unsignedBigInteger('profile_id')->nullable();
-            $table->foreign('profile_id')
-            ->references('id')
-            ->on('media')
-            ->onDelete('cascade');
+            $table->string('profile')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -4,7 +4,7 @@
   <!--  -->
 
   <!-- First form -->
-  <v-form v-if="!toggle" v-model="valid" class="form bg-grey-lighten-2">
+  <v-form v-if="!toggle" v-model="valid" class="form">
     <v-container class="container">
       <h1 class="text-center">Sign Up</h1>
       <div class="namefilled">
@@ -95,7 +95,7 @@
 
   <!-- second form -->
 
-  <v-form v-else v-model="valid" class="form py-3 bg-grey-lighten-3">
+  <v-form v-else v-model="valid" class="form py-3">
     <v-container class="container">
       <h1 class="mb-10">More Information</h1>
       <div class="inputFiled w-100">
@@ -286,7 +286,7 @@ export default {
             });
         }
       } catch (error) {
-        this.emailError = error.response.data.message.email[0];
+        this.emailError = error.response.data.message.email;
         this.toggle = false;
         this.email = "";
         console.log(error.response);
@@ -315,6 +315,8 @@ export default {
 .form {
   width: 40%;
   border-radius: 10px;
+  color: #ffff;
+  background-color: #ffffff05;
 }
 
 .container {
@@ -324,4 +326,5 @@ export default {
   flex-direction: column;
   padding: 10px;
 }
+
 </style>

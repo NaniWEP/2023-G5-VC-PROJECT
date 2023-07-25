@@ -24,35 +24,27 @@
               <v-btn
                 :to="`workshopDetail/${workshop.id}`"
                 :id="$route.params.index"
-                style="color: rgba(46, 46, 255, 0.79); padding: 0 20px"
-                variant="text"
+                class="actionBtn"
+                variant="outlined"
               >
                 See more
               </v-btn>
               <v-btn
                 v-if="isFavorite"
                 @click="saveFavorite(workshop.id)"
-                style="color: #304ffe; padding: 0 20px"
-                variant="text"
+                prepend-icon="mdi-heart-outline"
+                variant="outlined"
+                style="color: #fffff;background-color: #304FFE ;padding: 0 20px"
               >
-                <v-icon
-                  align="center"
-                  color="#304FFE"
-                  icon="mdi-heart"
-                ></v-icon>
                 Add to Favorites
               </v-btn>
               <v-btn
                 v-else
                 @click="saveFavorite(workshop.id)"
-                style="color: #304ffe; padding: 0 20px"
-                variant="text"
+                prepend-icon="mdi-heart-outline"
+                class="actionBtn"
+                variant="outlined"
               >
-                <v-icon
-                  align="center"
-                  color="#304FFE"
-                  icon="mdi-heart"
-                ></v-icon>
                 Favorited
               </v-btn>
             </v-card-actions>
@@ -87,4 +79,14 @@ export default {
 };
 </script>
 <style scoped>
+.actionBtn:hover{
+  background-color: #304ffe;
+  color : #fff;
+  transition: 800ms;
+  outline: 1px solid #304ffe;
+}
+.actionBtn{
+  padding: 0 20px;
+  color: #304ffe;
+}
 </style>

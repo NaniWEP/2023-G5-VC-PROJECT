@@ -35,6 +35,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         // Log out route
         Route::post('/logout', [AuthController::class, 'logout']);
 
+        // update user route
+        Route::put('/update/{id}', [AuthController::class, 'updateUser']);
+
         // university routes
         Route::resource('/university', UniversityController::class);
         Route::get('/myUniversity', [UniversityController::class, 'showMyUniversity']);

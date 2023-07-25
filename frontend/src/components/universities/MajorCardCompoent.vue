@@ -22,20 +22,18 @@
             <v-card-actions>
               <v-btn
                 :to="`/majorPostDetail/${major.id}`"
-                style="color: #304ffe; padding: 0 20px"
-                variant="text"
+                class="actionBtn"
+                variant="outlined"
               >
                 See more
               </v-btn>
-              <v-btn style="color: #304ffe; padding: 0 20px" 
-                  variant="text">
-                <v-icon
-                  @click="toggleFavorite(major.id)"
-                  align-tabs="center"
-                  :style="getIconStyle(major.id)" 
-                  icon="mdi-heart"
-                ></v-icon>
-                 FAVORITE
+              <v-btn 
+              prepend-icon="mdi-heart-outline"
+              class="actionBtn"
+              variant="outlined"
+              @click="toggleFavorite(major.id)"
+              >
+              FAVORITE
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -111,3 +109,15 @@ export default {
   }
 };
 </script>
+<style scoped>
+.actionBtn:hover{
+  background-color: #304ffe;
+  color : #fff;
+  transition: 800ms;
+  outline: 1px solid #304ffe;
+}
+.actionBtn{
+  padding: 0 20px;
+  color: #304ffe;
+}
+</style>

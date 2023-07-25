@@ -15,8 +15,8 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon to="/">
-        <v-icon>mdi-home</v-icon>
+      <v-btn prepend-icon="mdi-home" class="homeBtn" to="/">
+        Home
       </v-btn>
     </v-app-bar>
   </section>
@@ -45,5 +45,14 @@ export default {
 .navbar-title {
   font-size: 24px;
   margin-left: 20px;
+}
+.homeBtn{
+  outline: 1px solid black;
+}
+.homeBtn:hover {
+  background-color: #304ffe;
+  color : #ffff;
+  transition: 800ms;
+  outline: 1px solid #304ffe;
 }
 </style>

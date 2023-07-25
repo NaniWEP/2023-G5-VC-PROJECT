@@ -35,7 +35,7 @@ class GetUserRequest extends FormRequest
             'date_of_birth' => 'required',
             'province' => 'required',
             'role_id' => 'required',
-            'profile_id' => 'required',
+            'profile' => 'required|null',
         ];
     }
 }

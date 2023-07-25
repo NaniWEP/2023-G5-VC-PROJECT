@@ -23,6 +23,7 @@ class AuthController extends Controller
                'last_name' => $request -> last_name,
                'email' => $request -> email,
                'password' => Hash::make($request -> password),
+               'gender' => $request -> gender,
                'date_of_birth' => $request -> date_of_birth,
                'province' => $request -> province,
                'role_id' => $request -> role_id,
@@ -37,6 +38,25 @@ class AuthController extends Controller
                 'token' => $token
             ]);
 
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::find($id);
+        
+        $user->update([
+            'first_name' => $request -> first_name,
+            'last_name' => $request -> last_name,
+            'email' => $request -> email,
+            'password' => $request -> password,
+            'date_of_birth' => $request -> date_of_birth,
+            'province' => $request -> province,
+            'role_id' => $request -> role_id,
+        ]);
+        return response()->json([
+            'massage' => 'user updated successfully',
+            'data' => $user
+        ], Response::HTTP_OK);//200
     }
 
     public function login(AuthLoginRequest $request)

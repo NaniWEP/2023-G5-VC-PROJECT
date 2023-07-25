@@ -12,11 +12,6 @@ class Media extends Model
     [
         'name',
     ];
-
-    public function user() : HasMany 
-    {
-        return $this-> hasMany(User::class);
-    }
     public function universityPostMedia() : HasMany 
     {
         return $this-> hasMany(UniversityPostMedia::class);
