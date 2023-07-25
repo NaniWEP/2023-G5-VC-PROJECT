@@ -1,36 +1,46 @@
 <template>
   <v-list nav dense>
     <v-list-item-group>
-      <v-list-item :to="'/StudentDetail'">
-        <v-list-item-icon>
-          <v-icon size="32" icon="mdi-account"></v-icon>
-          <span>Doeur Diet</span>
-        </v-list-item-icon>
+      <v-list-item><h1>Dashboard</h1></v-list-item>
+      <v-list-item prepend-icon="mdi-account-box" :to="'/StudentDetail'">
+          Profile
       </v-list-item>
 
-      <v-list-item :to="{ path: '/favoritePage' }">
-        <v-list-item-icon>
-          <v-icon size="32">mdi-heart</v-icon>
-          <span>Favorite</span>
-        </v-list-item-icon>
+      <v-list-item prepend-icon="mdi-heart-box" :to="{ path: '/favoritePage' }">
+          Favorite
       </v-list-item>
 
-      <v-list-item :to="{ path: '/map' }">
-        <v-list-item-icon>
-          <v-icon size="32">mdi-map</v-icon>
-          <span>Map</span>
-        </v-list-item-icon>
+      <v-list-item prepend-icon="mdi-map-marker-account" :to="{ path: '/map' }">
+          My location
       </v-list-item>
 
-      <v-list-item :to="{ path: '/logOut' }">
-        <v-list-item-icon>
-          <v-icon size="32">mdi-logout</v-icon>
-          <span>Sign out</span>
-        </v-list-item-icon>
+      <v-list-item prepend-icon="mdi-logout" @click="logOut">
+          LogOut
       </v-list-item>
     </v-list-item-group>
   </v-list>
 </template>
+<script>
+import { eraseCookie } from "@/stores/cookie.js";
+import axios from "@/stores/axiosHttp";
+export default {
+  setup() {},
+  methods:{
+    async logOut() {
 
+      try {
+        await axios.post("/auth/logout")
+        .then(() => {
+          eraseCookie("myToken")
+          eraseCookie("myId")
+          this.$router.push("/");
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  }
+}
+</script>
 <style scoped>
 </style>

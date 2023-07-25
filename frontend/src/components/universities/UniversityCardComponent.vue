@@ -21,25 +21,22 @@
 
             <v-card-actions>
               <v-btn
+                class="actionBtn"
                 :to="`/universityDetail/${university.id}`"
                 :id="$route.params.index"
-                style="color: #304ffe; padding: 0 20px"
-                variant="text"
+                variant="outlined"
+                
               >
                 See more
               </v-btn>
-              <v-btn
-                :id="$route.params.index"
-                style="color: #304ffe; padding: 0 20px"
-                variant="text"
-                @click="alertFavorite"
+              <v-btn 
+              :id="$route.params.index"
+              prepend-icon="mdi-heart-outline"
+              class="actionBtn"
+              variant="outlined"
+              @click="alertFavorite"
               >
-                <v-icon
-                  align-tabs="center"
-                  color="#304FFE"
-                  icon="mdi-heart"
-                ></v-icon>
-                Favorite
+              favorite
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -76,7 +73,17 @@ export default {
     },
   },
 };
-
-
-
 </script>
+
+<style scoped>
+.actionBtn:hover{
+  background-color: #304ffe;
+  color : #fff;
+  transition: 800ms;
+  outline: 1px solid #304ffe;
+}
+.actionBtn{
+  padding: 0 20px;
+  color: #304ffe;
+}
+</style>

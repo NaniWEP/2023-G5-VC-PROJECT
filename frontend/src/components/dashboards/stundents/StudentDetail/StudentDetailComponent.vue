@@ -1,5 +1,5 @@
 <template>
-  <v-container class="container">
+  <v-container v-if="user !== null" class="container">
     <SideNavBar></SideNavBar>
     <v-row>
       <v-col cols="12" md="3">
@@ -10,15 +10,8 @@
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
               alt="student dp"
             />
-            <h3 class="text-center">Doeur Diet</h3>
+            <h3 class="text-center">{{ user.first_name + user.last_name }}</h3>
           </v-card-title>
-          <v-card-text>
-            <p class="mb-0">
-              <strong class="pr-1">Student ID:</strong>321000001
-            </p>
-            <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
-            <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
-          </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="12" md="8">
@@ -32,23 +25,21 @@
                 <v-row>
                   <v-col cols="12" sm="6">
                     <v-text-field
-                      label="firstName*"
                       required
-                      v-model="firstname"
+                      v-model="user.first_name"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6">
                     <v-text-field
-                      label="LastName*"
                       required
-                      v-model="lastname"
+                      v-model="user.last_name"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6">
                     <v-autocomplete
-                      :items="['M', 'F']"
+                      :items="['Male', 'Female']"
                       label="Gender*"
-                      v-model="gender"
+                      v-model="user.gender"
                     ></v-autocomplete>
                   </v-col>
                   <v-col cols="12" sm="6">
@@ -56,22 +47,14 @@
                       label="Date of birth*"
                       type="date"
                       required
-                      v-model="dateOfBirth"
+                      v-model="user.date_of_birth"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6">
                     <v-text-field
                       label="Email*"
                       required
-                      v-model="gmail"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6">
-                    <v-text-field
-                      label="Phone number*"
-                      type="number"
-                      required
-                      v-model="phoneNumber"
+                      v-model="user.email"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6">
@@ -89,17 +72,13 @@
                        'SeamReap',
                        ]"
                       required
-                      v-model="province"
+                      v-model="user.province"
                     ></v-autocomplete>
                   </v-col>
-                  <v-col cols="12" sm="6">
-                    <v-text-field label="Image*" type="file" required></v-text-field>
-                  </v-col>
-                  <v-btn color="#3737e5" variant="text" @click="Save">Save</v-btn>            
+                  <v-btn prepend-icon="mdi-content-save-edit" class="saveBtn" variant="outlined" @click="updateUser">Save</v-btn>            
                 </v-row>
               </v-container>
             </v-simple-table>
-            <dialog-form></dialog-form>
           </v-card-text>
         </v-card>
         <v-card class="elevation-2 mt-4">
@@ -123,29 +102,50 @@
 </template>
 
 <script>
-// import DialogForm from "./DialogFormComponent.vue";
+import axios from "@/stores/axiosHttp";
 import SideNavBar from "../studentLayouts/SideNavBar.vue";
 export default {
-  components: {
-    SideNavBar,
-    // DialogForm,
-  },
   data(){
     return{     
-      users:[
-      {
-        id:1,
-        firstname:"Thana",
-        lastname:"Chhoeun",
-        gender:"Male",
-        dateOfBirth:"1-1-1111",
-        gmail:"thana@gmail.com",
-        phoneNumber:"094839243",
-        province:"KPT"
+        user: {},
       }
-      ],
+    },                 
+  components: {
+    SideNavBar,
+  },
+  methods:{
+    getUser(){
+      axios
+      .get(`/auth/getUser`)
+      .then((response) => {
+        console.log(response.data.data);
+        this.user = response.data.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
+    updateUser(){
+      console.log(this.user.date_of_birth)
+      axios
+      .put(`/auth/update/`+ this.user.id, this.user)
+      .then((response)=>{
+        console.log(response.data);
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
     }
   },
+  show(){
+  },
+  onMounted(){
+  },
+  mounted(){
+    this.getUser()
+  },
+  created(){
+  }
 
 };
 </script>
@@ -184,15 +184,17 @@ img {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   padding: 30px;
   border-radius: 10px;
-  border: 2px solid #64dd17;
+  border: 2px solid #3737e5;
 }
 
 .text-center {
-  background-color: #64dd17;
+  background-color: #3737e5;
+  color: white;
+  border-radius: 5px;
 }
 
 .profile_img {
-  border: 3px solid #64dd17;
+  border: 3px solid #3737e5;
   border-radius: 50%;
   padding: 24px;
 }
@@ -223,5 +225,16 @@ tr:hover {
 
 .text-right {
   text-align: right;
+}
+
+.saveBtn{
+  outline: 1px solid #3737e5;
+  color: #3737e5;
+}
+.saveBtn:hover{
+  background-color: #304ffe;
+  color : #ffff;
+  transition: 800ms;
+  outline: 1px solid #304ffe;
 }
 </style>

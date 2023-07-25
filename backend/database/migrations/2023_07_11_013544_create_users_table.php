@@ -16,19 +16,16 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->string('password');
-            $table->date('date_of_birth');
-            $table->string('province');
+            $table->string('password')->nullable();
+            $table->string('gender')->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->string('province')->nullable();
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')
             ->references('id')
             ->on('roles')
             ->onDelete('cascade');
-            $table->unsignedBigInteger('profile_id')->nullable();
-            $table->foreign('profile_id')
-            ->references('id')
-            ->on('media')
-            ->onDelete('cascade');
+            $table->string('profile')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

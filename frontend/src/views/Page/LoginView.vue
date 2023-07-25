@@ -1,5 +1,7 @@
 <template>
+<v-main class="loginMain">
     <LoginPage></LoginPage>
+  </v-main>
 </template>
 
 <script>
@@ -12,5 +14,11 @@ export default {
 </script>
 
 <style scoped>
-
+.loginMain{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url("../../assets/login/World Map.svg");
+}
 </style>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FavoriteUniversityPostController;
 use App\Http\Controllers\FavoriteWorkshopPostController;
 use App\Http\Controllers\MajorController;
 use App\Http\Controllers\WorshopRegistrationController;
@@ -35,6 +36,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         // Log out route
         Route::post('/logout', [AuthController::class, 'logout']);
 
+        // update user route
+        Route::put('/update/{id}', [AuthController::class, 'updateUser']);
+
         // university routes
         Route::resource('/university', UniversityController::class);
         Route::get('/myUniversity', [UniversityController::class, 'showMyUniversity']);
@@ -42,6 +46,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/selectByUser', [WorkshopPostController::class, 'selctByUserId']);
             Route::post('/register', [WorshopRegistrationController::class, 'store']);
         });
+        Route::prefix('/workshop')->group(function(){
+            Route::post('/favorite',[FavoriteWorkshopPostController::class,'store']);
+            Route::get('/favoriteList',[FavoriteWorkshopPostController::class,'getFavorite']);
+        });
+        Route::post('/favoriteUniversityPost', [FavoriteUniversityPostController::class, 'store']);
+        Route::delete('/favoriteUniversityPost/{id}', [FavoriteUniversityPostController::class, 'destroy']);
     });
 
 });

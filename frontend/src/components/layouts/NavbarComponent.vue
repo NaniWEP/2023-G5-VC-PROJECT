@@ -27,45 +27,53 @@
         }}</v-list-item-title>
       </v-list-item>
       <v-btn
+        prepend-icon="mdi-login"
         v-if="isLoggedIn == false"
         elevation="2"
         class="mr-2 navButtom"
         to="/login"
         elevated
-        >SignIn</v-btn
+        >Login</v-btn
       >
       <v-btn
+        prepend-icon="mdi-account-plus-outline"
         v-if="isLoggedIn == false"
         elevation="2"
         class="navButtom"
         to="/register"
         elevated
-        >SingUp</v-btn
+        >Register</v-btn
+        > 
+      </v-list>
+    <div class="text-center">
+      <v-menu
+      open-on-hover
       >
-      <v-btn
-        v-if="isLoggedIn == true"
-        elevation="2"
-        class="navButtom"
-        @click="signOut"
-        elevated
-        >SingOut</v-btn
-      >
-    </v-list>
-    <router-link to="/studentDetail" v-if="isLoggedIn == true"
-      ><v-avatar size="65" @click="signOut"
-        ><v-img src="../../assets/user.png"></v-img>
-        <v-tooltip activator="parent" location="bottom"
-          >Profile
-        </v-tooltip></v-avatar
-      ></router-link
-    >
+      <template v-slot:activator="{ props }">
+          <v-avatar size="65" v-if="isLoggedIn == true"
+            v-bind="props"
+            ><v-img src="../../assets/user.png"></v-img>
+            </v-avatar>
+      </template>
+      
+      <v-list>
+        
+        <v-list-item to="/studentDetail">
+            <v-list-item-title class="pfBtn"><v-icon>mdi-account-check</v-icon> Your Profile</v-list-item-title>
+        </v-list-item>
+        <v-list-item
+          @click="logOut">
+          <v-list-item-title class="pfBtn"><v-icon>mdi-logout</v-icon>LogOut</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+  </div>
   </v-app-bar>
 </template>
 
 <script>
 import { getCookie, eraseCookie } from "@/stores/cookie.js";
 import axios from "@/stores/axiosHttp";
-import decrypt from "@/stores/decrypt";
 export default {
   name: "navbarView",
   data() {
@@ -80,18 +88,16 @@ export default {
         this.isLoggedIn = true;
       }
     },
-    async signOut() {
-    const token = decrypt(getCookie('myToken'), "myToken")
-          console.log("Token here: " + token)
+    async logOut() {
+    this.isLoggedIn = false;
       try {
         await axios.post("/auth/logout")
-        .then((repsonse) => {
+        .then(() => {
           eraseCookie("myToken")
-          console.log(repsonse)
+          eraseCookie("myId")
         });
-        console.log("Log out is work");
       } catch (error) {
-        console.log(error.response);
+        console.log(error);
       }
     },
   },
@@ -102,6 +108,9 @@ export default {
 </script>
 
 <style scoped>
+.nav{
+  border-radius: 5px;
+}
 .nav:hover {
   background: #3737e5;
   color: #ffffff;
@@ -110,10 +119,21 @@ export default {
 .navButtom {
   background-color: #3737e5;
   color: #ffffff;
+  border-radius: 5px;
 }
 .navButtom:hover {
   background: #ffffff;
   color: #000000;
+  transition: 800ms;
+}
+.pfBtn{
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 5px;
+}
+.pfBtn:hover{
+  background: #3737e5;
+  color : #FFFFFF;
   transition: 800ms;
 }
 </style>
