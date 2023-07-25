@@ -28,9 +28,10 @@
               >
                 See more
               </v-btn>
-              <v-btn style="color: #304ffe; padding: 0 20px" variant="text">
+              <v-btn style="color: #304ffe; padding: 0 20px" 
+              @click="toggleFavorite(major.id)"
+              variant="text">
                 <v-icon
-                  @click="toggleFavorite(major.id)"
                   align-tabs="center"
                   :style="getIconStyle(major.id)"
                   icon="mdi-heart"
@@ -42,6 +43,7 @@
         </v-list>
       </v-col>
     </v-row>
+    <v-pagination :length="4" rounded="circle" class="mb-8"></v-pagination>
   </div>
 </template>
 

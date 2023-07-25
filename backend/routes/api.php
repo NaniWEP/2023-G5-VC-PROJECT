@@ -58,9 +58,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
           // workshop routes
         Route::prefix('/workshop')->group(function(){
             // add favorite workshop
-            Route::post('/favorite',[FavoriteWorkshopPostController::class,'store']);
+            Route::post('/favoriteWorkshopPost',[FavoriteWorkshopPostController::class,'store']);
+            // delete favaite university post
+            Route::delete('/favoriteWorkshopPost/{workshop_post_id}', [FavoriteWorkshopPostController::class, 'destroy']);
             // get list of favorite workshop
-            Route::get('/favoriteList',[FavoriteWorkshopPostController::class,'getFavorite']);
+            Route::get('/getListOfFavrite',[FavoriteWorkshopPostController::class,'getListOfFavorite']);
             // get user id
             Route::get('/selectByUser', [WorkshopPostController::class, 'selctByUserId']);
         });
