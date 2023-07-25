@@ -83,7 +83,6 @@ export default {
     async signOut() {
     const token = decrypt(getCookie('myToken'), "myToken")
           console.log("Token here: " + token)
-
       try {
         await axios.post("/auth/logout")
         .then((repsonse) => {

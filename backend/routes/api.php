@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FavoriteWorkshopPostController;
 use App\Http\Controllers\MajorController;
+use App\Http\Controllers\WorshopRegistrationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchoolManagerController;
 use App\Http\Controllers\WorkshopPostController;
@@ -26,10 +27,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::prefix('/auth')->group(function () {
 
+    Route::prefix('/auth')->group(function () {
         // get user data route
-        Route::get('/getUser', [AuthController::class, 'getUser']);
+        Route::get('/getUser', [AuthController::class, 'olo']);
 
         // Log out route
         Route::post('/logout', [AuthController::class, 'logout']);
@@ -39,6 +40,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/myUniversity', [UniversityController::class, 'showMyUniversity']);
         Route::prefix('/workshop')->group(function(){
             Route::get('/selectByUser', [WorkshopPostController::class, 'selctByUserId']);
+            Route::post('/register', [WorshopRegistrationController::class, 'store']);
         });
     });
 
