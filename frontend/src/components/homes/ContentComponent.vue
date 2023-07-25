@@ -81,6 +81,7 @@
                   searchValue: searchValue,
                 },
               }"
+              prepend-icon="mdi-search-web"
               color="#3737e5"
               class="text-white"
               height="55"

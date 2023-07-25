@@ -33,7 +33,7 @@ class UniversityPostController extends Controller
     }
 
     public function getMajoePost(){
-        $majorPosts = universityPost::all();
+        $majorPosts = universityPost::where('status',1)->get();
         $majorPosts = ShowMajorPostResource::collection($majorPosts);
         return response()->json([
             'success' => true,

@@ -13,9 +13,9 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = 
+        $roles =
         [
-            ['role_type' => 'student'],
+            ['role_type' => 'user'],
             ['role_type' => 'manager'],
             ['role_type' => 'admin'],
         ];

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FavoriteUniversityPostController;
 use App\Http\Controllers\FavoriteWorkshopPostController;
 use App\Http\Controllers\MajorController;
+use App\Http\Controllers\WorshopRegistrationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchoolManagerController;
 use App\Http\Controllers\WorkshopPostController;
@@ -30,33 +31,37 @@ use Illuminate\Support\Facades\Route;
 // PRIVATE ROUTES
 // 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::prefix('/auth')->group(function () {
 
+    Route::prefix('/auth')->group(function () {
         // get user data route
-        Route::get('/getUser', [AuthController::class, 'getUser']);
+        Route::get('/getUser', [AuthController::class, 'olo']);
 
         // Log out route
         Route::post('/logout', [AuthController::class, 'logout']);
 
+        // update user route
+        Route::put('/update/{id}', [AuthController::class, 'updateUser']);
+
         // university routes
         Route::prefix('/university')->group(function(){
-            // 
+            // crud university
             Route::resource('/university', UniversityController::class);
-            // 
+            // add favorite university post
             Route::post('/favoriteUniversityPost', [FavoriteUniversityPostController::class, 'store']);
-            // 
+            // delete favaite university post
             Route::delete('/favoriteUniversityPost/{university_post_id}', [FavoriteUniversityPostController::class, 'destroy']);
-            // 
+            // get list of favrites
             Route::get('/getListOfFavrite',[FavoriteUniversityPostController::class, 'getListOfFavorite'] );
-            // 
+            // show university
             Route::get('/myUniversity', [UniversityController::class, 'showMyUniversity']);
         });
           // workshop routes
         Route::prefix('/workshop')->group(function(){
+            // add favorite workshop
             Route::post('/favorite',[FavoriteWorkshopPostController::class,'store']);
-            // 
+            // get list of favorite workshop
             Route::get('/favoriteList',[FavoriteWorkshopPostController::class,'getFavorite']);
-            // 
+            // get user id
             Route::get('/selectByUser', [WorkshopPostController::class, 'selctByUserId']);
         });
     });

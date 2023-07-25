@@ -23,8 +23,8 @@
             <v-card-actions>
               <v-btn
                 :to="`/majorPostDetail/${major.id}`"
-                style="color: #304ffe; padding: 0 20px"
-                variant="text"
+                class="actionBtn"
+                variant="outlined"
               >
                 See more
               </v-btn>
@@ -127,3 +127,15 @@ export default {
   },
 };
 </script>
+<style scoped>
+.actionBtn:hover{
+  background-color: #304ffe;
+  color : #fff;
+  transition: 800ms;
+  outline: 1px solid #304ffe;
+}
+.actionBtn{
+  padding: 0 20px;
+  color: #304ffe;
+}
+</style>

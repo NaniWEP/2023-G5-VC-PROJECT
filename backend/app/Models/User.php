@@ -25,6 +25,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'gender',
         'date_of_birth',
         'province',
         'role_id',
@@ -63,12 +64,12 @@ class User extends Authenticatable
     {
         return $this-> hasMany(FavoriteWorkshopPost::class);
     }
-    public function media() : BelongsTo
-    {
-        return $this-> belongsTo(Media::class);
-    }
     public function role() : BelongsTo
     {
         return $this-> belongsTo(Role::class);
+    }
+    public function workshopRegister() : HasMany
+    {
+        return $this-> hasMany(WorshopRegistration::class);
     }
 }
