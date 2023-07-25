@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class WorkshopPost extends Model
 {
     use HasFactory;
-    protected $fillable = 
+    protected $fillable =
     [
         'name',
         'description',
@@ -31,6 +31,10 @@ class WorkshopPost extends Model
     public function favoriteWorkshopPost(): HasMany
     {
         return $this -> hasMany(favoriteWorkshopPost::class);
+    }
+    public function WorshopRegistration(): HasMany
+    {
+        return $this -> hasMany(WorshopRegistration::class);
     }
     public function user():BelongsTo
     {

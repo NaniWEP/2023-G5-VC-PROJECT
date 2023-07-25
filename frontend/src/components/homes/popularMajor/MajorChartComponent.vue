@@ -19,7 +19,7 @@ export default {
     const myChart = new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Red"],
+        labels: ["RUPP", "PNC", "UP", "NT", "BMC", "MBR", "PPU"],
         datasets: [
           {
             data: [50, 40, 30, 20, 12, 10, 8],
