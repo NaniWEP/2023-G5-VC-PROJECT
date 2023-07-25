@@ -1,5 +1,15 @@
+
 <template>
   <v-container class="container">
+    <div class="title">
+      <h1>{{ major.title }}</h1>
+      <h3>
+        <router-link to="/">
+          Apply Now
+          <v-icon>mdi-fast-forward</v-icon>
+        </router-link>
+      </h3>
+    </div>
     <v-row>
       <v-col cols="12" md="5">
         <v-card class="elevation-2">
@@ -9,93 +19,60 @@
           </v-btn>
 
           <v-card-title class="justify-center">
-            <v-img
-              class="profile_img"
-              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-              alt="student dp"
-            />
-            <h4 class="text-center">{{ majorPost.title }}</h4>
-            <span class="d-flex justify-end mt-4">
-              <router-link to="/">
-                Apply Now
-                <v-icon>mdi-fast-forward</v-icon>
-              </router-link>  
-            </span>
+            <h3 class="mb-0">Information about major</h3>
           </v-card-title>
+          <v-card-text>
+            <v-simple-table>
+              <ul>
+                <li>
+                  <p>Major price :{{ major.price }} $</p>
+                </li>
+                <li>
+                  <p>Apply date :{{ major.apply_date }}</p>
+                </li>
+                <li>
+                  <p>Start date :{{ major.start_date }}</p>
+                </li>
+                <li>
+                  <p>Duration:{{ major.month_duration }} month</p>
+                </li>
+              </ul>
+            </v-simple-table>
+          </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="12" md="7">
         <v-card class="elevation-2">
           <v-card-title class="justify-center">
-            <h3 class="mb-0">
-              <v-icon>mdi-account</v-icon>General Information About Major
-            </h3>
+            <h3 class="mb-0">Announcement Description</h3>
           </v-card-title>
           <v-card-text>
             <v-simple-table>
-              <tbody>
-                <tr>
-                  <td>Major</td>
-                  <td class="text-right">:</td>
-                  <td>{{ major.title }}</td>
-                </tr>
-                <tr>
-                  <td>Major Price</td>
-                  <td class="text-right">:</td>
-                  <td>{{ major.price }}</td>
-                </tr>
-                <tr>
-                  <td>Day start apply</td>
-                  <td class="text-right">:</td>
-                  <td>{{ major.apply_date }}</td>
-                </tr>
-                <tr>
-                  <td>Day start learn</td>
-                  <td class="text-right">:</td>
-                  <td>{{ major.start_date }}</td>
-                </tr>
-                <tr>
-                  <td>Duration</td>
-                  <td class="text-right">:</td>
-                  <td>{{ major.month_duration }}</td>
-                </tr>
-                <tr>
-                  <td>Website</td>
-                  <td class="text-right">:</td>
-                  <td>{{ major.description }}</td>
-                </tr>
-              </tbody>
+              <p>{{ major.description }}</p>
             </v-simple-table>
-            <!-- <dialog-form></dialog-form> -->
           </v-card-text>
         </v-card>
         <v-card class="elevation-2">
           <v-card-title class="justify-center">
-            <h3 class="mb-0">
-              <v-icon>mdi-information</v-icon>Information About University
-            </h3>
+            <h3 class="mb-0">Information about university</h3>
           </v-card-title>
           <v-card-text>
             <v-simple-table>
-              <tbody>
-                <tr>
-                  <td>University Name</td>
-                  <td class="text-right">:</td>
-                  <td>{{ university.name }}</td>
-                </tr>
-                <tr>
-                  <td>Contact</td>
-                  <td class="text-right">:</td>
-                  <td>{{ university.email }}</td>
-                </tr>
-                <tr>
-                  <td>Website</td>
-                  <td class="text-right">:</td>
-                  <td>{{ university.website }}</td>
-                </tr>
-              </tbody>
+              <ul>
+                <li>
+                  <p>University :{{ university.name }}</p>
+                </li>
+                <li>
+                  <p>Email :{{ university.email }}</p>
+                </li>
+                <li>
+                  <p>Website :{{ university.website }}</p>
+                </li>
+                <li>
+                  <p>Phone :{{ university.phone }}</p>
+                </li>
+              </ul>
             </v-simple-table>
-            <!-- <dialog-form></dialog-form> -->
           </v-card-text>
         </v-card>
       </v-col>
@@ -112,7 +89,7 @@ export default {
     return {
       majorPost: {},
       major: {},
-      university: {}
+      university: {},
     };
   },
   mounted() {
@@ -133,28 +110,6 @@ export default {
 </script>
 
 <style scoped>
-h2,
-p {
-  text-align: center;
-}
-
-.profile {
-  display: flex;
-  justify-content: center;
-  margin-top: 3%;
-}
-img {
-  border-radius: 50%;
-  width: 10%;
-}
-.text-center {
-  background-color: #3737e5;
-  color: #ffff;
-  margin-top: 1%;
-  padding: 10px;
-  border-radius: 5px;
-}
-
 .v-card-text {
   margin-top: 16px;
   padding: 30px;
@@ -166,41 +121,26 @@ img {
 .v-card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: 24px;
-  background-color: #d8d8d8;
+  background-color: #ffff;
+  border: 2px solid #3737e5;
   padding: 30px;
   border-radius: 4px;
 }
-.profile_img {
-  border: 5px solid #3737e5;
-  border-radius: 50%;
-  padding: 24px;
-}
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
+.title {
+  background-color: #ffff;
+  border: 3px solid #3737e5;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
 }
-
-th,
-td {
-  padding: 9px;
-  text-align: left;
-  width: 2%;
+.justify-center {
+  background-color: #3737e5;
+  color: white;
+  padding: 10px;
 }
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-tr:hover {
-  background-color: #ddd;
-}
-
-.text-right {
-  text-align: right;
+p {
+  font-size: large;
 }
 </style>
