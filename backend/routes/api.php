@@ -11,6 +11,7 @@ use App\Http\Controllers\WorkshopPostController;
 use App\Models\WorkshopPost;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\UniversityPostController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Models\FavoriteWorkshopPost;
 use App\Models\University;
 use Illuminate\Http\Request;
@@ -102,7 +103,7 @@ Route::resource('/role', RoleController::class);
 // Login / register routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/googleLogin', [AuthController::class, 'googleLogin']);
+Route::post('/googleLogin', [GoogleAuthController::class, 'googleLogin']);
 
 
 Route::get('/majors',[MajorController::class,'index']);

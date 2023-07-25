@@ -3,7 +3,6 @@
     <v-img class="image" src="../../assets/login/logIN.png"></v-img>
     <h1 class="text-center">WELLCOME BACK</h1>
     <div class="google">
-
       <GoogleAuth class="googleLog"/>
       </div>
       <div class="line">
@@ -183,7 +182,6 @@ p {
 .googleLog{
   width: 90%;
 }
-
 hr {
     border: none;
     border-top: 3px double #ffffff;

@@ -7,7 +7,10 @@
     elevation="6"
     elevate-on-scroll
   >
+   <router-link to="/">
+   
     <v-avatar><v-img src="../../assets/logo.png"></v-img></v-avatar>
+   </router-link>
     <v-toolbar-title> KNOWLEDGE AND OPPORTUNITY </v-toolbar-title>
     <v-spacer />
     <v-list class="d-flex align-center">
@@ -43,38 +46,58 @@
         to="/register"
         elevated
         >Register</v-btn
-        > 
-      </v-list>
-    <div class="text-center">
-      <v-menu
-      open-on-hover
       >
-      <template v-slot:activator="{ props }">
-          <v-avatar size="65" v-if="isLoggedIn == true"
-            v-bind="props"
-            ><v-img src="../../assets/user.png"></v-img>
-            </v-avatar>
-      </template>
-      
-      <v-list>
-        
-        <v-list-item to="/studentDetail">
-            <v-list-item-title class="pfBtn"><v-icon>mdi-account-check</v-icon> Your Profile</v-list-item-title>
-        </v-list-item>
-        <v-list-item
-          @click="logOut">
-          <v-list-item-title class="pfBtn"><v-icon>mdi-logout</v-icon>LogOut</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
-  </div>
+    </v-list>
+    <div class="text-center">
+      <v-menu open-on-hover>
+        <template v-slot:activator="{ props }">
+          <v-avatar v-if="isLoggedIn == true" v-bind="props">
+            <v-img v-if="userPassword === null" :src="userProfile" w-50></v-img>
+            <v-img v-else src="../../assets/user.png" w-50></v-img>
+          </v-avatar>
+        </template>
+
+        <v-list>
+          <v-list-item to="/studentDetail">
+            <v-list-item-title class="pfBtn"
+              ><v-icon>mdi-account-check</v-icon> Your
+              Profile</v-list-item-title
+            >
+          </v-list-item>
+          <v-list-item @click="logOut">
+            <v-list-item-title class="pfBtn"
+              ><v-icon>mdi-logout</v-icon>LogOut</v-list-item-title
+            >
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </div>
   </v-app-bar>
 </template>
 
 <script>
 import { getCookie, eraseCookie } from "@/stores/cookie.js";
+import { googleLogout } from "vue3-google-login";
+import { useUserStore } from "../../stores/userStore";
+import { computed } from "vue";
+import { onMounted } from "vue";
 import axios from "@/stores/axiosHttp";
 export default {
+  setup() {
+    const userStore = useUserStore();
+    const userPassword = computed(() => userStore.users?.password);
+    const userProfile = computed(() => userStore.users?.picture);
+    onMounted(async () => {
+      if (!userStore.users) {
+        await userStore.getUser();
+      }
+    });
+    return {
+      users: userStore.users,
+      userPassword,
+      userProfile,
+    };
+  },
   name: "navbarView",
   data() {
     return {
@@ -89,12 +112,12 @@ export default {
       }
     },
     async logOut() {
-    this.isLoggedIn = false;
+      this.isLoggedIn = false;
+      googleLogout();
       try {
-        await axios.post("/auth/logout")
-        .then(() => {
-          eraseCookie("myToken")
-          eraseCookie("myId")
+        await axios.post("/auth/logout").then(() => {
+          eraseCookie("myToken");
+          eraseCookie("myId");
         });
       } catch (error) {
         console.log(error);
@@ -108,7 +131,7 @@ export default {
 </script>
 
 <style scoped>
-.nav{
+.nav {
   border-radius: 5px;
 }
 .nav:hover {
@@ -126,14 +149,14 @@ export default {
   color: #000000;
   transition: 800ms;
 }
-.pfBtn{
+.pfBtn {
   cursor: pointer;
   padding: 8px;
   border-radius: 5px;
 }
-.pfBtn:hover{
+.pfBtn:hover {
   background: #3737e5;
-  color : #FFFFFF;
+  color: #ffffff;
   transition: 800ms;
 }
 </style>
