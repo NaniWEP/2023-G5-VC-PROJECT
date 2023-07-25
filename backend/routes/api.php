@@ -27,14 +27,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// 
+//
 // PRIVATE ROUTES
-// 
+//
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('/auth')->group(function () {
         // get user data route
-        Route::get('/getUser', [AuthController::class, 'olo']);
+        Route::get('/getUser', [AuthController::class, 'getUser']);
 
         // Log out route
         Route::post('/logout', [AuthController::class, 'logout']);
@@ -70,9 +70,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 });
 
-// 
+//
 // PUBLIC ROUTES
-// 
+//
 
 // University routes
 Route::prefix('/university')->group(function () {
@@ -102,6 +102,8 @@ Route::resource('/role', RoleController::class);
 // Login / register routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/googleLogin', [AuthController::class, 'googleLogin']);
+
 
 Route::get('/majors',[MajorController::class,'index']);
 

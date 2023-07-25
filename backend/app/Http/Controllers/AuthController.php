@@ -43,7 +43,7 @@ class AuthController extends Controller
     public function updateUser(Request $request, $id)
     {
         $user = User::find($id);
-        
+
         $user->update([
             'first_name' => $request -> first_name,
             'last_name' => $request -> last_name,
@@ -57,6 +57,25 @@ class AuthController extends Controller
             'massage' => 'user updated successfully',
             'data' => $user
         ], Response::HTTP_OK);//200
+    }
+
+    public function googleLogin(Request $request)
+    {
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'profile' => $request->profile,
+            'role_id' => $request->role_id,
+        ]);
+        $token = $user->createToken('API TOKEN', ['select', 'create', 'update'])->plainTextToken;
+        $user = new GetUserResource($user);
+        return response()->json([
+            'success' => true,
+            'message' => 'Create user successful',
+            'data' => $user,
+            'token' => $token
+        ], Response::HTTP_CREATED); // 201
     }
 
     public function login(AuthLoginRequest $request)
