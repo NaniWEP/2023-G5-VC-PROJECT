@@ -27,6 +27,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// 
+// PRIVATE ROUTES
+// 
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('/auth')->group(function () {
@@ -40,22 +43,36 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/update/{id}', [AuthController::class, 'updateUser']);
 
         // university routes
-        Route::resource('/university', UniversityController::class);
-        Route::get('/myUniversity', [UniversityController::class, 'showMyUniversity']);
-        Route::prefix('/workshop')->group(function(){
-            Route::get('/selectByUser', [WorkshopPostController::class, 'selctByUserId']);
-            Route::post('/register', [WorshopRegistrationController::class, 'store']);
+        Route::prefix('/university')->group(function(){
+            // crud university
+            Route::resource('/university', UniversityController::class);
+            // add favorite university post
+            Route::post('/favoriteUniversityPost', [FavoriteUniversityPostController::class, 'store']);
+            // delete favaite university post
+            Route::delete('/favoriteUniversityPost/{university_post_id}', [FavoriteUniversityPostController::class, 'destroy']);
+            // get list of favrites
+            Route::get('/getListOfFavrite',[FavoriteUniversityPostController::class, 'getListOfFavorite'] );
+            // show university
+            Route::get('/myUniversity', [UniversityController::class, 'showMyUniversity']);
         });
+          // workshop routes
         Route::prefix('/workshop')->group(function(){
+            // add favorite workshop
             Route::post('/favorite',[FavoriteWorkshopPostController::class,'store']);
+            // get list of favorite workshop
             Route::get('/favoriteList',[FavoriteWorkshopPostController::class,'getFavorite']);
+            // get user id
+            Route::get('/selectByUser', [WorkshopPostController::class, 'selctByUserId']);
         });
-        Route::post('/favoriteUniversityPost', [FavoriteUniversityPostController::class, 'store']);
-        Route::delete('/favoriteUniversityPost/{id}', [FavoriteUniversityPostController::class, 'destroy']);
     });
 
 });
 
+// 
+// PUBLIC ROUTES
+// 
+
+// University routes
 Route::prefix('/university')->group(function () {
     Route::get('/showAllUniversity', [UniversityController::class, 'index']);
     Route::get('/university', [UniversityController::class, 'index']);
@@ -65,21 +82,10 @@ Route::prefix('/university')->group(function () {
     Route::get('/majorPostDetail/{id}', [UniversityPostController::class,'getMajorPostById']);
     Route::get('/newUpdate', [UniversityPostController::class,'getMajorLastUpdated']);
 });
+
 // Expired routes
 Route::prefix('/workshop')->group(function(){
-    Route::get('/expirepost', [WorkshopPostController::class,'getWorkshopPostExprired']);
     Route::post('/favorites',[FavoriteWorkshopPostController::class,'store']);
-});
-// Role routes
-Route::resource('/role', RoleController::class);
-
-// Login / register routes
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-
-
-// Expired routes
-Route::prefix('/workshop')->group(function(){
     Route::get('/workshopDetail/{id}', [WorkshopPostController::class,'show']);
     Route::get('/expirepost', [WorkshopPostController::class,'getWorkshopPostExprired']);
     Route::get('/newUpdate', [WorkshopPostController::class,'getWorkshopLastUpdated']);
@@ -88,10 +94,18 @@ Route::prefix('/workshop')->group(function(){
     Route::get('/{id}', [WorkshopPostController::class, 'selctByUserId']);
 });
 
+// Role routes
+Route::resource('/role', RoleController::class);
 
-Route::get('/getexpiredworkshop',[WorkshopPostController::class,'getWorkshopExprired']);
+// Login / register routes
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/majors',[MajorController::class,'index']);
+
+
+
+
 
 
 Route::fallback(function () {
