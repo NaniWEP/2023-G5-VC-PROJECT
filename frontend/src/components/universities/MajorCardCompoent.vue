@@ -4,6 +4,7 @@
       <v-col
         v-for="(major, index) in majors"
         :key="index"
+        :id="major.id"
         class="d-flex justift-center align-center"
         cols="4"
       >
@@ -27,58 +28,77 @@
               >
                 See more
               </v-btn>
-              <v-btn 
-              prepend-icon="mdi-heart-outline"
-              class="actionBtn"
-              variant="outlined"
+              <v-btn style="color: #304ffe; padding: 0 20px" 
               @click="toggleFavorite(major.id)"
-              >
-              FAVORITE
+              variant="text">
+                <v-icon
+                  align-tabs="center"
+                  :style="getIconStyle(major.id)"
+                  icon="mdi-heart"
+                ></v-icon>
+                FAVORITE
               </v-btn>
             </v-card-actions>
           </v-card>
         </v-list>
       </v-col>
     </v-row>
+    <v-pagination :length="4" rounded="circle" class="mb-8"></v-pagination>
   </div>
 </template>
 
 <script>
-import axios from "../../stores/axiosHttp"
+import axios from "../../stores/axiosHttp";
 import Swal from "sweetalert2";
+
 export default {
   props: ["majors"],
-  data(){
-    return{
-      favorites: {},
-      datas:[]
-    }
+  data() {
+    return {
+      favorites: [],
+    };
   },
-  methods:{
-    toggleFavorite(id){
-      const favoriteStatus = this.favorites[id];
-      if(favoriteStatus){
-        axios.delete(`auth/favoriteUniversityPost/${this.datas}`)
-        .then(response=>{
-          console.log(response.data)
-          this.favorites[id] = false; // update the favorite status to false
-          this.alertFavorite('info', 'Post removed from favorites');
-        })
-        .catch(error=>{
-          console.log(error.message);
-        })
-      }
-      else{
-        axios.post("auth/favoriteUniversityPost",{"university_post_id": id})
-        .then(response=>{
-          this.datas =  response.data.data.id
-          console.log(response.data)
-          this.favorites[id] = true; // update the favorite status to true
-          this.alertFavorite('success', 'Post added to favorites');
-        })
-        .catch(error=>{
-          console.log(error.message);
-        })
+  mounted() {
+    axios
+      .get("auth/university/getListOfFavrite")
+      .then((response) => {
+        this.favorites = response.data.data.map(
+          (favorite) => favorite.university_post_id
+        );
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  },
+  methods: {
+    toggleFavorite(id) {
+      const index = this.favorites.indexOf(id);
+      if (index !== -1) {
+        axios
+          .delete(`auth/university/favoriteUniversityPost/${id}`)
+          .then((response) => {
+            console.log(response.data);
+            this.favorites.splice(index, 1); // remove the post from favorites
+            this.alertFavorite("info", "Post removed from favorites");
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      } else {
+        axios
+          .post("auth/university/favoriteUniversityPost", {
+            university_post_id: id,
+          })
+          .then((response) => {
+            if (response.data.success) {
+              this.favorites.push(id); // add the post to favorites
+              this.alertFavorite('success', "Post added to favorites");
+            }
+            this.alertFavorite("success", response.data.message);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
       }
     },
     alertFavorite(icon, message) {
@@ -101,12 +121,12 @@ export default {
     },
   },
   computed: {
-    getIconStyle(){
-      return (id)=>({
-        color: this.favorites[id] ? 'blue' : 'black' // update the icon color based on the favorite status
-      })
-    }
-  }
+    getIconStyle() {
+      return (id) => ({
+        color: this.favorites.includes(id) ? "red" : "black", // update the icon color based on the favorite status
+      });
+    },
+  },
 };
 </script>
 <style scoped>

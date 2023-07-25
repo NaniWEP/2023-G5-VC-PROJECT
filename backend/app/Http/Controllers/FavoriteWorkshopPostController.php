@@ -21,19 +21,27 @@ class FavoriteWorkshopPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        //reference https://poe.com/
         $userId = Auth::user()->id;
         $workshopPostId = $request->workshop_post_id;
-        $favorite = FavoriteWorkshopPost::create([
-            'user_id' => $userId,
-            'workshop_post_id' => $workshopPostId,
-        ]);
-        return response()->json([
-            'success' => true,
-            'data' => $favorite,
-            'message' => 'Favorite saved'
-        ]);
+        $allow = FavoriteWorkshopPost::where('user_id', $userId)->where('workshop_post_id', $workshopPostId)->first();
+        if (!$allow) {
+            $favorite = FavoriteWorkshopPost::create([
+                'user_id' => $userId,
+                'workshop_post_id' => $workshopPostId,
+            ]);
+            return response()->json([
+                'success' => true,
+                'data' => $favorite,
+                'message' => 'Favorite saved'
+            ]);
+        } 
+        else {
+            $this->destroy($request);
+            return response()->json([
+                'success' => false,
+                'message' => 'Post removed from favorites'
+            ]);
+        }
     }
 
     /**
@@ -55,16 +63,26 @@ class FavoriteWorkshopPostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
-    }
-    public function getFavorite(){
         $userId = Auth::user()->id;
-        $myFavorite = FavoriteWorkshopPost::where('user_id' === $userId);
-        response()->json([
-            "success" => true,
-            "data" => $myFavorite
+        $workshopPostId = $request->workshop_post_id;
+        $favoriteWorkshopPost = FavoriteWorkshopPost::where('workshop_post_id', $workshopPostId)->where('user_id', $userId)->first();
+        if ($favoriteWorkshopPost) {
+            $favoriteWorkshopPost->delete();
+        }
+        return response()->json([
+            "success"=>true,
+            'message'=>"Post removed from favorites",
+            "data"=> $favoriteWorkshopPost
+        ]);
+    }
+    public function getListOfFavorite(){
+        $userId = Auth::user()->id;
+        $favoriteWorkshopPost = FavoriteWorkshopPost::where('user_id', $userId)->get();
+        return response()->json([
+            'success' => true,
+            "data"=> $favoriteWorkshopPost,
         ],200);
     }
 }
