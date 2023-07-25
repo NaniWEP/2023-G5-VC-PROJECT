@@ -29,7 +29,7 @@ class User extends Authenticatable
         'date_of_birth',
         'province',
         'role_id',
-        'profile_id',
+        'profile',
     ];
 
     /**
