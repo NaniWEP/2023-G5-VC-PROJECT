@@ -20,9 +20,11 @@ class GetUserResource extends JsonResource
             'last_name' => $this->last_name,
             'email' => $this->email,
             'date_of_birth' => $this->date_of_birth,
+            'password' => $this->password,
+            'gender' => $this->gender,
             'province' => $this->province,
-            'role_type' => $this->role->role_type,
-            'picture' => null,
+            'role_id' => $this->role_id,
+            'picture' => $this->picture,
         ];
     }
 }

@@ -15,14 +15,13 @@
               alt="student dp"
             />
             <h4 class="text-center">{{ majorPost.title }}</h4>
+            <span class="d-flex justify-end mt-4">
+              <router-link to="/">
+                Apply Now
+                <v-icon>mdi-fast-forward</v-icon>
+              </router-link>  
+            </span>
           </v-card-title>
-          <v-card-text>
-            <p class="mb-0">
-              <strong class="pr-1">Student ID:</strong>321000001
-            </p>
-            <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
-            <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
-          </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="12" md="7">
@@ -70,16 +69,33 @@
             <!-- <dialog-form></dialog-form> -->
           </v-card-text>
         </v-card>
-        <v-card class="elevation-2 mt-4">
+        <v-card class="elevation-2">
           <v-card-title class="justify-center">
             <h3 class="mb-0">
-              <v-icon>mdi-information</v-icon>Other Information
+              <v-icon>mdi-information</v-icon>Information About University
             </h3>
           </v-card-title>
           <v-card-text>
-            <p>
-              {{ majorPost.description }}
-            </p>
+            <v-simple-table>
+              <tbody>
+                <tr>
+                  <td>University Name</td>
+                  <td class="text-right">:</td>
+                  <td>{{ university.name }}</td>
+                </tr>
+                <tr>
+                  <td>Contact</td>
+                  <td class="text-right">:</td>
+                  <td>{{ university.email }}</td>
+                </tr>
+                <tr>
+                  <td>Website</td>
+                  <td class="text-right">:</td>
+                  <td>{{ university.website }}</td>
+                </tr>
+              </tbody>
+            </v-simple-table>
+            <!-- <dialog-form></dialog-form> -->
           </v-card-text>
         </v-card>
       </v-col>
@@ -96,6 +112,7 @@ export default {
     return {
       majorPost: {},
       major: {},
+      university: {}
     };
   },
   mounted() {
@@ -105,6 +122,8 @@ export default {
         console.log(response);
         this.majorPost = response.data.data;
         this.major = this.majorPost.major;
+        this.university = this.major.university;
+        console.log(this.university);
       })
       .catch((error) => {
         console.log(error);
@@ -133,6 +152,7 @@ img {
   color: #ffff;
   margin-top: 1%;
   padding: 10px;
+  border-radius: 5px;
 }
 
 .v-card-text {

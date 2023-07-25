@@ -105,6 +105,7 @@
 
 <script>
 import SideNavBar from "../studentLayouts/SideNavBar.vue";
+import axios from "@/stores/axiosHttp";
 export default {
   components: {
     SideNavBar,
@@ -112,6 +113,7 @@ export default {
   data() {
     return {
       tab: null,
+      favoriteList:'',
       slides: [
         {
           title: "PNC",
@@ -134,6 +136,21 @@ export default {
       ],
     };
   },
+  created(){
+    this.getFavorite();
+  },
+  methods:{
+    getFavorite(){
+      axios.post("auth/workshop/favoriteList")
+      .then(response=>{
+        this.favoriteList = response.data
+        console.log(response.data)
+      })
+      .catch(error=>{
+        console.log(error.message)
+      })
+    }
+  }
 };
 </script>
 

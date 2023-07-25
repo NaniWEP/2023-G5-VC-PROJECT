@@ -23,14 +23,17 @@ class FavoriteWorkshopPostController extends Controller
     {
         //
         //reference https://poe.com/
-        $user = auth()->user();
-        $favorite = new FavoriteWorkshopPost();
-        $favorite->user_id = $user->id;
-        $favorite->workshop_post_id = $request->input('workshop_post_id');
-        $favorite->save();
+        $userId = Auth::user()->id;
+        $workshopPostId = $request->workshop_post_id;
+        $favorite = FavoriteWorkshopPost::create([
+            'user_id' => $userId,
+            'workshop_post_id' => $workshopPostId,
+        ]);
         return response()->json([
-            'success' => true
-        ],201);
+            'success' => true,
+            'data' => $favorite,
+            'message' => 'Favorite saved'
+        ]);
     }
 
     /**
@@ -55,5 +58,13 @@ class FavoriteWorkshopPostController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function getFavorite(){
+        $userId = Auth::user()->id;
+        $myFavorite = FavoriteWorkshopPost::where('user_id' === $userId);
+        response()->json([
+            "success" => true,
+            "data" => $myFavorite
+        ],200);
     }
 }

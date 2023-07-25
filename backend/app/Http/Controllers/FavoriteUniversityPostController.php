@@ -56,6 +56,7 @@ class FavoriteUniversityPostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $favoritePostUniversity = FavoriteUniversityPost::find($id);
+        $favoritePostUniversity->delete();
     }
 }

@@ -17,7 +17,6 @@ import ChartView from "../views/Page/dashboards/managers/charts/ChartView.vue"
 import PostView from "../views/Page/dashboards/managers/posts/PostView.vue"
 import MajorView from "../views/Page/dashboards/managers/majors/MajorView.vue"
 import ExpirationView from "../views/Page/dashboards/managers/expirations/ExpirationView.vue"
-// import DashboardView from "../views/Dashboard/DashboardView.vue"
 
 const routes = [
   {
@@ -125,8 +124,7 @@ const routes = [
     path: '/expiration', 
     name: 'expiration',
     component: ExpirationView  
-  },   
- 
+  },
 ]
 
 
