@@ -1,17 +1,19 @@
 import { createApp } from 'vue'
-// import axios from 'axios'
 import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
-// import axios from 'axios'
+import vue3GoogleLogin from 'vue3-google-login'
 
-// axios.defaults.baseURL = 'http://localhost:8000/api/';
+const CLIENT_ID = '110348301474-54g460mkh1q5846sqrcp687oudgt4rvi.apps.googleusercontent.com'
 
 loadFonts()
 
-createApp(App)
-  // .use(axios)
-  .use(router)
-  .use(vuetify)
-  .mount('#app')
+const app = createApp(App)
+
+app.use(vue3GoogleLogin, {
+  clientId: CLIENT_ID,
+})
+app.use(router)
+app.use(vuetify)
+app.mount('#app')
