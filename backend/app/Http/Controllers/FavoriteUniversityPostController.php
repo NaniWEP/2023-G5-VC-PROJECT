@@ -73,11 +73,11 @@ class FavoriteUniversityPostController extends Controller
             $favoritePostUniversity->delete();
         }
         return response()->json([
-            "favorite"=> $favoritePostUniversity
+            "success"=>true,
+            "data"=> $favoritePostUniversity
         ]);
     }
     public function getListOfFavorite(){
-        // $listOfFavorite = [];
         $userId = Auth::user()->id;
         $favoritePostUniversity = FavoriteUniversityPost::where('user_id', $userId)->get();
         return response()->json([
