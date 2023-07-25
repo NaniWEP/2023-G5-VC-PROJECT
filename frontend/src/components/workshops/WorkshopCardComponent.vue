@@ -65,6 +65,7 @@
 </template>
 <script>
 import axios from "@/stores/axiosHttp";
+import Swal from "sweetalert2";
 export default {
   props: ["workshops"],
   data() {
@@ -73,16 +74,59 @@ export default {
     };
   },
   methods: {
-    addFovMajorPost(id) {
+    toggleFavorite(id) {
+      const favoriteStatus = this.favorites[id];
       console.log(id);
-      axios
-        .post("auth/workshop/favorite", { workshop_post_id: id })
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
+      if (favoriteStatus) {
+        axios
+          .delete(`auth/university/favoriteUniversityPost/${this.datas}`)
+          .then((response) => {
+            console.log(response.data);
+            this.favorites[id] = false; // update the favorite status to false
+            this.alertFavorite("info", "Post removed from favorites");
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      } else {
+        axios
+          .post("auth/university/favoriteUniversityPost", {
+            university_post_id: id,
+          })
+          .then((response) => {
+            this.datas = response.data.data.id;
+            this.favorites[id] = true; // update the favorite status to true
+            this.alertFavorite("success", "Post added to favorites");
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      }
+    },
+    alertFavorite(icon, message) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+
+      Toast.fire({
+        icon: icon,
+        title: message,
+      });
+    },
+  },
+  computed: {
+    getIconStyle() {
+      return (id) => ({
+        color: this.favorites[id] ? "red" : "black", // update the icon color based on the favorite status
+      });
     },
   },
 };
