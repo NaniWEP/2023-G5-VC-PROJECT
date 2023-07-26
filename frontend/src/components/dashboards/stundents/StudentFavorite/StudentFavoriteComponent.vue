@@ -22,7 +22,7 @@
           </v-card-title>
 
           <v-tabs v-model="tab" class="bg-white">
-            <v-tab value="university">University</v-tab>
+            <v-tab value="university">Major</v-tab>
             <v-tab value="workshop">Workshop</v-tab>
           </v-tabs>
 
