@@ -20,30 +20,30 @@ class FavoriteUniversityPostController extends Controller
      * Store a newly created resource in storage.
      */
 
-    public function store(Request $request)
-    {
-        $userId = Auth::user()->id;
-        $universityPostId = $request->university_post_id;
-        $allow = FavoriteUniversityPost::where('user_id', $userId)->where('university_post_id', $universityPostId)->first();
-        if (!$allow) {
-            $favorite = FavoriteUniversityPost::create([
-                'user_id' => $userId,
-                'university_post_id' => $universityPostId,
-            ]);
-            return response()->json([
-                'success' => true,
-                'data' => $favorite,
-                'message' => 'Favorite saved'
-            ]);
-        } 
-        else {
-            $this->destroy($request);
-            return response()->json([
-                'success' => false,
-                'message' => 'Post removed from favorites'
-            ]);
-        }
-    }
+     public function store(Request $request)
+     {
+         $userId = Auth::user()->id;
+         $universityPostId = $request->university_post_id;
+         $allow = FavoriteUniversityPost::where('workshop_post_id', $universityPostId)->where('user_id', $userId)->first();
+         if (!$allow) {
+             $favorite = FavoriteUniversityPost::create([
+                 'user_id' => $userId,
+                 'university_post_id' => $universityPostId,
+             ]);
+             return response()->json([
+                 'success' => true,
+                 'data' => $favorite,
+                 'message' => 'Favorite saved'
+             ]);
+         } 
+         else {
+             $this->destroy($request);
+             return response()->json([
+                 'success' => false,
+                 'message' => 'Post removed from favorites'
+             ]);
+         }
+     }
 
     /**
      * Display the specified resource.
