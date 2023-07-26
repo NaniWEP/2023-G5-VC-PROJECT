@@ -43,7 +43,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         // update user route
         Route::put('/update/{id}', [AuthController::class, 'updateUser']);
         // update user profile
-        Route::put('/update/{id}/profilePicture', [AuthController::class, 'updateUserProfile']);
+        Route::post('/update/profilePicture', [AuthController::class, 'getImage']);
 
         // university routes
         Route::prefix('/university')->group(function(){
