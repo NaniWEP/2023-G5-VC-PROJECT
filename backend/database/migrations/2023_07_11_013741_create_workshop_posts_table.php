@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('workshop_posts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('venue');
             $table->string('description');
             $table->date('date');
             $table->time('time');
             $table->string('location');
             $table->string('organizer');
             $table->string('contact');
+            $table->integer('variable_ticket');
             $table->boolean('status');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')

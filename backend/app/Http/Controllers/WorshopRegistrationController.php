@@ -75,7 +75,7 @@ class WorshopRegistrationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateWorshopRegistrationRequest $request, WorshopRegistration $worshopRegistration)
+    public function update( $request, WorshopRegistration $worshopRegistration)
     {
         //
     }

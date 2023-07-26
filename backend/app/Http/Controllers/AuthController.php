@@ -43,12 +43,12 @@ class AuthController extends Controller
     public function updateUser(Request $request, $id)
     {
         $user = User::find($id);
-
         $user->update([
             'first_name' => $request -> first_name,
             'last_name' => $request -> last_name,
             'email' => $request -> email,
             'password' => $request -> password,
+            'gender' => $request -> gender,
             'date_of_birth' => $request -> date_of_birth,
             'province' => $request -> province,
             'role_id' => $request -> role_id,
