@@ -42,6 +42,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/update/profilePicture', [AuthController::class, 'getImage']);
         // register for workshop
         Route::post('/registerWorkshop', [WorkshopRegistrationController::class, 'store']);
+        Route::post('/profilePicture', [AuthController::class, 'getImage']);
 
         Route::get('/showWorkshop/{id}', [WorkshopRegistrationController::class, 'show']);
         // university routes
