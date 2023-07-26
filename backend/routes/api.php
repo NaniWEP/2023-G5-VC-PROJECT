@@ -34,13 +34,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('/auth')->group(function () {
         // get user data route
-        Route::get('/getUser', [AuthController::class, 'olo']);
+        Route::get('/getUser', [AuthController::class, 'getUser']);
 
         // Log out route
         Route::post('/logout', [AuthController::class, 'logout']);
 
         // update user route
         Route::put('/update/{id}', [AuthController::class, 'updateUser']);
+        // update user profile
+        Route::put('/update/{id}/profilePicture', [AuthController::class, 'updateUserProfile']);
 
         // university routes
         Route::prefix('/university')->group(function(){

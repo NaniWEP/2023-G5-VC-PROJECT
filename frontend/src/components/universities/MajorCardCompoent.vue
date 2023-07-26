@@ -43,7 +43,6 @@
         </v-list>
       </v-col>
     </v-row>
-    <v-pagination :length="4" rounded="circle" class="mb-8"></v-pagination>
   </div>
 </template>
 

@@ -10,8 +10,17 @@
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
               alt="student dp"
             />
-            <h3 class="text-center">{{ user.first_name + user.last_name }}</h3>
           </v-card-title>
+          <div class="file-input-container">
+            <input
+              type="file"
+              ref="fileInput"
+              @change="updateProfilePicture"
+              class="file-input"
+              id="fileInput"
+            />
+            <label for="fileInput" class="placeholder">Edit profile</label>
+          </div>
         </v-card>
       </v-col>
       <v-col cols="12" md="8">
@@ -60,22 +69,28 @@
                   <v-col cols="12" sm="6">
                     <v-autocomplete
                       label="Province*"
-                       :items="[
-                       'KampongThom',
-                       'KampongCham',
-                       'PreyVeag',
-                       'KosKong',
-                       'BatdomBong',
-                       'BunteayMeanjey',
-                       'Kompot',
-                       'Stung Treang',
-                       'SeamReap',
-                       ]"
+                      :items="[
+                        'KampongThom',
+                        'KampongCham',
+                        'PreyVeag',
+                        'KosKong',
+                        'BatdomBong',
+                        'BunteayMeanjey',
+                        'Kompot',
+                        'Stung Treang',
+                        'SeamReap',
+                      ]"
                       required
                       v-model="user.province"
                     ></v-autocomplete>
                   </v-col>
-                  <v-btn prepend-icon="mdi-content-save-edit" class="saveBtn" variant="outlined" @click="updateUser">Save</v-btn>            
+                  <v-btn
+                    prepend-icon="mdi-content-save-edit"
+                    class="saveBtn"
+                    variant="outlined"
+                    @click="updateUser"
+                    >Save</v-btn
+                  >
                 </v-row>
               </v-container>
             </v-simple-table>
@@ -105,48 +120,56 @@
 import axios from "@/stores/axiosHttp";
 import SideNavBar from "../studentLayouts/SideNavBar.vue";
 export default {
-  data(){
-    return{     
-        user: {},
-      }
-    },                 
+  data() {
+    return {
+      user: {},
+    };
+  },
   components: {
     SideNavBar,
   },
-  methods:{
-    getUser(){
+  created() {
+    // this.onFileChange();
+  },
+  methods: {
+    getUser() {
       axios
-      .get(`/auth/getUser`)
-      .then((response) => {
-        console.log(response.data.data);
-        this.user = response.data.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .get(`/auth/getUser`)
+        .then((response) => {
+          console.log(response.data.data);
+          this.user = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    updateUser(){
-      console.log(this.user.date_of_birth)
-      axios
-      .put(`/auth/update/`+ this.user.id, this.user)
-      .then((response)=>{
-        console.log(response.data);
-      })
-      .catch((error)=>{
+    async updateProfilePicture(event) {
+      try {
+        const file = event.target.files[0];
+        const formData = new FormData();
+        console.log(file);
+        console.log(formData);
+        formData.append("profile_picture", file);
+        const response = await axios.post(
+          `/users/${this.user.id}/profilePicture`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        this.user.profile_picture_url = response.data.profile_picture_url;
+      } catch (error) {
         console.log(error);
-      })
-    }
+      }
+    },
   },
-  show(){
+  show() {},
+  onMounted() {},
+  mounted() {
+    this.getUser();
   },
-  onMounted(){
-  },
-  mounted(){
-    this.getUser()
-  },
-  created(){
-  }
-
 };
 </script>
 
@@ -227,14 +250,47 @@ tr:hover {
   text-align: right;
 }
 
-.saveBtn{
+.saveBtn {
   outline: 1px solid #3737e5;
   color: #3737e5;
 }
-.saveBtn:hover{
+.saveBtn:hover {
   background-color: #304ffe;
-  color : #ffff;
+  color: #ffff;
   transition: 800ms;
   outline: 1px solid #304ffe;
+}
+.file-input-container {
+  position: relative;
+  height: 30px;
+}
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #304ffe;
+  border-radius: 5px;
+  border: 2px solid #304ffe;
+  cursor: pointer;
+}
+.placeholder:hover {
+  background-color: #304ffe;
+  color: #fff;
 }
 </style>

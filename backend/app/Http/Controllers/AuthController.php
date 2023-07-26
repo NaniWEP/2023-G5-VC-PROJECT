@@ -114,4 +114,17 @@ class AuthController extends Controller
             'message' => 'Get user data successfully',
         ], Response::HTTP_OK); //200
     }
+    public function updateUserProfile(Request $request, $id)
+    {
+        $user = User::find($id);
+        
+        $user->update([
+            'profile_id' => $request -> profile_image,
+        ]);
+        return response()->json([
+            'massage' => 'user updated successfully',
+            'data' => $user
+        ], Response::HTTP_OK);//200
+    }
+    
 }
