@@ -22,12 +22,13 @@
 </template>
 <script>
 import { eraseCookie } from "@/stores/cookie.js";
+import { googleLogout } from "vue3-google-login";
 import axios from "@/stores/axiosHttp";
 export default {
   setup() {},
   methods:{
     async logOut() {
-
+  googleLogout()
       try {
         await axios.post("/auth/logout")
         .then(() => {

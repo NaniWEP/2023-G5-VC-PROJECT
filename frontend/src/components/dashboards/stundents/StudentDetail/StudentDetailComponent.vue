@@ -7,7 +7,7 @@
           <v-card-title class="justify-center">
             <v-img
               class="profile_img"
-              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+              :src="user.picture"
               alt="student dp"
             />
           </v-card-title>

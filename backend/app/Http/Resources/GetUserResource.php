@@ -24,7 +24,7 @@ class GetUserResource extends JsonResource
             'gender' => $this->gender,
             'province' => $this->province,
             'role_id' => $this->role_id,
-            'picture' => $this->picture,
+            'picture' => $this->profile,
         ];
     }
 }

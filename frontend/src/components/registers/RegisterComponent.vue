@@ -6,7 +6,11 @@
   <!-- First form -->
   <v-form v-if="!toggle" v-model="valid" class="form">
     <v-container class="container">
-      <h1 class="text-center">Sign Up</h1>
+      <h1 class="text-center">Rigister</h1>
+      <div class="google">
+        <GoogleAuth class="googleLog" />
+      </div>
+      <hr />
       <div class="namefilled">
         <v-col cols="11" md="6">
           <v-text-field
@@ -98,6 +102,10 @@
   <v-form v-else v-model="valid" class="form py-3">
     <v-container class="container">
       <h1 class="mb-10">More Information</h1>
+      <div class="google">
+        <GoogleAuth class="googleLog" />
+      </div>
+      <hr />
       <div class="inputFiled w-100">
         <v-col cols="12" md="12">
           <v-combobox
@@ -156,9 +164,11 @@
 
 <script>
 import "@mdi/font/css/materialdesignicons.css";
+import GoogleAuth from "../google/GoogleAuth.vue";
 import axios from "@/stores/axiosHttp";
 import { setCookie } from "@/stores/cookie.js";
 export default {
+  components: { GoogleAuth },
   data: () => ({
     toggle: false,
     firstName: "",
@@ -277,7 +287,7 @@ export default {
 
                 setCookie("myToken", token, 1);
                 setCookie("myId", response.data.data.id, 1);
-                
+
                 // send user to:
                 this.$router.push("/");
               } else {
@@ -326,5 +336,23 @@ export default {
   flex-direction: column;
   padding: 10px;
 }
+.google {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.googleLog {
+  width: 90%;
+}
 
+hr {
+  border: none;
+  width: 100%;
+  border-top: 3px double #ffffff;
+  text-align: center;
+  height: 5px;
+}
 </style>

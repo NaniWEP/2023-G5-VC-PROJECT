@@ -1,3 +1,4 @@
+
 <template>
   <v-container id="{{id}}" class="container">
     <v-row>
@@ -7,22 +8,14 @@
             <v-icon start icon="mdi-arrow-left"></v-icon>
             Back
           </v-btn>
-
-          <v-card-title class="justify-center">
+          <v-card-title>
             <v-img
               class="profile_img"
-              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+              src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29sbGVnZSUyMGNhbXB1c3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
               alt="student dp"
             />
             <h4 class="text-center">{{university.name}}</h4>
           </v-card-title>
-          <v-card-text>
-            <p class="mb-0">
-              <strong class="pr-1">Student ID:</strong>321000001
-            </p>
-            <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
-            <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
-          </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="12" md="7">
@@ -67,7 +60,6 @@
                 </tr>
               </tbody>
             </v-simple-table>
-            <!-- <dialog-form></dialog-form> -->
           </v-card-text>
         </v-card>
         <v-card class="elevation-2 mt-4">
@@ -123,10 +115,6 @@ p {
   justify-content: center;
   margin-top: 3%;
 }
-img {
-  border-radius: 50%;
-  width: 10%;
-}
 .text-center {
   background-color: #3737e5;
   color: #ffff;
@@ -145,13 +133,13 @@ img {
 .v-card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: 24px;
-  background-color: #d8d8d8;
+  background-color: #ffff;
+   border: 2px solid #3737e5;
   padding: 30px;
   border-radius: 4px;
 }
 .profile_img {
-  border: 5px solid #3737e5;
-  border-radius: 50%;
+  border-radius: 2%;
   padding: 24px;
 }
 
@@ -181,5 +169,11 @@ tr:hover {
 
 .text-right {
   text-align: right;
+}
+
+.justify-center {
+  background-color: #3737e5;
+  color: white;
+  padding: 10px;
 }
 </style>

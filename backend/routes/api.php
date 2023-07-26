@@ -11,6 +11,7 @@ use App\Http\Controllers\WorkshopPostController;
 use App\Models\WorkshopPost;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\UniversityPostController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Models\FavoriteWorkshopPost;
 use App\Models\University;
 use Illuminate\Http\Request;
@@ -27,9 +28,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// 
+//
 // PRIVATE ROUTES
-// 
+//
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('/auth')->group(function () {
@@ -72,9 +73,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 });
 
-// 
+//
 // PUBLIC ROUTES
-// 
+//
 
 // University routes
 Route::prefix('/university')->group(function () {
@@ -104,6 +105,8 @@ Route::resource('/role', RoleController::class);
 // Login / register routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/googleLogin', [GoogleAuthController::class, 'googleLogin']);
+
 
 Route::get('/majors',[MajorController::class,'index']);
 

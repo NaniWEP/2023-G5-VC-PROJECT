@@ -102,7 +102,7 @@
                 <NewUpdateComponent />
           </v-window-item>
           <v-window-item value="popularUniversity">
-                <NewUpdateComponent />
+                <PopularUniversityComponent />
           </v-window-item>
           <v-window-item value="popularMajor">
                 <PopularMajorComponent />
@@ -116,6 +116,7 @@
 <script>
 import NewUpdateComponent from "./NewUpdateComponent.vue";
 import PopularMajorComponent from "./PopularMajorComponent.vue";
+import PopularUniversityComponent from './PopularUniversityComponent.vue';
 export default {
   data() {
     return {
@@ -127,7 +128,8 @@ export default {
   },
   components: {
     NewUpdateComponent,
-    PopularMajorComponent
+    PopularMajorComponent,
+    PopularUniversityComponent
   },
   methods: {
     search() {
