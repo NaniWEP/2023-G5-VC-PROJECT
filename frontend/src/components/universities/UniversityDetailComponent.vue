@@ -29,7 +29,7 @@
             <v-simple-table>
               <tbody>
                 <tr>
-                  <td>Username</td>
+                  <td>University's name</td>
                   <td class="text-right">:</td>
                   <td>{{university.name}}</td>
                 </tr>
