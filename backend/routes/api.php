@@ -10,6 +10,7 @@ use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\UniversityPostController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\UniversityApplicationController;
+use App\Http\Controllers\WorkshopRegistrationController;
 // use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Route;
 /*
@@ -39,7 +40,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/update/{id}', [AuthController::class, 'updateUser']);
         // update user profile
         Route::post('/update/profilePicture', [AuthController::class, 'getImage']);
+        // register for workshop
+        Route::post('/registerWorkshop', [WorkshopRegistrationController::class, 'store']);
 
+        Route::get('/showWorkshop/{id}', [WorkshopRegistrationController::class, 'show']);
         // university routes
         Route::prefix('/university')->group(function(){
             // crud university
@@ -93,7 +97,7 @@ Route::prefix('/workshop')->group(function(){
     Route::get('/workshopDetail/{id}', [WorkshopPostController::class,'show']);
     Route::get('/expirepost', [WorkshopPostController::class,'getWorkshopPostExprired']);
     Route::get('/newUpdate', [WorkshopPostController::class,'getWorkshopLastUpdated']);
-    Route::get('/workshopPost', [WorkshopPostController::class, 'workshopPost']);
+    Route::get('/workshopPost', [WorkshopPostController::class, 'index']);
     Route::get('/', [WorkshopPostController::class, 'index']);
     Route::get('/{id}', [WorkshopPostController::class, 'selctByUserId']);
 });

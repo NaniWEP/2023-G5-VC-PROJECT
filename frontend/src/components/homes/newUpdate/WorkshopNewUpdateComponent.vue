@@ -30,15 +30,6 @@
             > 
               See more
             </v-btn>
-            <v-btn
-              :to="`/universityDetail/${index + 1}`"
-              :id="$route.params.index"
-              prepend-icon="mdi-heart-outline"
-              class="actionBtn"
-              variant="outlined"
-            >
-              Favorite
-            </v-btn>
           </v-card-actions>
         </v-card>
       </v-slide-group-item>

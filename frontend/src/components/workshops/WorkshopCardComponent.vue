@@ -31,13 +31,10 @@
               <v-btn
                 style="padding: 0 20px"
                 @click="toggleFavorite(workshop.id)"
-                variant="text"
+                :style="getIconStyle(workshop.id)"
+                variant="outlined"
+                prepend-icon="mdi-heart-outline"
               >
-                <v-icon
-                  align-tabs="center"
-                  :style="getIconStyle(workshop.id)"
-                  icon="mdi-heart"
-                ></v-icon>
                 FAVORITE
               </v-btn>
             </v-card-actions>
@@ -126,7 +123,7 @@ export default {
   computed: {
     getIconStyle() {
       return (id) => ({
-        color: this.favorites.includes(id) ? "red" : "black",
+        color: this.favorites.includes(id) ? "red" : "#3737e5",
       });
     },
   },
@@ -143,5 +140,11 @@ export default {
 .actionBtn {
   padding: 0 20px;
   color: #304ffe;
+}
+.faovrite{
+  background-color: #304ffe;
+  color: #fff;
+  transition: 800ms;
+  outline: 1px solid #304ffe;
 }
 </style>

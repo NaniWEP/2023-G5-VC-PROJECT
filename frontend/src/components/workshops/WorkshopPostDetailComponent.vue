@@ -65,9 +65,16 @@
         <v-row justify="end">
           <v-dialog v-model="dialog" persistent width="1080">
             <template v-slot:activator="{ props }">
-              <v-btn class="actionBtn" style="border:2px solid #3737e5" v-bind="props" prepend-icon="mdi-ticket"> register </v-btn>
+              <v-btn
+                class="actionBtn"
+                style="border: 2px solid #3737e5"
+                v-bind="props"
+                prepend-icon="mdi-ticket"
+              >
+                register
+              </v-btn>
             </template>
-            <v-card class="dialong" style="border-top:20px solid #3737e5">
+            <v-card class="dialong" style="border-top: 20px solid #3737e5">
               <v-card-title>
                 <span class="text-h5">Register for workshop</span>
               </v-card-title>
@@ -78,6 +85,7 @@
                       <v-text-field
                         label="First Name *"
                         hint="Please enter your first name"
+                        v-model="firstName"
                         required
                       ></v-text-field>
                     </v-col>
@@ -85,25 +93,30 @@
                       <v-text-field
                         label="Last Name *"
                         hint="Please enter your last name"
+                        v-model="lastName"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
-                      <v-text-field 
-                      label="Email*" 
-                      hint="Please enter your email"
-                      required></v-text-field>
+                      <v-text-field
+                        label="Email*"
+                        hint="Please enter your email"
+                        v-model="email"
+                        required
+                      ></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
-                      label="Phone number *"
-                      hint="Please enter your phone number"
-                      required
+                        label="Phone number *"
+                        hint="Please enter your phone number"
+                        v-model="phoneNumber"
+                        required
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6">
                       <v-select
                         :items="['0-17', '18-29', '30-54', '54+']"
                         label="Age *"
+                        v-model="age"
                         required
                       ></v-select>
                     </v-col>
@@ -111,6 +124,7 @@
                       <v-select
                         :items="['MALE', 'FEMALE']"
                         label="Gender *"
+                        v-model="gender"
                         required
                       ></v-select>
                     </v-col>
@@ -132,7 +146,7 @@
                   class="actionBtn"
                   prepend-icon="mdi-ticket-confirmation"
                   variant="outlined"
-                  @click="dialog = false"
+                  @click="registerWorkshop"
                 >
                   register
                 </v-btn>
@@ -147,12 +161,19 @@
 <script>
 import axios from "@/stores/axiosHttp";
 import dayjs from "dayjs";
+import Swal from "sweetalert2";
 export default {
   name: "UniversityDetail",
   data() {
     return {
       workshopPost: {},
       dialog: false,
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      age: "",
+      gender: ""
     };
   },
   props: ["id"],
@@ -162,6 +183,54 @@ export default {
       const date = dayjs(dateString);
       // Then specify how you want your dates to be formatted
       return date.format("D dddd, MMMM, YYYY");
+    },
+    async registerWorkshop(){
+      try {
+        if (
+          this.email !== "" &&
+          this.phoneNumber !== "" &&
+          this.gender !== ""
+        ) {
+          await axios
+            .post("/auth/registerWorkshop", {
+              name: this.firstName + this.lastName,
+              email: this.email,
+              phone_number: this.phoneNumber,
+              age: this.age,
+              gender: this.gender,
+              workshop_id: this.workshopPost.id
+            })
+            .then((response) => {
+              this.dialog = false;
+              this.alertFavorite("success", response.data.message);
+              console.log(response.data);
+            })
+            .catch((error) => {
+              console.log(error.response.data.message);
+              this.alertFavorite("info", error.response.data.message);
+            })
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    alertFavorite(icon, message) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+
+      Toast.fire({
+        icon: icon,
+        title: message,
+      });
     },
   },
   mounted() {
@@ -249,7 +318,7 @@ tr:hover {
   text-align: right;
 }
 
-.dialong{
+.dialong {
   box-shadow: 0px 2px 4px rgba(52, 7, 255, 0.2);
   margin-bottom: 24px;
   background-color: #ffff;
