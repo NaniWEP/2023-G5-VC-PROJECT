@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\FavoriteUniversityResource;
 use App\Models\FavoriteUniversityPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,6 +81,7 @@ class FavoriteUniversityPostController extends Controller
     public function getListOfFavorite(){
         $userId = Auth::user()->id;
         $favoritePostUniversity = FavoriteUniversityPost::where('user_id', $userId)->get();
+        $favoritePostUniversity = FavoriteUniversityResource::collection($favoritePostUniversity);
         return response()->json([
             'success' => true,
             "data"=> $favoritePostUniversity,
