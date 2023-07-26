@@ -72,4 +72,9 @@ class User extends Authenticatable
     {
         return $this-> hasMany(WorshopRegistration::class);
     }
+
+    public function universityApplication() : HasMany
+    {
+        return $this-> hasMany(UniversityApplication::class);
+    }
 }

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\GetUserResource;
+use Error;
+
 class GoogleAuthController extends Controller
 {
     /**
@@ -57,7 +59,7 @@ class GoogleAuthController extends Controller
                     'first_name' => $request->first_name,
                     'last_name' => $request->last_name,
                     'email' => $request->email,
-                    'profile' => $request->profile,
+                    'profile_image' => $request->profile,
                     'role_id' => $request->role_id,
                 ]);
                 $token = $user->createToken('API TOKEN', ['select', 'create', 'update'])->plainTextToken;
@@ -79,12 +81,11 @@ class GoogleAuthController extends Controller
                     'message' => 'Login successfully',
                 ], Response::HTTP_OK); //200
             }
-        }catch(error){
+        }catch(Error){
             return response()->json([
                 'success' => false,
-                'data' => error,
                 'message' => 'Login Error',
-            ], Response::HTTP_OK); //200
+            ], Response::HTTP_FORBIDDEN); //403
         };
     }
 }

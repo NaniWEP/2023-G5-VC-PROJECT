@@ -20,6 +20,11 @@ return new class extends Migration
             $table->date('apply_date');
             $table->date('start_date');
             $table->integer('price');
+            $table->unsignedBigInteger('major_type_id');
+            $table->foreign('major_type_id')
+            ->references('id')
+            ->on('major_types')
+            ->onDelete('cascade');
             $table->unsignedBigInteger('university_id');
             $table->foreign('university_id')
             ->references('id')
