@@ -23,7 +23,7 @@
 
           <v-card-actions>
             <v-btn
-              :to="`/universityDetail/${workshop.id}`"
+              :to="`workshop/workshopDetail/${workshop.id}`"
               :id="$route.params.index"
               class="actionBtn"
               variant="outlined"

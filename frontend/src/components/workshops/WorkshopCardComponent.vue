@@ -8,7 +8,7 @@
         class="d-flex justify-center align-center"
         cols="4"
       >
-        <v-list>
+        <v-list style="width: 100%">
           <v-card class="mx-auto" max-width="450">
             <v-img
               src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
@@ -22,7 +22,7 @@
 
             <v-card-actions>
               <v-btn
-                :to="`workshopDetail/${workshop.id}`"
+                :to="`workshop/workshopDetail/${workshop.id}`"
                 class="actionBtn"
                 variant="outlined"
               >
