@@ -4,17 +4,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FavoriteUniversityPostController;
 use App\Http\Controllers\FavoriteWorkshopPostController;
 use App\Http\Controllers\MajorController;
-use App\Http\Controllers\WorshopRegistrationController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\SchoolManagerController;
 use App\Http\Controllers\WorkshopPostController;
-use App\Models\WorkshopPost;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\UniversityPostController;
 use App\Http\Controllers\GoogleAuthController;
-use App\Models\FavoriteWorkshopPost;
-use App\Models\University;
-use Illuminate\Http\Request;
+use App\Http\Controllers\UniversityApplicationController;
 // use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Route;
 /*
@@ -43,12 +38,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
         // update user route
         Route::put('/update/{id}', [AuthController::class, 'updateUser']);
         // update user profile
-        Route::put('/update/{id}/profilePicture', [AuthController::class, 'updateUserProfile']);
+        Route::post('/update/profilePicture', [AuthController::class, 'getImage']);
 
         // university routes
         Route::prefix('/university')->group(function(){
             // crud university
-            Route::resource('/university', UniversityController::class);
+            Route::resource('/universities', UniversityController::class);
             // add favorite university post
             Route::post('/favoriteUniversityPost', [FavoriteUniversityPostController::class, 'store']);
             // delete favaite university post
@@ -57,6 +52,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/getListOfFavrite',[FavoriteUniversityPostController::class, 'getListOfFavorite'] );
             // show university
             Route::get('/myUniversity', [UniversityController::class, 'showMyUniversity']);
+            //store university application
+            Route::post('/universityApplication', [UniversityApplicationController::class, 'store']);
         });
           // workshop routes
         Route::prefix('/workshop')->group(function(){
@@ -86,6 +83,8 @@ Route::prefix('/university')->group(function () {
     Route::get('/majorPost', [UniversityPostController::class,'getMajoePost']);
     Route::get('/majorPostDetail/{id}', [UniversityPostController::class,'getMajorPostById']);
     Route::get('/newUpdate', [UniversityPostController::class,'getMajorLastUpdated']);
+    // get university apps
+    Route::get('/getUniversityApplication', [UniversityApplicationController::class, 'index']);
 });
 
 // Expired routes

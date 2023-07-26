@@ -20,6 +20,7 @@ class Major extends Model
         'apply_date',
         'start_date',
         'price',
+        'major_type_id',
         'university_id',
     ];
 
@@ -30,6 +31,10 @@ class Major extends Model
     public function university() : BelongsTo
     {
         return $this-> belongsTo(University::class);
+    }
+    public function majorType() : BelongsTo
+    {
+        return $this-> belongsTo(MajorType::class);
     }
 
 

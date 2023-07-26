@@ -27,13 +27,13 @@ class WorkshopPostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function workshopPost()
+    public function store(Request $request)
     {
-        $workshop = WorkshopPost::all();
+        
         return response()->json([
             'success' => true,
             'meassage' => 'get workshopPost successfully',
-            'data' => $workshop
+            'data' => ''
          ], Response::HTTP_OK);//200
     }
 

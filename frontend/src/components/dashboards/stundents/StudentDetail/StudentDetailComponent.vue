@@ -5,21 +5,19 @@
       <v-col cols="12" md="3">
         <v-card class="elevation-2">
           <v-card-title class="justify-center">
-            <v-img
-              class="profile_img"
-              :src="user.picture"
-              alt="student dp"
-            />
+            <v-img class="profile_img" :src="user.picture" alt="student dp" />
           </v-card-title>
           <div class="file-input-container">
-            <input
-              type="file"
-              ref="fileInput"
-              @change="updateProfilePicture"
-              class="file-input"
-              id="fileInput"
-            />
-            <label for="fileInput" class="placeholder">Edit profile</label>
+            <form @submit="formSubmit" enctype="multipart/form-data">
+              <input
+                type="file"
+                ref="fileInput"
+                v-on:change="onFileChange"
+                class="file-input"
+                id="fileInput"
+              />
+              <label for="fileInput" class="placeholder">Edit profile</label>
+            </form>
           </div>
         </v-card>
       </v-col>
@@ -123,13 +121,11 @@ export default {
   data() {
     return {
       user: {},
+      profile: "",
     };
   },
   components: {
     SideNavBar,
-  },
-  created() {
-    // this.onFileChange();
   },
   methods: {
     getUser() {
@@ -143,26 +139,14 @@ export default {
           console.log(error);
         });
     },
-    async updateProfilePicture(event) {
-      try {
-        const file = event.target.files[0];
-        const formData = new FormData();
-        console.log(file);
-        console.log(formData);
-        formData.append("profile_picture", file);
-        const response = await axios.post(
-          `/users/${this.user.id}/profilePicture`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        this.user.profile_picture_url = response.data.profile_picture_url;
-      } catch (error) {
-        console.log(error);
-      }
+    onFileChange(event) {
+      var file = event.target.files[0];
+      console.log(event.target.files[0]);
+      var form = new FormData();
+      form.append('profile', file);
+      axios.post('auth/update/profilePicture', form).then((response) => {
+        this.profile = response.data;
+      });
     },
   },
   show() {},
