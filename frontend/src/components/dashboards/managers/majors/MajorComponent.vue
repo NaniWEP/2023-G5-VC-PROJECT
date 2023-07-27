@@ -1,8 +1,8 @@
 <template>
 <div id="body">
 <dashboard-component></dashboard-component>
-  <v-card class="ml-15 mt-5 mr-8 mb-3 bg-grey-lighten-2 p-10">
-    <h1>hello</h1>
+  <v-card class="ml-10 mt-1 mr-8 bg-grey-lighten-2">
+    <h1 class="text-light-black-accent-4 ml-10">Major</h1>
   </v-card>
 </div>
 </template>

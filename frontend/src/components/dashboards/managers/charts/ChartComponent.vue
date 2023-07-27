@@ -1,16 +1,8 @@
 <template>
   <div id="body">
     <dashboard-component-vue></dashboard-component-vue>
-    <v-card>
-      <div id="chart">
-        <apexchart
-          type="bar"
-          height="350"
-          :options="chartOptions"
-          :series="series"
-        ></apexchart>
-        <h1>hi</h1>
-      </div>
+    <v-card class="ml-10 mt-1 mr-8 bg-grey-lighten-2">
+      <h1 class="text-light-black-accent-4 ml-10">Chart</h1>
     </v-card>
   </div>
 </template>

@@ -10,6 +10,7 @@ import UniversityDetalView from '../views/Page/universities/UniversityDetailView
 import MajorPostView from '../components/universities/MajorPostDetailComponent.vue'
 import StudentDetail from "../views/Page/dashboards/students/StudentDetailView.vue"
 import StudentFavoritePage from "../views/Page/dashboards/students/StudentFavoriteView.vue"
+import StudentMap from "../views/Page/dashboards/students/StudentMapView.vue"
 import SearchView from '../views/SearchView.vue'
 import UserView from "../components/dashboards/managers/UserView.vue"
 import ApplyView from "../views/Page/dashboards/managers/applys/ApplyingView.vue"
@@ -86,6 +87,12 @@ const routes = [
     path: "/favoritePage",
     name: "favoritePage",
     component: StudentFavoritePage,
+  },
+
+  {
+    path: "/mapPage",
+    name: "mapPage",
+    component: StudentMap,
   },
   
   {

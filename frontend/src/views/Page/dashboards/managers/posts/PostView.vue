@@ -2,7 +2,7 @@
     <postComponent />
 </template>
 <script>
-import postComponent from '../../../../../components/dashboards/managers/posts/PostComponent.vue'
+import postComponent from '../../../../../components/dashboards/managers/posts/ListPostComponent.vue'
     export default{
         name : 'postView',
         components: {

@@ -1,12 +1,12 @@
 <template>
   <div id="body">
     <dashboard-component-vue></dashboard-component-vue>
-    <v-card class="bg-grey-lighten-2 p-6 title">
-      <h1 class="text-light-green-accent-4">Expired Date</h1>
+    <v-card class="ml-10 mt-1 mr-8 bg-grey-lighten-2">
+      <h1 class="text-light-black-accent-4 ml-10">Expired Date</h1>
       <div class="d-flex align-center flex-column bg-grey-lighten-4 pa-6">
         <v-btn-toggle color="primary" v-model="toggle">
-          <v-btn color="success">UNIVERSITY</v-btn>
-          <v-btn color="success">WORK SHOP</v-btn>
+          <v-btn color="indigo-darken-1">WORKSHOP</v-btn>
+          <v-btn color="indigo-darken-1">UNIVERSITY</v-btn>
         </v-btn-toggle>
       </div>
     </v-card>
@@ -28,7 +28,7 @@
             <td>{{ work.description }}</td>
             <td>{{ work.date }}</td>
             <td class="d-flex align-center justify-center">
-              <v-btn class="mr-4 w-25" color="success">Edit</v-btn>
+              <v-btn class="mr-4 w-25 text-white" color="#3737e5">Edit</v-btn>
               <v-btn color="red">Delete</v-btn>
             </td>
           </tr>
@@ -53,7 +53,7 @@
             <td>{{ post.description }}</td>
             <td>{{ post.date }}</td>
             <td class="d-flex align-center justify-center">
-              <v-btn class="mr-4 w-25" color="success">Edit</v-btn>
+              <v-btn class="mr-4 w-25 text-white" color="#3737e5">Edit</v-btn>
               <v-btn color="red">Delete</v-btn>
             </td>
           </tr>
