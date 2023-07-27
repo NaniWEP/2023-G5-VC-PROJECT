@@ -218,6 +218,21 @@ export default {
   margin-top: 3%;
 }
 
+.text-center {
+  background-color: #afc4c7;
+  margin-top: 1%;
+  padding: 10px;
+  font-size: large;
+}
+
+.v-card-text {
+  margin-top: 16px;
+  padding: 30px;
+  background-color: #cdd3cd;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
 .v-card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: 24px;
@@ -248,7 +263,6 @@ export default {
   padding: 9px;
 }
 .title {
-  background-color: #3737e5;
   margin-right: 50%;
   text-align: center;
   margin-top: 2%;
@@ -257,16 +271,18 @@ export default {
 }
 
 .main-card {
-  background-color: #ffff;
+  background-color: #cdd3cd;
   border:solid 1px #3737e5;
   margin: 9px;
   padding: 10px;
   border-radius: 3px;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
 }
+.title,
 .text-center {
   background-color: #3737e5;
   color: white;
+  border-radius: 3px;
 }
 
 .name{

@@ -5,7 +5,20 @@
       <v-col cols="12" md="3">
         <v-card class="elevation-2">
           <v-card-title class="justify-center">
-            <v-img class="profile_img" :src="user.picture" alt="student dp" />
+            <v-img
+              v-if="user.picture != null"
+              class="profile_img"
+              :src="user.picture"
+              alt="student dp"
+            />
+            <v-img
+              v-else
+              class="profile_img"
+              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+              alt="student dp"
+              width="200"
+              height="180"
+            />
           </v-card-title>
           <div class="file-input-container">
             <input
