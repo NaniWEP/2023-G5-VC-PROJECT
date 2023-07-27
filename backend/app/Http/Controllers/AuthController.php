@@ -113,15 +113,15 @@ class AuthController extends Controller
     public function getImage(Request $request)
     {
         try {
-            if (!$request->hasFile('profile')) {
+            if (!$request->hasFile('file')) {
                 throw new \Exception('No file uploaded');
             }
-            $image = $request->file('profile');
+            $image = $request->file('file');
             if (!getimagesize($image)) {
                 throw new \Exception('Invalid image file');
             }
             $userId = Auth::id();
-            $newName = "profile_$userId" . time() . '.' . $image->getClientOriginalExtension();
+            $newName = "file_$userId" . rand() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $newName);
             $path = asset('images/' . $newName);
             return $path;

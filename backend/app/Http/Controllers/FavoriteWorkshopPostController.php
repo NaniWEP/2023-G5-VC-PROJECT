@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Resources\FavoriteWorkshopResource;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -80,6 +81,7 @@ class FavoriteWorkshopPostController extends Controller
     public function getListOfFavorite(){
         $userId = Auth::user()->id;
         $favoriteWorkshopPost = FavoriteWorkshopPost::where('user_id', $userId)->get();
+        $favoriteWorkshopPost = FavoriteWorkshopResource::collection($favoriteWorkshopPost);
         return response()->json([
             'success' => true,
             "data"=> $favoriteWorkshopPost,
