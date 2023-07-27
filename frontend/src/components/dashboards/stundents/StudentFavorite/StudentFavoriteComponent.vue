@@ -11,7 +11,7 @@
               width="200"
               height="180"
             />
-            <h3 class="text-center">Doeur Diet</h3>
+            <h3 class="text-center name">{{ user.first_name + user.last_name }}</h3>
           </v-card-title>
         </v-card>
       </v-col>
@@ -21,13 +21,13 @@
             <h3 class="mb-0"><v-icon>mdi-heart</v-icon>My favorite</h3>
           </v-card-title>
 
-          <v-tabs v-model="tab" class="bg-white">
+          <v-tabs v-model="tab" class="bg-white d-flex justify-space-between">
             <v-tab value="university">Major</v-tab>
             <v-tab value="workshop">Workshop</v-tab>
           </v-tabs>
 
           <v-window v-model="tab">
-            <v-window-item value="university">
+            <v-window-item v-if="favoriteListOfUniversity != null" value="university">
               <div class="title">
                 <h3>University</h3>
               </div>
@@ -54,11 +54,11 @@
                     </p>
                     <p>
                       <span style="font-weight: bold">Apply date:</span>
-                      {{ universityList.university.major.apply_date }}
+                      {{ formatDate(universityList.university.major.apply_date) }}
                     </p>
                     <p>
                       <span style="font-weight: bold">Sart date study:</span>
-                      {{ universityList.university.major.start_date }}
+                      {{ formatDate(universityList.university.major.start_date) }}
                     </p>
                     <p>
                       <span style="font-weight: bold">Duration:</span>
@@ -72,8 +72,11 @@
                 </article>
               </div>
             </v-window-item>
+            <v-window-item v-else value="university">
+              <h3>You don't have add university</h3>
+            </v-window-item>
 
-            <v-window-item value="workshop">
+            <v-window-item v-if="favoriteListOfWorkshop != null" value="workshop" class="favorite">
               <div class="title">
                 <h3>Workshop</h3>
               </div>
@@ -95,7 +98,7 @@
                     <p>{{ workshopList.workshop.description }}</p>
                     <p>
                       <span style="font-weight: bold">Date:</span>
-                      {{ workshopList.workshop.date }}
+                      {{ formatDate(workshopList.workshop.date) }}
                     </p>
                     <p>
                       <span style="font-weight: bold">Time:</span>
@@ -116,6 +119,9 @@
                   </div>
                 </article>
               </div>
+            </v-window-item>
+            <v-window-item v-else value="workshop">
+              <h3>You don't have add university</h3>
             </v-window-item>
           </v-window>
         </v-card>
@@ -143,6 +149,7 @@
 <script>
 import SideNavBar from "../studentLayouts/SideNavBar.vue";
 import axios from "@/stores/axiosHttp";
+import dayjs from "dayjs";
 export default {
   components: {
     SideNavBar,
@@ -150,15 +157,30 @@ export default {
   data() {
     return {
       tab: null,
-      favoriteListOfWorkshop: [],
-      favoriteListOfUniversity: [],
+      favoriteListOfWorkshop: null,
+      favoriteListOfUniversity: null,
+      user: {},
     };
   },
   created() {
     this.getFavoriteUniversity();
     this.getFavoriteWorkshop();
   },
+  mounted() {
+    this.getUser();
+  },
   methods: {
+    getUser() {
+      axios
+        .get(`/auth/getUser`)
+        .then((response) => {
+          console.log(response.data.data);
+          this.user = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     getFavoriteWorkshop() {
       axios
         .get("auth/workshop/getListOfFavrite")
@@ -168,6 +190,11 @@ export default {
         .catch((error) => {
           console.log(error.message);
         });
+    },
+    formatDate(dateString) {
+      const date = dayjs(dateString);
+      // Then specify how you want your dates to be formatted
+      return date.format("D dddd, MMMM, YYYY");
     },
     getFavoriteUniversity() {
       axios
@@ -226,6 +253,7 @@ export default {
   text-align: center;
   margin-top: 2%;
   color: white;
+  border-radius: 5px;
 }
 
 .main-card {
@@ -240,4 +268,9 @@ export default {
   background-color: #3737e5;
   color: white;
 }
+
+.name{
+  border-radius: 5px;
+}
+
 </style>
