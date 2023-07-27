@@ -8,7 +8,7 @@ use App\Http\Requests\GetUserRequest;
 use App\Http\Resources\GetUserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{Validator,Auth};
+use Illuminate\Support\Facades\{Validator, Auth};
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,56 +18,17 @@ class AuthController extends Controller
 
     public function register(AuthRegisterRequest $request)
     {
-            $user = User::create([
-               'first_name' => $request -> first_name,
-               'last_name' => $request -> last_name,
-               'email' => $request -> email,
-               'password' => Hash::make($request -> password),
-               'gender' => $request -> gender,
-               'date_of_birth' => $request -> date_of_birth,
-               'province' => $request -> province,
-               'role_id' => $request -> role_id,
-            ]);
-
-            $token = $user->createToken('API TOKEN', ['select', 'create', 'update'])->plainTextToken;
-            $user = new GetUserResource($user);
-            return response()->json([
-                'success' => true,
-                'message' => 'Create user successful',
-                'data' => $user,
-                'token' => $token
-            ]);
-
-    }
-
-    public function updateUser(Request $request, $id)
-    {
-        $user = User::find($id);
-
-        $user->update([
-            'first_name' => $request -> first_name,
-            'last_name' => $request -> last_name,
-            'email' => $request -> email,
-            'password' => $request -> password,
-            'date_of_birth' => $request -> date_of_birth,
-            'province' => $request -> province,
-            'role_id' => $request -> role_id,
-        ]);
-        return response()->json([
-            'massage' => 'user updated successfully',
-            'data' => $user
-        ], Response::HTTP_OK);//200
-    }
-
-    public function googleLogin(Request $request)
-    {
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
-            'profile' => $request->profile,
+            'password' => Hash::make($request->password),
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
+            'province' => $request->province,
             'role_id' => $request->role_id,
         ]);
+
         $token = $user->createToken('API TOKEN', ['select', 'create', 'update'])->plainTextToken;
         $user = new GetUserResource($user);
         return response()->json([
@@ -75,7 +36,26 @@ class AuthController extends Controller
             'message' => 'Create user successful',
             'data' => $user,
             'token' => $token
-        ], Response::HTTP_CREATED); // 201
+        ]);
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->update([
+            'first_name' => $request -> first_name,
+            'last_name' => $request -> last_name,
+            'email' => $request -> email,
+            'password' => $request -> password,
+            'gender' => $request -> gender,
+            'date_of_birth' => $request -> date_of_birth,
+            'province' => $request -> province,
+            'role_id' => $request -> role_id,
+        ]);
+        return response()->json([
+            'massage' => 'user updated successfully',
+            'data' => $user
+        ], Response::HTTP_OK); //200
     }
 
     public function login(AuthLoginRequest $request)
@@ -84,24 +64,20 @@ class AuthController extends Controller
         $userEmail = User::where('email', $request->email)->first();
         $credential = $request->only('email', 'password');
 
-        if(!$userEmail)
-        {
+        if (!$userEmail) {
             return response()->json([
                 'success' => false,
-               'message' => 'Incorrect email!',
+                'message' => 'Incorrect email!',
 
-            ], Response::HTTP_UNAUTHORIZED);// 401
-        }
-        elseif(!Auth::attempt($credential))
-        {
+            ], Response::HTTP_UNAUTHORIZED); // 401
+        } elseif (!Auth::attempt($credential)) {
             return response()->json([
                 'success' => false,
-               'message' => 'Incorrect password!',
+                'message' => 'Incorrect password!',
 
-            ], Response::HTTP_UNAUTHORIZED);// 401
+            ], Response::HTTP_UNAUTHORIZED); // 401
         }
-        if(Auth::attempt($credential))
-        {
+        if (Auth::attempt($credential)) {
             $user = Auth::user();
             $user = new GetUserResource($user);
             $token = $user->createToken('API TOKEN', ['select', 'create', 'update', 'delete'])->plainTextToken;
@@ -123,7 +99,8 @@ class AuthController extends Controller
         ], Response::HTTP_OK); //200
     }
 
-    public function getUser(){
+    public function getUser()
+    {
         $user = Auth::user();
         $user = new GetUserResource($user);
 
@@ -132,5 +109,24 @@ class AuthController extends Controller
             'data' => $user,
             'message' => 'Get user data successfully',
         ], Response::HTTP_OK); //200
+    }
+    public function getImage(Request $request)
+    {
+        try {
+            if (!$request->hasFile('file')) {
+                throw new \Exception('No file uploaded');
+            }
+            $image = $request->file('file');
+            if (!getimagesize($image)) {
+                throw new \Exception('Invalid image file');
+            }
+            $userId = Auth::id();
+            $newName = "file_$userId" . rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $newName);
+            $path = asset('images/' . $newName);
+            return $path;
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
     }
 }

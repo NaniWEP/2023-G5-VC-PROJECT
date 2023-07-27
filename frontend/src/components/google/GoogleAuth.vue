@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { decodeCredential, googleLogout } from "vue3-google-login";
+import { decodeCredential} from "vue3-google-login";
 import axios from "@/stores/axiosHttp";
 import { setCookie } from "@/stores/cookie.js";
 export default {
@@ -51,13 +51,11 @@ export default {
       }
     },
   },
-  logout() {
-    googleLogout();
-  },
 };
 </script>
  <style scoped>
 .google {
   width: 100%;
+  padding: 20px;
 }
 </style>

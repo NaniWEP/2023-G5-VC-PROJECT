@@ -17,11 +17,13 @@ class WorkshopResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this -> name,
+            'venue' => $this -> venue,
             'description' => $this -> description,
             'date' => $this -> date,
             'time' => $this -> time,
             'location' => $this -> location,
             'organizer' => $this -> organizer,
+            'variable_ticket' => $this -> variable_ticket,
             'contact' => $this -> contact,
             'status' => $this -> status,
             'user_id' => $this -> user_id

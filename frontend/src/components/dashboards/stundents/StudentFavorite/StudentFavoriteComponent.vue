@@ -8,19 +8,11 @@
             <v-img
               class="profile_img"
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-              alt="student dp"
               width="200"
               height="180"
             />
             <h3 class="text-center">Doeur Diet</h3>
           </v-card-title>
-          <v-card-text>
-            <p class="mb-0">
-              <strong class="pr-1">Student ID:</strong>321000001
-            </p>
-            <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
-            <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
-          </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="12" md="8">
@@ -30,8 +22,7 @@
           </v-card-title>
 
           <v-tabs v-model="tab" class="bg-white">
-            <v-tab value="university">University</v-tab>
-            <v-tab value="major">Major</v-tab>
+            <v-tab value="university">Major</v-tab>
             <v-tab value="workshop">Workshop</v-tab>
           </v-tabs>
 
@@ -41,27 +32,42 @@
                 <h3>University</h3>
               </div>
 
-              <div v-for="slide in slides" :key="slide" class="main-card">
+              <div
+                v-for="universityList in favoriteListOfUniversity"
+                :key="universityList"
+                class="main-card"
+              >
                 <article class="article">
-                  <img :src="slide.img" alt="Slide Image" />
+                  <!-- <img :src="slide.img" alt="Slide Image" /> -->
+                  <img
+                    src="https://img.freepik.com/free-photo/harvard-university-cambridge-usa_1268-14363.jpg"
+                    alt=""
+                  />
                   <div class="article_text_column">
-                    <h2>{{ slide.title }}</h2>
-                    <p>{{ slide.description }}</p>
-                  </div>
-                </article>
-              </div>
-            </v-window-item>
-
-            <v-window-item value="major">
-              <div class="title">
-                <h3>Major</h3>
-              </div>
-              <div v-for="slide in slides" :key="slide" class="main-card">
-                <article class="article">
-                  <img :src="slide.img" alt="Slide Image" />
-                  <div class="article_text_column">
-                    <h2>{{ slide.title }}</h2>
-                    <p>{{ slide.description }}</p>
+                    <h2>{{ universityList.university.title }}</h2>
+                    <p>{{ universityList.university.description }}</p>
+                    <p>
+                      <span style="font-weight: bold"
+                        >Major:
+                        {{ universityList.university.major.title }}
+                      </span>
+                    </p>
+                    <p>
+                      <span style="font-weight: bold">Apply date:</span>
+                      {{ universityList.university.major.apply_date }}
+                    </p>
+                    <p>
+                      <span style="font-weight: bold">Sart date study:</span>
+                      {{ universityList.university.major.start_date }}
+                    </p>
+                    <p>
+                      <span style="font-weight: bold">Duration:</span>
+                      {{ universityList.university.major.month_duration }} month
+                    </p>
+                    <p>
+                      <span style="font-weight: bold">$Price:</span>
+                      {{ universityList.university.major.price }} $
+                    </p>
                   </div>
                 </article>
               </div>
@@ -71,12 +77,42 @@
               <div class="title">
                 <h3>Workshop</h3>
               </div>
-              <div v-for="slide in slides" :key="slide" class="main-card">
+              <div
+                v-for="workshopList in favoriteListOfWorkshop"
+                :key="workshopList"
+                class="main-card"
+              >
                 <article class="article">
-                  <img :src="slide.img" alt="Slide Image" />
+                  <!-- <img :src="slide.img" alt="Slide Image" /> -->
+
+                  <img
+                    src="https://www.kgpraigarh.ac.in/images/web_img/workshop1.png"
+                    alt=""
+                  />
+
                   <div class="article_text_column">
-                    <h2>{{ slide.title }}</h2>
-                    <p>{{ slide.description }}</p>
+                    <h2>{{ workshopList.workshop.name }}</h2>
+                    <p>{{ workshopList.workshop.description }}</p>
+                    <p>
+                      <span style="font-weight: bold">Date:</span>
+                      {{ workshopList.workshop.date }}
+                    </p>
+                    <p>
+                      <span style="font-weight: bold">Time:</span>
+                      {{ workshopList.workshop.time }}
+                    </p>
+                    <p>
+                      <span style="font-weight: bold">Location:</span>
+                      {{ workshopList.workshop.location }}
+                    </p>
+                    <p>
+                      <span style="font-weight: bold">Organizer:</span>
+                      {{ workshopList.workshop.organizer }}
+                    </p>
+                    <p>
+                      <span style="font-weight: bold">Contact: </span>
+                      {{ workshopList.workshop.contact }}
+                    </p>
                   </div>
                 </article>
               </div>
@@ -91,10 +127,11 @@
           </v-card-title>
           <v-card-text>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              Knowledge sharpens our skills like reasoning and problem-solving.
+              A strong base of knowledge helps brains function more smoothly and
+              effectively. We become smarter with the power of knowledge and
+              solve problems more easily. * Everyday Life- Knowledge is
+              important and useful in day to day events.
             </p>
           </v-card-text>
         </v-card>
@@ -113,44 +150,37 @@ export default {
   data() {
     return {
       tab: null,
-      favoriteList:'',
-      slides: [
-        {
-          title: "PNC",
-          img: "https://img2.storyblok.com/fit-in/1200x630/f/64062/1600x900/0ecd62f24b/cambridge-uni.jpeg",
-          description:
-            "This image has an aspect ratio of 3/2. But when the text is longer, the image grows too, overriding its aspect ratio. Cool!",
-        },
-        {
-          title: "Siem Reap",
-          img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeZgcmGE7iRIZJaekxDGQTyzutH-qkh_S5cNZvZdPrXXg_dDqfNbWZxq8hiwkvyNarjaE&usqp=CAU",
-          description:
-            "This image has an aspect ratio of 3/2. But when the text is longer, the image grows too, overriding its aspect ratio. Cool!",
-        },
-        {
-          title: "Siem Reap",
-          img: "https://mekong.edu.kh/wp-content/uploads/2022/04/DSC_0334.jpg",
-          description:
-            "This image has an aspect ratio of 3/2. But when the text is longer, the image grows too, overriding its aspect ratio. Cool!",
-        },
-      ],
+      favoriteListOfWorkshop: [],
+      favoriteListOfUniversity: [],
     };
   },
-  created(){
-    this.getFavorite();
+  created() {
+    this.getFavoriteUniversity();
+    this.getFavoriteWorkshop();
   },
-  methods:{
-    getFavorite(){
-      axios.post("auth/workshop/favoriteList")
-      .then(response=>{
-        this.favoriteList = response.data
-        console.log(response.data)
-      })
-      .catch(error=>{
-        console.log(error.message)
-      })
-    }
-  }
+  methods: {
+    getFavoriteWorkshop() {
+      axios
+        .get("auth/workshop/getListOfFavrite")
+        .then((response) => {
+          this.favoriteListOfWorkshop = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    },
+    getFavoriteUniversity() {
+      axios
+        .get("auth/university/getListOfFavrite")
+        .then((response) => {
+          this.favoriteListOfUniversity = response.data.data;
+          console.log(this.favoriteListOfUniversity);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    },
+  },
 };
 </script>
 
@@ -171,7 +201,7 @@ export default {
 .v-card-text {
   margin-top: 16px;
   padding: 30px;
-  background-color: #cecaca;
+  background-color: #cdd3cd;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
@@ -179,72 +209,51 @@ export default {
 .v-card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: 24px;
-  border: 2px solid #64dd17;
+  border: 2px solid #3737e5;
   padding: 30px;
   border-radius: 4px;
 }
 
 .profile_img {
-  border: 3px solid #64dd17;
+  border: 3px solid #3737e5;
   border-radius: 50%;
   padding: 24px;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-}
-
-th,
-td {
-  padding: 9px;
-  text-align: left;
-  width: 2%;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-tr:hover {
-  background-color: #ddd;
 }
 
 .text-right {
   text-align: right;
 }
 
-img {
-  width: 35%;
+.article img {
+  width: 45%;
+  height: 30%;
 }
-
 .article {
   display: flex;
-  padding: 5px;
 }
 
 .article_text_column {
   padding: 9px;
 }
 .title {
-  background-color: #64dd17;
   margin-right: 50%;
   text-align: center;
   margin-top: 2%;
+  color: white;
 }
 
 .main-card {
-  background-color: #b8beb6;
-  margin: 8px;
+  background-color: #cdd3cd;
+  border:solid 1px #3737e5;
+  margin: 9px;
   padding: 10px;
   border-radius: 3px;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
 }
+.title,
 .text-center {
-  background-color: #64dd17;
+  background-color: #3737e5;
+  color: white;
+  border-radius: 3px;
 }
 </style>

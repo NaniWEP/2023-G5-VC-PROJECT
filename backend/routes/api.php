@@ -4,16 +4,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FavoriteUniversityPostController;
 use App\Http\Controllers\FavoriteWorkshopPostController;
 use App\Http\Controllers\MajorController;
-use App\Http\Controllers\WorshopRegistrationController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\SchoolManagerController;
 use App\Http\Controllers\WorkshopPostController;
-use App\Models\WorkshopPost;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\UniversityPostController;
-use App\Models\FavoriteWorkshopPost;
-use App\Models\University;
-use Illuminate\Http\Request;
+use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\UniversityApplicationController;
 // use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Route;
 /*
@@ -41,11 +37,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         // update user route
         Route::put('/update/{id}', [AuthController::class, 'updateUser']);
+        // update user profile
+        Route::post('/profilePicture', [AuthController::class, 'getImage']);
 
         // university routes
         Route::prefix('/university')->group(function(){
             // crud university
-            Route::resource('/university', UniversityController::class);
+            Route::resource('/universities', UniversityController::class);
             // add favorite university post
             Route::post('/favoriteUniversityPost', [FavoriteUniversityPostController::class, 'store']);
             // delete favaite university post
@@ -54,6 +52,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/getListOfFavrite',[FavoriteUniversityPostController::class, 'getListOfFavorite'] );
             // show university
             Route::get('/myUniversity', [UniversityController::class, 'showMyUniversity']);
+            //store university application
+            Route::post('/universityApplication', [UniversityApplicationController::class, 'store']);
         });
           // workshop routes
         Route::prefix('/workshop')->group(function(){
@@ -83,6 +83,8 @@ Route::prefix('/university')->group(function () {
     Route::get('/majorPost', [UniversityPostController::class,'getMajoePost']);
     Route::get('/majorPostDetail/{id}', [UniversityPostController::class,'getMajorPostById']);
     Route::get('/newUpdate', [UniversityPostController::class,'getMajorLastUpdated']);
+    // get university apps
+    Route::get('/getUniversityApplication', [UniversityApplicationController::class, 'index']);
 });
 
 // Expired routes
@@ -91,7 +93,7 @@ Route::prefix('/workshop')->group(function(){
     Route::get('/workshopDetail/{id}', [WorkshopPostController::class,'show']);
     Route::get('/expirepost', [WorkshopPostController::class,'getWorkshopPostExprired']);
     Route::get('/newUpdate', [WorkshopPostController::class,'getWorkshopLastUpdated']);
-    Route::get('/workshopPost', [WorkshopPostController::class, 'workshopPost']);
+    Route::get('/workshopPost', [WorkshopPostController::class, 'index']);
     Route::get('/', [WorkshopPostController::class, 'index']);
     Route::get('/{id}', [WorkshopPostController::class, 'selctByUserId']);
 });
@@ -102,7 +104,7 @@ Route::resource('/role', RoleController::class);
 // Login / register routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/googleLogin', [AuthController::class, 'googleLogin']);
+Route::post('/googleLogin', [GoogleAuthController::class, 'googleLogin']);
 
 
 Route::get('/majors',[MajorController::class,'index']);

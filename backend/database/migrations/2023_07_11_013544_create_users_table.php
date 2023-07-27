@@ -25,7 +25,7 @@ return new class extends Migration
             ->references('id')
             ->on('roles')
             ->onDelete('cascade');
-            $table->string('profile')->nullable();
+            $table->string('profile_image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

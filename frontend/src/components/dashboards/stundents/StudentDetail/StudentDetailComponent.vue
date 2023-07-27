@@ -6,12 +6,29 @@
         <v-card class="elevation-2">
           <v-card-title class="justify-center">
             <v-img
+              v-if="user.picture != null"
               class="profile_img"
               :src="user.picture"
               alt="student dp"
             />
-            <h3 class="text-center">{{ user.first_name + " " +user.last_name }}</h3>
+            <v-img
+              v-else
+              class="profile_img"
+              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+              alt="student dp"
+              width="200"
+              height="180"
+            />
           </v-card-title>
+          <div class="file-input-container">
+            <input
+              type="file"
+              @change="onFileChange"
+              class="file-input"
+              id="file-input"
+            />
+            <label for="file-input" class="placeholder">Edit profile</label>
+          </div>
         </v-card>
       </v-col>
       <v-col cols="12" md="8">
@@ -60,22 +77,28 @@
                   <v-col cols="12" sm="6">
                     <v-autocomplete
                       label="Province*"
-                       :items="[
-                       'KampongThom',
-                       'KampongCham',
-                       'PreyVeag',
-                       'KosKong',
-                       'BatdomBong',
-                       'BunteayMeanjey',
-                       'Kompot',
-                       'Stung Treang',
-                       'SeamReap',
-                       ]"
+                      :items="[
+                        'KampongThom',
+                        'KampongCham',
+                        'PreyVeag',
+                        'KosKong',
+                        'BatdomBong',
+                        'BunteayMeanjey',
+                        'Kompot',
+                        'Stung Treang',
+                        'SeamReap',
+                      ]"
                       required
                       v-model="user.province"
                     ></v-autocomplete>
                   </v-col>
-                  <v-btn prepend-icon="mdi-content-save-edit" class="saveBtn" variant="outlined" @click="updateUser">Save</v-btn>            
+                  <v-btn
+                    prepend-icon="mdi-content-save-edit"
+                    class="saveBtn"
+                    variant="outlined"
+                    @click="updateUser"
+                    >Save</v-btn
+                  >
                 </v-row>
               </v-container>
             </v-simple-table>
@@ -105,48 +128,74 @@
 import axios from "@/stores/axiosHttp";
 import SideNavBar from "../studentLayouts/SideNavBar.vue";
 export default {
-  data(){
-    return{     
-        user: {},
-      }
-    },                 
+  data() {
+    return {
+      user: {},
+      image: "",
+    };
+  },
   components: {
     SideNavBar,
   },
-  methods:{
-    getUser(){
+  methods: {
+    getUser() {
       axios
-      .get(`/auth/getUser`)
-      .then((response) => {
-        console.log(response.data.data);
-        this.user = response.data.data;
-      })
-      .catch((error) => {
-        console.log(error);
+        .get(`/auth/getUser`)
+        .then((response) => {
+          console.log(response.data.data);
+          this.user = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    // onFileChange(event) {
+    //   // Retrieve the selected image file
+    //   const file = event.target.files[0];
+    //   console.log(file);
+    //   if (file) {
+    //     const reader = new FileReader();
+    //     reader.onload = () => {
+    //       // Convert the image to base64 encoding
+    //       const base64Image = reader.result;
+    //       this.image = base64Image; // Store the base64 encoded image
+    //       // Create a new instance of FormData object
+    //       const imagePost = new FormData();
+    //       console.log(imagePost);
+    //       // Append the file to the FormData object
+    //       imagePost.append("file", file);
+    //       // Make an API call to upload the image
+    //       axios
+    //         .post("auth/profilePicture", imagePost)
+    //         .then((response) => {
+    //           console.log(response.data);
+    //         })
+    //         .catch((error) => {
+    //           console.log(error.response.data);
+    //         });
+    //     };
+    //     // Use setTimeout to delay the call to readAsDataURL()
+    //     setTimeout(() => {
+    //       reader.readAsDataURL(file);
+    //     }, 0);
+    //   }
+    // },
+    onFileChange(event) {
+      var file = event.target.files[0].name;
+      console.log(event.target.files[0]);
+      var form = new FormData();
+      form.append("file", file);
+      axios.post('auth/profilePicture', form).then((response) => {
+        this.image = response.data;
       });
     },
-    updateUser(){
-      console.log(this.user.date_of_birth)
-      axios
-      .put(`/auth/update/`+ this.user.id, this.user)
-      .then((response)=>{
-        console.log(response.data);
-      })
-      .catch((error)=>{
-        console.log(error);
-      })
-    }
   },
-  show(){
+  show() {},
+  onMounted() {},
+  mounted() {
+    this.getUser();
   },
-  onMounted(){
-  },
-  mounted(){
-    this.getUser()
-  },
-  created(){
-  }
-
 };
 </script>
 
@@ -227,14 +276,47 @@ tr:hover {
   text-align: right;
 }
 
-.saveBtn{
+.saveBtn {
   outline: 1px solid #3737e5;
   color: #3737e5;
 }
-.saveBtn:hover{
+.saveBtn:hover {
   background-color: #304ffe;
-  color : #ffff;
+  color: #ffff;
   transition: 800ms;
   outline: 1px solid #304ffe;
+}
+.file-input-container {
+  position: relative;
+  height: 30px;
+}
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #304ffe;
+  border-radius: 5px;
+  border: 2px solid #304ffe;
+  cursor: pointer;
+}
+.placeholder:hover {
+  background-color: #304ffe;
+  color: #fff;
 }
 </style>

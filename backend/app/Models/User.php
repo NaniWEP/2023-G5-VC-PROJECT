@@ -29,7 +29,7 @@ class User extends Authenticatable
         'date_of_birth',
         'province',
         'role_id',
-        'profile',
+        'profile_image',
     ];
 
     /**
@@ -71,5 +71,10 @@ class User extends Authenticatable
     public function workshopRegister() : HasMany
     {
         return $this-> hasMany(WorshopRegistration::class);
+    }
+
+    public function universityApplication() : HasMany
+    {
+        return $this-> hasMany(UniversityApplication::class);
     }
 }

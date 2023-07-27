@@ -1,9 +1,10 @@
-import { defineStore } from 'pinia'
+import { defineStore} from 'pinia';
+import { ref } from 'vue';
 import axios from "@/stores/axiosHttp";
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    users: [],
+    users: ref(null),
     error: null
   }),
   actions: {
@@ -12,9 +13,10 @@ export const useUserStore = defineStore('user', {
         await axios.get('/auth/getUser')
         .then((response) => {
           this.users = response.data.data
+          console.log("This is: ", this.users)
         })
-      }catch{
-        this.error = error.response.data.message;
+      }catch(error){
+        this.error = error;
       }
     }
   }

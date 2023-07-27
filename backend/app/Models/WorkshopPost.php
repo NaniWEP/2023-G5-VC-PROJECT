@@ -13,12 +13,14 @@ class WorkshopPost extends Model
     protected $fillable =
     [
         'name',
+        'venue',
         'description',
         'date',
         'time',
         'location',
         'organizer',
         'contact',
+        'variable_ticket',
         'status',
         'user_id'
     ];
