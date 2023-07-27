@@ -10,6 +10,7 @@ import UniversityDetalView from '../views/Page/universities/UniversityDetailView
 import MajorPostView from '../components/universities/MajorPostDetailComponent.vue'
 import StudentDetail from "../views/Page/dashboards/students/StudentDetailView.vue"
 import StudentFavoritePage from "../views/Page/dashboards/students/StudentFavoriteView.vue"
+import StudentMap from "../views/Page/dashboards/students/StudentMap.vue"
 import SearchView from '../views/SearchView.vue'
 import UserView from "../components/dashboards/managers/UserView.vue"
 import ApplyView from "../views/Page/dashboards/managers/applys/ApplyingView.vue"
@@ -21,108 +22,113 @@ import ExpirationView from "../views/Page/dashboards/managers/expirations/Expira
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'Home',
     component:HomePageView
   },
 
   {
     path: '/aboutPage',
-    name: 'about',
+    name: 'About',
     component: AboutPageView
   },
 
   {
     path: '/universityPage',
-    name: 'university',
+    name: 'University',
     component: UniversityPageView
   },
 
   {
     path: '/workshopPage',
-    name: 'workshop',
+    name: 'Workshop',
     component: WorkshopView
   },
 
   {
     path: '/login',
-    name: 'login',
+    name: 'Login',
     component: LoginPageView  
   },
 
   {
     path: '/register',
-    name: 'register',
+    name: 'Register',
     component:RegisterPageView
   },
 
   {
     path: '/universityDetail/:id',
-    name: 'universityDetail',
+    name: 'University Detail',
     component: UniversityDetalView,
     props: true
   },
 
   {
     path: '/majorPostDetail/:id',
-    name: 'MajorDetail',
+    name: 'Major Detail',
     component: MajorPostView,
     props: true
   },
 
   {
     path: '/workshop/workshopDetail/:id',
-    name: 'majorPost',
+    name: 'Workshop Detail',
     component:WorkshopDetailView,
     props: true
   },
 
   {
     path: "/studentDetail",
-    name: "detailPage",   
+    name: "Profle",   
     component: StudentDetail,
   },
 
   {
     path: "/favoritePage",
-    name: "favoritePage",
+    name: "Favorite Page",
     component: StudentFavoritePage,
+  },
+  {
+    path: "/map",
+    name: "Map Page",
+    component: StudentMap,
   },
   
   {
     path: '/searhPage',
-    name: 'searchPage',
+    name: 'Search Page',
     component: SearchView,
     props: true
   },
 
   {
     path: '/user',
-    name: 'user',
+    name: 'User',
     component: UserView
   },
   { 
     path: '/apply', 
-    name: 'apply',
+    name: 'Apply',
     component: ApplyView  
   },
   { 
     path: '/chart', 
-    name: 'chart',
+    name: 'Chart',
     component: ChartView  
   },
   { 
     path: '/post', 
-    name: 'post',
+    name: 'Post',
     component: PostView  
   },
   { 
     path: '/major', 
-    name: 'major',
+    name: 'Major',
     component: MajorView  
   },
   { 
     path: '/expiration', 
-    name: 'expiration',
+    name: 'Expiration',
     component: ExpirationView  
   },
 ]
@@ -132,6 +138,11 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
-
+router.beforeEach((to, from, next) => {
+  // ...`
+  let documentTitle = `${ process.env.VUE_APP_TITLE } - ${ to.name }`;
+  document.title = documentTitle;
+  next()
+})
 export default router
 

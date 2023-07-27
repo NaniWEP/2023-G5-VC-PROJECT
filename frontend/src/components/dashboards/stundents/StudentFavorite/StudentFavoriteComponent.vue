@@ -14,13 +14,6 @@
             />
             <h3 class="text-center">Doeur Diet</h3>
           </v-card-title>
-          <v-card-text>
-            <p class="mb-0">
-              <strong class="pr-1">Student ID:</strong>321000001
-            </p>
-            <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
-            <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
-          </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="12" md="8">
@@ -113,7 +106,7 @@ export default {
   data() {
     return {
       tab: null,
-      favoriteList:'',
+      favoriteList: "",
       slides: [
         {
           title: "PNC",
@@ -136,21 +129,22 @@ export default {
       ],
     };
   },
-  created(){
+  created() {
     this.getFavorite();
   },
-  methods:{
-    getFavorite(){
-      axios.post("auth/workshop/favoriteList")
-      .then(response=>{
-        this.favoriteList = response.data
-        console.log(response.data)
-      })
-      .catch(error=>{
-        console.log(error.message)
-      })
-    }
-  }
+  methods: {
+    getFavorite() {
+      axios
+        .post("auth/workshop/favoriteList")
+        .then((response) => {
+          this.favoriteList = response.data;
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    },
+  },
 };
 </script>
 
@@ -171,7 +165,7 @@ export default {
 .v-card-text {
   margin-top: 16px;
   padding: 30px;
-  background-color: #cecaca;
+  background-color: #cdd3cd;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
@@ -179,13 +173,13 @@ export default {
 .v-card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: 24px;
-  border: 2px solid #64dd17;
+  border: 2px solid #3737e5;
   padding: 30px;
   border-radius: 4px;
 }
 
 .profile_img {
-  border: 3px solid #64dd17;
+  border: 3px solid #3737e5;
   border-radius: 50%;
   padding: 24px;
 }
@@ -231,20 +225,22 @@ img {
   padding: 9px;
 }
 .title {
-  background-color: #64dd17;
   margin-right: 50%;
   text-align: center;
   margin-top: 2%;
 }
 
 .main-card {
-  background-color: #b8beb6;
+  background-color: #cdd3cd;
   margin: 8px;
   padding: 10px;
   border-radius: 3px;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
 }
+.title,
 .text-center {
-  background-color: #64dd17;
+  background-color: #3737e5;
+  color: white;
+  border-radius: 3px;
 }
 </style>
