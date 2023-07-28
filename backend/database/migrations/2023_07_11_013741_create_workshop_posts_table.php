@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('venue');
             $table->string('description');
             $table->date('date');
-            $table->time('time');
+            $table->string('time');
             $table->string('location');
             $table->string('organizer');
             $table->string('contact');

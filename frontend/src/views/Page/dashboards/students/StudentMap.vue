@@ -2,7 +2,7 @@
     <StudentMap/>
 </template>
 <script>
-    import StudentMap from "../../../../components/dashboards/stundents/studentMap/StudentMapComponent.vue";
+    import StudentMap from "../../../../components/dashboards/stundents/StudentMap/StudentMapComponent.vue";
     export default{
         components:{
             StudentMap
