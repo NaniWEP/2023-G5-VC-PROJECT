@@ -8,72 +8,75 @@
             <h3 class="mb-0">Your Favorite</h3>
           </v-card-title>
 
-          <v-tabs 
-          v-model="tab" 
-          class="tabBtn mb-8" 
-          align-tabs="center"
-          fixed-tabs
-          style="width: 50%">
+          <v-tabs
+            v-model="tab"
+            class="tabBtn mb-8"
+            align-tabs="center"
+            fixed-tabs
+            style="width: 50%"
+          >
             <v-tab value="university" class="subBtn">Major</v-tab>
             <v-tab value="workshop" class="subBtn">Workshop</v-tab>
           </v-tabs>
 
           <v-window v-model="tab">
-            <v-window-item v-if="favoriteListOfUniversity != null" value="university">
-
+            <v-window-item
+              v-if="favoriteListOfUniversity != null"
+              value="university"
+            >
               <div
                 v-for="universityList in favoriteListOfUniversity"
                 :key="universityList"
                 class="main-card"
               >
-                <article class="article">
-                  <img
-                    src="https://img.freepik.com/free-photo/harvard-university-cambridge-usa_1268-14363.jpg"
-                    alt=""
-                    width="200"
-                    height="200"
-                  />
-                  <div class="article_text_column">
-                    <h2>{{ universityList.university.title }}</h2>
-                    <p>{{ universityList.university.description }}</p>
-                    <p>
-                      <span style="font-weight: bold"
-                        >Major:
-                        {{ universityList.university.major.title }}
-                      </span>
-                    </p>
-                    <p>
-                      <span style="font-weight: bold">Apply date:</span>
-                      {{ formatDate(universityList.university.major.apply_date) }}
-                    </p>
-                    <p>
-                      <span style="font-weight: bold">Sart date study:</span>
-                      {{ formatDate(universityList.university.major.start_date) }}
-                    </p>
-                    <p>
-                      <span style="font-weight: bold">Duration:</span>
-                      {{ universityList.university.major.month_duration }} month
-                    </p>
-                    <p>
-                      <span style="font-weight: bold">$Price:</span>
-                      {{ universityList.university.major.price }} $
-                    </p>
-                  </div>
-                </article>
+                  <article class="article my-4">
+                    <img
+                      src="https://www.kgpraigarh.ac.in/images/web_img/workshop1.png"
+                      alt=""
+                      width="100"
+                      height="100"
+                    />
+
+                    <div class="article_text_column">
+                      <h4>{{ universityList.university.title }}</h4>
+                      <p>
+                        <span style="font-weight: bold">Date:</span>
+                        {{
+                          formatDate(universityList.university.major.apply_date)
+                        }}
+                      </p>
+                      <p>
+                        <span style="font-weight: bold">Location:</span>
+                        {{ universityList.university.major.price }} $
+                      </p>
+                    </div>
+                    <div class="btnAction">
+                      <v-btn class="seemoreBtn">See more</v-btn>
+                      <v-btn class="unFavoriteBtn" prepend-icon="mdi-heart-broken"
+                        >Unfaorite</v-btn
+                      >
+                    </div>
+                  </article>
               </div>
             </v-window-item>
             <v-window-item v-else class="university" value="university">
-              <h1> <v-icon>mdi-robot-vacuum-alert</v-icon> Didn't find your favorite major</h1>
+              <h1>
+                <v-icon>mdi-robot-vacuum-alert</v-icon> Didn't find your
+                favorite major
+              </h1>
             </v-window-item>
 
-            <v-window-item v-if="favoriteListOfWorkshop != null" value="workshop" class="favorite">
+            <v-window-item
+              v-if="favoriteListOfWorkshop != null"
+              value="workshop"
+              class="favorite"
+            >
               <div
                 v-for="workshopList in favoriteListOfWorkshop"
                 :key="workshopList"
                 class="main-card"
               >
-                <article class="article">
-
+                <article class="article my-4">
                   <img
                     src="https://www.kgpraigarh.ac.in/images/web_img/workshop1.png"
                     alt=""
@@ -93,19 +96,19 @@
                     </p>
                   </div>
                   <div class="btnAction">
-                    <v-btn
-                    class="seemoreBtn"
-                    >See more</v-btn>
-                    <v-btn
-                    class="unFavoriteBtn"
-                    prepend-icon="mdi-heart-broken"
-                    >Unfaorite</v-btn>
+                    <v-btn class="seemoreBtn">See more</v-btn>
+                    <v-btn class="unFavoriteBtn" prepend-icon="mdi-heart-broken"
+                      >Unfaorite</v-btn
+                    >
                   </div>
                 </article>
               </div>
             </v-window-item>
             <v-window-item v-else class="university" value="workshop">
-              <h1> <v-icon>mdi-robot-vacuum-alert</v-icon> Didn't find your favorite Workshop</h1>
+              <h1>
+                <v-icon>mdi-robot-vacuum-alert</v-icon> Didn't find your
+                favorite Workshop
+              </h1>
             </v-window-item>
           </v-window>
         </v-card>
@@ -186,7 +189,6 @@ export default {
   padding: 30px;
   border-radius: 5px;
   background-color: #eeee;
-  height: 80vh;
 }
 .article {
   display: flex;
@@ -196,39 +198,38 @@ export default {
   height: 120px;
   border-radius: 10px;
 }
-.article:hover{ 
-     transform: translateY(-5px) scale(1.005) translateZ(0);
-     transition: 1000ms;
-    box-shadow: 0 24px 36px rgba(0,0,0,0.11),
+.article:hover {
+  transform: translateY(-5px) scale(1.005) translateZ(0);
+  transition: 1000ms;
+  box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
     0 24px 46px var(--box-shadow-color);
 }
-.name{
+.name {
   border-radius: 5px;
 }
-.subBtn{
+.subBtn {
   border-radius: 5px;
   outline: 2px solid #000000;
   font-style: bold;
 }
-.subBtn:active{
+.subBtn:active {
   background: #3737e5;
 }
-.university{
+.university {
   margin-top: 100px;
   display: flex;
   justify-content: center;
   color: #3737e5;
 }
 
-.seemoreBtn{
+.seemoreBtn {
   color: white;
   background: #3737e5;
   margin: 2px;
 }
 
-.unFavoriteBtn{
+.unFavoriteBtn {
   color: white;
   background: red;
-
 }
 </style>

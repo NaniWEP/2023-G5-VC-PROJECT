@@ -4,16 +4,24 @@
   <!--  -->
 
   <!-- First form -->
-  <v-form v-if="!toggle" v-model="valid" class="form" @submit.prevent="submitForm">
+  <v-form
+    v-if="!toggle"
+    v-model="valid"
+    class="form"
+    @submit.prevent="submitForm"
+  >
     <v-container class="container">
       <h1 class="text-center">Rigister</h1>
       <div class="google">
         <GoogleAuth class="googleLog" />
       </div>
       <hr />
+      <p>Page 1/2</p>
       <div class="namefilled">
         <v-col cols="11" md="6">
           <v-text-field
+            variant="outlined"
+            required
             v-model="firstName"
             :rules="nameRules"
             label="First name"
@@ -22,15 +30,19 @@
 
         <v-col cols="11" md="6">
           <v-text-field
+            variant="outlined"
+            required
+            prepend-inner-icon="mdi-email-outline"
             v-model="lastName"
             :rules="nameRules"
             label="Last name"
-            required
           ></v-text-field>
         </v-col>
       </div>
       <div class="inputFilled">
         <v-text-field
+          variant="outlined"
+          prepend-inner-icon="mdi-email-outline"
           v-if="!emailError"
           :style="{ width: '97%' }"
           v-model="email"
@@ -41,6 +53,8 @@
         </v-text-field>
         <v-text-field
           v-else
+          variant="outlined"
+          prepend-inner-icon="mdi-email-outline"
           :style="{ width: '97%' }"
           v-model="email"
           :rules="emailRules"
@@ -51,6 +65,8 @@
         </v-text-field>
         <v-text-field
           :style="{ width: '97%' }"
+          variant="outlined"
+          prepend-inner-icon="mdi-email-outline"
           v-model="password"
           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
           :rules="[rules.required, rules.min]"
@@ -64,6 +80,8 @@
         ></v-text-field>
         <v-text-field
           block
+          variant="outlined"
+          prepend-inner-icon="mdi-email-outline"
           :style="{ width: '97%' }"
           v-model="verify"
           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -76,14 +94,12 @@
           @click:append="show1 = !show1"
         ></v-text-field>
         <p class="w-100 ml-5">
-          Do you have an account? <router-link to="/login">Login</router-link>
+          Do you have an account?
+          <router-link to="/login" color="#3737e5">Login</router-link>
         </p>
+
       </div>
-      <v-col cols="12" class="d-flex justify-space-between align-center">
-        <v-btn class="ma-2" color="red-darken-1" size="x-large" to="/">
-          <v-icon start icon="mdi-arrow-left"></v-icon>
-          CANCEL
-        </v-btn>
+      <v-col cols="12" class="d-flex flex-column">
         <v-btn
           class="ma-2"
           color="indigo-accent-3"
@@ -92,8 +108,11 @@
         >
           CONTINUE
         </v-btn>
+        <v-btn class="ma-2"  size="x-large" variant="outlined" to="/">
+          <v-icon start icon="mdi-arrow-left"></v-icon>
+          CANCEL
+        </v-btn>
       </v-col>
-      <p>1/2</p>
     </v-container>
   </v-form>
 
@@ -106,9 +125,12 @@
         <GoogleAuth class="googleLog" />
       </div>
       <hr />
+      <p>Page 2/2</p>
       <div class="inputFiled w-100">
         <v-col cols="12" md="12">
           <v-combobox
+            variant="outlined"
+            prepend-inner-icon="mdi-email-outline"
             label="Province"
             v-model="selectProvince"
             :rules="inputRules"
@@ -121,6 +143,8 @@
       <div class="inputFiled w-100">
         <v-col cols="12" md="12">
           <v-combobox
+            variant="outlined"
+            prepend-inner-icon="mdi-email-outline"
             label="Gender"
             :rules="inputRules"
             placeholder="Plase Select.........."
@@ -131,6 +155,8 @@
         </v-col>
         <v-col cols="12" md="12">
           <v-text-field
+            variant="outlined"
+            prepend-inner-icon="mdi-email-outline"
             v-model="dateOfBirth"
             :rules="inputRules"
             label="Date of birth"
@@ -143,21 +169,20 @@
           </p>
         </v-col>
       </div>
-      <v-col cols="12" class="d-flex justify-space-between align-center">
-        <v-btn class="ma-2" color="red-darken-1" size="x-large" @click="back">
-          <v-icon start icon="mdi-arrow-left"></v-icon>
-          BACK
-        </v-btn>
+      <v-col cols="12" class="d-flex flex-column">
         <v-btn
           class="ma-2"
           color="indigo-accent-3"
           size="x-large"
           @click="register"
         >
-          SIGN UP
+          REGISTER
+        </v-btn>
+        <v-btn class="ma-2" variant="outlined"  size="x-large" @click="back">
+          <v-icon start icon="mdi-arrow-left"></v-icon>
+          BACK
         </v-btn>
       </v-col>
-      <p>2/2</p>
     </v-container>
   </v-form>
 </template>
@@ -334,15 +359,12 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 10px;
 }
 .google {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-bottom: 5px;
-  margin-top: 5px;
 }
 .googleLog {
   width: 90%;

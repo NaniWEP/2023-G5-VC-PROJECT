@@ -1,45 +1,35 @@
 <template>
-  <v-container class="container">
+<v-container class="map-container">
     <SideNavBar></SideNavBar>
-    <main>
-        <MapComponent/>
-    </main>
-  </v-container>
+    <div id="map"></div>
+</v-container>
 </template>
 
 <script>
-import SideNavBar from "../SidebarIcon.vue";
-import MapComponent from "./MapComponent.vue";
+import SideNavBar from "../studentLayouts/SideNavBar.vue";
+import L from 'leaflet';
 
 export default {
-  components: {
-    SideNavBar,
-    MapComponent,
-  },
-  data() {
-    return {
-      tab: null,
-
-    };
-  },
-  created() {
-    
-  },
-  methods: {
-
-  },
+    components:{
+        SideNavBar
+    },
+    mounted() {
+    const map = L.map('map').setView([51.505, -0.09], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        maxZoom: 18
+    })
+    .addTo(map);
+    L.marker([51.505, -0.09]).addTo(map);
+  }
 };
 </script>
 
 <style scoped>
-.container{
-width: 100%;
-}
-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 90vh;
-}
+    .map-container {
+    height: 400px;
+    }
+    #map {
+    height: 100%;
+    }
 </style>

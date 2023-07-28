@@ -8,35 +8,68 @@
         cols="4"
       >
         <v-list style="width: 100%">
-          <v-card class="mx-auto" max-width="450">
+          <v-card class="mx-auto my-12 card" max-width="500">
             <v-img
               src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-              height="200px"
+              height="250px"
+              width="100%"
               cover
             ></v-img>
+            <v-card-item>
+              <v-card-title>{{ university.name }}</v-card-title>
 
-            <v-card-title> {{ university.name }}</v-card-title>
+              <v-card-subtitle>
+                <span class="me-1">{{ university.location }}</span>
 
-            <v-card-subtitle>{{ university.description }}</v-card-subtitle>
+                <v-icon
+                  color="error"
+                  icon="mdi-fire-circle"
+                  size="small"
+                ></v-icon>
+              </v-card-subtitle>
+            </v-card-item>
+            <v-card-text>
+              <v-row align="center" class="mx-0">
+                <v-rating
+                  :model-value="0"
+                  color="#3737e5"
+                  density="compact"
+                  half-increments
+                  readonly
+                  size="small"
+                ></v-rating>
 
-            <v-card-actions>
+                <div class="ms-4 text-subtitle-1">
+                  <v-icon color="#3737e5">mdi-map-marker-down</v-icon> •
+                  {{ university.province }}
+                </div>
+              </v-row>
+            </v-card-text>
+            <v-divider class="mx-4 mb-1"></v-divider>
+            <v-card-title>Contact by</v-card-title>
+            <div class="px-4">
+              <v-chip-group v-model="selection">
+                <v-chip>{{ university.phone }}</v-chip>
+                <v-chip>{{ university.email }}</v-chip>
+              </v-chip-group>
+            </div>
+            <v-card-actions class="my-2">
               <v-btn
                 class="actionBtn"
                 :to="`/universityDetail/${university.id}`"
                 :id="$route.params.index"
                 variant="outlined"
-                
               >
                 See more
               </v-btn>
-              <v-btn 
-              :id="$route.params.index"
-              prepend-icon="mdi-heart-outline"
-              class="actionBtn"
-              variant="outlined"
-              @click="alertFavorite"
+              <v-btn
+                :id="$route.params.index"
+                prepend-icon="mdi-heart-outline"
+                class="actionBtn"
+                variant="outlined"
+                @click="alertFavorite"
               >
-              favorite
+                favorite
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -46,9 +79,9 @@
   </div>
 </template>
 <script>
-// 
+//
 // Resource: https://sweetalert2.github.io/#examples
-// 
+//
 import Swal from "sweetalert2";
 export default {
   props: ["universities"],
@@ -76,14 +109,25 @@ export default {
 </script>
 
 <style scoped>
-.actionBtn:hover{
+.actionBtn:hover {
   background-color: #304ffe;
-  color : #fff;
+  color: #fff;
   transition: 800ms;
   outline: 1px solid #304ffe;
 }
-.actionBtn{
+.actionBtn {
   padding: 0 20px;
   color: #304ffe;
+}
+.card{
+  height: 100%;
+  background: #e7e7e7ee;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.card:hover {
+  transition: 500ms;
+  background: #ededed;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 </style>

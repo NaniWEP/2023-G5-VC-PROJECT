@@ -9,18 +9,51 @@
         cols="4"
       >
         <v-list style="width: 100%">
-          <v-card class="mx-auto" max-width="450">
+          <v-card max-width="400px" class="mx-auto my-12 card">
             <v-img
               src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-              height="200px"
+              height="250px"
+              width="100%"
               cover
             ></v-img>
+            <v-card-item>
+              <v-card-title>{{ workshop.name }}</v-card-title>
 
-            <v-card-title> {{ workshop.name }}</v-card-title>
+              <v-card-subtitle>
+                <span class="me-1">{{ workshop.location }}</span>
 
-            <v-card-subtitle>{{ workshop.description }}</v-card-subtitle>
+                <v-icon
+                  color="error"
+                  icon="mdi-fire-circle"
+                  size="small"
+                ></v-icon>
+              </v-card-subtitle>
+            </v-card-item>
+            <v-card-text>
+              <v-row align="center" class="mx-0">
+                <v-rating
+                  :model-value="0"
+                  color="#3737e5"
+                  density="compact"
+                  half-increments
+                  readonly
+                  size="small"
+                ></v-rating>
 
-            <v-card-actions>
+                <div class="ms-4 text-subtitle-1"><v-icon color="#3737e5">mdi-ticket-percent-outline</v-icon> • {{ workshop.variable_ticket }} tickets</div>
+              </v-row>
+            </v-card-text>
+            <v-divider class="mx-4 mb-1"></v-divider>
+
+
+            <div class="px-4">
+              <v-chip-group v-model="selection">
+                <v-chip>{{formatDate(workshop.date)}}</v-chip>
+
+                <v-chip>{{ workshop.time }}pm</v-chip>
+              </v-chip-group>
+            </div>
+            <v-card-actions class="my-2">
               <v-btn
                 :to="`workshop/workshopDetail/${workshop.id}`"
                 class="actionBtn"
@@ -49,6 +82,7 @@
 <script>
 import axios from "../../stores/axiosHttp";
 import Swal from "sweetalert2";
+import dayjs from "dayjs";
 
 export default {
   props: ["workshops"],
@@ -70,6 +104,11 @@ export default {
       });
   },
   methods: {
+    formatDate(dateString) {
+      const date = dayjs(dateString);
+      // Then specify how you want your dates to be formatted
+      return date.format(" dddd-D/MMMM/YYYY");
+    },
     toggleFavorite(id) {
       const index = this.favorites.indexOf(id);
       if (index !== -1) {
@@ -141,10 +180,22 @@ export default {
   padding: 0 20px;
   color: #304ffe;
 }
-.faovrite{
+.faovrite {
   background-color: #304ffe;
   color: #fff;
   transition: 800ms;
   outline: 1px solid #304ffe;
+}
+
+.card{
+  height: 100%;
+  background: #e7e7e7ee;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.card:hover {
+    transition: 1000ms;
+    box-shadow: 0 24px 36px rgba(0,0,0,0.11),
+    0 24px 46px var(--box-shadow-color);
 }
 </style>
