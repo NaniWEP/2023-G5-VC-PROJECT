@@ -105,11 +105,6 @@ export default {
       });
   },
   methods: {
-    formatDate(dateString) {
-      const date = dayjs(dateString);
-      // Then specify how you want your dates to be formatted
-      return date.format(" dddd-D/MMMM/YYYY");
-    },
     toggleFavorite(id) {
       const index = this.favorites.indexOf(id);
       if (index !== -1) {
@@ -131,7 +126,7 @@ export default {
           .then((response) => {
             if (response.data.success) {
               this.favorites.push(id); // add the post to favorites
-              this.alertFavorite("success", "Post added to favorites");
+              this.alertFavorite('success', "Post added to favorites");
             }
             console.log(response.data.message);
             this.alertFavorite("success", response.data.message);
@@ -163,7 +158,7 @@ export default {
   computed: {
     getIconStyle() {
       return (id) => ({
-        color: this.favorites.includes(id) ? "red" : "#3737e5", // update the icon color based on the favorite status
+        color: this.favorites.includes(id) ? "red" : "black", // update the icon color based on the favorite status
       });
     },
   },

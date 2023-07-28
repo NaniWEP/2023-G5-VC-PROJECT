@@ -1,5 +1,7 @@
 
 <template>
+  <section>
+    <navbar-component/>
   <v-container id="{{id}}" class="container">
     <div class="title">
       <h1>{{ major.title }}</h1>
@@ -7,7 +9,7 @@
         <v-dialog v-model="dialog" persistent width="1080">
           <template v-slot:activator="{ props }">
             <div>
-              <v-btn v-bind="props" @click="showForm">
+              <v-btn class="actionBtn" v-bind="props" @click="showForm">
                 Apply Now
                 <v-icon>mdi-fast-forward</v-icon>
               </v-btn>
@@ -47,7 +49,7 @@
                       bg-color="white"
                       prepend-inner-icon="mdi-school"
                       variant="outlined"
-                      :items="['Do not have','High School Diploma']"
+                      :items="['Do not have', 'High School Diploma']"
                       label="Degree"
                       v-model="degree"
                       required
@@ -138,36 +140,88 @@
     </div>
     <v-row>
       <v-col cols="12" md="5">
-        <v-card class="elevation-2">
-          <v-btn class="ma-2" color="red-darken-1" to="/">
-            <v-icon start icon="mdi-arrow-left"></v-icon>
-            Back
-          </v-btn>
-
+        <v-card class="elevation-2 card">
           <v-card-title class="justify-center">
             <h3 class="mb-0">Information about major</h3>
           </v-card-title>
           <v-card-text>
             <v-simple-table>
-              <ul>
-                <li>
-                  <p>Major price :{{ major.price }} $</p>
-                </li>
-                <li>
-                  <p>Apply date :{{ major.apply_date }}</p>
-                </li>
-                <li>
-                  <p>Start date :{{ major.start_date }}</p>
-                </li>
-                <li>
-                  <p>Duration:{{ major.month_duration }} month</p>
-                </li>
-              </ul>
+              <tbody>
+                  <tr>
+                    <td class="bold">
+                      <v-icon>mdi-currency-usd</v-icon> Price
+                    </td>
+                    <td class="text-right">:</td>
+                    <td>{{ major.price }}$ /per year</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">
+                      <v-icon>mdi-calendar-range</v-icon> Start apply
+                    </td>
+                    <td class="text-right">:</td>
+                    <td>{{ formatDate(major.apply_date) }}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">
+                      <v-icon>mdi-calendar-range</v-icon> Date start sesion
+                    </td>
+                    <td class="text-right">:</td>
+                    <td>{{ formatDate(major.start_date) }}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">
+                      <v-icon>mdi-playlist-star</v-icon> Duration
+                    </td>
+                    <td class="text-right">:</td>
+                    <td>{{ major.month_duration +"years " + major.year_duration +"month"}}</td>
+                  </tr>
+                </tbody>
             </v-simple-table>
           </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="12" md="7">
+        <v-card class="elevation-2 card">
+          <v-card-title class="justify-center">
+            <h3 class="mb-0">Information about university</h3>
+          </v-card-title>
+          <v-card-text>
+            <v-simple-table>
+              <tbody>
+                  <tr>
+                    <td class="bold">
+                      <v-icon>mdi-city-variant-outline</v-icon> University
+                    </td>
+                    <td class="text-right">:</td>
+                    <td>{{ university.name }}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">
+                      <v-icon>mdi-email-arrow-left-outline</v-icon> Contact email
+                    </td>
+                    <td class="text-right">:</td>
+                    <td>{{ university.email }}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">
+                      <v-icon>mdi-phone-check-outline</v-icon> Contact phone
+                    </td>
+                    <td class="text-right">:</td>
+                    <td>{{ university.phone }}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">
+                      <v-icon>mdi-web-box</v-icon> Website
+                    </td>
+                    <td class="text-right">:</td>
+                    <td>{{ university.website }}</td>
+                  </tr>
+                </tbody>
+            </v-simple-table>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="12">
         <v-card class="elevation-2">
           <v-card-title class="justify-center">
             <h3 class="mb-0">Announcement Description</h3>
@@ -178,41 +232,25 @@
             </v-simple-table>
           </v-card-text>
         </v-card>
-        <v-card class="elevation-2">
-          <v-card-title class="justify-center">
-            <h3 class="mb-0">Information about university</h3>
-          </v-card-title>
-          <v-card-text>
-            <v-simple-table>
-              <ul>
-                <li>
-                  <p>University :{{ university.name }}</p>
-                </li>
-                <li>
-                  <p>Email :{{ university.email }}</p>
-                </li>
-                <li>
-                  <p>Website :{{ university.website }}</p>
-                </li>
-                <li>
-                  <p>Phone :{{ university.phone }}</p>
-                </li>
-              </ul>
-            </v-simple-table>
-          </v-card-text>
-        </v-card>
       </v-col>
     </v-row>
   </v-container>
+  <footer-component/>
+</section>
 </template>
 <script>
 import axios from "@/stores/axiosHttp";
 import dayjs from "dayjs";
 import Swal from "sweetalert2";
+import NavbarComponent from "../layouts/NavbarComponent.vue";
+import FooterComponent from "../layouts/FooterComponent.vue";
 export default {
   name: "MajorDetail",
   props: ["id"],
-  components: {},
+  components: {
+    NavbarComponent,
+    FooterComponent
+  },
   data() {
     return {
       majorPost: {},
@@ -226,7 +264,7 @@ export default {
       gender: "",
       originLocation: "",
       residenceLocation: "",
-      dialog:false,
+      dialog: false,
       emailRules: [
         (v) =>
           /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
@@ -238,7 +276,7 @@ export default {
     formatDate(dateString) {
       const date = dayjs(dateString);
       // Then specify how you want your dates to be formatted
-      return date.format("D dddd, MMMM, YYYY");
+      return date.format("dddd D/ MMMM/ YYYY");
     },
     async registerWorkshop() {
       try {
@@ -252,15 +290,14 @@ export default {
           this.residenceLocation !== "" &&
           this.degree !== ""
         ) {
-          if (this.degree === 'Do not have'){
-              this.degree = false;
-          }
-          else {
+          if (this.degree === "Do not have") {
+            this.degree = false;
+          } else {
             this.degree = true;
           }
           await axios
             .post("/auth/universityApplication", {
-              first_name: this.firstName ,
+              first_name: this.firstName,
               last_name: this.lastName,
               email: this.email,
               phone_number: this.phoneNumber,
@@ -268,7 +305,7 @@ export default {
               university_post_id: this.id,
               origin_location: this.originLocation,
               residence_location: this.residenceLocation,
-              degree : this.degree,
+              degree: this.degree,
             })
             .then((response) => {
               this.dialog = false;
@@ -285,14 +322,14 @@ export default {
       } catch (error) {
         console.log(error);
       }
-      this.email = "" 
-          this.phoneNumber = "" 
-          this.gender = "" 
-          this.firstName = "" 
-          this.lastName = "" 
-          this.originLocation = "" 
-          this.residenceLocation = "" 
-          this.degree = ""
+      this.email = "";
+      this.phoneNumber = "";
+      this.gender = "";
+      this.firstName = "";
+      this.lastName = "";
+      this.originLocation = "";
+      this.residenceLocation = "";
+      this.degree = "";
     },
     alertFavorite(icon, message) {
       const Toast = Swal.mixin({
@@ -335,29 +372,30 @@ export default {
 
 <style scoped>
 .v-card-text {
-  margin-top: 16px;
-  padding: 30px;
-  background-color: #ffff;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
 
-.v-card {
+.card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: 24px;
   background-color: #ffff;
-  border: 2px solid #3737e5;
-  padding: 30px;
-  border-radius: 4px;
+  border-radius: 5px;
+  width: 100%;
 }
-
+th,
+td {
+  padding: 9px;
+  text-align: left;
+  width: 1%;
+}
 .title {
-  background-color: #ffff;
-  border: 3px solid #3737e5;
+  background-color: #3737e5;
   padding: 10px;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
+  color: #ffff;
 }
 .justify-center {
   background-color: #3737e5;
@@ -365,6 +403,18 @@ export default {
   padding: 10px;
 }
 p {
-  font-size: large;
+  text-align: center;
+  margin-top : 10px
+}
+.bold{
+  font-weight: bold;
+}
+.dialong{
+  padding: 20px;
+}
+
+.actionBtn{
+  background: #ffff;
+  color: #3737e5;
 }
 </style>

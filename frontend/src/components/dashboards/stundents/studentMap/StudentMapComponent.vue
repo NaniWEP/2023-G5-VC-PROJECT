@@ -1,35 +1,54 @@
 <template>
-<v-container class="map-container">
-    <SideNavBar></SideNavBar>
-    <div id="map"></div>
-</v-container>
-</template>
-
-<script>
-import SideNavBar from "../studentLayouts/SideNavBar.vue";
-import L from 'leaflet';
-
-export default {
-    components:{
-        SideNavBar
-    },
-    mounted() {
-    const map = L.map('map').setView([51.505, -0.09], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-        maxZoom: 18
-    })
-    .addTo(map);
-    L.marker([51.505, -0.09]).addTo(map);
+    <!-- 
+          resource: https://leafletjs.com/examples/quick-start/
+       -->
+    <v-container class="map-container">
+      <SideNavBar></SideNavBar>
+      <div ref="mapContainer" style="width: 100%; height: 80vh"></div>
+    </v-container>
+  </template>
+  
+  <script setup>
+  import SideNavBar from "../SidebarIcon.vue";
+  
+  import { onMounted, ref } from "vue";
+  import L from "leaflet";
+  
+  const lat = ref(0);
+  const lng = ref(0);
+  const map = ref();
+  const mapContainer = ref();
+  
+  onMounted(() => {
+    map.value = L.map(mapContainer.value).setView([51.505, -0.09], 13);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "© OpenStreetMap",
+    }).addTo(map.value);
+    getLocation();
+  });
+  
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        lat.value = position.coords.latitude;
+        lng.value = position.coords.longitude;
+        map.value.setView([lat.value, lng.value], 13);
+  
+        L.marker([lat.value, lng.value], { draggable: true })
+          .addTo(map.value)
+          .on("dragend", (event) => {
+            console.log(event);
+          });
+      });
+    }
   }
-};
-</script>
-
-<style scoped>
-    .map-container {
-    height: 400px;
-    }
-    #map {
-    height: 100%;
-    }
-</style>
+  </script>
+  
+  <style scoped>
+  
+  .map-container {
+  margin-top: -10px;
+    height: 100vh;
+  }
+  </style>

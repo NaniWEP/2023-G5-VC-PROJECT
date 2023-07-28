@@ -165,7 +165,7 @@ export default {
     formatDate(dateString) {
       const date = dayjs(dateString);
       // Then specify how you want your dates to be formatted
-      return date.format("D dddd, MMMM, YYYY");
+      return date.format("dddd D/ MMMM/ YYYY");
     },
     getFavoriteUniversity() {
       axios
@@ -189,6 +189,7 @@ export default {
   padding: 30px;
   border-radius: 5px;
   background-color: #eeee;
+  height: 100vh;
 }
 .article {
   display: flex;

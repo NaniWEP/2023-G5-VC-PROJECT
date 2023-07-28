@@ -1,106 +1,120 @@
 
 <template>
-  <v-container id="{{id}}" class="container">
-    <v-row>
-      <v-col cols="12" md="5">
-        <v-card class="elevation-2">
-          <v-btn class="ma-2" color="red-darken-1" to="/universityPage">
-            <v-icon start icon="mdi-arrow-left"></v-icon>
-            Back
-          </v-btn>
+  <section>
+    <navbar-component />
+    <v-container id="{{id}}" class="container">
+      <v-row>
+        <v-col cols="12" md="12">
           <v-card-title>
             <v-img
               class="profile_img"
               src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29sbGVnZSUyMGNhbXB1c3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
               alt="student dp"
+              width="100%"
+              height="500"
+              cover
             />
-            <h4 class="text-center">{{university.name}}</h4>
           </v-card-title>
-        </v-card>
-      </v-col>
-      <v-col cols="12" md="7">
-        <v-card class="elevation-2">
-          <v-card-title class="justify-center">
-            <h3 class="mb-0">
-              <v-icon>mdi-account</v-icon>General Information About University
-            </h3>
-          </v-card-title>
-          <v-card-text>
-            <v-simple-table>
-              <tbody>
-                <tr>
-                  <td>University's name</td>
-                  <td class="text-right">:</td>
-                  <td>{{university.name}}</td>
-                </tr>
-                <tr>
-                  <td>Contact By Email</td>
-                  <td class="text-right">:</td>
-                  <td>{{university.email}}</td>
-                </tr>
-                <tr>
-                  <td>Phone Number</td>
-                  <td class="text-right">:</td>
-                  <td>{{university.phone}}</td>
-                </tr>
-                <tr>
-                  <td>Province/City</td>
-                  <td class="text-right">:</td>
-                  <td>{{university.province}}</td>
-                </tr>
-                <tr>
-                  <td>Location</td>
-                  <td class="text-right">:</td>
-                  <td>{{university.location}}</td>
-                </tr>
-                <tr>
-                  <td>Website</td>
-                  <td class="text-right">:</td>
-                  <td>{{university.website}}</td>
-                </tr>
-              </tbody>
-            </v-simple-table>
-          </v-card-text>
-        </v-card>
-        <v-card class="elevation-2 mt-4">
-          <v-card-title class="justify-center">
-            <h3 class="mb-0">
-              <v-icon>mdi-information</v-icon>Other Information
-            </h3>
-          </v-card-title>
-          <v-card-text>
-            <p>
-              {{university.description}}
-            </p>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+        </v-col>
+        <v-col cols="12" md="12">
+          <v-card class="elevation-2 card">
+            <v-card-title class="justify-center">
+              <h3 class="mb-0">
+                <v-icon>mdi-account</v-icon>General Information About University
+              </h3>
+            </v-card-title>
+            <v-card-text>
+              <v-simple-table>
+                <tbody>
+                  <tr>
+                    <td class="bold">
+                      <v-icon>mdi-home-city-outline</v-icon> University's name
+                    </td>
+                    <td class="text-right">:</td>
+                    <td>{{ university.name }}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">
+                      <v-icon>mdi-email-check-outline</v-icon> Contact By Email
+                    </td>
+                    <td class="text-right">:</td>
+                    <td>{{ university.email }}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">
+                      <v-icon>mdi-phone-check-outline</v-icon> Phone Number
+                    </td>
+                    <td class="text-right">:</td>
+                    <td>{{ university.phone }}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">
+                      <v-icon>mdi-home-city-outline</v-icon> Province/City
+                    </td>
+                    <td class="text-right">:</td>
+                    <td>{{ university.province }}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">
+                      <v-icon>mdi-map-marker-radius</v-icon> Location
+                    </td>
+                    <td class="text-right">:</td>
+                    <td>{{ university.location }}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold"><v-icon>mdi-web-box</v-icon> Website</td>
+                    <td class="text-right">:</td>
+                    <td>{{ university.website }}</td>
+                  </tr>
+                </tbody>
+              </v-simple-table>
+            </v-card-text>
+          </v-card>
+          <v-card class="elevation-2 mt-4 card">
+            <v-card-title class="justify-center">
+              <h3 class="mb-0">
+                <v-icon>mdi-information</v-icon>Other Information
+              </h3>
+            </v-card-title>
+            <v-card-text>
+              <p>
+                {{ university.description }}
+              </p>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+    <footer-component/>
+  </section>
 </template>
 <script>
 import axios from "@/stores/axiosHttp";
+import NavbarComponent from "../layouts/NavbarComponent.vue";
+import FooterComponent from "../layouts/FooterComponent.vue";
 export default {
   name: "UniversityDetail",
-  data(){
-    return{
-      university: {}
-    }
+  data() {
+    return {
+      university: {},
+    };
   },
   props: ["id"],
   components: {
+    NavbarComponent,
+    FooterComponent
   },
-  mounted(){
+  mounted() {
     axios
-    .get(`/university/university/${this.id}`)
-    .then(response => {
-      this.university = response.data.data;
-        console.log(response.data.data)
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  }
+      .get(`/university/university/${this.id}`)
+      .then((response) => {
+        this.university = response.data.data;
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 };
 </script>
 
@@ -130,43 +144,20 @@ p {
   border-radius: 10px;
 }
 
-.v-card {
+.card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: 24px;
   background-color: #ffff;
-   border: 2px solid #3737e5;
   padding: 30px;
   border-radius: 4px;
-}
-.profile_img {
-  border-radius: 2%;
-  padding: 24px;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
 }
 
 th,
 td {
   padding: 9px;
   text-align: left;
-  width: 2%;
+  width: 1%;
 }
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-tr:hover {
-  background-color: #ddd;
-}
-
 .text-right {
   text-align: right;
 }
@@ -175,5 +166,9 @@ tr:hover {
   background-color: #3737e5;
   color: white;
   padding: 10px;
+  border-radius: 5px;
+}
+.bold {
+  font-weight: bold;
 }
 </style>

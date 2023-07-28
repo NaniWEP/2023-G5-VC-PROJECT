@@ -146,11 +146,11 @@ export default {
 
               // send user to
               if (response.data.data.role_id == 3) {
-                this.$router.push("/");
+                this.$router.push("/user");
               } else if (response.data.data.role_id == 2) {
-                this.$router.push("/manager");
+                this.$router.push("/user");
               } else if (response.data.data.role_id == 1) {
-                this.$router.push("/");
+                this.$router.push("/user");
               }
             } else {
               console.log("NOOOOOO");
@@ -181,7 +181,7 @@ p {
   width: 35%;
   border-radius: 10px;
   color: #ffff;
-  background-color: #ffffff05;
+  background-color: #ffffff4a;
 }
 .google {
   display: flex;

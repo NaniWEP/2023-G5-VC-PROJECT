@@ -18,6 +18,6 @@ export default {
   align-items: center;
   width: 100%;
   height: 100vh;
-  background: url("../../../assets/login/World Map.svg");
+  background: url("../../../assets/login/login.svg");
 }
 </style>
