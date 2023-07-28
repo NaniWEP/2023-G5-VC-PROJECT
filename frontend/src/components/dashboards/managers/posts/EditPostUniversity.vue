@@ -5,11 +5,11 @@
       persistent
       width="1024">
       <template v-slot:activator="{ props }">
-        <v-btn class="btn" color="primary" v-bind="props">+ ADD</v-btn>    
+        <v-btn class="btn" color="primary" v-bind="props">Edit</v-btn>    
       </template>
       <v-card class="boder" @submit.prevent="submit">
         <v-container class="container">
-          <h1>ADD UNIVERSITY</h1>
+          <h1>UPDATE UNIVERSITY</h1>
           <div class="namefilled input">
             <v-col cols="12" md="5">
               <v-text-field
@@ -80,8 +80,8 @@
               CANCEL
             </v-btn>
             <v-btn type="submite" class="ma-2 mr-10 text-white" color="#3737e5" size="x-large" @click="addPost">           
-              <v-icon start icon="mdi-wrench"></v-icon>
-              POST
+              <v-icon start icon="mdi-square-edit-outline"></v-icon>
+              Update
             </v-btn>
           </v-col>
         </v-container>
@@ -97,9 +97,13 @@ import "@mdi/font/css/materialdesignicons.css"
     data: () => ({
       dialog: false,
       valid: true,
-      title: "",
-      date: "",
+      name: "",
       description: "",
+      year_duration: "",
+      month_duration:"",
+      apply_date:"",
+      start_date:"",
+      price:""
     }),  
     methods: {
       addPost() {
@@ -115,28 +119,23 @@ import "@mdi/font/css/materialdesignicons.css"
             price: this.price
           }
           this.$emit('university',university);
-          this.title = "",
-          this.date = "",
+          this.name = "",
+          this.year_duration = "",
           this.description = ""
+          this.month_duration = ""
+          this.apply_date = ""
+          this.start_date = ""
+          this.price = ""
         }
           this.dialog = false
         }
-        // axios.post("api/workshopData", {
-        //   this.workshopInfo
-        // })
-        // .than(response => {
-        //   console.log(response.data)
-        // })
-        // .catch(error => {
-        //   console.log(error.message)
-        // })
-        },
-  };
+    }
+  }
 </script>
 
 <style scoped>
   .btn{
-    margin-right: 85%
+   margin-left: 10%;
   }
   .header{
     text-align: center;
