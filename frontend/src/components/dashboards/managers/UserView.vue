@@ -1,8 +1,8 @@
 <template>
   <div id="body">
     <DashboardComponent></DashboardComponent>
-    <v-card class="ml-8 mt-5 mr-8 mb-3 bg-grey-lighten-2 p-10">
-      <h1 class="text-light-green-accent-4 ml-10">Profile Detail</h1>
+    <v-card class="ml-8 mt-3 mr-8 bg-grey-lighten-2">
+      <!-- <h1 class="text-light-black-accent-4 ml-10">Profile Detail</h1> -->
     </v-card>
     <v-container class="container">
     <v-row>

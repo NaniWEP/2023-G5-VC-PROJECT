@@ -1,19 +1,19 @@
 <template>
       <v-navigation-drawer class="bg-grey-lighten-2" expand-on-hover rail> 
         <div class="d-flex mr-2">
-          <v-list-item class="mt-5 mr-16 font-weight-bold text-h1 text-green-accent-3"
+          <v-list-item class="mt-5 mr-16 font-weight-bold text-h1 text-light-black-accent-4"
             prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
             title="Dashboard" size="large">
           </v-list-item>
         </div>
         <hr class="boder">
-        <v-list border="light-green-accent-4">
+        <v-list border="indigo-darken-3">
           <v-list-item :to="{ path: '/user' }" prepend-icon="mdi-account-multiple-outline" title="Users" value="users"></v-list-item>
-          <v-list-item :to="{ path: '/apply' }" prepend-icon="mdi-bookmark-outline" title="Applying" value="Applying"></v-list-item>
+          <v-list-item :to="{ path: '/apply'}" prepend-icon="mdi-bookmark-outline" title="Applying" value="Applying"></v-list-item>
           <v-list-item :to="{ path: '/post' }" prepend-icon="mdi-post" title="Post" value="Post"></v-list-item>
-          <v-list-item :to="{ path: '/major' }" prepend-icon="mdi-clipboard-check" title="Major" value="Major"></v-list-item>
-          <v-list-item :to="{ path: '/chart' }" prepend-icon="mdi-chart-line" title="Chart" value="Chart"></v-list-item>
-          <v-list-item :to="{ path: '/expiration' }" prepend-icon="mdi-alert-circle" title="Expired Date" value="Expired Date"></v-list-item>
+          <v-list-item :to="{ path: '/major'}" prepend-icon="mdi-clipboard-check" title="Major" value="Major"></v-list-item>
+          <v-list-item :to="{ path: '/chart'}" prepend-icon="mdi-chart-line" title="Chart" value="Chart"></v-list-item>
+          <v-list-item :to="{ path: '/expiration'}" prepend-icon="mdi-alert-circle" title="Expired Date" value="Expired Date"></v-list-item>
           <v-list-item prepend-icon="mdi-account-minus" title="Sign Out" value="Sign Out"></v-list-item>
         </v-list>
       </v-navigation-drawer>
@@ -33,7 +33,7 @@ export default {
   }
   .boder{
     margin: 10px 10px 0px 10px; 
-    border: 1px rgb(17, 224, 17) solid;
+    border: 1px #3737e5 solid;
   }
 </style>
 
