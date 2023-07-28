@@ -4,7 +4,7 @@
   <!--  -->
 
   <!-- First form -->
-  <v-form v-if="!toggle" v-model="valid" class="form" @submit.prevent="submitForm">
+  <v-form v-if="!toggle" v-model="valid" class="form">
     <v-container class="container">
       <h1 class="text-center">Rigister</h1>
       <div class="google">
@@ -99,7 +99,7 @@
 
   <!-- second form -->
 
-  <v-form v-else v-model="valid" class="form py-3" @submit.prevent="submitForm">
+  <v-form v-else v-model="valid" class="form py-3">
     <v-container class="container">
       <h1 class="mb-10">More Information</h1>
       <div class="google">
@@ -184,30 +184,30 @@ export default {
     selectProvince: "",
     gender: ["MALE", "FEMALE"],
     province: [
-      "Banteay Meanchey",
-      "Battambang",
-      "Kampong Cham",
-      "Kampong Chhnang",
-      "Kampong Speu",
-      "Kampot",
-      "Kandal",
-      "Kep",
-      "Koh Kong",
-      "Kratié",
-      "Mondulkiri",
-      "Oddar Meanchey",
-      "Pailin",
-      "Phnom Penh",
-      "Preah Vihear",
-      "Prey Veng",
-      "Pursat",
-      "Ratanakiri",
-      "Siem Reap",
-      "Sihanoukville",
-      "Stung Treng",
-      "Svay Rieng",
-      "Takeo",
-      "Tboung Khmum",
+      'Banteay Meanchey',
+      'Battambang',
+      'Kampong Cham',
+      'Kampong Chhnang',
+      'Kampong Speu',
+      'Kampot',
+      'Kandal',
+      'Kep',
+      'Koh Kong',
+      'Kratié',
+      'Mondulkiri',
+      'Oddar Meanchey',
+      'Pailin',
+      'Phnom Penh',
+      'Preah Vihear',
+      'Prey Veng',
+      'Pursat',
+      'Ratanakiri',
+      'Siem Reap',
+      'Sihanoukville',
+      'Stung Treng',
+      'Svay Rieng',
+      'Takeo',
+      'Tboung Khmum',
     ],
     inputRules: [
       (value) => {

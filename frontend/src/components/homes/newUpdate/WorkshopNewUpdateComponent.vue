@@ -23,21 +23,12 @@
 
           <v-card-actions>
             <v-btn
-              :to="`/universityDetail/${workshop.id}`"
+              :to="`workshop/workshopDetail/${workshop.id}`"
               :id="$route.params.index"
               class="actionBtn"
               variant="outlined"
             > 
               See more
-            </v-btn>
-            <v-btn
-              :to="`/universityDetail/${index + 1}`"
-              :id="$route.params.index"
-              prepend-icon="mdi-heart-outline"
-              class="actionBtn"
-              variant="outlined"
-            >
-              Favorite
             </v-btn>
           </v-card-actions>
         </v-card>

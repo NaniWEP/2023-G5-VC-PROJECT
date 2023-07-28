@@ -10,6 +10,7 @@ use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\UniversityPostController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\UniversityApplicationController;
+use App\Http\Controllers\WorkshopRegistrationController;
 // use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Route;
 /*
@@ -37,9 +38,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         // update user route
         Route::put('/update/{id}', [AuthController::class, 'updateUser']);
-        // update user profile
-        Route::post('/profilePicture', [AuthController::class, 'getImage']);
 
+        // register for workshop
+        Route::post('/registerWorkshop', [WorkshopRegistrationController::class, 'store']);
+
+        Route::get('/getMyTicket', [WorkshopRegistrationController::class, 'showByUser']);
+        //store university application
+        Route::post('/universityApplication', [UniversityApplicationController::class, 'store']);
+
+        Route::get('/showWorkshop/{id}', [WorkshopRegistrationController::class, 'show']);
         // university routes
         Route::prefix('/university')->group(function(){
             // crud university
@@ -52,8 +59,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/getListOfFavrite',[FavoriteUniversityPostController::class, 'getListOfFavorite'] );
             // show university
             Route::get('/myUniversity', [UniversityController::class, 'showMyUniversity']);
-            //store university application
-            Route::post('/universityApplication', [UniversityApplicationController::class, 'store']);
         });
           // workshop routes
         Route::prefix('/workshop')->group(function(){
@@ -65,6 +70,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/getListOfFavrite',[FavoriteWorkshopPostController::class,'getListOfFavorite']);
             // get user id
             Route::get('/selectByUser', [WorkshopPostController::class, 'selctByUserId']);
+
+            Route::get('/getWorkshop/{id}', [WorkshopPostController::class, 'show']);
         });
     });
 

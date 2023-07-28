@@ -44,6 +44,7 @@ class UniversityApplicationController extends Controller
             'user_id' => $userId,
             'university_post_id' => $request -> university_post_id,
         ]);
+
         return response()->json([
             'success' => true,
             'message' => 'Store application successful',
