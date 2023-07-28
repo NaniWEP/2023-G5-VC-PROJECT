@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('contact');
             $table->integer('variable_ticket');
             $table->boolean('status');
+            $table->string('images');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
             ->references('id')

@@ -11,7 +11,7 @@
         <v-list style="width: 100%">
           <v-card class="mx-auto" max-width="450">
             <v-img
-              src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+            :src="major.image" alt="major Image"
               height="200px"
               cover
             ></v-img>

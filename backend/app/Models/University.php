@@ -21,6 +21,7 @@ class University extends Model
         'phone',
         'location',
         'province',
+        'image',
         'user_id',
     ];
     public static function store($request, $id = null)
@@ -33,6 +34,7 @@ class University extends Model
             'phone',
             'location',
             'province',
+            'image',
             'user_id',
         ]);
         $university = self::updateOrCreate(['id' => $id], $university);

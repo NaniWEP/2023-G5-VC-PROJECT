@@ -16,8 +16,8 @@ class Media extends Model
     {
         return $this-> hasMany(UniversityPostMedia::class);
     }
-    public function workshopPostMedia() : HasMany 
+    public function workshopPost()
     {
-        return $this-> hasMany(WorkshopPostMedia::class);
+        return $this-> belongsToMany(WorkshopPost::class);
     }
 }

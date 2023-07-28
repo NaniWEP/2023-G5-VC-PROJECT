@@ -22,6 +22,7 @@ class ShowMajorPostResource extends JsonResource
             'description' => $this->description,
             'date' => $this->date,
             'status' => $this->status,
+            'image' => $this->image,
             'major' => new MajorResource($this->major),
             'schoolManager' => $this->user_id
         ];

@@ -22,14 +22,12 @@ class WorkshopPost extends Model
         'contact',
         'variable_ticket',
         'status',
+        'images',
         'user_id'
     ];
 
 
-    public function workshopPostMedia(): HasMany
-    {
-        return $this -> hasMany(WorkshopPostMedia::class);
-    }
+
     public function favoriteWorkshopPost(): HasMany
     {
         return $this -> hasMany(favoriteWorkshopPost::class);
@@ -38,10 +36,15 @@ class WorkshopPost extends Model
     {
         return $this -> hasMany(WorshopRegistration::class);
     }
+    public function media()
+    {
+        return $this -> belongsToMany(Media::class);
+    }
     public function user():BelongsTo
     {
         return $this -> belongsTo(User::class);
     }
+
     public function favorite(){
         $cid = auth()->guard('user')->user()!=null ? auth()->guard('user')->user()->id : null;
         return $this->belongsTo(FavoriteUniversityPost::class,'id','workshop_post_id')->where('user_id',$cid);

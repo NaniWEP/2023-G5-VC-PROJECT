@@ -11,8 +11,7 @@
           <v-card-title>
             <v-img
               class="profile_img"
-              src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29sbGVnZSUyMGNhbXB1c3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-              alt="student dp"
+              :src="university.image" alt="university Image"
             />
             <h4 class="text-center">{{university.name}}</h4>
           </v-card-title>

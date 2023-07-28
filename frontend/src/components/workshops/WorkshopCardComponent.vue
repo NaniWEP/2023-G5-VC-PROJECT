@@ -11,7 +11,7 @@
         <v-list>
           <v-card class="mx-auto" max-width="450">
             <v-img
-              src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+             :src="workshop.images" alt="workshop Image"
               height="200px"
               cover
             ></v-img>

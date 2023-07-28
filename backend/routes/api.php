@@ -95,6 +95,7 @@ Route::prefix('/workshop')->group(function(){
     Route::get('/newUpdate', [WorkshopPostController::class,'getWorkshopLastUpdated']);
     Route::get('/workshopPost', [WorkshopPostController::class, 'index']);
     Route::get('/', [WorkshopPostController::class, 'index']);
+    Route::post('/post', [WorkshopPostController::class, 'store']);
     Route::get('/{id}', [WorkshopPostController::class, 'selctByUserId']);
 });
 

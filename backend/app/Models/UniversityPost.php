@@ -17,6 +17,7 @@ class UniversityPost extends Model
         'date',
         'variable_student',
         'status',
+        'image',
         'major_id',
         'user_id',
     ];

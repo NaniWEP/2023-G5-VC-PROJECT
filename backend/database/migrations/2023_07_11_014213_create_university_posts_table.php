@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('date');
             $table->integer('variable_student');
             $table->boolean('status');
+            $table->string('image');
             $table->unsignedBigInteger('major_id');
             $table->foreign('major_id')
             ->references('id')

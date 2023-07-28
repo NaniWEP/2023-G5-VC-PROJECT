@@ -12,7 +12,7 @@
           width="350"
         >
           <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+            :src="major.image" alt="university Image"
             height="200px"
             cover
           ></v-img>

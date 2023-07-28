@@ -26,6 +26,7 @@ class WorkshopResource extends JsonResource
             'variable_ticket' => $this -> variable_ticket,
             'contact' => $this -> contact,
             'status' => $this -> status,
+            'images' => $this -> images,
             'user_id' => $this -> user_id
         ];
     }
