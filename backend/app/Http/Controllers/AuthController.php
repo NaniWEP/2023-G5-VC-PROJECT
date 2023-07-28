@@ -132,4 +132,25 @@ class AuthController extends Controller
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
+
+    function updateUaserImage(Request $request, string $id)
+    {
+        try {
+            $user = User::find($id);
+            $user->update([
+                'profile_image' => $request->downloadImageFile,
+            ]);
+
+            $user = new GetUserResource($user);
+
+            return response()->json([
+                'success' => true,
+                'data' => $user,
+                'message' => 'Upload profile successfully',
+            ], Response::HTTP_CREATED); //201
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
+    }
 }

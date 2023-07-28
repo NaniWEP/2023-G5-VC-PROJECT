@@ -13,7 +13,7 @@
     <v-row>
       <v-col cols="12" md="5">
         <v-card class="elevation-2">
-          <v-btn class="ma-2" color="red-darken-1" to="/universityPage">
+          <v-btn class="ma-2" color="red-darken-1" to="/">
             <v-icon start icon="mdi-arrow-left"></v-icon>
             Back
           </v-btn>

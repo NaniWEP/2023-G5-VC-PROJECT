@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import SideNavBar from "../studentLayouts/SideNavBar.vue";
+import SideNavBar from "../SidebarIcon.vue";
 import MapComponent from "./MapComponent.vue";
 
 export default {
