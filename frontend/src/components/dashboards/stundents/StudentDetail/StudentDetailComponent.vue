@@ -14,20 +14,18 @@
             <v-img
               v-else
               class="profile_img"
-              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+              :src="profile"
               alt="student dp"
               width="200"
               height="180"
             />
           </v-card-title>
           <div class="file-input-container">
-            <input
-              type="file"
-              @change="onFileChange"
-              class="file-input"
-              id="file-input"
-            />
-            <label for="file-input" class="placeholder">Edit profile</label>
+            <form @submit.prevent="uploadImage">
+              <input type="file" ref="image" />
+              <button type="submit">Upload Image</button>
+            </form>
+            <!-- <label for="file-input" class="placeholder">Edit profile</label> -->
           </div>
         </v-card>
       </v-col>
@@ -131,7 +129,7 @@ export default {
   data() {
     return {
       user: {},
-      image: "",
+      profile: "",
     };
   },
   components: {
@@ -149,46 +147,21 @@ export default {
           console.log(error);
         });
     },
-
-    // onFileChange(event) {
-    //   // Retrieve the selected image file
-    //   const file = event.target.files[0];
-    //   console.log(file);
-    //   if (file) {
-    //     const reader = new FileReader();
-    //     reader.onload = () => {
-    //       // Convert the image to base64 encoding
-    //       const base64Image = reader.result;
-    //       this.image = base64Image; // Store the base64 encoded image
-    //       // Create a new instance of FormData object
-    //       const imagePost = new FormData();
-    //       console.log(imagePost);
-    //       // Append the file to the FormData object
-    //       imagePost.append("file", file);
-    //       // Make an API call to upload the image
-    //       axios
-    //         .post("auth/profilePicture", imagePost)
-    //         .then((response) => {
-    //           console.log(response.data);
-    //         })
-    //         .catch((error) => {
-    //           console.log(error.response.data);
-    //         });
-    //     };
-    //     // Use setTimeout to delay the call to readAsDataURL()
-    //     setTimeout(() => {
-    //       reader.readAsDataURL(file);
-    //     }, 0);
-    //   }
-    // },
-    onFileChange(event) {
-      var file = event.target.files[0].name;
-      console.log(event.target.files[0]);
-      var form = new FormData();
-      form.append("file", file);
-      axios.post('auth/profilePicture', form).then((response) => {
-        this.image = response.data;
-      });
+    async uploadImage() {
+      const image = this.$refs.image.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.onload = async () => {
+        try {
+          const response = await axios.post("auth/profilePicture", {
+            image: reader.result,
+          });
+          this.profile = response.data.path;
+          console.log(this.profile);
+        } catch (error) {
+          console.error(error);
+        }
+      };
     },
   },
   show() {},
