@@ -11,51 +11,37 @@
       </div>
     </v-card>
     <v-container v-if="toggle">
-      <v-table>
+      <v-table class="table bg-grey-lighten-2">
         <thead>
           <tr>
-            <th style="width: 100px" class="text-center">Id</th>
-            <th style="width: 100px" class="text-center">Name</th>
-            <th style="width: 400px" class="text-center">descrition</th>
-            <th style="width: 100px" class="text-center">date</th>
-            <th style="width: 300px" class="text-center">Action</th>
+            <th style="width: 100px" class="text-left">Id</th>
+            <th style="width: 200px" class="text-left">Name</th>
+            <th style="width: 100px" class="text-left">Exprite Date</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="bg-grey-lighten-4">
           <tr v-for="(work, index) of workshopPostExpired" :key="index">
             <td>{{ work.id }}</td>
             <td>{{ work.name }}</td>
-            <td>{{ work.description }}</td>
             <td>{{ work.date }}</td>
-            <td class="d-flex align-center justify-center">
-              <v-btn class="mr-4 w-25 text-white" color="#3737e5">Edit</v-btn>
-              <v-btn color="red">Delete</v-btn>
-            </td>
           </tr>
         </tbody>
       </v-table>
     </v-container>
     <v-container v-else>
-      <v-table>
+      <v-table class="table bg-grey-lighten-2" >
         <thead>
           <tr>
-            <th style="width: 100px" class="text-center">Id</th>
-            <th style="width: 100px" class="text-center">Name</th>
-            <th style="width: 400px" class="text-center">descrition</th>
-            <th style="width: 100px" class="text-center">date</th>
-            <th style="width: 300px" class="text-center">Action</th>
+            <th style="width: 100px" class="text-left">Id</th>
+            <th style="width: 200px" class="text-left">Name</th>
+            <th style="width: 100px" class="text-left">Exprite Date</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="bg-grey-lighten-4">
           <tr v-for="(post, index) of universityPostExpired" :key="index">
             <td>{{ post.id }}</td>
             <td>{{ post.title }}</td>
-            <td>{{ post.description }}</td>
             <td>{{ post.date }}</td>
-            <td class="d-flex align-center justify-center">
-              <v-btn class="mr-4 w-25 text-white" color="#3737e5">Edit</v-btn>
-              <v-btn color="red">Delete</v-btn>
-            </td>
           </tr>
         </tbody>
       </v-table>
@@ -115,5 +101,9 @@ export default {
   flex-direction: column;
   width: 100%;
   height: 100vh;
+}
+.table {
+  background-color: 	#C0C0C0;
+  border-radius: 5px;
 }
 </style>

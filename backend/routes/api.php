@@ -38,13 +38,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         // update user route
         Route::put('/update/{id}', [AuthController::class, 'updateUser']);
-        // update user profile
-        Route::post('/update/profilePicture', [AuthController::class, 'getImage']);
+
         // register for workshop
         Route::post('/registerWorkshop', [WorkshopRegistrationController::class, 'store']);
-        Route::post('/profilePicture', [AuthController::class, 'getImage']);
 
         Route::get('/getMyTicket', [WorkshopRegistrationController::class, 'showByUser']);
+        //store university application
+        Route::post('/universityApplication', [UniversityApplicationController::class, 'store']);
 
         Route::get('/showWorkshop/{id}', [WorkshopRegistrationController::class, 'show']);
         // university routes
@@ -59,8 +59,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/getListOfFavrite',[FavoriteUniversityPostController::class, 'getListOfFavorite'] );
             // show university
             Route::get('/myUniversity', [UniversityController::class, 'showMyUniversity']);
-            //store university application
-            Route::post('/universityApplication', [UniversityApplicationController::class, 'store']);
         });
           // workshop routes
         Route::prefix('/workshop')->group(function(){
