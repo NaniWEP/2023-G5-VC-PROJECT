@@ -50,6 +50,7 @@ class AuthController extends Controller
             'gender' => $request->gender,
             'date_of_birth' => $request->date_of_birth,
             'province' => $request->province,
+            'profile_image' => $request->picture,    
             'role_id' => $request->role_id,
         ]);
         return response()->json([
@@ -125,27 +126,6 @@ class AuthController extends Controller
             $image->move(public_path('images'), $newName);
             $path = asset('images/' . $newName);
             return $path;
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 400);
-        }
-    }
-
-    function updateUaserImage(Request $request, string $id)
-    {
-        try {
-            $user = User::find($id);
-            $user->update([
-                'profile_image' => $request->downloadImageFile,
-            ]);
-
-            $user = new GetUserResource($user);
-
-            return response()->json([
-                'success' => true,
-                'data' => $user,
-                'message' => 'Upload profile successfully',
-            ], Response::HTTP_CREATED); //201
-
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
