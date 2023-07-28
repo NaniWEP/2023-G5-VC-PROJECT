@@ -87,7 +87,7 @@ class WorkshopRegistrationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(WorkshopRegistration $worshopRegistration)
+    public function edit(WorkshopRegistrations $worshopRegistration)
     {
         //
     }
@@ -95,7 +95,7 @@ class WorkshopRegistrationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update( $request, WorkshopRegistration $worshopRegistration)
+    public function update( $request, WorkshopRegistrations $worshopRegistration)
     {
         //
     }
@@ -103,7 +103,7 @@ class WorkshopRegistrationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(WorshopRegistration $worshopRegistration)
+    public function destroy(WorkshopRegistrations $worshopRegistration)
     {
         //
     }
