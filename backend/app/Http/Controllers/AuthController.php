@@ -43,14 +43,14 @@ class AuthController extends Controller
     {
         $user = User::find($id);
         $user->update([
-            'first_name' => $request -> first_name,
-            'last_name' => $request -> last_name,
-            'email' => $request -> email,
-            'password' => $request -> password,
-            'gender' => $request -> gender,
-            'date_of_birth' => $request -> date_of_birth,
-            'province' => $request -> province,
-            'role_id' => $request -> role_id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
+            'province' => $request->province,
+            'role_id' => $request->role_id,
         ]);
         return response()->json([
             'massage' => 'user updated successfully',
@@ -125,6 +125,27 @@ class AuthController extends Controller
             $image->move(public_path('images'), $newName);
             $path = asset('images/' . $newName);
             return $path;
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
+    }
+
+    function updateUaserImage(Request $request, string $id)
+    {
+        try {
+            $user = User::find($id);
+            $user->update([
+                'profile_image' => $request->downloadImageFile,
+            ]);
+
+            $user = new GetUserResource($user);
+
+            return response()->json([
+                'success' => true,
+                'data' => $user,
+                'message' => 'Upload profile successfully',
+            ], Response::HTTP_CREATED); //201
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
