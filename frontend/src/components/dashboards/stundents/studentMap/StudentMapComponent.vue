@@ -2,13 +2,13 @@
   <v-container class="container">
     <SideNavBar></SideNavBar>
     <main>
-        <MapComponent/>
+      <MapComponent />
     </main>
   </v-container>
 </template>
 
 <script>
-import SideNavBar from "../SidebarIcon.vue";
+import SideNavBar from "../studentLayouts/SideNavBar.vue";
 import MapComponent from "./MapComponent.vue";
 
 export default {
@@ -19,27 +19,21 @@ export default {
   data() {
     return {
       tab: null,
-
     };
   },
-  created() {
-    
-  },
-  methods: {
-
-  },
+  methods: {},
 };
 </script>
 
 <style scoped>
-.container{
-width: 100%;
+.container {
+  width: 100%;
 }
-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 90vh;
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90vh;
 }
 </style>
