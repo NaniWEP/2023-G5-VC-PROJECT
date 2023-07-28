@@ -7,7 +7,7 @@
       <template v-slot:activator="{ props }">
         <v-btn class="btn" color="primary" v-bind="props">+ ADD</v-btn>    
       </template>
-      <v-card class="boder">
+      <v-card class="boder" @submit.prevent="submit">
         <v-container class="container">
           <h1>ADD UNIVERSITY</h1>
           <div class="namefilled input">
@@ -20,10 +20,45 @@
             </v-col>
             <v-col cols="12" md="6">
               <v-text-field
+                type="time"
+                :rules="yearRules"
+                v-model="year_duration"
+                label="year_duration"
+              ></v-text-field>
+            </v-col>
+          </div>
+          <div class="namefilled input">
+            <v-col cols="12" md="5">
+              <v-text-field
+                type="time"
+                :rules="monthRules"
+                v-model="month_duration"
+                label="month_duration"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-text-field
                 type="date"
                 :rules="dateRules"
-                v-model="date"
-                label="Date start"
+                v-model="apply_date"
+                label="apply_date"
+              ></v-text-field>
+            </v-col>
+          </div>
+          <div class="namefilled input">
+            <v-col cols="12" md="5">
+              <v-text-field
+                type="date"
+                :rules="startdateRule"
+                v-model="start_date"
+                label="start_date"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-text-field
+                :rules="priceRules"
+                v-model="price"
+                label="price"
               ></v-text-field>
             </v-col>
           </div>
@@ -31,7 +66,7 @@
             <v-col cols="11">
               <v-textarea
                 name="input-10-1"
-                :roles="rules"
+                :rules="Descriptionrules"
                 v-model="description"
                 label="Description"
                 required
@@ -44,7 +79,7 @@
               <v-icon start icon="mdi-arrow-left"></v-icon>
               CANCEL
             </v-btn>
-            <v-btn type="submite" class="ma-2 mr-10 text-white" color="#3737e5" size="x-large" @click="dialog = false">           
+            <v-btn type="submite" class="ma-2 mr-10 text-white" color="#3737e5" size="x-large" @click="addPost">           
               <v-icon start icon="mdi-wrench"></v-icon>
               POST
             </v-btn>
@@ -64,58 +99,27 @@ import "@mdi/font/css/materialdesignicons.css"
       valid: true,
       title: "",
       date: "",
-      time: "",
-      organizer: "",
-      contact: "",
-      location: "",
-      image: "",
       description: "",
-      workshopInfo: null,
-      titleRules: [
-        (value) => {
-          if (value) return true;
-          return "Title is requird.";
-        },
-      ],
-      dateRules: [
-        (value) => {
-          if (value) return true;
-          return "Date is requird.";
-        },
-      ],
-      timeRoles: [
-        (value) => {
-          if (value) return true;
-          return "Date is requird.";
-        },
-      ],
-      contactRoles: [
-        (v) => !!v || "Email is Required",
-        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-      ],
-
-      show1: false,
-      rules: {
-        required: (value) => !!value || "Required.",
-        min: (v) => (v && v.length >= 10) || "Min 10 characters",
-      },
-      }),
-      computed: {
-        passwordMatch() {
-          return () => this.password === this.verify || "Password must match";
-        },
-      },
-      methods: {
-      submitData() {
-        this.workshopInfo = {
-          name: this.title,
-          date: this.date,
-          time: this.time,
-          organizer: this.organizer,
-          contact: this.contact,
-          location: this.location,
-          image: this.image,
-          description: this.description,
+    }),  
+    methods: {
+      addPost() {
+        if (this.name !== "" && this.year_duration !== "" && this.description !== "" 
+            && this.month_duration !== "" && this.apply_date !== "" && this.start_date !== "" && this.price !== ""){
+          const university = {
+            title: this.name,
+            description: this.description,
+            year_duration: this.year_duration,
+            month_duration: this.month_duration,
+            apply_date: this.apply_date,
+            start_date: this.start_date,
+            price: this.price
+          }
+          this.$emit('university',university);
+          this.title = "",
+          this.date = "",
+          this.description = ""
+        }
+          this.dialog = false
         }
         // axios.post("api/workshopData", {
         //   this.workshopInfo
@@ -127,14 +131,12 @@ import "@mdi/font/css/materialdesignicons.css"
         //   console.log(error.message)
         // })
         },
-      },
-  };  
+  };
 </script>
 
 <style scoped>
   .btn{
-    margin-right: 81%;
-    margin-top: 10px;
+    margin-right: 85%
   }
   .header{
     text-align: center;

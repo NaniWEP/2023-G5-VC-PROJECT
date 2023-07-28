@@ -19,6 +19,6 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url("../../assets/login/World Map.svg");
+  background: url("../../assets/login/login.svg");
 }
 </style>

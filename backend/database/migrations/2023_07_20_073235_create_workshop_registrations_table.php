@@ -11,19 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('worshop_registrations', function (Blueprint $table) {
+        Schema::create('workshop_registrations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email');
             $table->string('phone_number');
             $table->string('gender');
+            $table->string('age');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                     ->references('id')
                     ->on('users')
                     ->onDelete('cascade');
-            $table->unsignedBigInteger('workshop_post_id');
-            $table->foreign('workshop_post_id')
+            $table->unsignedBigInteger('workshop_id');
+            $table->foreign('workshop_id')
                     ->references('id')
                     ->on('workshop_posts')
                     ->onDelete('cascade');

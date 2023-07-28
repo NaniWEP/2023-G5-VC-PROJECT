@@ -17,8 +17,8 @@ class UniversityApplication extends Model
         'phone_number',
         'gender',
         'degree',
-        'origin_loaction',
-        'residence_loaction',
+        'origin_location',
+        'residence_location',
         'user_id',
         'university_post_id',
     ];

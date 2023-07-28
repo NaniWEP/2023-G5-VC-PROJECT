@@ -9,16 +9,49 @@
         cols="4"
       >
         <v-list style="width: 100%">
-          <v-card class="mx-auto" max-width="450">
+          <v-card class="mx-auto my-12 card" max-width="400">
             <v-img
             :src="major.image" alt="major Image"
               height="200px"
               cover
             ></v-img>
+            <v-card-item>
+              <v-card-title><v-icon>mdi-school-outline</v-icon> : {{ major.major.title }}</v-card-title>
+              <v-card-title>UNIVERSITY : {{ major.major.university.name }}</v-card-title>
 
-            <v-card-title> {{ major.title }}</v-card-title>
+              <v-card-subtitle>
+                <span class="me-1">{{ major.major.year_duration }}years</span>
 
-            <v-card-subtitle>{{ major.description }}</v-card-subtitle>
+                <v-icon
+                  color="error"
+                  icon="mdi-fire-circle"
+                  size="small"
+                ></v-icon>
+              </v-card-subtitle>
+            </v-card-item>
+            <v-card-text>
+              <v-row align="center" class="mx-0">
+                <v-rating
+                  :model-value="0"
+                  color="#3737e5"
+                  density="compact"
+                  half-increments
+                  readonly
+                  size="small"
+                ></v-rating>
+
+                <div class="ms-4 text-subtitle-1">
+                  ${{ major.major.price }} /per year
+                </div>
+              </v-row>
+            </v-card-text>
+            <v-divider class="mx-4 mb-1"></v-divider>
+            <v-card-title>START APPLY</v-card-title>
+            <div class="px-4">
+              <v-chip-group v-model="selection">
+                <v-chip>{{ formatDate(major.major.apply_date) }}</v-chip>
+              </v-chip-group>
+            </div>
 
             <v-card-actions>
               <v-btn
@@ -28,14 +61,14 @@
               >
                 See more
               </v-btn>
-              <v-btn style="color: #304ffe; padding: 0 20px" 
-              @click="toggleFavorite(major.id)"
-              variant="text">
-                <v-icon
-                  align-tabs="center"
-                  :style="getIconStyle(major.id)"
-                  icon="mdi-heart"
-                ></v-icon>
+              <v-btn
+                class="actionBtn"
+                prepend-icon="mdi-heart-outline"
+                @click="toggleFavorite(major.id)"
+                :style="getIconStyle(major.id)"
+                align-tabs="center"
+                variant="outlined"
+              >
                 FAVORITE
               </v-btn>
             </v-card-actions>
@@ -49,6 +82,7 @@
 <script>
 import axios from "../../stores/axiosHttp";
 import Swal from "sweetalert2";
+import dayjs from "dayjs";
 
 export default {
   props: ["majors"],
@@ -93,6 +127,7 @@ export default {
               this.favorites.push(id); // add the post to favorites
               this.alertFavorite('success', "Post added to favorites");
             }
+            console.log(response.data.message);
             this.alertFavorite("success", response.data.message);
           })
           .catch((error) => {
@@ -129,14 +164,26 @@ export default {
 };
 </script>
 <style scoped>
-.actionBtn:hover{
+.actionBtn:hover {
   background-color: #304ffe;
-  color : #fff;
+  color: #fff;
   transition: 800ms;
   outline: 1px solid #304ffe;
 }
-.actionBtn{
+.actionBtn {
   padding: 0 20px;
   color: #304ffe;
+}
+
+.card{
+  height: 100%;
+  background: #e7e7e7ee;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.card:hover {
+  transition: 500ms;
+  background: #ededed;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 </style>

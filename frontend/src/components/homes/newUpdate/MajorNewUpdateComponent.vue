@@ -8,36 +8,53 @@
         <v-card
           color="grey-lighten-3"
           class="ma-2"
-          height="320"
+          height="350" 
           width="350"
         >
           <v-img
             :src="major.image" alt="university Image"
             height="200px"
+            width="100%"
             cover
           ></v-img>
+          <v-card-item>
+            <v-card-title>{{ major.title }}</v-card-title>
 
-          <v-card-title>{{major.title}}</v-card-title>
+            <v-card-subtitle>
+              <span class="me-1">{{major.description}}</span>
 
-          <v-card-subtitle>{{major.description}}</v-card-subtitle>
+              <v-icon
+                color="error"
+                icon="mdi-fire-circle"
+                size="small"
+              ></v-icon>
+            </v-card-subtitle>
+          </v-card-item>
+          <v-card-text>
+            <v-row align="center" class="mx-0">
+              <v-rating
+                :model-value="0"
+                color="#3737e5"
+                density="compact"
+                half-increments
+                readonly
+                size="small"
+              ></v-rating>
 
+              <div class="ms-4 text-subtitle-1">
+                <v-icon color="#3737e5">mdi-ticket-percent-outline</v-icon> •
+                {{ major.variable_student }} tickets
+              </div>
+            </v-row>
+          </v-card-text>
           <v-card-actions>
             <v-btn
-              :to="`/universityDetail/${major.id}`"
+              :to="`/majorPostDetail/${major.id}`"
               :id="$route.params.index"
               class="actionBtn"
               variant="outlined"
             > 
               See more
-            </v-btn>
-            <v-btn
-              :to="`/universityDetail/${index + 1}`"
-              :id="$route.params.index"
-              prepend-icon="mdi-heart-outline"
-              class="actionBtn"
-              variant="outlined"
-            >
-              Favorite
             </v-btn>
           </v-card-actions>
         </v-card>

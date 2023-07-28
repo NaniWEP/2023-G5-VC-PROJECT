@@ -8,7 +8,7 @@ import LoginPageView from '../views/Page/LoginView.vue'
 import RegisterPageView from '../views/Page/registers/RegisterView.vue'
 import UniversityDetalView from '../views/Page/universities/UniversityDetailView.vue'
 import MajorPostView from '../components/universities/MajorPostDetailComponent.vue'
-import StudentDetail from "../views/Page/dashboards/students/StudentDetailView.vue"
+import StudentDetail from "../components/dashboards/stundents/StudentDetail/StudentDetailComponent.vue"
 import StudentFavoritePage from "../views/Page/dashboards/students/StudentFavoriteView.vue"
 import StudentMap from "../views/Page/dashboards/students/StudentMap.vue"
 import SearchView from '../views/SearchView.vue'
@@ -18,12 +18,18 @@ import ChartView from "../views/Page/dashboards/managers/charts/ChartView.vue"
 import PostView from "../views/Page/dashboards/managers/posts/PostView.vue"
 import MajorView from "../views/Page/dashboards/managers/majors/MajorView.vue"
 import ExpirationView from "../views/Page/dashboards/managers/expirations/ExpirationView.vue"
-
+import ticketsView from "../components/dashboards/stundents/studentTicket/StudentTicketComponent.vue"
 const routes = [
   {
     path: '/',
     name: 'Home',
     component:HomePageView
+  },
+
+  {
+    path: '/ticket',
+    name: 'Ticket',
+    component:ticketsView
   },
 
   {

@@ -3,24 +3,28 @@
     <v-img class="image" src="../../assets/login/logIN.png"></v-img>
     <h1 class="text-center">WELLCOME BACK</h1>
     <div class="google">
-      <GoogleAuth class="googleLog"/>
-      </div>
-      <div class="line">
-          <hr>
-      </div>
+      <GoogleAuth class="googleLog" />
+    </div>
+    <div class="line">
+      <hr />
+    </div>
     <v-form v-model="form" @submit.prevent="onSubmit">
       <v-text-field
         v-if="errorMessage == null"
+        variant="outlined"
+        required
+        prepend-inner-icon="mdi-email-outline"
         v-model="email"
         :readonly="loading"
         :rules="emailRules"
         class="mb-2 mt-3"
         clearable
-        prepend-inner-icon="mdi-email-outline"
         label="Email"
       ></v-text-field>
       <v-text-field
         v-else
+        variant="outlined"
+        required
         v-model="email"
         :readonly="loading"
         :rules="emailRules"
@@ -33,6 +37,8 @@
 
       <v-text-field
         v-if="errorMessage == null"
+        variant="outlined"
+        required
         v-model="password"
         :readonly="loading"
         :rules="[rules.required, rules.min]"
@@ -49,6 +55,8 @@
       <v-text-field
         v-else
         v-model="password"
+        variant="outlined"
+        required
         :readonly="loading"
         :rules="[rules.required, rules.min]"
         :error-messages="[errorMessage]"
@@ -63,7 +71,10 @@
         prepend-inner-icon="mdi-lock-outline"
       ></v-text-field>
       <p>
-        Don't have account? <router-link to="/register" style="color: #3737e5">Register</router-link>
+        Don't have account?
+        <router-link to="/register" style="color: #3737e5"
+          >Register</router-link
+        >
       </p>
 
       <v-btn
@@ -78,18 +89,18 @@
       >
         LOGIN
       </v-btn>
-      <v-btn block to="/" color="red" size="large" class="mb-4"> CANCEL </v-btn> 
+      <v-btn block variant="outlined" to="/" size="large" class="mb-4"> CANCEL </v-btn>
     </v-form>
   </v-card>
 </template>
 
 <script>
 import "@mdi/font/css/materialdesignicons.css";
-import GoogleAuth from "../google/GoogleAuth.vue"
+import GoogleAuth from "../google/GoogleAuth.vue";
 import axios from "@/stores/axiosHttp";
 import { setCookie } from "@/stores/cookie.js";
 export default {
-  components: {GoogleAuth},
+  components: { GoogleAuth },
   data: () => ({
     email: "",
     password: "",
@@ -135,11 +146,11 @@ export default {
 
               // send user to
               if (response.data.data.role_id == 3) {
-                this.$router.push("/");
+                this.$router.push("/user");
               } else if (response.data.data.role_id == 2) {
-                this.$router.push("/manager");
+                this.$router.push("/user");
               } else if (response.data.data.role_id == 1) {
-                this.$router.push("/");
+                this.$router.push("/user");
               }
             } else {
               console.log("NOOOOOO");
@@ -170,22 +181,22 @@ p {
   width: 35%;
   border-radius: 10px;
   color: #ffff;
-  background-color: #ffffff05;
+  background-color: #ffffff4a;
 }
-.google{
+.google {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   margin-bottom: 10px;
 }
-.googleLog{
+.googleLog {
   width: 90%;
 }
 hr {
-    border: none;
-    border-top: 3px double #ffffff;
-    text-align: center;
-    height: 5px;
+  border: none;
+  border-top: 3px double #ffffff;
+  text-align: center;
+  height: 5px;
 }
 </style>

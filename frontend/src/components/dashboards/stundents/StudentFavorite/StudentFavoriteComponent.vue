@@ -2,138 +2,115 @@
   <v-container class="container">
     <SideNavBar></SideNavBar>
     <v-row>
-      <v-col cols="12" md="3">
-        <v-card class="elevation-2">
+      <v-col cols="12" md="12">
+        <v-card class="elevation-2 card">
           <v-card-title class="justify-center">
-            <v-img
-              class="profile_img"
-              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-              width="200"
-              height="180"
-            />
-            <h3 class="text-center">Doeur Diet</h3>
-          </v-card-title>
-        </v-card>
-      </v-col>
-      <v-col cols="12" md="8">
-        <v-card class="elevation-2">
-          <v-card-title class="justify-center">
-            <h3 class="mb-0"><v-icon>mdi-heart</v-icon>My favorite</h3>
+            <h3 class="mb-0">Your Favorite</h3>
           </v-card-title>
 
-          <v-tabs v-model="tab" class="bg-white">
-            <v-tab value="university">Major</v-tab>
-            <v-tab value="workshop">Workshop</v-tab>
+          <v-tabs
+            v-model="tab"
+            class="tabBtn mb-8"
+            align-tabs="center"
+            fixed-tabs
+            style="width: 50%"
+          >
+            <v-tab value="university" class="subBtn">Major</v-tab>
+            <v-tab value="workshop" class="subBtn">Workshop</v-tab>
           </v-tabs>
 
           <v-window v-model="tab">
-            <v-window-item value="university">
-              <div class="title">
-                <h3>University</h3>
-              </div>
-
+            <v-window-item
+              v-if="favoriteListOfUniversity != null"
+              value="university"
+            >
               <div
                 v-for="universityList in favoriteListOfUniversity"
                 :key="universityList"
                 class="main-card"
               >
-                <article class="article">
-                  <!-- <img :src="slide.img" alt="Slide Image" /> -->
-                  <img
-                    src="https://img.freepik.com/free-photo/harvard-university-cambridge-usa_1268-14363.jpg"
-                    alt=""
-                  />
-                  <div class="article_text_column">
-                    <h2>{{ universityList.university.title }}</h2>
-                    <p>{{ universityList.university.description }}</p>
-                    <p>
-                      <span style="font-weight: bold"
-                        >Major:
-                        {{ universityList.university.major.title }}
-                      </span>
-                    </p>
-                    <p>
-                      <span style="font-weight: bold">Apply date:</span>
-                      {{ universityList.university.major.apply_date }}
-                    </p>
-                    <p>
-                      <span style="font-weight: bold">Sart date study:</span>
-                      {{ universityList.university.major.start_date }}
-                    </p>
-                    <p>
-                      <span style="font-weight: bold">Duration:</span>
-                      {{ universityList.university.major.month_duration }} month
-                    </p>
-                    <p>
-                      <span style="font-weight: bold">$Price:</span>
-                      {{ universityList.university.major.price }} $
-                    </p>
-                  </div>
-                </article>
+                  <article class="article my-4">
+                    <img
+                      src="https://www.kgpraigarh.ac.in/images/web_img/workshop1.png"
+                      alt=""
+                      width="100"
+                      height="100"
+                    />
+
+                    <div class="article_text_column">
+                      <h4>{{ universityList.university.title }}</h4>
+                      <p>
+                        <span style="font-weight: bold">Date:</span>
+                        {{
+                          formatDate(universityList.university.major.apply_date)
+                        }}
+                      </p>
+                      <p>
+                        <span style="font-weight: bold">Location:</span>
+                        {{ universityList.university.major.price }} $
+                      </p>
+                    </div>
+                    <div class="btnAction">
+                      <v-btn class="seemoreBtn">See more</v-btn>
+                      <v-btn class="unFavoriteBtn" prepend-icon="mdi-heart-broken"
+                        >Unfaorite</v-btn
+                      >
+                    </div>
+                  </article>
               </div>
             </v-window-item>
+            <v-window-item v-else class="university" value="university">
+              <h1>
+                <v-icon>mdi-robot-vacuum-alert</v-icon> Didn't find your
+                favorite major
+              </h1>
+            </v-window-item>
 
-            <v-window-item value="workshop">
-              <div class="title">
-                <h3>Workshop</h3>
-              </div>
+            <v-window-item
+              v-if="favoriteListOfWorkshop != null"
+              value="workshop"
+              class="favorite"
+            >
               <div
                 v-for="workshopList in favoriteListOfWorkshop"
                 :key="workshopList"
                 class="main-card"
               >
-                <article class="article">
-                  <!-- <img :src="slide.img" alt="Slide Image" /> -->
-
+                <article class="article my-4">
                   <img
                     src="https://www.kgpraigarh.ac.in/images/web_img/workshop1.png"
                     alt=""
+                    width="100"
+                    height="100"
                   />
 
                   <div class="article_text_column">
-                    <h2>{{ workshopList.workshop.name }}</h2>
-                    <p>{{ workshopList.workshop.description }}</p>
+                    <h4>{{ workshopList.workshop.name }}</h4>
                     <p>
                       <span style="font-weight: bold">Date:</span>
-                      {{ workshopList.workshop.date }}
-                    </p>
-                    <p>
-                      <span style="font-weight: bold">Time:</span>
-                      {{ workshopList.workshop.time }}
+                      {{ formatDate(workshopList.workshop.date) }}
                     </p>
                     <p>
                       <span style="font-weight: bold">Location:</span>
                       {{ workshopList.workshop.location }}
                     </p>
-                    <p>
-                      <span style="font-weight: bold">Organizer:</span>
-                      {{ workshopList.workshop.organizer }}
-                    </p>
-                    <p>
-                      <span style="font-weight: bold">Contact: </span>
-                      {{ workshopList.workshop.contact }}
-                    </p>
+                  </div>
+                  <div class="btnAction">
+                    <v-btn class="seemoreBtn">See more</v-btn>
+                    <v-btn class="unFavoriteBtn" prepend-icon="mdi-heart-broken"
+                      >Unfaorite</v-btn
+                    >
                   </div>
                 </article>
               </div>
             </v-window-item>
+            <v-window-item v-else class="university" value="workshop">
+              <h1>
+                <v-icon>mdi-robot-vacuum-alert</v-icon> Didn't find your
+                favorite Workshop
+              </h1>
+            </v-window-item>
           </v-window>
-        </v-card>
-        <v-card class="elevation-2 mt-4">
-          <v-card-title class="justify-center">
-            <h3 class="mb-0">
-              <v-icon>mdi-information</v-icon>Other Information
-            </h3>
-          </v-card-title>
-          <v-card-text>
-            <p>
-              Knowledge sharpens our skills like reasoning and problem-solving.
-              A strong base of knowledge helps brains function more smoothly and
-              effectively. We become smarter with the power of knowledge and
-              solve problems more easily. * Everyday Life- Knowledge is
-              important and useful in day to day events.
-            </p>
-          </v-card-text>
         </v-card>
       </v-col>
     </v-row>
@@ -141,8 +118,9 @@
 </template>
 
 <script>
-import SideNavBar from "../studentLayouts/SideNavBar.vue";
+import SideNavBar from "../SidebarIcon.vue";
 import axios from "@/stores/axiosHttp";
+import dayjs from "dayjs";
 export default {
   components: {
     SideNavBar,
@@ -150,15 +128,30 @@ export default {
   data() {
     return {
       tab: null,
-      favoriteListOfWorkshop: [],
-      favoriteListOfUniversity: [],
+      favoriteListOfWorkshop: null,
+      favoriteListOfUniversity: null,
+      user: {},
     };
   },
   created() {
     this.getFavoriteUniversity();
     this.getFavoriteWorkshop();
   },
+  mounted() {
+    this.getUser();
+  },
   methods: {
+    getUser() {
+      axios
+        .get(`/auth/getUser`)
+        .then((response) => {
+          console.log(response.data.data);
+          this.user = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     getFavoriteWorkshop() {
       axios
         .get("auth/workshop/getListOfFavrite")
@@ -168,6 +161,11 @@ export default {
         .catch((error) => {
           console.log(error.message);
         });
+    },
+    formatDate(dateString) {
+      const date = dayjs(dateString);
+      // Then specify how you want your dates to be formatted
+      return date.format("dddd D/ MMMM/ YYYY");
     },
     getFavoriteUniversity() {
       axios
@@ -185,75 +183,54 @@ export default {
 </script>
 
 <style scoped>
-.profile {
-  display: flex;
-  justify-content: center;
-  margin-top: 3%;
-}
-
-.text-center {
-  background-color: #afc4c7;
-  margin-top: 1%;
-  padding: 10px;
-  font-size: large;
-}
-
-.v-card-text {
-  margin-top: 16px;
+.card {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 1px 0 0 rgba(255, 255, 255, 0.15);
   padding: 30px;
-  background-color: #cdd3cd;
-  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-}
-
-.v-card {
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  margin-bottom: 24px;
-  border: 2px solid #3737e5;
-  padding: 30px;
-  border-radius: 4px;
-}
-
-.profile_img {
-  border: 3px solid #3737e5;
-  border-radius: 50%;
-  padding: 24px;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.article img {
-  width: 45%;
-  height: 30%;
+  border-radius: 5px;
+  background-color: #eeee;
+  height: 100vh;
 }
 .article {
   display: flex;
+  justify-content: space-around;
+  background: #ffff;
+  align-items: center;
+  height: 120px;
+  border-radius: 10px;
+}
+.article:hover {
+  transform: translateY(-5px) scale(1.005) translateZ(0);
+  transition: 1000ms;
+  box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
+    0 24px 46px var(--box-shadow-color);
+}
+.name {
+  border-radius: 5px;
+}
+.subBtn {
+  border-radius: 5px;
+  outline: 2px solid #000000;
+  font-style: bold;
+}
+.subBtn:active {
+  background: #3737e5;
+}
+.university {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  color: #3737e5;
 }
 
-.article_text_column {
-  padding: 9px;
-}
-.title {
-  margin-right: 50%;
-  text-align: center;
-  margin-top: 2%;
+.seemoreBtn {
   color: white;
+  background: #3737e5;
+  margin: 2px;
 }
 
-.main-card {
-  background-color: #cdd3cd;
-  border:solid 1px #3737e5;
-  margin: 9px;
-  padding: 10px;
-  border-radius: 3px;
-  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
-}
-.title,
-.text-center {
-  background-color: #3737e5;
+.unFavoriteBtn {
   color: white;
-  border-radius: 3px;
+  background: red;
 }
 </style>
