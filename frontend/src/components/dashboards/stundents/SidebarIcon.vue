@@ -17,6 +17,7 @@
             prepend-icon="mdi-heart-box"
             :to="{ path: '/favoritePage' }"
             active-class="bgColor"
+            value="profile"
           >
             Favorite
           </v-list-item>
@@ -25,6 +26,7 @@
             prepend-icon="mdi-ticket"
             :to="{ path: '/ticket' }"
             active-class="bgColor"
+            value="ticket"
           >
             Ticket
           </v-list-item>
@@ -33,6 +35,7 @@
             prepend-icon="mdi-map-marker-account"
             :to="{ path: '/map' }"
             active-class="bgColor"
+            value="profile"
           >
             My location
           </v-list-item>
@@ -41,6 +44,7 @@
             prepend-icon="mdi-logout"
             @click="logOut"
             active-class="bgColor"
+            value="profile"
           >
             LogOut
           </v-list-item>
@@ -63,12 +67,15 @@
         Back Home
       </v-btn>
     </v-app-bar>
+    <v-window v-model="tab">
+    </v-window>
   </section>
 </template>
 <script>
 import { eraseCookie } from "@/stores/cookie.js";
 import { googleLogout } from "vue3-google-login";
 import axios from "@/stores/axiosHttp";
+// import studentTicket from "./studentTicket/StudentTicketComponent.vue"
 export default {
   data() {
     return {
@@ -76,7 +83,9 @@ export default {
       showDrawer: false,
     };
   },
-  setup() {},
+  components:{
+    // studentTicket
+  },
   methods: {
     async logOut() {
       googleLogout();

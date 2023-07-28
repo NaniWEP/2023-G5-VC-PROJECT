@@ -27,8 +27,9 @@ export default {
   mounted() {
     axios
       .get("/workshop/workshopPost")
-      .then((respone) => {
-        this.workshopPost = respone.data.data;
+      .then((response) => {
+        this.workshopPost = response.data.data;
+        console.log(this.workshopPost)
       })
       .catch((err) => {
         return err;

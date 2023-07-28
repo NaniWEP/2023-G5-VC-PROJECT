@@ -1,4 +1,6 @@
 <template>
+<section>
+  <NavbarComponent />
   <v-container id="{{id}}" class="container">
     <v-row>
       <v-col cols="12" md="5">
@@ -85,9 +87,11 @@
       </v-col>
     </v-row>
   </v-container>
+  </section>
 </template>
 <script>
 import axios from "@/stores/axiosHttp";
+import NavbarComponent from '../../../components/layouts/NavbarComponent.vue';
 export default {
   name: "UniversityDetail",
   data() {
@@ -96,7 +100,9 @@ export default {
     };
   },
   props: ["id"],
-  components: {},
+  components: {
+    NavbarComponent
+  },
   mounted() {
     axios
       .get(`/workshop/workshopDetail/${this.id}`)

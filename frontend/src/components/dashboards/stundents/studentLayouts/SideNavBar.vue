@@ -15,8 +15,8 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn prepend-icon="mdi-home" class="homeBtn" to="/">
-        Home
+      <v-btn prepend-icon="mdi-home-circle" class="homeBtn" to="/">
+        Back Home
       </v-btn>
     </v-app-bar>
   </section>
@@ -47,12 +47,8 @@ export default {
   margin-left: 20px;
 }
 .homeBtn{
-  outline: 1px solid black;
-}
-.homeBtn:hover {
+  outline: 1px solid #3737e5;
   background-color: #304ffe;
-  color : #ffff;
-  transition: 800ms;
-  outline: 1px solid #304ffe;
+  color: #ffff;
 }
 </style>
