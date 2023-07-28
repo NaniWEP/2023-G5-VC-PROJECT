@@ -133,7 +133,7 @@ export default {
               this.alertFavorite("success", "Post added to favorites");
             }
             console.log(response.data.message);
-            this.alertFavorite("success", "Post added to favorites");
+            this.alertFavorite("success", response.data.message);
           })
           .catch((error) => {
             console.log(error.message);

@@ -28,14 +28,16 @@
                 />
               </v-card-title>
               <v-row>
-                <v-col cols="12" sm="4">
+                <v-col cols="12" sm="4" d-flex>
                   <v-file-input
                     bg-color="white"
                     prepend-inner-icon="mdi-file-arrow-left-right-outline"
                     variant="outlined"
                     label="Change you Profile"
                     required
-                  ></v-file-input>
+                    @change="uploadImage"
+                  >
+                  </v-file-input>
                 </v-col>
                 <v-col cols="12" sm="4">
                   <v-text-field
@@ -114,25 +116,12 @@
                   class="saveBtn"
                   variant="outlined"
                   @click="updateUser"
-                  >Save Change</v-btn>
+                  >Save Change
+                  </v-btn
+                >
               </v-row>
             </v-container>
           </v-simple-table>
-        </v-card>
-        <v-card class="elevation-2 mt-4">
-          <v-card-title class="justify-center">
-            <h3 class="mb-0">
-              <v-icon>mdi-information</v-icon>Other Information
-            </h3>
-          </v-card-title>
-          <v-card-text>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-          </v-card-text>
         </v-card>
       </v-col>
     </v-row>
@@ -143,11 +132,54 @@
 import axios from "@/stores/axiosHttp";
 import SideNavBar from "../SidebarIcon.vue";
 import Swal from "sweetalert2";
+import { storage } from "@/firebase.js";
+import {
+  uploadBytesResumable,
+  getDownloadURL,
+  ref as storageReference,
+} from "firebase/storage";
+import { ref } from "vue";
 export default {
+  // ===========
+  // RESOURCE: https://firebase.google.com/docs/storage/web/upload-files
+  // ===========
+  setup() {
+    const uploadImageFile = ref(null);
+    const downloadImageFile = ref(null);
+    const randomText = ref(null);
+
+
+    async function uploadImage(event) {
+      randomText.value =  Math.random().toString(36).slice(2)
+      let fileImage = event.target.files[0];
+      const storageRef = storageReference(storage, `images/${randomText.value}-${fileImage.name}`);
+      const uploadFile = uploadBytesResumable(storageRef, fileImage);
+      uploadFile.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Upload is ${progress}% done`);
+        },
+        (error) => {
+          console.log(error);
+        },
+        async () => {
+          uploadImageFile.value = uploadFile;
+          const url = await getDownloadURL(storageRef);
+          downloadImageFile.value = url;
+        }
+      );
+    }
+    return {
+    uploadImage,
+    downloadImageFile,
+    }
+  },
   data() {
     return {
       user: {},
-      image: "",
+      profile: "",
     };
   },
   components: {
@@ -165,17 +197,17 @@ export default {
           console.log(error);
         });
     },
-    updateUser(){
-      console.log(this.user.gender)
+    updateUser() {
+      this.user.picture = this.downloadImageFile
       axios
-      .put(`/auth/update/`+ this.user.id, this.user)
-      .then((response)=>{
-        console.log(response.data);
-        this.alertFavorite("success", response.data.massage);
-      })
-      .catch((error)=>{
-        console.log(error);
-      })
+        .put(`/auth/update/` + this.user.id, this.user)
+        .then((response) => {
+          console.log(response.data);
+          this.alertFavorite("success", response.data.massage);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     alertFavorite(icon, message) {
       const Toast = Swal.mixin({
@@ -205,8 +237,6 @@ export default {
       });
     },
   },
-  show() {},
-  onMounted() {},
   mounted() {
     this.getUser();
   },

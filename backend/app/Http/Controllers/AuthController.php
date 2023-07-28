@@ -8,7 +8,7 @@ use App\Http\Requests\GetUserRequest;
 use App\Http\Resources\GetUserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{Validator, Auth};
+use Illuminate\Support\Facades\{Validator, Auth, DB, Storage};
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,14 +43,15 @@ class AuthController extends Controller
     {
         $user = User::find($id);
         $user->update([
-            'first_name' => $request -> first_name,
-            'last_name' => $request -> last_name,
-            'email' => $request -> email,
-            'password' => $request -> password,
-            'gender' => $request -> gender,
-            'date_of_birth' => $request -> date_of_birth,
-            'province' => $request -> province,
-            'role_id' => $request -> role_id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
+            'province' => $request->province,
+            'profile_image' => $request->picture,    
+            'role_id' => $request->role_id,
         ]);
         return response()->json([
             'massage' => 'user updated successfully',
@@ -110,21 +111,24 @@ class AuthController extends Controller
             'message' => 'Get user data successfully',
         ], Response::HTTP_OK); //200
     }
-    public function getImage(Request $request)
+    public function uploadImage(Request $request)
     {
         try {
-            if (!$request->hasFile('file')) {
-                throw new \Exception('No file uploaded');
+            if (!$request->has('image')) {
+                throw new \Exception('No image uploaded');
             }
-            $image = $request->file('file');
-            if (!getimagesize($image)) {
-                throw new \Exception('Invalid image file');
-            }
+            $imageData = $request->get('image');
+            $imageData = str_replace('data:image/jpeg;base64,', '', $imageData);
+            $imageData = str_replace('data:image/png;base64,', '', $imageData);
+            $imageData = str_replace(' ', '+', $imageData);
+            $imageData = base64_decode($imageData);
             $userId = Auth::id();
-            $newName = "file_$userId" . rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $newName);
+            $newName = "file_$userId" . rand() . '.png';
+            file_put_contents(public_path('images/' . $newName), $imageData);
             $path = asset('images/' . $newName);
-            return $path;
+            $userId = Auth::user()->id;
+            $data = DB::table('users')->where('id', $userId)->update(['profile_image' => $path]);
+            return response()->json(['path' => $path]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }

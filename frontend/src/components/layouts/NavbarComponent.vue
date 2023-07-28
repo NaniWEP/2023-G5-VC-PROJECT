@@ -52,8 +52,9 @@
       <v-menu open-on-hover>
         <template v-slot:activator="{ props }">
           <v-avatar v-if="isLoggedIn == true" v-bind="props">
-            <v-img v-if="userPassword === null" :src="userProfile" w-50></v-img>
-            <v-img v-else src="../../assets/user.png" w-50></v-img>
+            <v-img v-if="userPassword == null" :src="userProfile" w-50></v-img>
+            <v-img v-else-if="userPassword != null && userProfile != null" :src="userProfile" w-50></v-img>
+            <v-img v-else src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" w-50></v-img>
           </v-avatar>
         </template>
 
