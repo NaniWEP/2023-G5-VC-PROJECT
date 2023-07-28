@@ -44,6 +44,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/registerWorkshop', [WorkshopRegistrationController::class, 'store']);
         Route::post('/profilePicture', [AuthController::class, 'getImage']);
 
+        Route::get('/getMyTicket', [WorkshopRegistrationController::class, 'showByUser']);
+
         Route::get('/showWorkshop/{id}', [WorkshopRegistrationController::class, 'show']);
         // university routes
         Route::prefix('/university')->group(function(){
@@ -70,6 +72,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/getListOfFavrite',[FavoriteWorkshopPostController::class,'getListOfFavorite']);
             // get user id
             Route::get('/selectByUser', [WorkshopPostController::class, 'selctByUserId']);
+
+            Route::get('/getWorkshop/{id}', [WorkshopPostController::class, 'show']);
         });
     });
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\WorkshopRegistrations;
+use App\Models\WorkshopPostController;
+use App\Http\Resources\WorkshopRegistrationResource;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\{Validator,Auth};
@@ -69,14 +71,16 @@ class WorkshopRegistrationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function showByUser()
     {
         //
-        $workshop = WorkshopRegistrations::find($id);
+        $userId = Auth::user()->id;
+        $ticket = WorkshopRegistrations::where('user_id',$userId)->get();
+        $ticket = WorkshopRegistrationResource::collection($ticket);
         return response()->json([
             'success' => true,
-            'massage' => 'Get workshop apply successfully',
-            'data' => $workshop
+            'massage' => 'Get ticket successfully',
+            'data' => $ticket
         ],Response::HTTP_OK);//200
     }
 
