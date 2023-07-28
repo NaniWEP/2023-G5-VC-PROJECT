@@ -179,7 +179,7 @@ export default {
   data() {
     return {
       user: {},
-      image: "",
+      profile: "",
     };
   },
   components: {

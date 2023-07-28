@@ -93,6 +93,7 @@ export default {
               this.favorites.push(id); // add the post to favorites
               this.alertFavorite('success', "Post added to favorites");
             }
+            console.log(response.data.message);
             this.alertFavorite("success", response.data.message);
           })
           .catch((error) => {

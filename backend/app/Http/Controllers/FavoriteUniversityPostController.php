@@ -25,7 +25,7 @@ class FavoriteUniversityPostController extends Controller
      {
          $userId = Auth::user()->id;
          $universityPostId = $request->university_post_id;
-         $allow = FavoriteUniversityPost::where('workshop_post_id', $universityPostId)->where('user_id', $userId)->first();
+         $allow = FavoriteUniversityPost::where('university_post_id', $universityPostId)->where('user_id', $userId)->first();
          if (!$allow) {
              $favorite = FavoriteUniversityPost::create([
                  'user_id' => $userId,
