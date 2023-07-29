@@ -10,7 +10,6 @@
   
   <script setup>
   import SideNavBar from "../SidebarIcon.vue";
-  
   import { onMounted, ref } from "vue";
   import L from "leaflet";
   

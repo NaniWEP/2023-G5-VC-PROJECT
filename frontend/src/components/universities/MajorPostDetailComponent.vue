@@ -173,7 +173,7 @@
                       <v-icon>mdi-playlist-star</v-icon> Duration
                     </td>
                     <td class="text-right">:</td>
-                    <td>{{ major.month_duration +"years " + major.year_duration +"month"}}</td>
+                    <td>{{ major.year_duration +"years / " + major.month_duration +" month"}}</td>
                   </tr>
                 </tbody>
             </v-simple-table>

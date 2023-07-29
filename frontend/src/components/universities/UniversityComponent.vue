@@ -8,9 +8,25 @@
           class="d-flex flex-column align-center justify-center"
         >
           <h1 class="mb-8">KNOWLEDGE AND OPPORTUNITY</h1>
-          <v-tabs v-model="tab" fixed-tabs color="#3737e5" class="mb-8" style="width: 80%">
-              <v-tab value="university" class="selectButton" style="border-right: 2px solid #3737e5">UNIVERSITIES</v-tab>
-              <v-tab value="major" class="selectButton" style="border-left: 2px solid #3737e5">MAJOR POSTS</v-tab>
+          <v-tabs
+            v-model="tab"
+            fixed-tabs
+            color="#3737e5"
+            class="mb-8"
+            style="width: 80%"
+          >
+            <v-tab
+              value="university"
+              class="selectButton"
+              style="border-right: 2px solid #3737e5"
+              >UNIVERSITIES</v-tab
+            >
+            <v-tab
+              value="major"
+              class="selectButton"
+              style="border-left: 2px solid #3737e5"
+              >MAJOR POSTS</v-tab
+            >
           </v-tabs>
         </v-list>
       </v-col>
@@ -38,7 +54,7 @@ import MajorCardComponet from "./MajorCardCompoent.vue";
 export default {
   components: {
     UniversityCardComponet,
-    MajorCardComponet
+    MajorCardComponet,
   },
   data() {
     return {
@@ -47,25 +63,34 @@ export default {
       tab: null,
     };
   },
+  methods: {
+    async getAllUiversity() {
+      await axios
+        .get("/university/showAllUniversity")
+        .then((respone) => {
+          this.universities = respone.data.data;
+          console.log(respone.data.data);
+        })
+        .catch((err) => {
+          return "Univer", err;
+        });
+    },
+
+    async getAllMajor() {
+      await axios
+        .get("/university/majorPost")
+        .then((respone) => {
+          this.majors = respone.data.data;
+          console.log(this.majors);
+        })
+        .catch((err) => {
+          return "work", err;
+        });
+    },
+  },
   mounted() {
-    axios
-      .get("/university/showAllUniversity")
-      .then((respone) => {
-        this.universities = respone.data.data;
-        console.log(respone.data.data);
-      })
-      .catch((err) => {
-        return err;
-      });
-    axios
-      .get("/university/majorPost")
-      .then((respone) => {
-        this.majors = respone.data.data;
-        console.log(this.majors)
-      })
-      .catch((err) => {
-        return err;
-      });
+    this.getAllUiversity(),
+    this.getAllMajor()
   },
 };
 </script>

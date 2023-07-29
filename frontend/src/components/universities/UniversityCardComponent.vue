@@ -45,13 +45,6 @@
               </v-row>
             </v-card-text>
             <v-divider class="mx-4 mb-1"></v-divider>
-            <v-card-title>Contact by</v-card-title>
-            <div class="px-4">
-              <v-chip-group v-model="selection">
-                <v-chip>{{ university.phone }}</v-chip>
-                <v-chip>{{ university.email }}</v-chip>
-              </v-chip-group>
-            </div>
             <v-card-actions class="my-2">
               <v-btn
                 class="actionBtn"

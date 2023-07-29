@@ -50,7 +50,7 @@
               <v-chip-group v-model="selection">
                 <v-chip>{{formatDate(workshop.date)}}</v-chip>
 
-                <v-chip>{{ workshop.time }}pm</v-chip>
+                <v-chip>{{ workshop.time }}</v-chip>
               </v-chip-group>
             </div>
             <v-card-actions class="my-2">

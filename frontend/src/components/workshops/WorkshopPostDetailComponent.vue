@@ -11,7 +11,7 @@
             </h1>
             <v-card-title class="justify-center">
               <v-img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG-qJsnyzIuwPcZUjdFAoTYfiTXIWfhmCGgh-_3ZzDHPcBcQunAIM0S8Rcr-nHfdgrxjs&usqp=CAU"
+                :src="workshopPost.images"
                 alt="student dp"
                 width="100%"
                 height="500px"

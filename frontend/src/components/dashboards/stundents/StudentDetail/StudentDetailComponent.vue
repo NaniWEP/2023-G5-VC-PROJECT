@@ -35,6 +35,7 @@
                     variant="outlined"
                     label="Change you Profile"
                     required
+                    :hint="uploading"
                     @change="uploadImage"
                   >
                   </v-file-input>
@@ -147,6 +148,7 @@ export default {
     const uploadImageFile = ref(null);
     const downloadImageFile = ref(null);
     const randomText = ref(null);
+    const downloading = ref(false)
 
 
     async function uploadImage(event) {
@@ -168,12 +170,31 @@ export default {
           uploadImageFile.value = uploadFile;
           const url = await getDownloadURL(storageRef);
           downloadImageFile.value = url;
+          downloading.value = true;
+
+          const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+
+      Toast.fire({
+        icon: "success",
+        title: "Upload image successful",
+      });
         }
       );
     }
     return {
     uploadImage,
     downloadImageFile,
+    downloading,
     }
   },
   data() {

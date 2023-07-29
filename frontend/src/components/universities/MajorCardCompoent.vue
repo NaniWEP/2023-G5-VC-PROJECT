@@ -82,8 +82,7 @@
 <script>
 import axios from "../../stores/axiosHttp";
 import Swal from "sweetalert2";
-import dayjs from "dayjs";
-
+import dayjs from "dayjs"
 export default {
   props: ["majors"],
   data() {
@@ -104,6 +103,11 @@ export default {
       });
   },
   methods: {
+    formatDate(dateString) {
+      const date = dayjs(dateString);
+      // Then specify how you want your dates to be formatted
+      return date.format(" dddd-D/MMMM/YYYY");
+    },
     toggleFavorite(id) {
       const index = this.favorites.indexOf(id);
       if (index !== -1) {
