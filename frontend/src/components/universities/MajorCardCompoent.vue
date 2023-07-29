@@ -161,7 +161,7 @@ export default {
   computed: {
     getIconStyle() {
       return (id) => ({
-        color: this.favorites.includes(id) ? "red" : "black", // update the icon color based on the favorite status
+        color: this.favorites.includes(id) ? "red" : "#3737e5", // update the icon color based on the favorite status
       });
     },
   },

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\WorkshopRegistrations;
-use App\Models\WorkshopPostController;
+use App\Models\WorkshopPost;
 use App\Http\Resources\WorkshopRegistrationResource;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,6 +53,7 @@ class WorkshopRegistrationController extends Controller
         if($validator->fails()) {
             return $validator->errors();
         }
+            $workshop = WorkshopPost::find($workshop_id);
             $WorkshopRegister = WorkshopRegistrations::create([
                 "name" => $name,
                 "email" => $email,
@@ -62,6 +63,8 @@ class WorkshopRegistrationController extends Controller
                 "user_id" => $userId,
                 "workshop_id" => $workshop_id
             ]);
+            $ticket = $workshop->variable_ticket - 1;
+            WorkshopPost::where('id',$workshop_id)->update(['variable_ticket'=>$ticket]);
             return response()->json([
                 'success' => true,
                 'message' => 'Workshop register successfully created',

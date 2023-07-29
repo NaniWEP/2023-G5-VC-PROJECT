@@ -29,15 +29,19 @@
                 :key="universityList"
                 class="main-card"
               >
-                  <article class="article my-4">
+                <article class="article my-4">
+                  <div class="w-25 d-flex justify-center">
                     <img
-                      src="https://www.kgpraigarh.ac.in/images/web_img/workshop1.png"
+                      :src="universityList.university.image"
                       alt=""
                       width="100"
                       height="100"
                     />
-
-                    <div class="article_text_column">
+                  </div>
+                  <div
+                    class="w-75 mr-4 d-flex justify-space-between align-center"
+                  >
+                    <div>
                       <h4>{{ universityList.university.title }}</h4>
                       <p>
                         <span style="font-weight: bold">Date:</span>
@@ -51,12 +55,20 @@
                       </p>
                     </div>
                     <div class="btnAction">
-                      <v-btn class="seemoreBtn">See more</v-btn>
-                      <v-btn class="unFavoriteBtn" prepend-icon="mdi-heart-broken"
+                      <v-btn
+                        class="seemoreBtn"
+                        :to="`/majorPostDetail/${universityList.university.major.id}`"
+                        >See more</v-btn
+                      >
+                      <v-btn
+                        class="unFavoriteBtn"
+                        prepend-icon="mdi-heart-broken"
+                        @click="removeMajorFavorite(universityList.id)"
                         >Unfaorite</v-btn
                       >
                     </div>
-                  </article>
+                  </div>
+                </article>
               </div>
             </v-window-item>
             <v-window-item v-else class="university" value="university">
@@ -77,29 +89,37 @@
                 class="main-card"
               >
                 <article class="article my-4">
-                  <img
-                    src="https://www.kgpraigarh.ac.in/images/web_img/workshop1.png"
-                    alt=""
-                    width="100"
-                    height="100"
-                  />
-
-                  <div class="article_text_column">
-                    <h4>{{ workshopList.workshop.name }}</h4>
-                    <p>
-                      <span style="font-weight: bold">Date:</span>
-                      {{ formatDate(workshopList.workshop.date) }}
-                    </p>
-                    <p>
-                      <span style="font-weight: bold">Location:</span>
-                      {{ workshopList.workshop.location }}
-                    </p>
+                  <div class="w-25 d-flex justify-center">
+                    <img
+                      :src="workshopList.workshop.images"
+                      alt=""
+                      width="100"
+                      height="100"
+                    />
                   </div>
-                  <div class="btnAction">
-                    <v-btn class="seemoreBtn">See more</v-btn>
-                    <v-btn class="unFavoriteBtn" prepend-icon="mdi-heart-broken"
-                      >Unfaorite</v-btn
-                    >
+                  <div
+                    class="w-75 mr-4 d-flex justify-space-between align-center"
+                  >
+                    <div>
+                      <h4>{{ workshopList.workshop.name }}</h4>
+                      <p>
+                        <span style="font-weight: bold">Date:</span>
+                        {{ formatDate(workshopList.workshop.date) }}
+                      </p>
+                      <p>
+                        <span style="font-weight: bold">Organizer :</span>
+                        {{ workshopList.workshop.organizer }}
+                      </p>
+                    </div>
+                    <div class="btnAction">
+                      <v-btn class="seemoreBtn">See more</v-btn>
+                      <v-btn
+                        class="unFavoriteBtn"
+                        prepend-icon="mdi-heart-broken"
+                        @click="removeWorkshopFavorite(workshopList.id)"
+                        >Unfaorite</v-btn
+                      >
+                    </div>
                   </div>
                 </article>
               </div>
@@ -121,6 +141,8 @@
 import SideNavBar from "../SidebarIcon.vue";
 import axios from "@/stores/axiosHttp";
 import dayjs from "dayjs";
+import Swal from "sweetalert2";
+
 export default {
   components: {
     SideNavBar,
@@ -136,16 +158,40 @@ export default {
   created() {
     this.getFavoriteUniversity();
     this.getFavoriteWorkshop();
-  },
-  mounted() {
     this.getUser();
   },
+  mounted() {},
   methods: {
+    removeWorkshopFavorite(id) {
+      const index = this.favoriteListOfWorkshop.indexOf(id) + 1;
+      axios
+        .delete(`auth/workshop/favoriteWorkshopPost/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          this.favoriteListOfWorkshop.splice(index, 1); // remove the post from favorites
+          this.alertFavorite("info", "Post removed from favorites");
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    },
+    removeMajorFavorite(id) {
+      const index = this.favoriteListOfUniversity.indexOf(id) + 1;
+      axios
+        .delete(`auth/university/favoriteUniversityPost/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          this.favoriteListOfUniversity.splice(index, 1); // remove the post from favorites
+          this.alertFavorite("info", "Post removed from favorites");
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    },
     getUser() {
       axios
         .get(`/auth/getUser`)
         .then((response) => {
-          console.log(response.data.data);
           this.user = response.data.data;
         })
         .catch((error) => {
@@ -156,7 +202,9 @@ export default {
       axios
         .get("auth/workshop/getListOfFavrite")
         .then((response) => {
-          this.favoriteListOfWorkshop = response.data.data;
+          if (response.data.data[0]) {
+            this.favoriteListOfWorkshop = response.data.data;
+          }
         })
         .catch((error) => {
           console.log(error.message);
@@ -171,12 +219,31 @@ export default {
       axios
         .get("auth/university/getListOfFavrite")
         .then((response) => {
-          this.favoriteListOfUniversity = response.data.data;
-          console.log(this.favoriteListOfUniversity);
+          if (response.data.data[0]) {
+            this.favoriteListOfUniversity = response.data.data;
+          }
         })
         .catch((error) => {
           console.log(error.message);
         });
+    },
+    alertFavorite(icon, message) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+
+      Toast.fire({
+        icon: icon,
+        title: message,
+      });
     },
   },
 };

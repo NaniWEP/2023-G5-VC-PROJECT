@@ -69,6 +69,7 @@ class FavoriteWorkshopPostController extends Controller
         $userId = Auth::user()->id;
         $workshopPostId = $request->workshop_post_id;
         $favoriteWorkshopPost = FavoriteWorkshopPost::where('workshop_post_id', $workshopPostId)->where('user_id', $userId)->first();
+        $favoriteWorkshopPost = FavoriteWorkshopPost::where('id', $workshopPostId)->where('user_id', $userId)->first();
         if ($favoriteWorkshopPost) {
             $favoriteWorkshopPost->delete();
         }

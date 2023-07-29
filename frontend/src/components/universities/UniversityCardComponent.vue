@@ -54,15 +54,6 @@
               >
                 See more
               </v-btn>
-              <v-btn
-                :id="$route.params.index"
-                prepend-icon="mdi-heart-outline"
-                class="actionBtn"
-                variant="outlined"
-                @click="alertFavorite"
-              >
-                favorite
-              </v-btn>
             </v-card-actions>
           </v-card>
         </v-list>

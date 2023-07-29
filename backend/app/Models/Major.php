@@ -19,6 +19,7 @@ class Major extends Model
         'month_duration',
         'apply_date',
         'start_date',
+        'image',
         'price',
         'major_type_id',
         'university_id',

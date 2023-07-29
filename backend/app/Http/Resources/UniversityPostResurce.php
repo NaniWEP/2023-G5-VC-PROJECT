@@ -21,6 +21,7 @@ class UniversityPostResource extends JsonResource
             'description' => $this->description,
             'date' => $this->date,
             'status' => $this->status,
+            'image' => $this->image,
             'user' => new GetUserResource($this->user_id),
             'major' => new MajorResource($this->major_id),
         ];

@@ -20,6 +20,7 @@ class FavoriteUniversityResource extends JsonResource
                "description" => $this->universityPost->description,
                "date" => $this->universityPost->date,
                "status" => $this->universityPost->status,
+               'image' => $this->universityPost->image,
                "major" => new MajorResource($this->universityPost->major),
             ],
         ];

@@ -70,6 +70,7 @@ class FavoriteUniversityPostController extends Controller
         $userId = Auth::user()->id;
         $universityPostId = $request->university_post_id;
         $favoritePostUniversity = FavoriteUniversityPost::where('university_post_id', $universityPostId)->where('user_id', $userId)->first();
+        $favoritePostUniversity = FavoriteUniversityPost::where('id', $universityPostId)->where('user_id', $userId)->first();
         if ($favoritePostUniversity) {
             $favoritePostUniversity->delete();
         }

@@ -17,7 +17,7 @@ class WorkshopPostController extends Controller
      */
     public function index()
     {
-        $WorkshopPost = WorkshopPost::all();
+        $WorkshopPost = WorkshopPost::where('variable_ticket', '>' ,0)->get();
         $WorkshopPost = WorkshopResource::collection($WorkshopPost);
         return response()->json(
             [
