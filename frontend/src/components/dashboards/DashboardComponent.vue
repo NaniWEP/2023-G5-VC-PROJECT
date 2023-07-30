@@ -14,12 +14,6 @@
             value="users"
           ></v-list-item>
           <v-list-item
-            :to="{ path: '/apply' }"
-            prepend-icon="mdi-bookmark-outline"
-            title="Applying"
-            value="Applying"
-          ></v-list-item>
-          <v-list-item
             :to="{ path: '/post' }"
             prepend-icon="mdi-post"
             title="Post"
@@ -37,7 +31,7 @@
             title="Expired Date"
             value="Expired Date"
           ></v-list-item>
-          <v-list-item :to="{ path: '/logOut' }">
+          <v-list-item @click="logOut">
             <v-list-item-icon>
               <v-icon size="32">mdi-logout</v-icon>
               <span>Sign out</span>
@@ -57,16 +51,14 @@
       >
 
       <v-spacer></v-spacer>
-
-      <v-btn prepend-icon="mdi-home-circle" class="homeBtn" to="/">
-        Back Home
-      </v-btn>
     </v-app-bar>
   </section>
 </template>
 
 <script>
-
+import { eraseCookie } from "@/stores/cookie.js";
+import { googleLogout } from "vue3-google-login";
+import axios from "@/stores/axiosHttp";
 export default {
   name: "App",
   components: {
@@ -77,6 +69,20 @@ export default {
       showDrawer: false,
     };
   },
+  methods:{
+    async logOut() {
+      googleLogout();
+      try {
+        await axios.post("/auth/logout").then(() => {
+          eraseCookie("myToken");
+          eraseCookie("myId");
+          this.$router.push("/");
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  }
 };
 </script>
 

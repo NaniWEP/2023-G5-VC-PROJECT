@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="user !== null" class="container">
+  <v-container v-if="user !== null"  class="container">
     <SideNavBar></SideNavBar>
     <v-row>
       <v-col cols="12" md="12">

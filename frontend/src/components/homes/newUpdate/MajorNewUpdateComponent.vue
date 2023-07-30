@@ -43,7 +43,7 @@
 
               <div class="ms-4 text-subtitle-1">
                 <v-icon color="#3737e5">mdi-ticket-percent-outline</v-icon> •
-                {{ major.variable_student }} tickets
+                {{ major.variable_student }}
               </div>
             </v-row>
           </v-card-text>

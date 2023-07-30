@@ -2,43 +2,32 @@
 <template>
   <div id="card">
     <v-card
-      class="mx-auto  mt-4 mb-4 box-sizing: border-box"
-      color="blue-lighten-5"
+      class="mx-auto mt-4 mb-4 box-sizing: border-box"
+      color="#F8F8FF"
       theme="light"
       max-width="70%"
-      max-height="500px"
       :title="major.title"
     >
-      <template v-slot:prepend>
-        <v-icon size="x-large"></v-icon>
-      </template>
-
-      <v-card-text class=" w-100 card-body ml-12 d-flex  mr-5">
-        <div class="description">
-        {{ major.description }}
+      <div class="w-100 mr-4 d-flex justify-space-between align-center">
+        <v-card-text class="w-100 card-body ml-12 d-flex mr-5">
+          <div class="description">
+            {{ major.description }}
+            <p><v-icon> mdi-currency-usd</v-icon> {{ major.price }}/year</p>
+            <p>
+              <v-icon> mdi-clock-time-eight-outline</v-icon>
+              {{ major.year_duration }} year
+            </p>
+            <v-list-item-title>{{ major.university.name }}</v-list-item-title>
+          </div>
+        </v-card-text>
+        <div class="action mr-4">
+          <div class="btnAction">
+            <v-btn class="seemoreBtn" :to="`/majorPostDetail/${major.id}`"
+              >See more</v-btn
+            >
+          </div>
         </div>
-        <div class="action">
-          <h3><v-icon> mdi-currency-usd</v-icon> {{ major.price }}/year</h3>
-          <h3> <v-icon> mdi-clock-time-eight-outline</v-icon> {{ major.year_duration }} year</h3>
-        </div>
-      </v-card-text>
-      <v-card-actions>
-        <v-list-item class="w-100">
-          <template  v-slot:prepend>
-            <v-avatar
-              color="grey-darken-3"
-              image="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-            ></v-avatar>
-          </template>
-
-          <v-list-item-title>{{ major.university.name }}</v-list-item-title>
-          <template v-slot:append>
-            <div class="justify-self-end mr-15">
-              <v-icon class="me-1" icon="mdi-bookmark-plus-outline"></v-icon>
-            </div>
-          </template>
-        </v-list-item>
-      </v-card-actions>
+      </div>
     </v-card>
   </div>
 </template>
@@ -49,17 +38,15 @@ export default {
 };
 </script>
 <style scoped>
-.card-body{
+.card-body {
   justify-content: space-between;
 }
-.description{
-
+.description {
   width: 80%;
 }
-.action{
+.action {
   flex-direction: column;
   gap: 10px;
-  width: 150px;
-
+  width: 200px;
 }
 </style>

@@ -112,7 +112,8 @@
                       </p>
                     </div>
                     <div class="btnAction">
-                      <v-btn class="seemoreBtn">See more</v-btn>
+                      <v-btn class="seemoreBtn" :to="`workshop/workshopDetail/${workshopList.workshop.id}`"
+                      >See more</v-btn>
                       <v-btn
                         class="unFavoriteBtn"
                         prepend-icon="mdi-heart-broken"
